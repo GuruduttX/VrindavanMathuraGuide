@@ -142,13 +142,26 @@ const TempleDetail = () => {
               <div className="space-y-4">
                 <div>
                   <h3 className="font-semibold text-gray-900 mb-2">Temple Hours</h3>
-                  <p className="text-base text-gray-700 leading-relaxed">{temple.darshan.timings}</p>
+                  {temple.darshan.morning && temple.darshan.evening ? (
+                    <div className="space-y-2">
+                      <p className="text-base text-gray-700"><strong>Morning:</strong> {temple.darshan.morning}</p>
+                      <p className="text-base text-gray-700"><strong>Evening:</strong> {temple.darshan.evening}</p>
+                    </div>
+                  ) : (
+                    <p className="text-base text-gray-700 leading-relaxed">{temple.darshan.timings}</p>
+                  )}
                 </div>
-                <Separator />
-                <div>
-                  <h3 className="font-semibold text-gray-900 mb-2">Important Notes</h3>
-                  <p className="text-base text-gray-700 leading-relaxed">{temple.darshan.specialNotes}</p>
-                </div>
+                {(temple.darshan.notes || temple.darshan.specialNotes) && (
+                  <>
+                    <Separator />
+                    <div>
+                      <h3 className="font-semibold text-gray-900 mb-2">Important Notes</h3>
+                      <p className="text-base text-gray-700 leading-relaxed">
+                        {temple.darshan.notes || temple.darshan.specialNotes}
+                      </p>
+                    </div>
+                  </>
+                )}
               </div>
             </CardContent>
           </Card>
