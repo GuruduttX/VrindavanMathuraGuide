@@ -57,7 +57,15 @@ const TempleDetail = () => {
                 <Clock className="h-6 w-6 text-amber-600 mt-1" />
                 <div>
                   <h3 className="font-semibold text-gray-900 mb-2">Darshan Timings</h3>
-                  <p className="text-sm text-gray-700 leading-relaxed">{temple.darshan.timings}</p>
+                  {temple.darshan.morning && temple.darshan.evening ? (
+                    <div className="space-y-1">
+                      <p className="text-sm text-gray-700">Morning: {temple.darshan.morning}</p>
+                      <p className="text-sm text-gray-700">Evening: {temple.darshan.evening}</p>
+                      {temple.darshan.notes && <p className="text-xs text-gray-600 italic mt-2">{temple.darshan.notes}</p>}
+                    </div>
+                  ) : (
+                    <p className="text-sm text-gray-700 leading-relaxed">{temple.darshan.timings}</p>
+                  )}
                 </div>
               </div>
             </CardContent>
@@ -69,17 +77,21 @@ const TempleDetail = () => {
                 <Users className="h-6 w-6 text-amber-600 mt-1" />
                 <div>
                   <h3 className="font-semibold text-gray-900 mb-2">Crowd Level</h3>
-                  <Badge 
-                    className={`${
-                      temple.darshan.crowdLevel.includes('Very High') 
-                        ? 'bg-red-100 text-red-700 border-red-300'
-                        : temple.darshan.crowdLevel.includes('High')
-                        ? 'bg-orange-100 text-orange-700 border-orange-300'
-                        : 'bg-green-100 text-green-700 border-green-300'
-                    }`}
-                  >
-                    {temple.darshan.crowdLevel}
-                  </Badge>
+                  {temple.darshan.crowdLevel ? (
+                    <Badge 
+                      className={`${
+                        temple.darshan.crowdLevel.includes('Very High') 
+                          ? 'bg-red-100 text-red-700 border-red-300'
+                          : temple.darshan.crowdLevel.includes('High')
+                          ? 'bg-orange-100 text-orange-700 border-orange-300'
+                          : 'bg-green-100 text-green-700 border-green-300'
+                      }`}
+                    >
+                      {temple.darshan.crowdLevel}
+                    </Badge>
+                  ) : (
+                    <p className="text-sm text-gray-600">Contact temple for crowd information</p>
+                  )}
                 </div>
               </div>
             </CardContent>
