@@ -7,7 +7,7 @@ import logging
 from pathlib import Path
 
 # Import route modules
-from routes import temples, spiritual_places, planning_guides, festivals, sitemaps, schema_markup
+from routes import temples, spiritual_places, planning_guides, festivals, sitemaps, schema_markup, search, testimonials, newsletter
 
 ROOT_DIR = Path(__file__).parent
 load_dotenv(ROOT_DIR / '.env')
