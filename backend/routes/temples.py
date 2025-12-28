@@ -1,4 +1,4 @@
-from fastapi import APIRouter, HTTPException, Depends
+from fastapi import APIRouter, HTTPException, Depends, Query
 from models.temple import Temple, TempleCreate
 from motor.motor_asyncio import AsyncIOMotorClient
 import os
