@@ -5,7 +5,7 @@ export const temples = [
     name: 'Banke Bihari Temple',
     location: 'Vrindavan',
     deity: 'Lord Krishna (Banke Bihari form)',
-    summary: 'Banke Bihari Temple is one of the most revered temples in Vrindavan, dedicated to Lord Krishna in his Banke Bihari form. The temple is known for its unique darshan customs where the curtain is opened and closed multiple times, preventing devotees from being mesmerized by the deity's enchanting form.',
+    summary: 'Banke Bihari Temple is one of the most revered temples in Vrindavan, dedicated to Lord Krishna in his Banke Bihari form. The temple is known for its unique darshan customs where the curtain is opened and closed multiple times, preventing devotees from being mesmerized by the deity\'s enchanting form.',
     history: 'The temple was established in 1864 by Swami Haridas, a renowned devotee and musician. The deity was discovered by Swami Haridas at Nidhivan. The term "Banke" means bent, and "Bihari" means supreme enjoyer, referring to Krishna\'s threefold bending posture.',
     significance: 'This temple holds immense spiritual significance as it is believed that Swami Haridas, through his devotional music, made Lord Krishna manifest in this form. The deity is considered highly sacred and powerful, attracting millions of devotees annually.',
     darshan: {
