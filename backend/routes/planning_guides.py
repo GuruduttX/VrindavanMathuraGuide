@@ -1,16 +1,19 @@
-from fastapi import APIRouter, HTTPException
+from fastapi import APIRouter, HTTPException, Depends
 from models.planning_guide import PlanningGuide, PlanningGuideCreate
 from motor.motor_asyncio import AsyncIOMotorClient
 import os
 
 router = APIRouter(prefix="/planning-guides", tags=["planning-guides"])
 
-mongo_url = os.environ["MONGO_URL"]
-client = AsyncIOMotorClient(mongo_url)
-db = client[os.environ["DB_NAME"]]
+def get_database():
+    """Dependency to get database connection"""
+    mongo_url = os.environ["MONGO_URL"]
+    client = AsyncIOMotorClient(mongo_url)
+    db = client[os.environ["DB_NAME"]]
+    return db
 
 @router.get("", response_model=dict)
-async def get_all_planning_guides():
+async def get_all_planning_guides(db = Depends(get_database)):
     """Fetch all planning guides from database"""
     try:
         guides = await db.planning_guides.find().to_list(100)
@@ -23,7 +26,7 @@ async def get_all_planning_guides():
         raise HTTPException(status_code=500, detail=f"Error fetching planning guides: {str(e)}")
 
 @router.get("/{guide_id}", response_model=dict)
-async def get_planning_guide_by_id(guide_id: str):
+async def get_planning_guide_by_id(guide_id: str, db = Depends(get_database)):
     """Fetch single planning guide by ID"""
     try:
         guide = await db.planning_guides.find_one({"_id": guide_id})
@@ -39,7 +42,7 @@ async def get_planning_guide_by_id(guide_id: str):
         raise HTTPException(status_code=500, detail=f"Error fetching planning guide: {str(e)}")
 
 @router.post("", response_model=dict)
-async def create_planning_guide(guide: PlanningGuideCreate):
+async def create_planning_guide(guide: PlanningGuideCreate, db = Depends(get_database)):
     """Create a new planning guide entry"""
     try:
         guide_dict = guide.dict()
