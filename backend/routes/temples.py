@@ -13,14 +13,36 @@ def get_database():
     return db
 
 @router.get("", response_model=dict)
-async def get_all_temples(db = Depends(get_database)):
-    """Fetch all temples from database"""
+async def get_all_temples(
+    location: str = Query(None, description="Filter by location (Vrindavan/Mathura)"),
+    deity: str = Query(None, description="Filter by deity name"),
+    sortBy: str = Query("name", description="Sort by field (name/location)"),
+    order: str = Query("asc", description="Sort order (asc/desc)"),
+    db = Depends(get_database)
+):
+    """Fetch all temples from database with optional filtering and sorting"""
     try:
-        temples = await db.temples.find().to_list(100)
+        # Build filter query
+        filter_query = {}
+        if location:
+            filter_query["location"] = {"$regex": location, "$options": "i"}
+        if deity:
+            filter_query["deity"] = {"$regex": deity, "$options": "i"}
+        
+        # Build sort
+        sort_direction = 1 if order == "asc" else -1
+        
+        temples = await db.temples.find(filter_query).sort(sortBy, sort_direction).to_list(100)
         return {
             "success": True,
             "data": temples,
-            "count": len(temples)
+            "count": len(temples),
+            "filters": {
+                "location": location,
+                "deity": deity,
+                "sortBy": sortBy,
+                "order": order
+            }
         }
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Error fetching temples: {str(e)}")
