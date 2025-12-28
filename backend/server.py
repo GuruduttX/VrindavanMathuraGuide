@@ -50,6 +50,9 @@ api_router.include_router(planning_guides.router)
 api_router.include_router(festivals.router)
 api_router.include_router(sitemaps.router)
 api_router.include_router(schema_markup.router)
+api_router.include_router(search.router)
+api_router.include_router(testimonials.router)
+api_router.include_router(newsletter.router)
 
 # Include the router in the main app
 app.include_router(api_router)
