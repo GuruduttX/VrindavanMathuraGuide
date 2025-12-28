@@ -1,12 +1,60 @@
-import React from 'react';
-import { planningGuides } from '../data/mockTemples';
+import React, { useState, useEffect } from 'react';
+import { planningGuidesAPI } from '../services/api';
 import { Card, CardContent } from '../components/ui/card';
-import { AlertCircle, CheckCircle2, Info, Calendar, Shirt, Sun, CloudRain, Snowflake } from 'lucide-react';
+import { AlertCircle, CheckCircle2, Info, Calendar, Shirt, Sun, CloudRain, Snowflake, Loader2 } from 'lucide-react';
 import { Separator } from '../components/ui/separator';
+import { Button } from '../components/ui/button';
 
 const PlanYourVisit = () => {
-  const bestTimeGuide = planningGuides.find(g => g.id === 'best-time-to-visit');
-  const dressCodeGuide = planningGuides.find(g => g.id === 'dress-code-guidelines');
+  const [planningGuides, setPlanningGuides] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const fetchGuides = async () => {
+      try:
+        setLoading(true);
+        const response = await planningGuidesAPI.getAll();
+        if (response.success) {
+          setPlanningGuides(response.data);
+        }
+      } catch (err) {
+        console.error("Error fetching planning guides:", err);
+        setError("Failed to load planning guides. Please try again later.");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchGuides();
+  }, []);
+
+  const bestTimeGuide = planningGuides.find(g => g._id === 'best-time-to-visit');
+  const dressCodeGuide = planningGuides.find(g => g._id === 'dress-code-guidelines');
+
+  if (loading) {
+    return (
+      <div className="min-h-screen py-12 px-4 flex items-center justify-center">
+        <div className="text-center">
+          <Loader2 className="h-12 w-12 animate-spin text-amber-600 mx-auto mb-4" />
+          <p className="text-gray-600">Loading planning guides...</p>
+        </div>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="min-h-screen py-12 px-4 flex items-center justify-center">
+        <div className="text-center">
+          <p className="text-red-600 mb-4">{error}</p>
+          <Button onClick={() => window.location.reload()} className="bg-amber-600 hover:bg-amber-700">
+            Try Again
+          </Button>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen py-12 px-4">
