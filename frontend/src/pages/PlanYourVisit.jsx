@@ -12,7 +12,7 @@ const PlanYourVisit = () => {
 
   useEffect(() => {
     const fetchGuides = async () => {
-      try:
+      try {
         setLoading(true);
         const response = await planningGuidesAPI.getAll();
         if (response.success) {
