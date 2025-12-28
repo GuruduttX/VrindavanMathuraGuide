@@ -1,45 +1,18 @@
 // Sample temple data - gold-standard templates for scaling
 export const temples = [
   {
-    id: 'banke-bihari',
-    name: 'Banke Bihari Temple',
-    location: 'Vrindavan',
-    deity: 'Lord Krishna (Banke Bihari form)',
-    summary: 'Banke Bihari Temple is one of the most revered temples in Vrindavan, dedicated to Lord Krishna in his Banke Bihari form. The temple is known for its unique darshan customs where the curtain is opened and closed multiple times, preventing devotees from being mesmerized by the deity\'s enchanting form.',
-    history: 'The temple was established in 1864 by Swami Haridas, a renowned devotee and musician. The deity was discovered by Swami Haridas at Nidhivan. The term "Banke" means bent, and "Bihari" means supreme enjoyer, referring to Krishna\'s threefold bending posture.',
-    significance: 'This temple holds immense spiritual significance as it is believed that Swami Haridas, through his devotional music, made Lord Krishna manifest in this form. The deity is considered highly sacred and powerful, attracting millions of devotees annually.',
+    id: "banke-bihari-temple",
+    name: "Banke Bihari Temple",
+    location: "Vrindavan",
+    deity: "Lord Krishna (Banke Bihari form)",
+    summary: "Banke Bihari Temple is one of the most revered temples in Vrindavan, dedicated to Lord Krishna in his Banke Bihari form. The temple is known for its unique darshan customs where the curtain is opened and closed multiple times, preventing devotees from being mesmerized by the deity's enchanting form.",
+    history: "The temple was established in 1864 by Swami Haridas, a renowned devotee and musician. The deity was discovered by Swami Haridas at Nidhivan. The term 'Banke' means bent, and 'Bihari' means supreme enjoyer, referring to Krishna's threefold bending posture.",
+    significance: "This temple holds immense spiritual significance as it is believed that Swami Haridas, through his devotional music, made Lord Krishna manifest in this form. The deity is considered highly sacred and powerful, attracting millions of devotees annually.",
     darshan: {
-      timings: 'Summer: 7:45 AM - 12:00 PM, 5:30 PM - 9:30 PM | Winter: 8:45 AM - 1:00 PM, 4:30 PM - 8:30 PM',
-      specialNotes: 'The curtain opens and closes multiple times during darshan. Photography is strictly prohibited inside the temple. Expect large crowds, especially on Janmashtami.',
-      crowdLevel: 'Very High'
-    },
-    visitorGuidance: [
-      'Remove footwear before entering the temple premises',
-      'Dress modestly - avoid shorts, sleeveless tops',
-      'Mobile phones and cameras are not allowed inside',
-      'Best time to visit is early morning to avoid crowds',
-      'Temple is wheelchair accessible from the main entrance',
-      'Expect waiting time of 1-3 hours during peak seasons'
-    ],
-    festivals: ['Janmashtami', 'Radha Ashtami', 'Holi'],
-    faqs: [
-      {
-        question: 'What makes Banke Bihari Temple unique?',
-        answer: 'The temple is unique for its darshan custom where the curtain covering the deity is repeatedly opened and closed to prevent devotees from being overwhelmed by the deity\'s divine charm. This practice is not found in other temples.'
-      },
-      {
-        question: 'What are the best visiting hours to avoid crowds?',
-        answer: 'Early morning hours between 8:00 AM - 9:30 AM on weekdays typically have smaller crowds. Avoid weekends, festival days, and evening aartis if you prefer a calmer experience.'
-      },
-      {
-        question: 'Is photography allowed inside the temple?',
-        answer: 'No, photography and videography are strictly prohibited inside the temple sanctum. Mobile phones must be kept away during darshan.'
-      },
-      {
-        question: 'Can senior citizens and differently-abled visitors access the temple easily?',
-        answer: 'The main entrance has wheelchair accessibility, though the inner sanctum can be crowded. Senior citizens should visit during off-peak hours and may request assistance from temple volunteers.'
-      }
-    ]
+      morning: "7:30 AM – 12:00 PM",
+      evening: "5:30 PM – 9:30 PM",
+      notes: "Darshan timings may vary on festivals and special occasions."
+    }
   },
   {
     id: 'iskcon-vrindavan',
