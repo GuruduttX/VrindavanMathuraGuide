@@ -1,10 +1,58 @@
-import React from 'react';
-import { festivals } from '../data/mockTemples';
+import React, { useState, useEffect } from 'react';
+import { festivalsAPI } from '../services/api';
 import { Card, CardContent } from '../components/ui/card';
 import { Badge } from '../components/ui/badge';
-import { Calendar, Users, AlertTriangle, Info } from 'lucide-react';
+import { Calendar, Users, AlertTriangle, Info, Loader2 } from 'lucide-react';
+import { Button } from '../components/ui/button';
 
 const Festivals = () => {
+  const [festivals, setFestivals] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const fetchFestivals = async () => {
+      try {
+        setLoading(true);
+        const response = await festivalsAPI.getAll();
+        if (response.success) {
+          setFestivals(response.data);
+        }
+      } catch (err) {
+        console.error("Error fetching festivals:", err);
+        setError("Failed to load festivals. Please try again later.");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchFestivals();
+  }, []);
+
+  if (loading) {
+    return (
+      <div className="min-h-screen py-12 px-4 flex items-center justify-center">
+        <div className="text-center">
+          <Loader2 className="h-12 w-12 animate-spin text-amber-600 mx-auto mb-4" />
+          <p className="text-gray-600">Loading festivals...</p>
+        </div>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="min-h-screen py-12 px-4 flex items-center justify-center">
+        <div className="text-center">
+          <p className="text-red-600 mb-4">{error}</p>
+          <Button onClick={() => window.location.reload()} className="bg-amber-600 hover:bg-amber-700">
+            Try Again
+          </Button>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="min-h-screen py-12 px-4">
       <div className="container mx-auto max-w-5xl">
