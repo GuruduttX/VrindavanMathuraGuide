@@ -48,6 +48,8 @@ api_router.include_router(temples.router)
 api_router.include_router(spiritual_places.router)
 api_router.include_router(planning_guides.router)
 api_router.include_router(festivals.router)
+api_router.include_router(sitemaps.router)
+api_router.include_router(schema_markup.router)
 
 # Include the router in the main app
 app.include_router(api_router)
