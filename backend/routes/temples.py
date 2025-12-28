@@ -1,16 +1,19 @@
-from fastapi import APIRouter, HTTPException
+from fastapi import APIRouter, HTTPException, Depends
 from models.temple import Temple, TempleCreate
 from motor.motor_asyncio import AsyncIOMotorClient
 import os
 
 router = APIRouter(prefix="/temples", tags=["temples"])
 
-mongo_url = os.environ["MONGO_URL"]
-client = AsyncIOMotorClient(mongo_url)
-db = client[os.environ["DB_NAME"]]
+def get_database():
+    """Dependency to get database connection"""
+    mongo_url = os.environ["MONGO_URL"]
+    client = AsyncIOMotorClient(mongo_url)
+    db = client[os.environ["DB_NAME"]]
+    return db
 
 @router.get("", response_model=dict)
-async def get_all_temples():
+async def get_all_temples(db = Depends(get_database)):
     """Fetch all temples from database"""
     try:
         temples = await db.temples.find().to_list(100)
@@ -23,7 +26,7 @@ async def get_all_temples():
         raise HTTPException(status_code=500, detail=f"Error fetching temples: {str(e)}")
 
 @router.get("/{temple_id}", response_model=dict)
-async def get_temple_by_id(temple_id: str):
+async def get_temple_by_id(temple_id: str, db = Depends(get_database)):
     """Fetch single temple by ID"""
     try:
         temple = await db.temples.find_one({"_id": temple_id})
@@ -39,7 +42,7 @@ async def get_temple_by_id(temple_id: str):
         raise HTTPException(status_code=500, detail=f"Error fetching temple: {str(e)}")
 
 @router.post("", response_model=dict)
-async def create_temple(temple: TempleCreate):
+async def create_temple(temple: TempleCreate, db = Depends(get_database)):
     """Create a new temple entry"""
     try:
         temple_dict = temple.dict()
