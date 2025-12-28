@@ -44,24 +44,30 @@ const TemplesList = () => {
                 <div className="space-y-2 mb-4">
                   <div className="flex items-start text-sm">
                     <Clock className="h-4 w-4 mr-2 mt-0.5 text-gray-500 flex-shrink-0" />
-                    <span className="text-gray-600">{temple.darshan.timings}</span>
+                    <span className="text-gray-600">
+                      {temple.darshan.morning && temple.darshan.evening 
+                        ? `${temple.darshan.morning} | ${temple.darshan.evening}`
+                        : temple.darshan.timings || 'Contact temple for timings'}
+                    </span>
                   </div>
-                  <div className="flex items-center text-sm">
-                    <Users className="h-4 w-4 mr-2 text-gray-500" />
-                    <span className="text-gray-600">Crowd Level: </span>
-                    <Badge 
-                      variant="outline" 
-                      className={`ml-2 ${
-                        temple.darshan.crowdLevel.includes('Very High') 
-                          ? 'border-red-300 text-red-700 bg-red-50'
-                          : temple.darshan.crowdLevel.includes('High')
-                          ? 'border-orange-300 text-orange-700 bg-orange-50'
-                          : 'border-green-300 text-green-700 bg-green-50'
-                      }`}
-                    >
-                      {temple.darshan.crowdLevel}
-                    </Badge>
-                  </div>
+                  {temple.darshan.crowdLevel && (
+                    <div className="flex items-center text-sm">
+                      <Users className="h-4 w-4 mr-2 text-gray-500" />
+                      <span className="text-gray-600">Crowd Level: </span>
+                      <Badge 
+                        variant="outline" 
+                        className={`ml-2 ${
+                          temple.darshan.crowdLevel.includes('Very High') 
+                            ? 'border-red-300 text-red-700 bg-red-50'
+                            : temple.darshan.crowdLevel.includes('High')
+                            ? 'border-orange-300 text-orange-700 bg-orange-50'
+                            : 'border-green-300 text-green-700 bg-green-50'
+                        }`}
+                      >
+                        {temple.darshan.crowdLevel}
+                      </Badge>
+                    </div>
+                  )}
                 </div>
 
                 {/* Deity */}
