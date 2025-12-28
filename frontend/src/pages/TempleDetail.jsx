@@ -205,21 +205,23 @@ const TempleDetail = () => {
         )}
 
         {/* AI-Friendly Structured Q&A Block */}
-        <section className="mb-8">
-          <h2 className="text-2xl font-bold text-gray-900 mb-4">Common Questions About {temple.name}</h2>
-          <Accordion type="single" collapsible className="w-full">
-            {temple.faqs.map((faq, index) => (
-              <AccordionItem key={index} value={`item-${index}`} className="border-gray-200">
-                <AccordionTrigger className="text-left text-base font-semibold text-gray-900 hover:text-amber-600">
-                  {faq.question}
-                </AccordionTrigger>
-                <AccordionContent className="text-base text-gray-700 leading-relaxed">
-                  {faq.answer}
-                </AccordionContent>
-              </AccordionItem>
-            ))}
-          </Accordion>
-        </section>
+        {temple.faqs && temple.faqs.length > 0 && (
+          <section className="mb-8">
+            <h2 className="text-2xl font-bold text-gray-900 mb-4">Common Questions About {temple.name}</h2>
+            <Accordion type="single" collapsible className="w-full">
+              {temple.faqs.map((faq, index) => (
+                <AccordionItem key={index} value={`item-${index}`} className="border-gray-200">
+                  <AccordionTrigger className="text-left text-base font-semibold text-gray-900 hover:text-amber-600">
+                    {faq.question}
+                  </AccordionTrigger>
+                  <AccordionContent className="text-base text-gray-700 leading-relaxed">
+                    {faq.answer}
+                  </AccordionContent>
+                </AccordionItem>
+              ))}
+            </Accordion>
+          </section>
+        )}
 
         {/* Related Navigation */}
         <section className="bg-gray-50 rounded-lg border border-gray-200 p-6">
