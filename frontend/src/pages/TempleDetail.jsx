@@ -168,37 +168,41 @@ const TempleDetail = () => {
         </section>
 
         {/* Visitor Guidance */}
-        <section className="mb-8">
-          <h2 className="text-2xl font-bold text-gray-900 mb-4">Visitor Guidance</h2>
-          <Card className="border-gray-200">
-            <CardContent className="p-6">
-              <div className="flex items-start space-x-3 mb-4">
-                <Info className="h-5 w-5 text-blue-600 mt-0.5" />
-                <p className="text-sm text-gray-600">Essential guidelines for a respectful and smooth temple visit</p>
-              </div>
-              <ul className="space-y-3">
-                {temple.visitorGuidance.map((guide, index) => (
-                  <li key={index} className="flex items-start space-x-3">
-                    <AlertCircle className="h-5 w-5 text-amber-600 mt-0.5 flex-shrink-0" />
-                    <span className="text-base text-gray-700 leading-relaxed">{guide}</span>
-                  </li>
-                ))}
-              </ul>
-            </CardContent>
-          </Card>
-        </section>
+        {temple.visitorGuidance && temple.visitorGuidance.length > 0 && (
+          <section className="mb-8">
+            <h2 className="text-2xl font-bold text-gray-900 mb-4">Visitor Guidance</h2>
+            <Card className="border-gray-200">
+              <CardContent className="p-6">
+                <div className="flex items-start space-x-3 mb-4">
+                  <Info className="h-5 w-5 text-blue-600 mt-0.5" />
+                  <p className="text-sm text-gray-600">Essential guidelines for a respectful and smooth temple visit</p>
+                </div>
+                <ul className="space-y-3">
+                  {temple.visitorGuidance.map((guide, index) => (
+                    <li key={index} className="flex items-start space-x-3">
+                      <AlertCircle className="h-5 w-5 text-amber-600 mt-0.5 flex-shrink-0" />
+                      <span className="text-base text-gray-700 leading-relaxed">{guide}</span>
+                    </li>
+                  ))}
+                </ul>
+              </CardContent>
+            </Card>
+          </section>
+        )}
 
         {/* Major Festivals */}
-        <section className="mb-8">
-          <h2 className="text-2xl font-bold text-gray-900 mb-4">Major Festivals</h2>
-          <div className="flex flex-wrap gap-3">
-            {temple.festivals.map((festival, index) => (
-              <Badge key={index} variant="outline" className="text-base py-2 px-4 border-amber-300 text-amber-700">
-                {festival}
-              </Badge>
-            ))}
-          </div>
-        </section>
+        {temple.festivals && temple.festivals.length > 0 && (
+          <section className="mb-8">
+            <h2 className="text-2xl font-bold text-gray-900 mb-4">Major Festivals</h2>
+            <div className="flex flex-wrap gap-3">
+              {temple.festivals.map((festival, index) => (
+                <Badge key={index} variant="outline" className="text-base py-2 px-4 border-amber-300 text-amber-700">
+                  {festival}
+                </Badge>
+              ))}
+            </div>
+          </section>
+        )}
 
         {/* AI-Friendly Structured Q&A Block */}
         <section className="mb-8">
