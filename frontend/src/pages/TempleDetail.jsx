@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useParams, Link, Navigate } from 'react-router-dom';
-import { temples } from '../data/mockTemples';
+import { templeAPI } from '../services/api';
 import { Card, CardContent } from '../components/ui/card';
 import { Badge } from '../components/ui/badge';
 import { Separator } from '../components/ui/separator';
@@ -10,14 +10,46 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from '../components/ui/accordion';
-import { MapPin, Clock, Users, AlertCircle, Info, ChevronLeft } from 'lucide-react';
+import { MapPin, Clock, Users, AlertCircle, Info, ChevronLeft, Loader2 } from 'lucide-react';
 import { Button } from '../components/ui/button';
 
 const TempleDetail = () => {
   const { id } = useParams();
-  const temple = temples.find((t) => t.id === id);
+  const [temple, setTemple] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
-  if (!temple) {
+  useEffect(() => {
+    const fetchTemple = async () => {
+      try {
+        setLoading(true);
+        const response = await templeAPI.getById(id);
+        if (response.success) {
+          setTemple(response.data);
+        }
+      } catch (err) {
+        console.error("Error fetching temple:", err);
+        setError("Temple not found");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchTemple();
+  }, [id]);
+
+  if (loading) {
+    return (
+      <div className="min-h-screen py-12 px-4 flex items-center justify-center">
+        <div className="text-center">
+          <Loader2 className="h-12 w-12 animate-spin text-amber-600 mx-auto mb-4" />
+          <p className="text-gray-600">Loading temple details...</p>
+        </div>
+      </div>
+    );
+  }
+
+  if (error || !temple) {
     return <Navigate to="/temples" replace />;
   }
 
