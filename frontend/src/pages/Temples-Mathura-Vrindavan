@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Temples of Mathura Vrindavan – Complete Pilgrim Guide</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        h1, h2, h3, h4 { font-family: 'Playfair Display', serif; }
+        .hero-bg {
+            background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1561585258-40d4c4c77571?q=80&w=2000&auto=format&fit=crop'); /* Placeholder Image of Temple/Ghat */
+            background-size: cover;
+            background-position: center;
+        }
+    </style>
+</head>
+<body class="bg-stone-50 text-slate-800 antialiased">
+
+    <nav class="bg-white shadow-sm sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16 items-center">
+                <div class="flex items-center gap-2">
+                    <span class="text-amber-600 text-2xl">📍</span>
+                    <span class="font-bold text-xl tracking-tight text-slate-900">Vrindavan Mathura <span class="text-slate-500 font-normal text-sm block md:inline md:ml-2">Temple Guide</span></span>
+                </div>
+                <div class="hidden md:flex space-x-8 text-sm font-medium text-slate-600">
+                    <a href="#" class="text-amber-700 hover:text-amber-900">Temples</a>
+                    <a href="#" class="hover:text-amber-700">Spiritual Places</a>
+                    <a href="#" class="hover:text-amber-700">Plan Your Visit</a>
+                    <a href="#" class="hover:text-amber-700">Festivals</a>
+                </div>
+                <button class="bg-slate-100 text-slate-700 px-4 py-2 rounded-full text-sm font-medium hover:bg-slate-200">🇬🇧 English</button>
+            </div>
+        </div>
+    </nav>
+
+    <header class="hero-bg h-[60vh] flex items-center justify-center text-center px-4">
+        <div class="max-w-4xl">
+            <h1 class="text-4xl md:text-6xl font-bold text-white mb-4 shadow-sm">Where History Meets Divinity</h1>
+            <p class="text-lg md:text-xl text-stone-200 mb-8 font-light">The complete authoritative guide to the sacred temples of Braj—from Krishna’s birthplace to His playground.</p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <a href="#temple-directory" class="bg-amber-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-amber-700 transition shadow-lg">Explore Temples</a>
+                <a href="#plan-visit" class="bg-white text-slate-900 px-8 py-3 rounded-lg font-semibold hover:bg-stone-100 transition shadow-lg">Plan Your Visit</a>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-4 py-12 grid grid-cols-1 lg:grid-cols-12 gap-12">
+
+        <aside class="hidden lg:block lg:col-span-3">
+            <div class="sticky top-24 bg-white p-6 rounded-xl shadow-sm border border-stone-100">
+                <h3 class="font-bold text-slate-900 mb-4 uppercase text-xs tracking-wider">In This Guide</h3>
+                <ul class="space-y-3 text-sm text-slate-600">
+                    <li><a href="#mathura" class="hover:text-amber-600 flex items-center gap-2"><span class="w-1.5 h-1.5 bg-amber-500 rounded-full"></span> Mathura Temples</a></li>
+                    <li><a href="#vrindavan" class="hover:text-amber-600 flex items-center gap-2"><span class="w-1.5 h-1.5 bg-green-500 rounded-full"></span> Vrindavan Temples</a></li>
+                    <li><a href="#darshan-tips" class="hover:text-amber-600">First-Time Visitor Tips</a></li>
+                    <li><a href="#family-guide" class="hover:text-amber-600">Family & Senior Guide</a></li>
+                    <li><a href="#logistics" class="hover:text-amber-600">How to Reach & Stay</a></li>
+                </ul>
+                <div class="mt-8 pt-6 border-t border-stone-100">
+                    <p class="text-xs text-slate-500 mb-2">Need a custom itinerary?</p>
+                    <button class="w-full text-center border border-amber-600 text-amber-600 py-2 rounded-lg text-sm font-medium hover:bg-amber-50">Ask an Expert</button>
+                </div>
+            </div>
+        </aside>
+
+        <div class="col-span-1 lg:col-span-9 space-y-16">
+
+            <section class="prose prose-lg max-w-none text-slate-600">
+                <p class="lead text-xl text-slate-800">Mathura and Vrindavan are not just tourist destinations; they are the heart of India's spiritual geography.</p>
+                <div class="grid md:grid-cols-2 gap-6 not-prose mt-8">
+                    <div class="bg-amber-50 p-6 rounded-lg border-l-4 border-amber-500">
+                        <h4 class="font-bold text-amber-900 text-lg mb-2">Mathura (Janmabhoomi)</h4>
+                        <p class="text-sm text-amber-800">The city of kings and history. Majestic, urban, and centered around the significance of Krishna’s arrival.</p>
+                    </div>
+                    <div class="bg-green-50 p-6 rounded-lg border-l-4 border-green-500">
+                        <h4 class="font-bold text-green-900 text-lg mb-2">Vrindavan (Leela Bhoomi)</h4>
+                        <p class="text-sm text-green-800">The land of love and play. Intimate, devotional, and centered on Bhakti and Leela.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="mathura">
+                <div class="flex items-center gap-4 mb-8">
+                    <h2 class="text-3xl font-serif font-bold text-slate-900">Mathura: The Royal Heritage</h2>
+                    <div class="h-px bg-slate-200 flex-grow"></div>
+                </div>
+
+                <div class="bg-white rounded-xl shadow-sm border border-stone-200 overflow-hidden mb-8">
+                    <div class="md:flex">
+                        <div class="md:w-1/3 bg-slate-200 h-48 md:h-auto relative">
+                             <div class="absolute inset-0 flex items-center justify-center text-slate-400">Image: Janmabhoomi</div>
+                        </div>
+                        <div class="p-6 md:w-2/3">
+                            <div class="flex justify-between items-start mb-2">
+                                <h3 class="text-xl font-bold text-slate-900">Shri Krishna Janmabhoomi</h3>
+                                <span class="bg-amber-100 text-amber-800 text-xs px-2 py-1 rounded font-medium">Must Visit</span>
+                            </div>
+                            <p class="text-slate-600 text-sm mb-4">The holiest site marking the prison cell where Lord Krishna was born. A place of solemn history and deep reverence.</p>
+                            
+                            <div class="grid grid-cols-2 gap-4 text-sm mb-4">
+                                <div>
+                                    <span class="block text-slate-400 text-xs uppercase font-bold">Timings</span>
+                                    <span class="text-slate-800">5 AM–12 PM | 4 PM–9:30 PM</span>
+                                </div>
+                                <div>
+                                    <span class="block text-slate-400 text-xs uppercase font-bold">Experience</span>
+                                    <span class="text-slate-800">Strict Security • Emotional</span>
+                                </div>
+                            </div>
+                            
+                            <div class="bg-stone-50 p-3 rounded text-xs text-slate-600 border border-stone-100">
+                                <strong>💡 Note:</strong> No mobiles or cameras allowed. Lockers available.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-xl shadow-sm border border-stone-200 overflow-hidden mb-8">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-slate-900 mb-2">Dwarkadhish Temple</h3>
+                        <p class="text-slate-600 text-sm mb-4">Dedicated to Krishna as the "King of Dwarka," famous for its Rajasthani architecture and the "Hindola" (Swing) festival.</p>
+                        <div class="flex gap-4 text-sm text-slate-500">
+                             <span class="flex items-center gap-1">🕒 6:30 AM – 10:30 AM</span>
+                             <span class="flex items-center gap-1">📍 Near Vishram Ghat</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="vrindavan">
+                <div class="flex items-center gap-4 mb-8">
+                    <h2 class="text-3xl font-serif font-bold text-slate-900">Vrindavan: The Land of Devotion</h2>
+                    <div class="h-px bg-slate-200 flex-grow"></div>
+                </div>
+
+                <div class="bg-white rounded-xl shadow-md border-l-4 border-amber-600 overflow-hidden mb-8 relative">
+                    <div class="absolute top-0 right-0 bg-amber-600 text-white text-xs px-3 py-1 rounded-bl-lg font-bold">Most Popular</div>
+                    <div class="p-6">
+                        <h3 class="text-2xl font-bold text-slate-900 mb-2">Banke Bihari Temple</h3>
+                        <p class="text-slate-600 mb-4">The energy here is electric. The deity is treated as a living child, and curtains are pulled periodically. Not for silent meditation, but for ecstatic devotion.</p>
+                        
+                        <div class="grid md:grid-cols-2 gap-6 bg-stone-50 p-4 rounded-lg">
+                            <div>
+                                <h5 class="font-bold text-slate-800 text-sm mb-1">Darshan Experience</h5>
+                                <p class="text-xs text-slate-600">High intensity, crowded, vibrant. Best visited on weekdays early morning.</p>
+                            </div>
+                            <div>
+                                <h5 class="font-bold text-slate-800 text-sm mb-1">Caution</h5>
+                                <p class="text-xs text-slate-600">Take care of glasses (monkeys) and slippers.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-xl shadow-sm border border-stone-200 overflow-hidden mb-8">
+                    <div class="p-6">
+                        <div class="flex justify-between">
+                            <h3 class="text-xl font-bold text-slate-900 mb-2">Prem Mandir</h3>
+                            <span class="text-green-600 bg-green-50 px-2 py-1 rounded text-xs font-bold h-fit">Wheelchair Friendly</span>
+                        </div>
+                        <p class="text-slate-600 text-sm mb-4">A massive white marble complex. Famous for its evening light show and musical fountain.</p>
+                        <div class="text-sm text-slate-500">
+                            <strong>Best Time:</strong> Sunset (Light show approx 7:30 PM).
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="darshan-tips" class="bg-slate-900 text-slate-200 rounded-2xl p-8 shadow-xl">
+                <h2 class="text-2xl font-serif text-white mb-6">⚠️ First-Time Visitor Essentials</h2>
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div>
+                        <h4 class="font-bold text-amber-400 mb-2">🐒 The Monkey Menace</h4>
+                        <p class="text-sm opacity-90 mb-4">Vrindavan monkeys target glasses and food. Wear contacts or use a strap. If they take something, trade it for a juice box (Frooti).</p>
+                        
+                        <h4 class="font-bold text-amber-400 mb-2">🚫 Afternoon Closure</h4>
+                        <p class="text-sm opacity-90">Most temples close strictly between 12:00 PM and 4:00 PM. Plan your lunch and rest then.</p>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-amber-400 mb-2">🛺 E-Rickshaws Only</h4>
+                        <p class="text-sm opacity-90 mb-4">Cars cannot enter inner Vrindavan lanes. Park at your hotel and use local Tuk-Tuks.</p>
+                        
+                        <h4 class="font-bold text-amber-400 mb-2">👟 Footwear</h4>
+                        <p class="text-sm opacity-90">Wear slip-ons. You will be taking them off constantly.</p>
+                    </div>
+                </div>
+            </section>
+
+        </div>
+    </main>
+
+    <footer class="bg-white border-t border-stone-200 mt-12 py-12">
+        <div class="max-w-7xl mx-auto px-4 text-center">
+            <h3 class="font-serif text-2xl text-slate-900 mb-4">Plan Your Spiritual Journey</h3>
+            <p class="text-slate-600 mb-8 max-w-2xl mx-auto">Whether you find peace in the silence of Radha Raman or energy in the crowds of Banke Bihari, enter with your heart.</p>
+            <button class="bg-amber-600 text-white px-8 py-3 rounded-full font-bold hover:bg-amber-700 transition">Contact Local Guides</button>
+            <p class="text-slate-400 text-xs mt-12">© 2026 Vrindavan Mathura Guide. All rights reserved.</p>
+        </div>
+    </footer>
+
+</body>
+</html>
