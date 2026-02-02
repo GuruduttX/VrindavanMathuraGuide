@@ -3,12 +3,14 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
+import Image from "next/image";
 
 const navItems = [
   { name: "Home", href: "/" },
+  { name: "Product", href: "/product" },
   { name: "About", href: "/about" },
-  { name: "Services", href: "/services" },
-  { name: "Portfolio", href: "/portfolio" },
+  { name: "Blog", href: "/blog" },
+
 ];
 
 export default function FloatingNavbar() {
@@ -24,18 +26,22 @@ export default function FloatingNavbar() {
   return (
     <div
       className={`fixed top-6 left-1/2 z-50 w-[90%] max-w-6xl -translate-x-1/2 transition-all duration-500
-      ${
-        show
+      ${show
           ? "opacity-100 translate-y-0"
           : "opacity-0 -translate-y-8 pointer-events-none"
-      }`}
+        }`}
     >
-      <nav className="flex items-center justify-between rounded-full bg-white/60 px-6 py-3 backdrop-blur-xl shadow-xl border border-white/40">
-        
+      <nav className="flex items-center justify-between rounded-full bg-white px-6 py-3 backdrop-blur-xl shadow-xl border border-white/40">
+
         {/* Logo */}
         <Link href="/" className="flex items-center gap-2">
-          <div className="h-9 w-9 rounded-full bg-gradient-to-tr from-pink-500 to-blue-500" />
-          <span className="font-semibold">Navbar</span>
+          <Image
+            src="/images/Admin/Experience_my_India.webp"
+            width={140}
+            height={30}
+            alt="logo"
+            className="cursor-pointer"
+          />
         </Link>
 
         {/* Menu */}
@@ -61,9 +67,10 @@ export default function FloatingNavbar() {
         {/* CTA */}
         <Link
           href="/signup"
-          className="rounded-full bg-gradient-to-r from-blue-500 to-indigo-500 px-5 py-2 text-sm font-semibold text-white shadow-md hover:scale-105 transition"
+          className="rounded-full bg-gradient-to-r from-orange-400 to-orange-400 px-5 py-2 text-sm font-semibold text-white shadow-md hover:scale-105 transition"
         >
-          Sign Up
+          Enquire Now
+          
         </Link>
       </nav>
     </div>

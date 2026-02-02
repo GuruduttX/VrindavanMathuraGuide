@@ -2,8 +2,20 @@
 
 html,
 body {
-  height: 100%;
-  overflow: hidden;
+  overflow-x: auto;
+  overflow-y: auto;
+
+  /* Firefox */
+  scrollbar-width: none;
+
+  /* IE / Edge */
+  -ms-overflow-style: none;
+}
+
+/* Chrome / Safari */
+html::-webkit-scrollbar,
+body::-webkit-scrollbar {
+  display: none;
 }
 
 /* Hide scrollbar but keep scrolling */
@@ -12,9 +24,119 @@ body {
 }
 
 .no-scrollbar {
-  -ms-overflow-style: none;  /* IE & Edge */
-  scrollbar-width: none;     /* Firefox */
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
 
 
+/* Orange Gradient Scrollbar */
+.orange-scrollbar::-webkit-scrollbar {
+  height: 8px;
+}
 
+.orange-scrollbar::-webkit-scrollbar-track {
+  background: #fff7ed;
+  border-radius: 10px;
+}
+
+.orange-scrollbar::-webkit-scrollbar-thumb {
+  background: linear-gradient(90deg,
+      #fb923c,
+      #f97316,
+      #ea580c);
+  border-radius: 10px;
+}
+
+.orange-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(90deg,
+      #f97316,
+      #ea580c,
+      #c2410c);
+}
+
+
+@keyframes marquee {
+  0% {
+    transform: translateX(0);
+  }
+
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-marquee {
+  animation: marquee 18s linear infinite;
+}
+
+.animate-marquee:hover {
+  animation-play-state: paused;
+}
+
+/* hide scrollbar */
+.animate-marquee ::-webkit-scrollbar {
+  display: none;
+}
+
+
+/* SunEditor Theme Changing */
+
+/* Main editor container */
+.dark-sun-editor .sun-editor {
+  background-color: #020617;
+  /* deep navy */
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Toolbar */
+.dark-sun-editor .sun-toolbar {
+  background-color: #020617;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Toolbar buttons */
+.dark-sun-editor .sun-btn {
+  color: #00040b;
+}
+
+.dark-sun-editor .se-btn:hover {
+  background-color: rgba(99, 102, 241, 0.15);
+}
+
+/* Editor writing area */
+.dark-sun-editor .sun-editor-editable {
+  background-color: #020617;
+  color: #ffffff;
+}
+
+/* Placeholder text */
+.dark-sun-editor .sun-editor-editable::before {
+  color: white;
+}
+
+/* Dropdowns (H1, H2, etc.) */
+.dark-sun-editor .se-dropdown {
+  background-color: #020617;
+  color: white;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Dropdown items hover */
+.dark-sun-editor .se-dropdown-item:hover {
+  background-color: rgba(99, 102, 241, 0.15);
+}
+
+/* Popups (link, image, etc.) */
+.dark-sun-editor .se-dialog {
+  background-color: transparent;
+  color: black;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+/* Inputs inside dialogs */
+.dark-sun-editor input,
+.dark-sun-editor textarea {
+  background-color: white;
+  color: black;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
