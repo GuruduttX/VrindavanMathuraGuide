@@ -55,6 +55,7 @@ body::-webkit-scrollbar {
 }
 
 
+/* Tust Builder Cards */
 @keyframes marquee {
   0% {
     transform: translateX(0);
@@ -140,3 +141,50 @@ body::-webkit-scrollbar {
   color: black;
   border: 1px solid rgba(255, 255, 255, 0.2);
 }
+
+
+/* Packages Hero section */
+
+@keyframes marquee-slow {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-marquee-slow {
+  animation: marquee-slow 28s linear infinite;
+}
+
+
+.animate-marquee-slow:hover {
+  animation-play-state: paused;
+}
+
+
+
+/* Scrollbar Packages */
+.scrollbar-hide {
+  scrollbar-width: none;
+}
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+/* For Input field in Enquiry PopUp Form */
+.input {
+  width: 100%;
+  border: 1px solid #e5e7eb;
+  padding: 12px 14px;
+  border-radius: 12px;
+  font-size: 14px;
+  outline: none;
+}
+
+.input:focus {
+  border-color: #f97316;
+  box-shadow: 0 0 0 2px rgba(249, 115, 22, 0.15);
+}
+

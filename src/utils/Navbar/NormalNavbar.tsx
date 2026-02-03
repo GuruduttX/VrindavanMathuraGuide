@@ -1,9 +1,17 @@
+"use client"
 import Image from "next/image";
 import Link from "next/link";
+import EnquiryPopup from "../EnquiryForm";
+import { useState } from "react";
 
 export default function NormalNavbar() {
+     const [isOpen, setIsOpen] = useState(false);
+     
     return (
-        <nav className="w-full h-full md:h-18">
+        <>
+        <EnquiryPopup onClose={()=>setIsOpen(false)} open={isOpen}/>
+          
+          <nav className="w-full h-full md:h-18">
             <div className=" flex items-center justify-between px-4 sm:px-8 py-4">
 
                 <div className="flex items-center justify-between  space-x-2   w-full   lg:w-[50%] xl:w-[50%] 2xl:w-[44%]">
@@ -30,6 +38,15 @@ export default function NormalNavbar() {
                             </Link>
 
                         </div>
+                        
+                        <Link href={"/packages"} className="cursor-pointer relative
+                                          after:absolute after:left-0 after:bottom-0 after:h-0.5 after:w-0 
+                                          after:bg-blue-600 after:transition-all after:duration-400
+                                          hover:after:w-full hover:text-blue-600">
+                                            Packages
+                        </Link>
+
+                        
 
 
                         {/* <CoursesDropdown courses={courses} /> */}
@@ -46,7 +63,7 @@ export default function NormalNavbar() {
                                           after:bg-blue-600 after:transition-all after:duration-400
                                           hover:after:w-full hover:text-blue-600">
                                             Blogs
-              </Link>
+                            </Link>
 
 
                             {/* <BlogsDropdown blogs={blogs} /> */}
@@ -72,7 +89,7 @@ export default function NormalNavbar() {
 
                     {/* Scholarship Button */}
                     <button
-                        // onClick={() => setIsOpen(true)}
+                        onClick={() => setIsOpen(true)}
                         className=" relative inline-flex items-center justify-center px-5 py-2.5 text-base font-semibold rounded-full shadow-md transition-all duration-300 ease-in-out hover:shadow-lg active:scale-95 focus:outline-none focus:ring-4 focus:ring-blue-300 cursor-pointer bg-gradient-to-r from-orange-600 to-orange-500"
                     >
                         <span className="text-white">
@@ -114,5 +131,7 @@ export default function NormalNavbar() {
                 </div>
             )} */}
         </nav>
+        </>
+       
     );
 }

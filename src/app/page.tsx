@@ -12,6 +12,7 @@ import HeroSection from '@/components/Home/Hero'
 import Footer from '@/utils/Footer'
 import FooterCTA from '@/utils/FooterCTA'
 import DestinationFilter from '@/components/Home/DestinationFilter'
+import WhyChooseUs from '@/components/Home/WhyChooseUs'
 
 
 const Home = () => {
@@ -23,8 +24,10 @@ const Home = () => {
       <EnquirySection />
       <PopularTours />
       <GroupCta />
+      <WhyChooseUs/>
       <TrustBuildingSection />
       <PhotoGallerySection />
+
       <HomeFAQSection />
       <ToursWeOperate />
       <VrindavanTrustStats />
