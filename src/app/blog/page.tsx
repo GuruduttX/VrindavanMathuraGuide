@@ -9,6 +9,7 @@ import LetsConnect from '@/components/Blog/LetsConnect';
 import VrindavanTrustStats from '@/components/Home/VrindavanTrustStats';
 import GroupCta from '@/components/Home/GroupCta';
 import PopularTours from '@/components/Home/PopularPackages';
+import BlogArchive from '@/components/Blog/BlogArchive';
 
 
 export const metadata: Metadata = {
@@ -85,7 +86,7 @@ const page = async () => {
 
             <PopularTours />
 
-            {/* <Content /> */}
+            <BlogArchive />
 
             <GroupCta />
 

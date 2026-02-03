@@ -116,6 +116,7 @@ export default function CreateNewBlog() {
         </div>
 
         <div className="dark-sun-editor h-[85vh] w-full rounded-2xl p-5 overflow-hidden shadow-xl hover:shadow-2xl hover:shadow-indigo-400 border border-indigo-400 shadow-indigo-400 hover:border-2 hover:border-indigo-400">
+
           <SunEditor
             
             defaultValue="<p><strong>Welcome!</strong> Start writing your course content here.</p>"
@@ -129,6 +130,7 @@ export default function CreateNewBlog() {
                 ["list"],
                 ["align"],
                 ["link", "image"],
+                ["table"]
               ],
             }}
 

@@ -3,6 +3,7 @@ import {
   Table2,
   PlusCircle,
 } from "lucide-react";
+import Link from "next/link";
 
 const modes = [
   {
@@ -12,6 +13,7 @@ const modes = [
     icon: LayoutGrid,
     buttonText: "View Cards",
     gradient: "from-cyan-500 to-blue-600",
+    route : "cards"
   },
   {
     title: "Table View",
@@ -20,6 +22,7 @@ const modes = [
     icon: Table2,
     buttonText: "View Table",
     gradient: "from-violet-500 to-purple-600",
+    route : "table"
   },
   {
     title: "Add New Content",
@@ -28,6 +31,7 @@ const modes = [
     icon: PlusCircle,
     buttonText: "Add Blog",
     gradient: "from-emerald-500 to-green-600",
+    route : "create-new"
   },
 ];
 
@@ -54,7 +58,7 @@ export default function Blogs() {
             </div>
 
             {/* Content */}
-            <h3 className="text-lg font-semibold mb-2">
+            <h3 className="text-lg font-semibold mb-2 text-white">
               {mode.title}
             </h3>
 
@@ -63,11 +67,13 @@ export default function Blogs() {
             </p>
 
             {/* Action Button */}
-            <button
-              className={`mt-auto w-full py-2 rounded-lg font-medium bg-gradient-to-r cursor-pointer ${mode.gradient} hover:opacity-90 transition`}
-            >
-              {mode.buttonText}
-            </button>
+            <Link href={`/admin-x9AqP7mK2/blogs/${mode.route}`}>
+              <button
+                className={`mt-auto w-full py-2 rounded-lg font-medium bg-gradient-to-r cursor-pointer ${mode.gradient} hover:opacity-90 transition`}
+              >
+                {mode.buttonText}
+              </button>
+            </Link>
           </div>
         </div>
       ))}
