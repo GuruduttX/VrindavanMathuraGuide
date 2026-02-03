@@ -66,7 +66,7 @@ export default function EnquirySection() {
         {/* RIGHT SIDE – IMAGE WITH MANDIR GLOW */}
         <div className="relative rounded-3xl overflow-hidden min-h-[420px]">
           <Image
-            src="/images/mathura-vrindavan.webp"
+            src="/images/Home/mathura-vrindavan.webp"
             alt="Mathura Vrindavan Temple View"
             fill
             priority

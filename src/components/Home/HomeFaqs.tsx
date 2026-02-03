@@ -12,7 +12,7 @@ export default function HomeFAQSection() {
             
 
             <Image
-                src={'/images/mathura-vrindavan.webp'}
+                src={'/images/Home/mathura-vrindavan.webp'}
                 alt="Mathura Vrindavan Spiritual Journey"
                 className="object-cover w-full h-full"
                 fill

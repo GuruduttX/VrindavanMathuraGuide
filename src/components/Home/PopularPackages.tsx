@@ -79,7 +79,7 @@ export default function PopularTours() {
               flex gap-6 overflow-x-auto pb-4
               scroll-smooth
               snap-x snap-mandatory
-              no-scrollbar orange-scrollbar
+              orange-scrollbar
             
             "
           >
