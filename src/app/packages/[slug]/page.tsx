@@ -11,6 +11,7 @@ import ProductRatings from '@/components/PackageDetail/ProductRatings'
 import Footer from '@/utils/Footer'
 import Navbar from '@/utils/Navbar'
 import React from 'react'
+import FooterCTA from "@/utils/FooterCTA";
 
 
 const page = () => {
@@ -18,9 +19,6 @@ const page = () => {
         <>
             <Navbar />
             <PackageHero />
-
-
-
             <div className="w-full h-full">
 
                 {/* Duration Stript */}
@@ -68,17 +66,12 @@ const page = () => {
                         "Anything not mentioned under inclusions",
                     ]}
                 />
-
-
-
-
-
-
             </div>
 
             <GroupCta />
             <ProductRatings />
             <Policies />
+            <FooterCTA />
             <Footer />
         </>
     )
