@@ -6,6 +6,8 @@ import PackagesCTA from "@/components/Packages/PackagesCTA";
 import PackagesFaq from "@/components/Packages/PackageFaqs";
 import PackagesGrid from "@/components/Packages/PackagesGrid";
 import Footer from "@/utils/Footer";
+import VrindavanTrustStats from "@/components/Home/VrindavanTrustStats";
+
 
 export default function Page() {
   return (
@@ -25,6 +27,7 @@ export default function Page() {
       {/* <PackagesSlider/> */}
       <PackagesGrid/>
       <PackagesCTA/>
+      <VrindavanTrustStats/>
       <PackagesFaq/>
       <Footer/>
       

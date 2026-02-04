@@ -26,7 +26,6 @@ const Home = () => {
       <GroupCta />
       <WhyChooseUs/>
       <TrustBuildingSection />
-      <PhotoGallerySection />
 
       <HomeFAQSection />
       <ToursWeOperate />
