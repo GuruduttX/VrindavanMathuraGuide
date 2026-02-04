@@ -84,9 +84,9 @@ const page = async () => {
 
             <LetsConnect />
 
-            <PopularTours />
-
             <BlogArchive />
+
+            <PopularTours />
 
             <GroupCta />
 
