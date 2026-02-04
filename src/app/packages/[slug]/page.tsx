@@ -2,14 +2,28 @@ import InclusionExclusion from "@/components/PackageDetail/InclusionExclusion";
 import PackageDurationStrip from "@/components/PackageDetail/PackageDurationStrip";
 import PackageHighlights from "@/components/PackageDetail/PackageHighlights";
 import PackageInclusionsStrip from "@/components/PackageDetail/PackageInclusionsStrip";
+import GroupCta from '@/components/Home/GroupCta'
+import DestinationRoute from '@/components/PackageDetail/DestinationRoute'
+import ItineraryAccordion from '@/components/PackageDetail/ItineraryAccordion'
+import PackageHero from '@/components/PackageDetail/PackageHero'
+import Policies from '@/components/PackageDetail/Policies'
+import ProductRatings from '@/components/PackageDetail/ProductRatings'
+import Footer from '@/utils/Footer'
+import Navbar from '@/utils/Navbar'
+import React from 'react'
 
-export default async function Page({params} : {params : Promise<{slug : string}>}) {
-    const {slug} = await params;
 
+const page = () => {
     return (
+        <>
+            <Navbar />
+            <PackageHero />
+           
+            
+
         <div className="w-full h-full">
 
-            {/* Duration Stript */}
+              {/* Duration Stript */}
            <PackageDurationStrip
                 duration="4D / 3N"
                 breakdown={[
@@ -20,7 +34,9 @@ export default async function Page({params} : {params : Promise<{slug : string}>
             />
            
             {/* Package Inclusion Strip */}
-           <PackageInclusionsStrip/>
+            <PackageInclusionsStrip/>
+
+            <DestinationRoute />
 
            {/* Package Highlights */}
            <PackageHighlights   highlights={[
@@ -32,6 +48,8 @@ export default async function Page({params} : {params : Promise<{slug : string}>
             ]}   
             
             />
+
+            <ItineraryAccordion />
 
             <InclusionExclusion
 
@@ -50,6 +68,8 @@ export default async function Page({params} : {params : Promise<{slug : string}>
                     "Anything not mentioned under inclusions",
                 ]}
             />
+
+            
             
             
 
@@ -57,5 +77,13 @@ export default async function Page({params} : {params : Promise<{slug : string}>
 
 
         </div>
+
+        <GroupCta />
+        <ProductRatings />
+        <Policies/>
+        <Footer />
+        </>
     )
 }
+
+export default page

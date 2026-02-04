@@ -8,7 +8,7 @@ export default function HeroSection() {
       
 
       {/* Orange Gradient Overlay */}
-      <div className="absolute inset-0 bg-gradient-to-r from-[#b3500a] via-[#fe9001] to-[#f66f00]" />
+      <div className="absolute inset-0 bg-gradient-to-r from-[#b3500a] via-[#cf7602] to-[#c45800]" />
 
       {/* Content */}
       <div className="relative z-10 mx-auto max-w-7xl px-6 pt-12">
