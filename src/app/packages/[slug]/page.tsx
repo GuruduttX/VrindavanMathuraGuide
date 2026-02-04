@@ -35,7 +35,7 @@ const page = () => {
            
             {/* Package Inclusion Strip */}
             <PackageInclusionsStrip/>
-
+            
             <DestinationRoute />
 
            {/* Package Highlights */}
@@ -68,8 +68,6 @@ const page = () => {
                     "Anything not mentioned under inclusions",
                 ]}
             />
-
-            
             
             
 
