@@ -31,7 +31,7 @@ const FooterCTA = () => {
                     {/* Image Section */}
                     <div className="relative w-full lg:w-1/2 flex justify-center">
                         <Image
-                            src="/images/utils/CTAIMAGE.png"
+                            src="/images/utils/CTAIMAGE.webp"
                             alt="confused person"
                             width={200}
                             height={50}

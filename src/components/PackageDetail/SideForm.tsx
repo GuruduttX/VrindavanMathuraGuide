@@ -2,12 +2,12 @@ import { Star } from "lucide-react";
 import { FloatingInput } from "@/utils/FloatingInput"; 
 import { FloatingTextarea } from "@/utils/FloatingTextarea";
 
-export default function PackageSidebar() {
+export default function SideForm() {
   return (
-    <aside className="sticky top-24 w-full max-w-sm">
+    <div className="w-full  max-w-sm z-10 ">
 
       {/* PRICE CARD */}
-      <div className="bg-white rounded-2xl border p-5 mb-6 shadow-sm">
+      {/* <div className="bg-white rounded-2xl border p-5 mb-6 shadow-sm">
         <div className="flex justify-between items-start">
           <div>
             <p className="text-xl font-bold text-gray-900">
@@ -27,10 +27,10 @@ export default function PackageSidebar() {
           text-white font-semibold py-3 rounded-xl">
           Send Enquiry
         </button>
-      </div>
+      </div> */}
 
       {/* FORM CARD */}
-      <div className="bg-white rounded-2xl border p-6 shadow-sm">
+      <div className="bg-white rounded-2xl border border-gray-400 p-6 shadow-lg">
         <h3 className="font-semibold text-gray-900 mb-4">
           Enquire About This Package
         </h3>
@@ -47,18 +47,36 @@ export default function PackageSidebar() {
               <FloatingInput label="Phone Number" required />
             </div>
           </div>
+          <div className="relative">
+            <input
+                type="date"
+                required
+                placeholder=" "
+                className="peer w-full rounded-xl border border-gray-300 px-4 pt-5 pb-2
+                text-sm outline-none focus:border-orange-500 focus:ring-1 focus:ring-orange-200"
+            />
+            <label
+                className="absolute    
+                left-2
+                top-1
+                text-xs
+                peer-focus:text-orange-600"
+            >
+                {"Trave Date" }{" *"}
+            </label>
+       </div>
 
-          <FloatingInput label="Travel Date" type="date" required />
+          {/* <FloatingInput label="Travel Date" type="date" required /> */}
           <FloatingInput label="Traveller Count" required />
 
           <FloatingTextarea label="Message" />
 
-          <button className="w-full bg-orange-500 hover:bg-orange-600
+          <button className="w-full bg-orange-500 hover:bg-orange-600 cursor-pointer
             text-white font-semibold py-3 rounded-xl">
             Send Enquiry
           </button>
         </div>
       </div>
-    </aside>
+    </div>
   );
 }
