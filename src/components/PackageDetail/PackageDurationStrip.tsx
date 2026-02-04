@@ -14,7 +14,7 @@ export default function PackageDurationStrip({
 }: PackageDurationStripProps) {
   return (
     <section className="py-6">
-      <div className="max-w-7xl mx-auto px-6">
+      <div className="max-w-7xl mx-auto ">
         <div className="flex flex-wrap items-center gap-6">
 
           {/* LEFT DURATION PILL */}
