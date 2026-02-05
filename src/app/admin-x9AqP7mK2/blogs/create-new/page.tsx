@@ -71,7 +71,7 @@ export default function CreateNewBlog() {
         <FaqHandler faqs = {faqs} setFaqs = {setFaqs}/>
         <CMSMediaSection image = {form.image} alt = {form.alt} onChange = {updateForm}/>
         <CMSContentSection subContent={form.subContent} content = {form.content} onChange = {updateForm}/>
-        <CMSActions />
+        <CMSActions form={form} faqs={faqs}/>
       </div>
 
     </div>
