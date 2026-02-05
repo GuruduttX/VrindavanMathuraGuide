@@ -130,7 +130,8 @@ export default function BlogEditor() {
                 ["list"],
                 ["align"],
                 ["link", "image"],
-                ["table"]
+                ["table"],
+                
               ],
             }}
 
