@@ -1,6 +1,6 @@
 import React from 'react'
 
-const CMSSeoSection = ({ metaTitle, metaDescription, onChange }: { metaTitle: string, metaDescription: string, onChange: any }) => {
+const CMSSeoSection = ({ metaTitle, metaDescription, onChange }: { metaTitle: string, metaDescription: string, onChange: any , editorType : "Blog" | "Package"}) => {
     return (
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
@@ -21,7 +21,7 @@ const CMSSeoSection = ({ metaTitle, metaDescription, onChange }: { metaTitle: st
                     onChange={(e) => { onChange("metaDescription", e.target.value) }}
                     placeholder="Growing an online business isn’t easy..."
                     className="mt-2 w-full px-5 py-3 rounded-xl bg-white/5 text-white
-            border border-white/10 focus:ring-2 focus:ring-sky-500 transition"
+                        border border-white/10 focus:ring-2 focus:ring-sky-500 transition"
                 />
             </div>
         </div>

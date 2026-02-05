@@ -7,7 +7,7 @@ const SunEditor = dynamic(() => import("suneditor-react"), {
     ssr: false,
 });
 
-const CMSContentSection = ({ subContent, content, onChange }: { subContent: string, content: string, onChange: any }) => {
+const CMSContentSection = ({ subContent, content, onChange }: { subContent: string, content: string, onChange: any, editorType : "Blog" | "Package" }) => {
     return (
         <div className='space-y-6'>
             {/* SubContent */}
