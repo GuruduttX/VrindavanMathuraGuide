@@ -72,6 +72,7 @@ export default function CreateNewBlog() {
         <CMSMediaSection image = {form.image} alt = {form.alt} onChange = {updateForm}/>
         <CMSContentSection subContent={form.subContent} content = {form.content} onChange = {updateForm}/>
         <CMSActions form={form} faqs={faqs}/>
+        
       </div>
 
     </div>

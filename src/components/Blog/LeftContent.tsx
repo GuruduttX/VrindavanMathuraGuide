@@ -35,20 +35,20 @@ export default function LeftContent({ Blogs }: { Blogs: Blog }) {
         {/* ===== BLOG HEADER ===== */}
         <section className="px-8 sm:px-4 pt-16 ">
             <nav aria-label="Breadcrumb" className="text-sm text-gray-400 -mt-6 py-4 px-3 ">
-                <Link href="/" className="hover:text-blue-500 transition">
+                <Link href="/" className="hover:text-orange-500 transition">
                     Home
                 </Link>
                 <span className="mx-2">/</span>
-                <Link href={"/blog"} className=" font-medium hover:text-blue-500 transition">
+                <Link href={"/blog"} className=" font-medium hover:text-orange-500 transition">
                     Blogs
                 </Link>
                 <span className="mx-2">/</span>
-                <Link href={Blogs.slug} className="text-gray-700 ">{Blogs.domain}</Link>
+                <Link href={Blogs.slug} className="text-orange-700 ">{Blogs.domain}</Link>
             </nav>
 
             <div className="flex items-center gap-3 mb-4">
 
-                <span className="px-3 py-1 text-xs font-semibold rounded-full bg-blue-50 text-blue-600">
+                <span className="px-3 py-1 text-xs font-semibold rounded-full bg-orange-50 text-orange-600">
 
                     {Blogs && Blogs.domain}
 
@@ -96,12 +96,12 @@ export default function LeftContent({ Blogs }: { Blogs: Blog }) {
             <Link
                 href="#form"
                 className="relative inline-flex items-center gap-2 px-7 py-3 rounded-full
-                                bg-linear-to-r from-blue-600 to-indigo-600
+                                bg-linear-to-r from-orange-600 to-orange-600
                                 text-white font-medium shadow-lg
                                 hover:shadow-xl hover:scale-[1.02]
                                 transition-all duration-300"
             >
-                Let’s Connect
+                Let’s Get Your Package
                 <span className="absolute inset-0 rounded-full ring-2 ring-blue-300/40"></span>
             </Link>
         </div>

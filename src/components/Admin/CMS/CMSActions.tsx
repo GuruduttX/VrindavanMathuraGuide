@@ -20,8 +20,12 @@ type FAQ = {
 
 const CMSActions = ({ form, faqs } : {form : BlogForm , faqs : FAQ}) => {
 
-    return (
+    const saveHandler = () => {
         
+    }
+
+    return (
+
         <div className="mt-10 flex gap-4">
             <button className="px-6 py-3 rounded-xl bg-sky-600 text-white
       hover:bg-sky-500 hover:shadow-lg hover:shadow-sky-500/30

@@ -1,6 +1,7 @@
 "use client";
 
 import { X, Phone, ShieldCheck, Zap, MapPin } from "lucide-react";
+import { useEffect, useState } from "react";
 
 interface EnquiryPopupProps {
   open: boolean;
@@ -8,11 +9,22 @@ interface EnquiryPopupProps {
 }
 
 export default function EnquiryPopup({ open, onClose }: EnquiryPopupProps) {
+  const [animate, setAnimate] = useState(false);
+
+  useEffect(() => {
+    if (open) {
+      // allow first paint, then animate
+      requestAnimationFrame(() => setAnimate(true));
+    } else {
+      setAnimate(false);
+    }
+  }, [open]);
+
   if (!open) return null;
 
   return (
-    <div className="fixed inset-0 z-[999] flex items-center justify-center">
-      
+    <div className="fixed inset-0 z-[999] flex items-start justify-center no-scrollbar">
+
       {/* BACKDROP */}
       <div
         className="absolute inset-0 bg-black/60 backdrop-blur-sm"
@@ -20,8 +32,12 @@ export default function EnquiryPopup({ open, onClose }: EnquiryPopupProps) {
       />
 
       {/* MODAL */}
-      <div className="relative bg-white w-full max-w-5xl mx-4 rounded-3xl shadow-xl max-h-[90vh] overflow-y-auto overflow-hidden z-10">
-
+      <div
+        className={`relative bg-white w-full max-w-5xl mx-4 rounded-3xl shadow-xl
+        max-h-[90vh] overflow-y-auto overflow-hidden z-10
+        transform transition-all duration-500 ease-out no-scrollbar
+        ${animate ? "translate-y-11 opacity-100" : "-translate-y-40 opacity-0"}`}
+      >
         {/* CLOSE */}
         <button
           onClick={onClose}
@@ -63,8 +79,13 @@ export default function EnquiryPopup({ open, onClose }: EnquiryPopupProps) {
             {/* CALL BOX */}
             <div className="bg-white rounded-2xl p-4 shadow border">
               <p className="text-sm text-gray-500">Call Now</p>
-              <p className="font-semibold text-gray-900 mb-4">+91 111613003</p>
-              <a  href="https://wa.me/9400599250" className="w-full bg-green-500 hover:bg-green-600 text-white rounded-xl py-2 px-4 font-semibold cursor-pointer">
+              <p className="font-semibold text-gray-900 mb-4">
+                +91 111613003
+              </p>
+              <a
+                href="https://wa.me/9400599250"
+                className="block text-center bg-green-500 hover:bg-green-600 text-white rounded-xl py-2 px-4 font-semibold cursor-pointer"
+              >
                 WhatsApp
               </a>
             </div>
@@ -72,8 +93,7 @@ export default function EnquiryPopup({ open, onClose }: EnquiryPopupProps) {
         </div>
 
         {/* FORM */}
-        <form className="p-8 grid grid-cols-1 md:grid-cols-3 gap-4">
-          
+        <form className="p-10 grid grid-cols-1 md:grid-cols-3 gap-4">
           <input className="input cursor-pointer" placeholder="Full Name*" />
           <input className="input cursor-pointer" placeholder="Phone Number*" />
           <input className="input cursor-pointer" placeholder="Email*" />
@@ -97,25 +117,23 @@ export default function EnquiryPopup({ open, onClose }: EnquiryPopupProps) {
             placeholder="Message / Requirements"
           />
 
-          {/* SECURITY CHECK */}
-          {/* <div className="md:col-span-3 bg-orange-50 border border-dashed border-orange-300 rounded-xl p-4">
-            <label className="text-sm font-semibold text-gray-700">
-              Security Check: <span className="text-orange-600">4 + 7</span>
-            </label>
-            <input className="input mt-2" placeholder="Enter answer cursor-pointer" />
-          </div> */}
-
           {/* ACTIONS */}
           <div className="md:col-span-3 flex flex-wrap gap-4">
             <button className="cursor-pointer bg-orange-600 hover:bg-orange-700 text-white px-6 py-3 rounded-xl font-semibold">
               Send Enquiry
             </button>
 
-            <button type="button" className="cursor-pointer bg-white border px-6 py-3 rounded-xl font-semibold flex items-center gap-2">
+            <button
+              type="button"
+              className="cursor-pointer bg-white border px-6 py-3 rounded-xl font-semibold flex items-center gap-2"
+            >
               <Phone className="w-4 h-4" /> Call
             </button>
 
-            <button type="button" className="cursor-pointer bg-green-500 hover:bg-green-600 text-white px-6 py-3 rounded-xl font-semibold">
+            <button
+              type="button"
+              className="cursor-pointer bg-green-500 hover:bg-green-600 text-white px-6 py-3 rounded-xl font-semibold"
+            >
               WhatsApp
             </button>
           </div>

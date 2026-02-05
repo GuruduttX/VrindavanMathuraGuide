@@ -59,7 +59,7 @@ const FooterCTA = () => {
                                       mb-6
                                     "
                         >
-                            Build <span className='text-yellow-400 font-extrabold'>skills</span> that employers look for, not just marks
+                            Follow Krishna’s   <span className='text-yellow-400 font-extrabold'>footsteps,</span> not crowded routes.
                         </h2>
 
                         <button

@@ -95,10 +95,10 @@ export default function RelatedBlog({slug}:{slug:string}) {
         {relatedBlogs?.map((blog, idx) => (
           <div
             key={idx}
-            className="bg-white rounded-xl border-gray-200 shadow-lg  overflow-hidden
+            className="bg-white rounded-2xl border-gray-200 shadow-lg  overflow-hidden
                          transition-all duration-300 hover:shadow-blue-200 hover:-translate-y-1  curosr-pointer"
           >
-            <div className="relative h-40 cursor-pointer">
+            <div className="relative h-70 cursor-pointer">
               <Image
                 src={blog.image}
                 alt={blog.title}
@@ -118,9 +118,9 @@ export default function RelatedBlog({slug}:{slug:string}) {
               </p>
 
               <Link href={`/blog/${blog.slug}`}>
-                <span className="inline-block mt-4 text-sm font-medium text-blue-600">
+                <button className="px-6 py-3 rounded-3xl inline-block mt-4 text-sm font-medium text-white bg-orange-400 hover:bg-orange-500 cursor-pointer transition">
                   Read more →
-                </span>
+                </button>
               </Link>
 
 

@@ -177,3 +177,245 @@ body::-webkit-scrollbar {
   border-color: #f97316;
   box-shadow: 0 0 0 2px rgba(249, 115, 22, 0.15);
 }
+
+
+
+.BlogContent h1 {
+  font-size: 35px;
+  font-weight:bold
+}
+
+.BlogContent h2 {
+  font-size: 25px;
+  font-weight: bold
+}
+
+.BlogContent h3 {
+  font-size : 15px;
+  font-weight : bold
+}
+
+.BlogContent h4 {
+  font-size : 10px;
+  font-weight : bold
+}
+
+.BlogContent h5 {
+  font-size : 8px;
+  font-weight : bold
+}
+
+.BlogContent h6 {
+  font-size : 6px;
+  font-weight : bold
+}
+
+/* ===== UNORDERED LIST ===== */
+.BlogContent ul {
+  list-style-type: disc;
+  padding-left: 2rem;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+/* ===== ORDERED LIST ===== */
+.BlogContent ol {
+  list-style-type: decimal;
+  padding-left: 2rem;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+/* ===== LIST ITEM ===== */
+.BlogContent li {
+  margin: 0.25rem 0;
+}
+
+/* ===== BULLET / NUMBER ===== */
+.BlogContent li::marker {
+  color: #64748b; /* slate-500 */
+  font-weight: 500;
+}
+
+
+/* Table wrapper (important for mobile scroll) */
+.BlogContent table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1.5rem 0;
+  font-size: 15px;
+  overflow-x: auto;
+}
+
+/* Table Header */
+.BlogContent thead {
+  background-color: #f1f5f9; /* slate-100 */
+}
+
+.BlogContent th {
+  padding: 12px 14px;
+  text-align: left;
+  font-weight: 600;
+  color: #0f172a; /* slate-900 */
+  border: 1px solid #e2e8f0; /* slate-200 */
+}
+
+/* Table Body */
+.BlogContent td {
+  padding: 12px 14px;
+  border: 1px solid #e2e8f0;
+  color: #334155; /* slate-700 */
+  vertical-align: top;
+}
+
+/* Zebra striping */
+.BlogContent tbody tr:nth-child(even) {
+  background-color: #f8fafc; /* slate-50 */
+}
+
+/* Hover effect */
+.BlogContent tbody tr:hover {
+  background-color: #e2e8f0; /* slate-200 */
+  transition: background-color 0.2s ease;
+}
+
+/* Responsive table (mobile friendly) */
+@media (max-width: 768px) {
+  .BlogContent table {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+}
+
+/* ===============================
+   BLOG TYPOGRAPHY (RESPONSIVE)
+================================ */
+
+.BlogContent {
+  line-height: 1.75;
+  font-size: clamp(14px, 1.1vw, 16px);
+}
+
+/* Headings */
+.BlogContent h1 {
+  font-size: clamp(28px, 4vw, 42px);
+  font-weight: 800;
+  margin: 1.5rem 0 1rem;
+}
+
+.BlogContent h2 {
+  font-size: clamp(22px, 3vw, 32px);
+  font-weight: 700;
+  margin: 1.4rem 0 0.9rem;
+}
+
+.BlogContent h3 {
+  font-size: clamp(18px, 2.4vw, 24px);
+  font-weight: 600;
+  margin: 1.2rem 0 0.75rem;
+}
+
+.BlogContent h4 {
+  font-size: clamp(16px, 2vw, 20px);
+  font-weight: 600;
+  margin: 1rem 0 0.6rem;
+}
+
+.BlogContent h5 {
+  font-size: clamp(14px, 1.6vw, 18px);
+  font-weight: 600;
+}
+
+.BlogContent h6 {
+  font-size: clamp(13px, 1.4vw, 16px);
+  font-weight: 600;
+  color: #475569; /* slate-600 */
+}
+
+/* ===============================
+   LISTS
+================================ */
+
+.BlogContent ul,
+.BlogContent ol {
+  padding-left: clamp(1.25rem, 2vw, 2rem);
+  margin: 1rem 0;
+}
+
+.BlogContent li {
+  margin: 0.4rem 0;
+  font-size: clamp(14px, 1.1vw, 16px);
+}
+
+.BlogContent li::marker {
+  color: #64748b; /* slate-500 */
+  font-weight: 500;
+}
+
+/* ===============================
+   TABLES (MOBILE-FIRST)
+================================ */
+
+/* Table wrapper */
+.BlogContent .table-wrapper {
+  width: 100%;
+  overflow-x: auto;
+  margin: 1.5rem 0;
+}
+
+/* Table */
+.BlogContent table {
+  width: 100%;
+  min-width: 600px; /* prevents squishing */
+  border-collapse: collapse;
+  font-size: clamp(13px, 1vw, 15px);
+}
+
+/* Header */
+.BlogContent thead {
+  background-color: #f1f5f9;
+}
+
+.BlogContent th {
+  padding: clamp(10px, 1.5vw, 14px);
+  text-align: left;
+  font-weight: 600;
+  color: #0f172a;
+  border: 1px solid #e2e8f0;
+}
+
+/* Body */
+.BlogContent td {
+  padding: clamp(10px, 1.5vw, 14px);
+  border: 1px solid #e2e8f0;
+  color: #334155;
+  vertical-align: top;
+}
+
+/* Zebra rows */
+.BlogContent tbody tr:nth-child(even) {
+  background-color: #f8fafc;
+}
+
+/* Hover */
+.BlogContent tbody tr:hover {
+  background-color: #e2e8f0;
+  transition: background-color 0.2s ease;
+}
+
+/* ===============================
+   SMALL SCREENS OPTIMIZATION
+================================ */
+
+@media (max-width: 640px) {
+  .BlogContent {
+    line-height: 1.8;
+  }
+
+  .BlogContent table {
+    font-size: 13px;
+  }
+}
+
+

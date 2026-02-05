@@ -54,7 +54,7 @@ const tours = [
 
 export default function PopularTours() {
   return (
-    <section className="py-20 bg-[#fff7ed] mt-12">
+    <section className="py-20 bg-gradient-to-b from-white to-orange-50">
       <div className="max-w-7xl mx-auto px-6">
 
         {/* HEADER */}

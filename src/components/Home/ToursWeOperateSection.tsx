@@ -2,7 +2,10 @@ import { MapPin, Clock, Users, Footprints } from "lucide-react";
 
 export default function ToursWeOperate() {
   return (
-    <section className="py-24 bg-[#FFF7ED]">
+    <section className="py-24 bg-gradient-to-tr from-[#ffeed7] to-[#ffa11e]
+
+
+">
       <div className="max-w-7xl mx-auto px-6">
 
         {/* HEADER */}
@@ -24,7 +27,7 @@ export default function ToursWeOperate() {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
 
           {/* TOUR 1 */}
-          <div className="bg-white rounded-3xl p-8 shadow-md hover:shadow-lg transition">
+          <div className="bg-white rounded-3xl p-8 shadow-sm hover:shadow-lg transition cursor-pointer hover:scale-105">
             <div className="w-12 h-12 bg-orange-100 rounded-xl flex items-center justify-center mb-5">
               <MapPin className="w-6 h-6 text-orange-500" />
             </div>
@@ -43,7 +46,7 @@ export default function ToursWeOperate() {
           </div>
 
           {/* TOUR 2 */}
-          <div className="bg-white rounded-3xl p-8 shadow-md hover:shadow-lg transition">
+          <div className="bg-white rounded-3xl p-8 shadow-sm hover:shadow-lg transition cursor-pointer hover:scale-105">
             <div className="w-12 h-12 bg-orange-100 rounded-xl flex items-center justify-center mb-5">
               <Footprints className="w-6 h-6 text-orange-500" />
             </div>
@@ -62,7 +65,7 @@ export default function ToursWeOperate() {
           </div>
 
           {/* TOUR 3 */}
-          <div className="bg-white rounded-3xl p-8 shadow-md hover:shadow-lg transition">
+          <div className="bg-white rounded-3xl p-8 shadow-sm hover:shadow-lg transition cursor-pointer hover:scale-105">
             <div className="w-12 h-12 bg-orange-100 rounded-xl flex items-center justify-center mb-5">
               <Users className="w-6 h-6 text-orange-500" />
             </div>
@@ -81,7 +84,7 @@ export default function ToursWeOperate() {
           </div>
 
           {/* TOUR 4 */}
-          <div className="bg-white rounded-3xl p-8 shadow-md hover:shadow-lg transition">
+          <div className="bg-white rounded-3xl p-8 shadow-sm hover:shadow-lg transition cursor-pointer hover:scale-105">
             <div className="w-12 h-12 bg-orange-100 rounded-xl flex items-center justify-center mb-5">
               <Clock className="w-6 h-6 text-orange-500" />
             </div>
@@ -100,7 +103,7 @@ export default function ToursWeOperate() {
           </div>
 
           {/* TOUR 5 */}
-          <div className="bg-white rounded-3xl p-8 shadow-md hover:shadow-lg transition">
+          <div className="bg-white rounded-3xl p-8 shadow-sm hover:shadow-lg transition cursor-pointer hover:scale-105">
             <div className="w-12 h-12 bg-orange-100 rounded-xl flex items-center justify-center mb-5">
               <MapPin className="w-6 h-6 text-orange-500" />
             </div>
@@ -119,7 +122,7 @@ export default function ToursWeOperate() {
           </div>
 
           {/* TOUR 6 */}
-          <div className="bg-white rounded-3xl p-8 shadow-md hover:shadow-lg transition">
+          <div className="bg-white rounded-3xl p-8 shadow-sm hover:shadow-lg transition cursor-pointer hover:scale-105">
             <div className="w-12 h-12 bg-orange-100 rounded-xl flex items-center justify-center mb-5">
               <Users className="w-6 h-6 text-orange-500" />
             </div>

@@ -9,7 +9,7 @@ type Blog = {
   id: string;
   title: string;
   content: string;
-  FAQ: {
+  faqs: {
     question: string;
     answer: string
   }[];
@@ -44,7 +44,7 @@ export default function BlogFAQ({ Blogs }: { Blogs: Blog }) {
       {/* Heading */}
       <div className="mb-10 ">
         <h2 className="text-2xl sm:text-3xl font-extrabold text-gray-900 text-center md:text-left">
-          Frequently Asked <span className="text-blue-600">Questions</span>
+          Frequently Asked <span className="text-orange-600">Questions</span>
         </h2>
 
       </div>
@@ -52,7 +52,7 @@ export default function BlogFAQ({ Blogs }: { Blogs: Blog }) {
       {/* FAQ List */}
       <div className="space-y-4">
 
-        {Blogs?.FAQ.map((faq, index) => {
+        {Blogs?.faqs.map((faq, index) => {
 
           const isOpen = openIndex === index;
 
@@ -81,8 +81,8 @@ export default function BlogFAQ({ Blogs }: { Blogs: Blog }) {
                 <span
                   className={`
                     flex h-8 w-8 items-center justify-center rounded-full
-                    bg-blue-50 text-blue-600
-                    transition-transform duration-300 hover:bg-[#8787fc]
+                    bg-orange-50 text-orange-600
+                    transition-transform duration-300 hover:bg-[#f5ca7e]
                     ${isOpen ? "rotate-180" : ""}
                   `}
                 >
@@ -97,7 +97,7 @@ export default function BlogFAQ({ Blogs }: { Blogs: Blog }) {
               )}
 
 
-              <div className="h-0.5 bg-linear-to-r from-blue-500 rounded-b-xl" />
+              <div className="h-0.5 bg-linear-to-r from-orange-500 rounded-b-xl" />
             </div>
           );
         })}

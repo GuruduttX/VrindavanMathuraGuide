@@ -174,7 +174,7 @@ const Page = async ({ params }: { params: Promise<{ slug: string }> }) => {
                 </div>
 
 
-                {/* <BlogFAQ Blogs={Blogs} /> */}
+                <BlogFAQ Blogs={Blogs} />
 
 
                 <RelatedBlog slug={slug} />

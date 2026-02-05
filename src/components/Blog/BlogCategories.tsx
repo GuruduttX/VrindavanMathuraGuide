@@ -23,7 +23,7 @@ export default function BlogCategories() {
 
             {/* Heading */}
             <div className="flex items-center gap-3 mb-5">
-                <span className="h-6 w-1.5 rounded-full bg-blue-600" />
+                <span className="h-6 w-1.5 rounded-full bg-orange-600" />
                 <h3 className="text-sm font-bold uppercase tracking-wide text-slate-900">
                     Blog Categories
                 </h3>
@@ -36,9 +36,9 @@ export default function BlogCategories() {
                         key={cat}
                         className="
               px-4 py-2 rounded-full text-sm font-medium
-              border border-blue-200 text-blue-700
-              bg-blue-50
-              hover:bg-blue-600 hover:text-white hover:border-blue-600
+              border border-orange-200 text-orange-700
+              bg-orange-50
+              hover:bg-orange-600 hover:text-white hover:border-orange-600
               transition-all duration-200
             "
                     >

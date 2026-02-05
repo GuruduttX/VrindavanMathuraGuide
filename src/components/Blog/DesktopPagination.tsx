@@ -39,7 +39,7 @@ export default function DesktopPagination({
 
     return (
         <div className="flex items-center justify-center mt-10">
-            <div className="flex items-center gap-2 rounded-full border border-blue-200 bg-white px-4 py-2 shadow-lg ">
+            <div className="flex items-center gap-2 rounded-full border border-orange-200 bg-white px-4 py-2 shadow-lg ">
 
                 {/* Prev */}
                 <button
@@ -66,7 +66,7 @@ export default function DesktopPagination({
                             onClick={() => onPageChange(page as number)}
                             className={`w-9 h-9 flex items-center justify-center rounded-full text-sm font-medium transition cursor-pointer
                 ${currentPage === page
-                                    ? "border-2 border-blue-600 text-blue-600"
+                                    ? "border-2 border-orange-600 text-orange-600"
                                     : "text-gray-600 hover:bg-gray-100"
                                 }`}
                         >

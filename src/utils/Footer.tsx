@@ -17,7 +17,7 @@ export default function Footer() {
   ];
 
   return (
-    <footer className="bg-gradient-to-br from-orange-950 via-orange-900 to-orange-800">
+    <footer className="bg-gradient-to-br from-orange-500 via-orange-600 to-orange-700">
 
       {/* MAIN FOOTER */}
       <div className="max-w-7xl mx-auto px-6 lg:px-14 xl:px-6 py-16">
@@ -39,19 +39,19 @@ export default function Footer() {
             </p> */}
 
             <div className="space-y-4 text-sm">
-              <div className="flex gap-3 items-center text-gray-300">
+              <div className="flex gap-3 items-center text-white">
                 <Phone size={16} />
                 <span>+91 89236 60886</span>
               </div>
 
-              <div className="flex gap-3 items-start text-gray-300">
+              <div className="flex gap-3 items-start text-white">
                 <MapPin size={16} className="mt-1 shrink-0" />
                 <p>
                   Mathura – Vrindavan Road, Uttar Pradesh, India
                 </p>
               </div>
 
-              <div className="flex gap-3 items-center text-gray-300">
+              <div className="flex gap-3 items-center text-white">
                 <Mail size={16} />
                 <span>support@mathuravrindavantour.com</span>
               </div>
@@ -63,7 +63,7 @@ export default function Footer() {
             <h4 className="text-white font-semibold mb-5">
               Tour Packages
             </h4>
-            <ul className="space-y-2 text-sm text-gray-300">
+            <ul className="space-y-2 text-sm text-white">
               <li><Link href="/">Mathura Vrindavan 1 Day Tour</Link></li>
               <li><Link href="/">2D / 1N Vrindavan Darshan</Link></li>
               <li><Link href="/">Govardhan Parikrama Tour</Link></li>
@@ -76,7 +76,7 @@ export default function Footer() {
             <h4 className="text-white font-semibold mb-5">
               Pilgrimage Highlights
             </h4>
-            <ul className="space-y-2 text-sm text-gray-300">
+            <ul className="space-y-2 text-sm text-white">
               <li>Shri Krishna Janmabhoomi</li>
               <li>Banke Bihari Temple</li>
               <li>Prem Mandir Aarti</li>
@@ -89,7 +89,7 @@ export default function Footer() {
             <h4 className="text-white font-semibold mb-5">
               Company
             </h4>
-            <ul className="space-y-2 text-sm text-gray-300">
+            <ul className="space-y-2 text-sm text-white">
               <li><Link href="/about">About Us</Link></li>
               <li><Link href="/contact">Contact Us</Link></li>
               <li><Link href="/faqs">FAQs</Link></li>
@@ -121,7 +121,7 @@ export default function Footer() {
 
       {/* DESTINATION STRIP */}
       <div className="border-t border-white/10 bg-orange-900/60">
-        <div className="max-w-7xl mx-auto px-6 py-5 text-sm text-gray-300
+        <div className="max-w-7xl mx-auto px-6 py-5 text-sm text-white
           flex flex-wrap gap-x-2 gap-y-1 justify-center text-center">
           <span>Mathura Vrindavan Tour Packages</span>
           <span>|</span>
@@ -137,7 +137,7 @@ export default function Footer() {
 
       {/* BOTTOM BAR */}
       <div className="border-t border-white/10">
-        <div className="max-w-7xl mx-auto px-6 py-4 text-xs text-gray-400
+        <div className="max-w-7xl mx-auto px-6 py-4 text-xs text-white
           flex flex-wrap justify-center gap-6 text-center">
           <Link href="/privacy-policy">Privacy Policy</Link>
           <p>© {new Date().getFullYear()} Mathura Vrindavan Tour. All rights reserved.</p>

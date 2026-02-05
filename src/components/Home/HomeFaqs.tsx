@@ -4,7 +4,7 @@ import Image from "next/image";
 
 export default function HomeFAQSection() {
   return (
-    <section className="bg-[#fff7ed] py-24">
+    <section className="bg-white py-24">
       <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-14 items-center">
 
         {/* LEFT IMAGE */}
@@ -32,7 +32,7 @@ export default function HomeFAQSection() {
             FAQs
           </span>
 
-          <h2 className="text-4xl md:text-5xl font-bold text-orange-600 mb-6">
+          <h2 className="text-4xl md:text-4xl font-bold text-orange-600 mb-6">
             Frequently Asked Questions
           </h2>
 
