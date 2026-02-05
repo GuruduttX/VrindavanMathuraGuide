@@ -11,7 +11,7 @@ export default function InclusionExclusion({
 }: InclusionsExclusionsProps) {
   return (
     <section className="py-12">
-      <div className="max-w-7xl mx-auto px-6">
+      <div className="max-w-7xl mx-auto ">
 
         {/* SECTION TITLE */}
         <h2 className="text-2xl font-bold text-gray-900 mb-8">
@@ -28,11 +28,11 @@ export default function InclusionExclusion({
 
             <ul className="space-y-3">
               {inclusions.map((item, index) => (
-                <li key={index} className="flex items-start gap-3">
-                  <CheckCircle className="w-5 h-5 text-green-600 mt-0.5" />
-                  <span className="text-gray-800 leading-relaxed">
+                <li key={index} className="flex items-center gap-3">
+                  <span><CheckCircle  className="w-5 h-5 text-green-600 mt-0.5" /></span>
+                  <p className="text-gray-800 leading-relaxed">
                     {item}
-                  </span>
+                  </p>
                 </li>
               ))}
             </ul>

@@ -1,16 +1,6 @@
 @import "tailwindcss";
 
-html,
-body {
-  overflow-x: auto;
-  overflow-y: auto;
 
-  /* Firefox */
-  scrollbar-width: none;
-
-  /* IE / Edge */
-  -ms-overflow-style: none;
-}
 
 /* Chrome / Safari */
 html::-webkit-scrollbar,
@@ -187,4 +177,3 @@ body::-webkit-scrollbar {
   border-color: #f97316;
   box-shadow: 0 0 0 2px rgba(249, 115, 22, 0.15);
 }
-

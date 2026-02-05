@@ -19,19 +19,19 @@ const Home = () => {
   return (
     <>
       <Navbar />
-      <HeroSection/>
-      <DestinationFilter/>
+      <HeroSection />
+      <DestinationFilter />
       <EnquirySection />
       <PopularTours />
       <GroupCta />
-      <WhyChooseUs/>
+      <WhyChooseUs />
       <TrustBuildingSection />
-
+      <PhotoGallerySection />
       <HomeFAQSection />
       <ToursWeOperate />
       <VrindavanTrustStats />
-      <FooterCTA/>
-      <Footer/>
+      <FooterCTA />
+      <Footer />
     </>
   )
 }
