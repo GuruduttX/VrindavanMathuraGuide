@@ -6,7 +6,7 @@ type faq = {
     answer: string
 }
 
-const FaqHandler = ({ faqs, setFaqs }: { faqs: faq[], setFaqs: React.Dispatch<React.SetStateAction<faq[]>> }) => {
+const FaqHandler = ({ faqs, setFaqs }: { faqs: faq[], setFaqs: React.Dispatch<React.SetStateAction<faq[]>>, editorType : "Blog" | "Package" }) => {
 
 
     const handleAddFaq = () => {
@@ -58,7 +58,7 @@ const FaqHandler = ({ faqs, setFaqs }: { faqs: faq[], setFaqs: React.Dispatch<Re
                         placeholder='Enter the question of your faq'
                         className="mt-2 w-full px-5 py-3 rounded-xl bg-white/5 text-white
             border border-white/10 focus:ring-2 focus:ring-sky-500 transition"
-
+                        value={faq.question}
                         onChange={(e) => { handleQuestionChange(faq.id, e.target.value) }}
 
                     />
@@ -66,7 +66,7 @@ const FaqHandler = ({ faqs, setFaqs }: { faqs: faq[], setFaqs: React.Dispatch<Re
                     <textarea rows={3}
                         placeholder="Enter the answer of your faq"
                         className="mt-2 w-full px-5 py-3 rounded-xl bg-white/5 text-white border border-white/10 focus:ring-2 focus:ring-sky-500 transition resize-none"
-
+                        value={faq.answer}
                         onChange={(e) => { handleAnswerChange(faq.id, e.target.value) }}
                     >
 

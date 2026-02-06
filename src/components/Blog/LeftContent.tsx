@@ -24,7 +24,7 @@ type Blog = {
     subcontent: string,
     created_at: Date;
     author: string,
-    domain: string;
+    category: string;
 
 };
 
@@ -43,14 +43,14 @@ export default function LeftContent({ Blogs }: { Blogs: Blog }) {
                     Blogs
                 </Link>
                 <span className="mx-2">/</span>
-                <Link href={Blogs.slug} className="text-orange-700 ">{Blogs.domain}</Link>
+                <Link href={Blogs.slug} className="text-orange-700 ">{Blogs.category}</Link>
             </nav>
 
             <div className="flex items-center gap-3 mb-4">
 
                 <span className="px-3 py-1 text-xs font-semibold rounded-full bg-orange-50 text-orange-600">
 
-                    {Blogs && Blogs.domain}
+                    {Blogs && Blogs.category}
 
                 </span>
                 <span className="text-xs text-slate-500">10 min read</span>

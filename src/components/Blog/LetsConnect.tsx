@@ -1,15 +1,16 @@
 "use client";
 
+import EnquiryPopup from "@/utils/EnquiryForm";
 import React, { useState } from "react";
 // import PopUpForm from "../AllCourses/PopUpForm";
 
 const LetsConnect = () => {
-  
+
   const [isOpen, setIsOpen] = useState(false);
 
   return (
     <>
-     
+      <EnquiryPopup onClose={() => setIsOpen(false)} open={isOpen} />
       <section
         className="
           relative 
@@ -26,7 +27,7 @@ const LetsConnect = () => {
         }}
       >
         {/* Overlay */}
-      
+
         <div className="hidden sm:block absolute inset-0 bg-linear-to-r from-orange-400 via-orange-600/70 to-orange-600" />
         <div className="block sm:hidden absolute inset-0 bg-linear-to-r from-[#6493cc] via-[#538ed6] to-[#6493cc]" />
 
@@ -43,15 +44,14 @@ const LetsConnect = () => {
             gap-4 sm:gap-5
             text-center sm:text-left
           ">
-            
+
             {/* LEFT TEXT */}
             <div className="max-w-full sm:max-w-xl text-white">
               <h2 className="text-base sm:text-xl md:text-2xl lg:text-3xl font-extrabold leading-tight">
-                Let’s Build Your Career Together
+                Let’s Plan Your Divine Journey Together
               </h2>
               <p className="mt-1 sm:mt-2 text-xs sm:text-sm text-blue-100">
-                Have questions about our courses or career guidance?  
-                Our experts are ready to help.
+                Have questions about Vrindavan–Mathura tours, temples, or travel arrangements?
               </p>
             </div>
 
@@ -63,7 +63,7 @@ const LetsConnect = () => {
                 mt-2 sm:mt-0
                 px-4 py-3
                 sm:px-9 sm:py-5
-                bg-yellow-500 hover:bg-yellow-600
+                bg-orange-200 hover:bg-orange-600
                 text-blue-900
                 font-bold
                 rounded-full
@@ -74,17 +74,13 @@ const LetsConnect = () => {
                 active:scale-95
               "
             >
-              Let’s Connect
+              Let's Meet Krishna
             </button>
           </div>
         </div>
       </section>
 
-      {/* <PopUpForm
-        isOpen={isOpen}
-        onCancel={() => setIsOpen(false)}
-        onConfirm={() => setIsOpen(false)}
-      /> */}
+    
     </>
   );
 };

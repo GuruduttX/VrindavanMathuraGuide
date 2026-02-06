@@ -47,7 +47,7 @@ export default function EnquiryPopup({ open, onClose }: EnquiryPopupProps) {
         </button>
 
         {/* HEADER */}
-        <div className="p-8 border-b bg-[#FFF7ED]">
+        <div className="p-8 border-b bg-orange-300">
           <span className="inline-block bg-orange-100 text-orange-600 text-xs font-semibold px-3 py-1 rounded-full mb-2">
             QUICK ENQUIRY
           </span>
@@ -64,27 +64,29 @@ export default function EnquiryPopup({ open, onClose }: EnquiryPopupProps) {
 
               {/* TRUST BADGES */}
               <div className="mt-4 flex flex-wrap gap-3 text-sm">
-                <span className="flex items-center gap-1 bg-white px-3 py-1 rounded-full border cursor-pointer">
+                <span className="flex items-center gap-1 bg-white px-3 py-1 rounded-full border border-yellow-300 shadow-lg shadow-orange-300 hover:shadow-xl hover:scale-105 cursor-pointer transition">
                   <ShieldCheck className="w-4 h-4 text-orange-500" /> Trusted
                 </span>
-                <span className="flex items-center gap-1 bg-white px-3 py-1 rounded-full border cursor-pointer">
+                <span className="flex items-center gap-1 bg-white px-3 py-1 rounded-full border border-yellow-300 shadow-lg shadow-orange-300 hover:shadow-xl hover:scale-105 cursor-pointer transition">
                   <Zap className="w-4 h-4 text-orange-500" /> Fast Response
                 </span>
-                <span className="flex items-center gap-1 bg-white px-3 py-1 rounded-full border cursor-pointer">
+                <span className="flex items-center gap-1 bg-white px-3 py-1 rounded-full border border-yellow-300 shadow-lg shadow-orange-300 hover:shadow-xl hover:scale-105 cursor-pointer transition">
                   <MapPin className="w-4 h-4 text-orange-500" /> Local Experts
                 </span>
               </div>
             </div>
 
             {/* CALL BOX */}
-            <div className="bg-white rounded-2xl p-4 shadow border">
-              <p className="text-sm text-gray-500">Call Now</p>
-              <p className="font-semibold text-gray-900 mb-4">
-                +91 111613003
-              </p>
+            <div className="bg-white rounded-3xl px-4 py-2 shadow-lg shadow-orange-200 border border-orange-300 cursor-pointer">
+              <div className="flex">
+                <p className=" text-gray-500">Call Now &nbsp; &nbsp; &nbsp; &nbsp; </p>
+                <p className="font-semibold text-gray-900 mb-4">
+                  +91 7302265809
+                </p>
+              </div>
               <a
-                href="https://wa.me/9400599250"
-                className="block text-center bg-green-500 hover:bg-green-600 text-white rounded-xl py-2 px-4 font-semibold cursor-pointer"
+                href="https://wa.me/7302265809"
+                className="block text-center bg-green-500 hover:bg-green-600 text-white rounded-2xl py-2 px-4 font-semibold cursor-pointer"
               >
                 WhatsApp
               </a>
@@ -119,22 +121,27 @@ export default function EnquiryPopup({ open, onClose }: EnquiryPopupProps) {
 
           {/* ACTIONS */}
           <div className="md:col-span-3 flex flex-wrap gap-4">
-            <button className="cursor-pointer bg-orange-600 hover:bg-orange-700 text-white px-6 py-3 rounded-xl font-semibold">
+            <button className="cursor-pointer bg-orange-600 hover:bg-orange-700 text-white px-6 py-1 rounded-3xl font-semibold">
               Send Enquiry
             </button>
 
             <button
               type="button"
-              className="cursor-pointer bg-white border px-6 py-3 rounded-xl font-semibold flex items-center gap-2"
+              className="cursor-pointer bg-white border px-6 py-1 rounded-3xl font-semibold flex items-center gap-2"
             >
               <Phone className="w-4 h-4" /> Call
             </button>
 
             <button
               type="button"
-              className="cursor-pointer bg-green-500 hover:bg-green-600 text-white px-6 py-3 rounded-xl font-semibold"
+              className="cursor-pointer bg-green-500 hover:bg-green-600 text-white px-6 py-1 rounded-3xl font-semibold transition"
             >
-              WhatsApp
+              <a
+                href="https://wa.me/7302265809"
+                className="block text-center bg-green-500 hover:bg-green-600 text-white rounded-2xl py-2 px-4 font-semibold cursor-pointer"
+              >
+                WhatsApp
+              </a>
             </button>
           </div>
 

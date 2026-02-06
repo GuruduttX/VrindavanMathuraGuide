@@ -12,9 +12,9 @@ const SunEditor = dynamic(() => import("suneditor-react"), {
 export default function CreateNewProduct() {
   return (
     <div className="max-w-6xl mx-auto p-8 rounded-2xl
-  bg-gradient-to-br from-[#0b1220]/80 via-[#0e1a2f]/80 to-[#0a1020]/80
-  backdrop-blur-xl border border-white/10
-  shadow-[0_0_60px_-15px_rgba(56,189,248,0.25)]">
+          bg-gradient-to-br from-[#0b1220]/80 via-[#0e1a2f]/80 to-[#0a1020]/80
+          backdrop-blur-xl border border-white/10
+          shadow-[0_0_60px_-15px_rgba(56,189,248,0.25)]">
 
       {/* Header */}
       <div className="mb-8">

@@ -27,7 +27,7 @@ type Blog = {
   subcontent: string,
   created_at: number;
   author: string,
-  domain: string;
+  category: string;
 
 };
 
@@ -56,7 +56,7 @@ export default function RelatedBlog({slug}:{slug:string}) {
   };
 
   const getRelatedBlog = async()=>{
-     const {data,error} = await supabase.from("Blog").select("*").eq("domain",blog?.domain).neq('slug',slug).limit(3);
+     const {data,error} = await supabase.from("Blog").select("*").eq("category",blog?.category).neq('slug',slug).limit(3);
      if (error) {
       console.error("RELATED BLOG ERROR:", error);
       return;
@@ -78,7 +78,7 @@ export default function RelatedBlog({slug}:{slug:string}) {
   }, [])
 
   useEffect(() => {
-  if (blog?.domain) {
+  if (blog?.category) {
     getRelatedBlog();
   }
 }, [blog]);
@@ -95,8 +95,8 @@ export default function RelatedBlog({slug}:{slug:string}) {
         {relatedBlogs?.map((blog, idx) => (
           <div
             key={idx}
-            className="bg-white rounded-2xl border-gray-200 shadow-lg  overflow-hidden
-                         transition-all duration-300 hover:shadow-blue-200 hover:-translate-y-1  curosr-pointer"
+            className="bg-white rounded-2xl border-gray-200 shadow-xl  overflow-hidden
+                         transition-all duration-300 hover:shadow-orange-200 hover:-translate-y-1  curosr-pointer"
           >
             <div className="relative h-70 cursor-pointer">
               <Image

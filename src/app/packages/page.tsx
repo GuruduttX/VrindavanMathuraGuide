@@ -30,10 +30,6 @@ export default function Page() {
       <VrindavanTrustStats/>
       <PackagesFaq/>
       <Footer/>
-      
-
-
-
     </div>
   );
 }

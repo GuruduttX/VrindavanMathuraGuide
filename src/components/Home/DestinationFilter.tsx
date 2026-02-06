@@ -172,7 +172,7 @@ export default function DestinationFilter() {
         {filteredPackages.map((pkg) => (
           <div
             key={pkg.id}
-            className="rounded-2xl overflow-hidden border hover:shadow-lg transition"
+            className="rounded-2xl overflow-hidden bordern transition shadow-lg hover:shadow-2xl hover:shadow-orange-400 cursor-pointer hover:scale-105"
           >
             <div className="relative h-56">
               <Image

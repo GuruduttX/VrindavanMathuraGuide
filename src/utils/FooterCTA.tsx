@@ -2,6 +2,7 @@
 
 import Image from 'next/image';
 import React, { useState } from 'react'
+import EnquiryPopup from './EnquiryForm';
 // import PopUpForm from '../AllCourses/PopUpForm';
 
 const FooterCTA = () => {
@@ -11,8 +12,7 @@ const FooterCTA = () => {
     return (
 
         <>
-
-            {/* <PopUpForm isOpen={isOpen} onCancel={() => setIsOpen(false)} onConfirm={() => setIsOpen(false)} /> */}
+            <EnquiryPopup onClose={() => setIsOpen(false)} open={isOpen} />
 
             <section className="w-full pt-10 px-4">
                 <div

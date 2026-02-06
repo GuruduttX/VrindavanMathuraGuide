@@ -1,6 +1,6 @@
 import React from 'react'
 
-const CMSMetaSection = ({ title, domain, slug, onChange }: { title: string, domain: string, slug: string, onChange: any }) => {
+const CMSMetaSection = ({ title, domain, slug, onChange, editorType }: { title: string, domain: string, slug: string, onChange: any , editorType : "Blog" | "Package"}) => {
     return (
         <div className="space-y-6">
             {/* Blog Title */}
@@ -10,8 +10,8 @@ const CMSMetaSection = ({ title, domain, slug, onChange }: { title: string, doma
                     value={title}
                     placeholder="A Way to Grow Your Online Business With Digital Marketing"
                     className="mt-2 w-full px-5 py-3 rounded-xl bg-white/5 text-white
-          placeholder-white/40 border border-white/10
-          focus:ring-2 focus:ring-sky-500 transition"
+                             placeholder-white/40 border border-white/10
+                               focus:ring-2 focus:ring-sky-500 transition"
 
                     onChange={(e) => { onChange("title", e.target.value) }}
                 />

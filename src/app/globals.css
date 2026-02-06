@@ -418,4 +418,20 @@ body::-webkit-scrollbar {
   }
 }
 
+@keyframes popup {
+  0% {
+    opacity: 0;
+    transform: translateY(-40px) scale(0.95);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.animate-popup {
+  animation: popup 0.45s ease-out forwards;
+}
+
+
 
