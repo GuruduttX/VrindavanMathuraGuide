@@ -1,82 +1,96 @@
-const cards = [
-  {
-    image: "https://images.unsplash.com/photo-1519389950473-47ba0277781c",
-    category: "Technology",
-    title: "What's New in 2022 Tech",
-    desc: "Keeping up with digital trends requires adapting fast and staying ahead of innovation.",
-    author: "Jane Doe",
-    time: "2h ago",
-  },
-  {
-    image: "https://images.unsplash.com/photo-1546069901-ba9599a7e63c",
-    category: "Food",
-    title: "Delicious Food",
-    desc: "Explore mouth-watering dishes and culinary experiences from around the world.",
-    author: "John Doe",
-    time: "Yesterday",
-  },
-  {
-    image: "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee",
-    category: "Automobile",
-    title: "Race To Your Heart Content",
-    desc: "Experience speed, passion, and adrenaline through automotive storytelling.",
-    author: "John Doe",
-    time: "1d ago",
-  },
-  {
-    image: "https://images.unsplash.com/photo-1519389950473-47ba0277781c",
-    category: "Technology",
-    title: "What's New in 2022 Tech",
-    desc: "Keeping up with digital trends requires adapting fast and staying ahead of innovation.",
-    author: "Jane Doe",
-    time: "2h ago",
-  },
-  {
-    image: "https://images.unsplash.com/photo-1546069901-ba9599a7e63c",
-    category: "Food",
-    title: "Delicious Food",
-    desc: "Explore mouth-watering dishes and culinary experiences from around the world.",
-    author: "John Doe",
-    time: "Yesterday",
-  },
-  {
-    image: "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee",
-    category: "Automobile",
-    title: "Race To Your Heart Content",
-    desc: "Experience speed, passion, and adrenaline through automotive storytelling.",
-    author: "John Doe",
-    time: "1d ago",
-  },
-  {
-    image: "https://images.unsplash.com/photo-1519389950473-47ba0277781c",
-    category: "Technology",
-    title: "What's New in 2022 Tech",
-    desc: "Keeping up with digital trends requires adapting fast and staying ahead of innovation.",
-    author: "Jane Doe",
-    time: "2h ago",
-  },
-  {
-    image: "https://images.unsplash.com/photo-1546069901-ba9599a7e63c",
-    category: "Food",
-    title: "Delicious Food",
-    desc: "Explore mouth-watering dishes and culinary experiences from around the world.",
-    author: "John Doe",
-    time: "Yesterday",
-  },
-  {
-    image: "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee",
-    category: "Automobile",
-    title: "Race To Your Heart Content",
-    desc: "Experience speed, passion, and adrenaline through automotive storytelling.",
-    author: "John Doe",
-    time: "1d ago",
-  },
-];
+"use client"
+import { useEffect, useState } from "react";
+import { supabase } from "@/lib/supabase/SupabaseConfig";
+import DeleteConfirmModal from "@/utils/Admin/DeleteConfirmModal";
+import toast from "react-hot-toast";
+import Link from "next/link";
+
+type BlogType = {
+  id : string;
+  title: string;
+  category: string,
+  slug: string,
+  author : string,
+  subcontent : string,
+  metaTitle: string,
+  metaDescription: string,
+  image: string,
+  alt: string,
+  subContent: string
+  content: string
+  faqs : FAQ[]
+  created_at : Date
+}
+
+type FAQ = {
+  id : string, 
+  question : string,
+  answer : string
+}
+
+
 
 
 
 export default function ProductCards() {
+   const [blogs, setBlogs] = useState<BlogType[]>([]);
+   const [loading, setLoading] = useState(true);
+   const [open, setOpen] = useState(false)
+   const [selectedId, setSelectedId] = useState<string | null>(null);
+
+    
+  
+    useEffect(() => {
+      const getBlogs = async () => {
+        const { data, error } = await supabase
+          .from("Blog")
+          .select("*");
+  
+        if (error) {
+          console.error(error);
+          setLoading(false);
+          return;
+        }
+  
+        setBlogs(data ?? []);
+        setLoading(false);
+      };
+  
+      getBlogs();
+    }, []);
+
+    const handleDelete = async () => {
+  if(!selectedId){
+     return;
+  }
+  const { error } = await supabase
+    .from("Blog")
+    .delete()
+    .eq("id", selectedId);
+
+  if (error) {
+    toast.error(error.message);
+    return;
+  }
+
+  toast.success("Blog Deleted Successfully");
+
+  setBlogs((prev) => prev.filter((b) => b.id !== selectedId));
+  setSelectedId("");
+  setOpen(false);
+};
+  
+    if (loading) {
+      return <p className="text-white">Loading blogs...</p>;
+    }
+  
+    if (blogs.length === 0) {
+      return <p className="text-white">No blogs found.</p>;
+    }
+  
   return (
+    <>
+    <DeleteConfirmModal open={open} onConfirm={handleDelete} onCancel={()=>setOpen(false)}/>
     <section className="min-h-screen p-6 md:p-10">
 
       <div
@@ -85,9 +99,9 @@ export default function ProductCards() {
           gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))",
         }}
       >
-        {cards.map((card, index) => (
+       {blogs.map((blog) => (
           <article
-            key={index}
+            key={blog.id}
             className="group relative rounded-2xl overflow-hidden
             bg-gradient-to-br from-[#0b1437] to-[#060b1f]
             border border-white/10
@@ -95,71 +109,66 @@ export default function ProductCards() {
             hover:-translate-y-1 hover:shadow-[0_20px_60px_rgba(0,0,0,0.8)]
             transition-all duration-300"
           >
-
-
-            {/* Image */}
             <div className="h-48 overflow-hidden">
               <img
-                src={card.image}
-                alt={card.title}
-                loading="lazy"
+                src={blog.image}
+                alt={blog.title}
                 className="w-full h-full object-cover
                 group-hover:scale-105 transition duration-500"
               />
             </div>
 
-            {/* Content */}
             <div className="p-5">
-              <span className="inline-block mb-3 px-3 py-1 text-xs font-medium
+              <span className="inline-block mb-3 px-3 py-1 text-xs
                 rounded-full bg-blue-500/10 text-blue-400 border border-blue-400/20">
-                {card.category}
+                {blog.category}
               </span>
 
               <h3 className="text-base font-semibold text-white mb-2">
-                {card.title}
+                {blog.title}
               </h3>
 
-              <p className="text-sm text-gray-400 leading-relaxed line-clamp-3">
-                {card.desc}
+              <p className="text-sm text-gray-400 line-clamp-3">
+                {blog.subcontent}
               </p>
+              
 
-              {/* ACTION BUTTONS */}
               <div className="flex justify-between transition mt-5">
-                <button
-                  className="w-18 h-10 rounded-3xl
-                bg-blue-600/20 border border-blue-500/30
-                hover:bg-blue-600/30 transition text-white cursor-pointer"
-                >
+                <Link href={`/admin-x9AqP7mK2/blogs/edit/${blog.id}`} className="px-6 py-2 rounded-2xl
+                  bg-blue-600/20 border border-blue-500/30
+                  hover:bg-blue-600/30 transition text-white">
                   Edit
-                </button>
+                </Link>
+                
 
-                <button
-                  className="w-18 h-10 rounded-3xl
-                bg-red-600/20 text-white
-                border border-red-500/30
-                hover:bg-red-600/30 transition cursor-pointer"
+                 <button
+                  disabled={open}
+                  onClick={() => {
+                    setSelectedId(blog.id);
+                    setOpen(true);
+                  }}
+                  className="px-4 py-1.5 rounded-2xl text-sm
+                  bg-red-600/20 text-red-400 border border-red-500/30
+                  hover:bg-red-600/30 transition disabled:opacity-50"
                 >
                   Delete
                 </button>
+
               </div>
             </div>
 
-            {/* Footer */}
-            <div className="px-5 py-4 border-t border-white/10 flex items-center justify-between">
-              <div className="flex items-center gap-2">
-                <div className="w-8 h-8 rounded-full bg-white/10" />
-                <span className="text-sm text-gray-300">
-                  {card.author}
-                </span>
-              </div>
-
+            <div className="px-5 py-4 border-t border-white/10 flex justify-between">
+              <span className="text-sm text-gray-300">{blog.author}</span>
               <span className="text-xs text-gray-500">
-                {card.time}
+                {new Date(blog.created_at).toDateString()}
               </span>
             </div>
           </article>
         ))}
+
+
       </div>
     </section>
+    </>
   );
 }

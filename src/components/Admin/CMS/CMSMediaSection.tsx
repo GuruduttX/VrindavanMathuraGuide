@@ -102,6 +102,7 @@ const CMSMediaSection = ({
         </label>
         <input
           value={alt}
+          required
           onChange={(e) => onChange("alt", e.target.value)}
           placeholder="Describe the image for SEO"
           className="mt-2 w-full px-5 py-3 rounded-xl bg-white/5 text-white

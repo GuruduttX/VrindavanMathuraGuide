@@ -9,10 +9,11 @@ import CMSSeoSection from '@/components/Admin/CMS/CMSSeoSection';
 import FaqHandler from '@/components/Admin/CMS/FaqHandler';
 import { useState } from 'react';
 import { supabase } from '@/lib/supabase/SupabaseConfig';
+import toast from 'react-hot-toast';
 
 type BlogForm = {
   title: string;
-  domain: string,
+  category: string,
   slug: string,
   author : string,
   metaTitle: string,
@@ -34,7 +35,7 @@ type FAQ = {
 export default function CreateNewBlog() {
   const [form, setForm] = useState<BlogForm>({
     title: "",
-    domain: "",
+    category: "",
     slug: "",
     author : "",
     metaTitle: "",
@@ -61,25 +62,73 @@ export default function CreateNewBlog() {
 
   }
   
-   const handleSave = async () => {
-    // await savePackageAction({
-    //   form,
-    //   faqs,
-    //   seo,
-    // });
-    console.log("hi")
-    const payload = {title:form.title, domain : form.domain, slug : form.slug,
-       meta : {title : form.metaTitle, description : form.metaDescription}, image : form.image, alt : form.alt
-        , subcontent : form.subContent, content: form.content, author : form.author, faqs};
+  const handleSave = async (
+    e: React.FormEvent<HTMLFormElement>
+  ) => {
+    e.preventDefault();
 
-    const {data : createdData , error} = await supabase.from('Blog').insert(payload).select('*').single();
-    
-    if(error){
-       console.log(error.message);
-       return;
+    // browser validation check
+    if (!e.currentTarget.checkValidity()) {
+      e.currentTarget.reportValidity();
+      return;
     }
-    console.log("Blog created", createdData);
-  };
+
+
+    if (form.content.length < 300) {
+      toast.error("At least 300 characters required in blog content");
+      return;
+    }
+
+    if(!form.image){
+       toast.error("Blog image is missing");
+       return;
+    };
+    
+     if(!form.category){
+        toast.error("Blog category is missing")
+     }
+
+      const { data: existingData, error:existingError } = await supabase
+      .from("Blog")
+      .select("id")
+      .eq("slug", form.slug);
+
+      if (existingData && existingData?.length > 0) {
+        toast.error("Slug already exists");
+        return;
+      }
+
+
+     const payload = {
+      title: form.title,
+      category: form.category,
+      slug: form.slug,
+      meta: {
+        title: form.metaTitle,
+        description: form.metaDescription,
+      },
+      image: form.image,
+      alt: form.alt,
+      subcontent: form.subContent,
+      content: form.content,
+      author: form.author,
+      faqs,
+    };
+
+    const { data, error } = await supabase
+      .from("Blog")
+      .insert(payload)
+      .select("*")
+      .single();
+
+    if (error) {
+      toast.error(error.message);
+      return;
+    }
+
+  toast.success("Blog Published Successfully");
+};
+
 
   const handlePreview = () => {
   };
@@ -94,19 +143,20 @@ export default function CreateNewBlog() {
       backdrop-blur-xl border border-white/10
       shadow-[0_0_60px_-15px_rgba(56,189,248,0.25)]">
 
-      <div className='space-y-6'>
+      <form className='space-y-6' onSubmit={handleSave}>
         <CMSHeader editorType="Blog" />
-        <CMSMetaSection title = {form.title} domain = {form.domain} slug = {form.slug} onChange = {updateForm} editorType="Blog"/>
+        <CMSMetaSection title = {form.title} category = {form.category} slug = {form.slug} onChange = {updateForm} editorType="Blog"/>
         <div>
-            <label className="text-sm text-white/70">Meta Description</label>
+            <label className="text-sm text-white/70">Author</label>
             <input
                 value={form.author}
+                required
                 onChange={(e) => { updateForm("author", e.target.value) }}
-                placeholder="Growing an online business isn’t easy..."
+                placeholder="author name..."
                 className="mt-2 w-full px-5 py-3 rounded-xl bg-white/5 text-white
                     border border-white/10 focus:ring-2 focus:ring-sky-500 transition"
             />
-        </div>
+       </div>
         <CMSSeoSection metaTitle = {form.metaTitle} metaDescription = {form.metaDescription} onChange = {updateForm} editorType="Blog"/>
         <FaqHandler faqs = {faqs} setFaqs = {setFaqs} editorType="Blog"/>
         <CMSMediaSection image = {form.image} alt = {form.alt} onChange = {updateForm} editorType="Blog"/>
@@ -114,10 +164,9 @@ export default function CreateNewBlog() {
         <CMSActions 
          actionType='create'
          editorType='Blog'
-         onSave={handleSave} 
          onPreview={handlePreview}
          onPublish={handlePublish} />
-      </div>
+      </form>
 
     </div>
 
