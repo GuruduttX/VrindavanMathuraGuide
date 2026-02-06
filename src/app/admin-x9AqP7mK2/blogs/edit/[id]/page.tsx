@@ -9,6 +9,8 @@ import CMSSeoSection from '@/components/Admin/CMS/CMSSeoSection';
 import FaqHandler from '@/components/Admin/CMS/FaqHandler';
 import { useEffect, useState } from 'react';
 import { supabase } from '@/lib/supabase/SupabaseConfig';
+import { useParams } from 'next/navigation';
+import toast from 'react-hot-toast';
 
 
 type FAQ = {
@@ -19,7 +21,7 @@ type FAQ = {
 
 type BlogForm = {
   title: string;
-  domain: string;
+  category: string;
   slug: string;
   author : string;
   metaTitle: string;
@@ -31,11 +33,12 @@ type BlogForm = {
 };
 
 
-export default  function BlogEditor({params} : {params : {id : string}}) {
-     const id =  "3c1c3f76-6e28-47c3-a9c8-e4f621e8e81b";
+export default  function BlogEditor() {
+    const {id} = useParams();
+  
     const [form, setForm] = useState<BlogForm>({
       title: "",
-      domain: "",
+      category: "",
       slug: "",
       author : "",
       metaTitle: "",
@@ -48,7 +51,7 @@ export default  function BlogEditor({params} : {params : {id : string}}) {
 
     const [faqs, setFaqs] = useState<FAQ[]>([]);
     const [loading, setLoading] = useState(true);
-
+    
     
 
   
@@ -63,7 +66,7 @@ export default  function BlogEditor({params} : {params : {id : string}}) {
 
         setForm({
           title: data.title ?? "",
-          domain: data.domain ?? "",
+          category: data.category ?? "",
           slug: data.slug ?? "",
           author : data.author ?? "",
           metaTitle: data.meta?.title ?? "",
@@ -82,10 +85,34 @@ export default  function BlogEditor({params} : {params : {id : string}}) {
 
   //Saving data
 
- const handleSave = async () => {
-    await supabase.from("Blog").update({
+ const handleSave = async (e : React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    
+    if (form.content.length < 300) {
+      toast.error("At least 300 characters required");
+      return;
+    }
+
+     const { data: existingData, error:existingError } = await supabase
+      .from("Blog")
+      .select("id")
+      .eq("slug", form.slug);
+      
+
+   
+    if (existingData &&  (existingData.length > 1 ||  (existingData?.length==1 && existingData[0].id !== id))) {
+      toast.error("Slug already exists");
+      return;
+    }
+      
+
+
+
+
+   const {error} = await supabase.from("Blog").update({
       title: form.title,
-      domain: form.domain,
+      category: form.category,
       author : form.author,
       slug: form.slug,
       image: form.image,
@@ -98,6 +125,15 @@ export default  function BlogEditor({params} : {params : {id : string}}) {
       },
       faqs: faqs,
     }).eq("id", id);
+    
+
+    if (error) {
+      toast.error(error.message);
+      return;
+   }
+
+
+   toast.success("Blog Updated Successfully"); 
   };
 
   
@@ -122,15 +158,16 @@ export default  function BlogEditor({params} : {params : {id : string}}) {
       backdrop-blur-xl border border-white/10
       shadow-[0_0_60px_-15px_rgba(56,189,248,0.25)]">
 
-      <div className='space-y-6'>
+      <form className='space-y-6' onSubmit={handleSave}>
         <CMSHeader editorType="Blog" />
-        <CMSMetaSection title = {form.title} domain = {form.domain} slug = {form.slug} onChange = {updateForm} editorType="Blog"/>
+        <CMSMetaSection title = {form.title} category = {form.category} slug = {form.slug} onChange = {updateForm} editorType="Blog"/>
         <div>
-            <label className="text-sm text-white/70">Meta Description</label>
+            <label className="text-sm text-white/70">Author</label>
             <input
                 value={form.author}
-                onChange={(e) => { updateForm("metaDescription", e.target.value) }}
-                placeholder="Growing an online business isn’t easy..."
+                required
+                onChange={(e) => { updateForm("author", e.target.value) }}
+                placeholder="author name..."
                 className="mt-2 w-full px-5 py-3 rounded-xl bg-white/5 text-white
                     border border-white/10 focus:ring-2 focus:ring-sky-500 transition"
             />
@@ -142,10 +179,10 @@ export default  function BlogEditor({params} : {params : {id : string}}) {
         <CMSActions 
          actionType='update'
          editorType='Blog'
-         onSave={handleSave} 
+        
          onPreview={handlePreview}
          onPublish={handlePublish} />
-      </div>
+      </form>
 
     </div>
 

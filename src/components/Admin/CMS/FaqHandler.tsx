@@ -54,6 +54,7 @@ const FaqHandler = ({ faqs, setFaqs }: { faqs: faq[], setFaqs: React.Dispatch<Re
             {faqs.map((faq: faq) => (
                 <div key={faq.id} className='border-2 border-indigo-500 rounded-3xl w-full p-6 shadow-md shadow-indigo-500 cursor-pointer mb-5'>
                     <input
+                        required
                         type='text'
                         placeholder='Enter the question of your faq'
                         className="mt-2 w-full px-5 py-3 rounded-xl bg-white/5 text-white
@@ -64,6 +65,7 @@ const FaqHandler = ({ faqs, setFaqs }: { faqs: faq[], setFaqs: React.Dispatch<Re
                     />
 
                     <textarea rows={3}
+                        required
                         placeholder="Enter the answer of your faq"
                         className="mt-2 w-full px-5 py-3 rounded-xl bg-white/5 text-white border border-white/10 focus:ring-2 focus:ring-sky-500 transition resize-none"
                         value={faq.answer}

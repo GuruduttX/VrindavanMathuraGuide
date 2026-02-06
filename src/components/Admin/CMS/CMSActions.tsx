@@ -3,29 +3,28 @@ import React from 'react'
 interface CMSActionsProps {
     actionType : 'create' | 'update';
     editorType : "Blog" | "Package"
-    onSave : ()=>void;
     onPreview : ()=>void;
     onPublish : ()=>void;
     loading? :boolean;
 }
 
 const CMSActions = ({actionType, editorType, 
-               onSave, onPreview, onPublish,
+                onPreview, onPublish,
      loading = false}: CMSActionsProps
     ) => {
 
     return (
         <div className="mt-10 flex gap-4">
-            <button onClick={onSave} disabled={loading} className="px-6 py-3 rounded-xl bg-sky-600 text-white
+            <button type="submit" disabled={loading} className="cursor-pointer px-6 py-3 rounded-xl bg-sky-600 text-white
             hover:bg-sky-500 hover:shadow-lg hover:shadow-sky-500/30
             transition active:scale-95">
-                {actionType==='update' ?  "Update" : "Save"}
+                {actionType==='update' ?  "Update" : "Publish"}
             </button>
 
             {onPreview && (
                 <button
                 onClick={onPreview}
-                className="px-6 py-3 rounded-xl bg-slate-600 text-white
+                className="cursor-pointer px-6 py-3 rounded-xl bg-slate-600 text-white
                 hover:bg-slate-500 transition active:scale-95"
                 >
                    Preview
@@ -33,10 +32,10 @@ const CMSActions = ({actionType, editorType,
              )}
 
            {onPublish && (
-            <button onClick={onPublish} disabled className="px-6 py-3 rounded-xl bg-emerald-600 text-white
+            <button onClick={onPublish} disabled className="cursor-pointer px-6 py-3 rounded-xl bg-emerald-600 text-white
               hover:bg-emerald-500 hover:shadow-lg hover:shadow-emerald-500/30
                 transition active:scale-95">
-                Publish
+                Save Draft
             </button>
              )
            }
