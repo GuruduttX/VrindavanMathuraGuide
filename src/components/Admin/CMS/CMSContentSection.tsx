@@ -14,6 +14,7 @@ const CMSContentSection = ({ subContent, content, onChange }: { subContent: stri
             <div>
                 <label className="text-sm text-white/70">Sub Content</label>
                 <textarea
+                    required
                     rows={5}
                     value={subContent}
                     onChange={(e) => { onChange("subContent", e.target.value) }}
