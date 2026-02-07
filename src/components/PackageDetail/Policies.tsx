@@ -40,7 +40,7 @@ export default function Policies() {
   const [active, setActive] = useState<number | null>(null);
 
   return (
-    <section className="w-full max-w-7xl mx-auto py-12">
+    <section className="w-full max-w-7xl mx-auto py-12 px-6 sm:0">
       <h2 className="mb-6 text-2xl font-bold text-gray-900">
         Policies & Important Information
       </h2>

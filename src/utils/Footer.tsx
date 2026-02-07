@@ -17,41 +17,35 @@ export default function Footer() {
   ];
 
   return (
-    <footer className="bg-gradient-to-br from-orange-500 via-orange-600 to-orange-700">
-
+    <footer className="bg-gradient-to-br from-orange-500 via-orange-600 to-orange-700 text-white">
+      
       {/* MAIN FOOTER */}
       <div className="max-w-7xl mx-auto px-6 lg:px-14 xl:px-6 py-16">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-12">
 
           {/* BRAND / CONTACT */}
           <div className="lg:col-span-2">
-            <h3 className="text-white text-lg font-semibold mb-5">
+            <h3 className="text-lg font-semibold mb-5">
               Trusted Mathura–Vrindavan Tour Operator
             </h3>
-            <div className="flex items-center gap-5 mb-8"> 
-                <Image src="/images/utils/CTAIMAGE.png" alt="Meta Partner" width={89} height={40} className="object-contain" /> 
-                <Image src="/images/utils/CTAIMAGE.png" alt="Google Partner" width={90} height={40} className="object-contain" /> 
-                </div>
 
-            {/* <p className="text-sm text-gray-300 mb-6">
-              We specialize in spiritual tours of Mathura, Vrindavan, Govardhan & Braj Bhoomi,
-              offering comfortable, well-planned yatras for families and senior citizens.
-            </p> */}
+            <div className="flex items-center gap-5 mb-8">
+              <Image src="/images/utils/CTAIMAGE.png" alt="Partner" width={90} height={40} />
+              <Image src="/images/utils/CTAIMAGE.png" alt="Partner" width={90} height={40} />
+            </div>
 
             <div className="space-y-4 text-sm">
-              <div className="flex gap-3 items-center text-white">
+              <div className="flex gap-3 items-center">
                 <Phone size={16} />
                 <span>+91 89236 60886</span>
               </div>
 
-              <div className="flex gap-3 items-start text-white">
+              <div className="flex gap-3 items-start">
                 <MapPin size={16} className="mt-1 shrink-0" />
-                <p>
-                  Mathura – Vrindavan Road, Uttar Pradesh, India
-                </p>
+                <p>Mathura – Vrindavan Road, Uttar Pradesh, India</p>
               </div>
 
-              <div className="flex gap-3 items-center text-white">
+              <div className="flex gap-3 items-center">
                 <Mail size={16} />
                 <span>support@mathuravrindavantour.com</span>
               </div>
@@ -60,55 +54,64 @@ export default function Footer() {
 
           {/* TOUR PACKAGES */}
           <div>
-            <h4 className="text-white font-semibold mb-5">
-              Tour Packages
-            </h4>
-            <ul className="space-y-2 text-sm text-white">
-              <li><Link href="/">Mathura Vrindavan 1 Day Tour</Link></li>
-              <li><Link href="/">2D / 1N Vrindavan Darshan</Link></li>
-              <li><Link href="/">Govardhan Parikrama Tour</Link></li>
-              <li><Link href="/">Barsana & Nandgaon Tour</Link></li>
+            <h4 className="font-semibold mb-5">Tour Packages</h4>
+            <ul className="space-y-2 text-sm">
+              <li><Link href="/">1 Day Vrindavan Darshan</Link></li>
+              <li><Link href="/">Mathura Vrindavan Tour</Link></li>
+              <li><Link href="/">Govardhan Parikrama</Link></li>
+              <li><Link href="/">Barsana & Nandgaon</Link></li>
             </ul>
           </div>
 
           {/* PILGRIMAGE */}
-          <div>
-            <h4 className="text-white font-semibold mb-5">
-              Pilgrimage Highlights
-            </h4>
-            <ul className="space-y-2 text-sm text-white">
-              <li>Shri Krishna Janmabhoomi</li>
+          <div className="md:block hidden">
+            <h4 className="font-semibold mb-5 ">Pilgrimage Highlights</h4>
+            <ul className="space-y-2 text-sm">
+              <li>Krishna Janmabhoomi</li>
               <li>Banke Bihari Temple</li>
               <li>Prem Mandir Aarti</li>
               <li>Yamuna Aarti</li>
             </ul>
           </div>
 
-          {/* COMPANY */}
-          <div>
-            <h4 className="text-white font-semibold mb-5">
-              Company
-            </h4>
-            <ul className="space-y-2 text-sm text-white">
-              <li><Link href="/about">About Us</Link></li>
-              <li><Link href="/contact">Contact Us</Link></li>
-              <li><Link href="/faqs">FAQs</Link></li>
-              <li><Link href="/policies">Travel Policies</Link></li>
+          {/* COMPANY + LINKS (same pattern as reference footer) */}
+          <div className=" flex gap-24 items-start  ">
+          <div className="md:hidden block">
+            <h4 className="font-semibold mb-5">Pilgrimage Highlights</h4>
+            <ul className="space-y-2 text-sm">
+              <li>Krishna Janmabhoomi</li>
+              <li>Banke Bihari Temple</li>
+              <li>Prem Mandir Aarti</li>
+              <li>Yamuna Aarti</li>
             </ul>
           </div>
 
+             <div>
+
+              <h4 className="font-semibold  mb-5 sm:ml-12 ml-0 ">Quick Links</h4>
+              <ul className="space-y-2 text-sm sm:ml-12 ml-0">
+                <li><Link href="/packages">All Packages</Link></li>
+                <li><Link href="/blog">Blogs</Link></li>
+                <li><Link href="/">Custom Yatra</Link></li>
+              </ul>
+            </div>
+
+             </div>
+            
+              
+         
+
           {/* SOCIAL */}
           <div>
-            <h4 className="text-white font-semibold mb-5">
+            <h4 className="font-semibold mb-5 sm:ml-12 ml-0">
               Follow Us
             </h4>
-            <div className="flex gap-4">
+            <div className="flex gap-4 sm:ml-12 ml-0">
               {socialMedia.map((item, i) => (
                 <Link
-                  href={item.url}
                   key={i}
-                  className="p-2 rounded-full borde bg-white border-white/20
-                  hover:bg-white text-orange-900 transition"
+                  href={item.url}
+                  className="p-2 rounded-full border border-white/30 hover:bg-white hover:text-orange-700 transition"
                 >
                   <item.icon size={20} />
                 </Link>
@@ -120,27 +123,24 @@ export default function Footer() {
       </div>
 
       {/* DESTINATION STRIP */}
-      <div className="border-t border-white/10 bg-orange-900/60">
-        <div className="max-w-7xl mx-auto px-6 py-5 text-sm text-white
+      <div className="border-t border-white/20 bg-orange-900/50">
+        <div className="max-w-7xl mx-auto px-6 py-5 text-sm
           flex flex-wrap gap-x-2 gap-y-1 justify-center text-center">
-          <span>Mathura Vrindavan Tour Packages</span>
-          <span>|</span>
-          <span>Krishna Janmabhoomi Darshan</span>
+          <span>Mathura Vrindavan Tours</span>
           <span>|</span>
           <span>Govardhan Parikrama</span>
           <span>|</span>
-          <span>Barsana Radha Rani Temple</span>
+          <span>Barsana Darshan</span>
           <span>|</span>
           <span>Braj 84 Kos Yatra</span>
         </div>
       </div>
 
       {/* BOTTOM BAR */}
-      <div className="border-t border-white/10">
-        <div className="max-w-7xl mx-auto px-6 py-4 text-xs text-white
-          flex flex-wrap justify-center gap-6 text-center">
+      <div className="border-t border-white/20">
+        <div className="max-w-7xl flex justify-around mx-auto px-6 py-4 text-xs text-center">
           <Link href="/privacy-policy">Privacy Policy</Link>
-          <p>© {new Date().getFullYear()} Mathura Vrindavan Tour. All rights reserved.</p>
+          <p>© {new Date().getFullYear()} Mathura Vrindavan Tour</p>
           <Link href="/refund-policy">Refund Policy</Link>
         </div>
       </div>

@@ -35,11 +35,11 @@ const faqs = [
 
 export default function PackagesFaq() {
   return (
-    <section className="py-24 bg-white">
-      <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-14 items-start">
+    <section className="py-16 sm:py-20 lg:py-24 bg-white">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-14 items-start">
 
         {/* LEFT IMAGE */}
-        <div className="relative h-[720px] rounded-3xl overflow-hidden shadow-md">
+        <div className="relative h-[260px] sm:h-[360px] lg:h-[720px] rounded-3xl overflow-hidden shadow-md">
           <Image
             src="/images/Home/home-faqs.webp"
             alt="Mathura Vrindavan Tour FAQs"
@@ -54,34 +54,34 @@ export default function PackagesFaq() {
 
         {/* RIGHT FAQs */}
         <div>
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-900">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900">
             Frequently Asked Questions
           </h2>
 
-          <div className="mt-3 h-[3px] w-40 bg-gradient-to-r from-orange-600 via-orange-400 to-transparent rounded-full" />
+          <div className="mt-3 h-[3px] w-32 sm:w-40 bg-gradient-to-r from-orange-600 via-orange-400 to-transparent rounded-full" />
 
-          <p className="mt-4 text-gray-700 max-w-xl">
+          <p className="mt-4 text-sm sm:text-base text-gray-700 max-w-xl">
             Common questions about our Mathura Vrindavan tour packages,
             answered clearly to help you plan your yatra with confidence.
           </p>
 
           {/* FAQ LIST */}
-          <div className="mt-8 space-y-4">
+          <div className="mt-6 sm:mt-8 space-y-3 sm:space-y-4">
             {faqs.map((faq, index) => (
               <details
                 key={index}
-                className="group border border-orange-100 rounded-2xl p-5 cursor-pointer"
+                className="group border border-orange-100 rounded-2xl p-4 sm:p-5 cursor-pointer"
               >
-                <summary className="flex items-center justify-between cursor-pointer list-none ">
-                  <h3 className="font-semibold text-gray-900 text-lg">
+                <summary className="flex items-start justify-between gap-4 cursor-pointer list-none">
+                  <h3 className="font-semibold text-gray-900 text-sm sm:text-base md:text-lg leading-snug">
                     {faq.question}
                   </h3>
-                  <span className="text-orange-500 transition-transform group-open:rotate-180">
+                  <span className="text-orange-500 mt-1 transition-transform group-open:rotate-180">
                     ▼
                   </span>
                 </summary>
 
-                <p className="mt-4 text-gray-700 leading-relaxed">
+                <p className="mt-3 sm:mt-4 text-sm sm:text-base text-gray-700 leading-relaxed">
                   {faq.answer}
                 </p>
               </details>
