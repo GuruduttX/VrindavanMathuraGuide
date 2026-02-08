@@ -29,19 +29,10 @@ const CMSActions = ({actionType, editorType,
                 >
                    Preview
                 </button>
+             )}
 
-                {onPreview && (
-                    <button
-                        onClick={onPreview}
-                        className="px-6 py-3 rounded-xl bg-slate-600 text-white
-                hover:bg-slate-500 transition active:scale-95"
-                    >
-                        Preview
-                    </button>
-                )}
-
-                {onPublish && (
-                    <button onClick={onPublish} disabled className="px-6 py-3 rounded-xl bg-emerald-600 text-white
+           {onPublish && (
+            <button onClick={onPublish} disabled className="px-6 py-3 rounded-xl bg-emerald-600 text-white
               hover:bg-emerald-500 hover:shadow-lg hover:shadow-emerald-500/30
                 transition active:scale-95">
                 Save Draft
@@ -49,11 +40,11 @@ const CMSActions = ({actionType, editorType,
              )
            }
 
-                <span className="ml-auto text-sm text-gray-400 self-center">
-                    Editing {editorType}
-                </span>
-            </div>
-        )
-    }
+            <span className="ml-auto text-sm text-gray-400 self-center">
+              Editing {editorType}
+            </span>
+        </div>
+    )
+}
 
-    export default CMSActions
+export default CMSActions

@@ -16,7 +16,7 @@ const products = [
     category: "Gadgets",
     stock: 78,
     status: "Active",
-  },
+  }
 ];
 
 export default function CurrentProductTable() {

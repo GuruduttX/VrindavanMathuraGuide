@@ -1,6 +1,6 @@
 import React from 'react'
 
-const CMSHeader = ({editorType} : {editorType : "Blog" | "Package"}) => {
+const CMSHeader = ({editorType} : {editorType : string}) => {
     return (
 
         <div className="mb-8">
