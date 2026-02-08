@@ -21,33 +21,25 @@ const CMSActions = ({actionType, editorType,
                 {actionType==='update' ?  "Update" : "Publish"}
             </button>
 
+
             {onPreview && (
                 <button
-                onClick={onPreview}
-                className="cursor-pointer px-6 py-3 rounded-xl bg-slate-600 text-white
-                hover:bg-slate-500 transition active:scale-95"
+                    onClick={onPreview}
+                    className="px-6 py-3 rounded-xl bg-slate-600 text-white
+            hover:bg-slate-500 transition active:scale-95"
                 >
-                   Preview
+                    Preview
                 </button>
+            )}
 
-                {onPreview && (
-                    <button
-                        onClick={onPreview}
-                        className="px-6 py-3 rounded-xl bg-slate-600 text-white
-                hover:bg-slate-500 transition active:scale-95"
-                    >
-                        Preview
-                    </button>
-                )}
-
-                {onPublish && (
-                    <button onClick={onPublish} disabled className="px-6 py-3 rounded-xl bg-emerald-600 text-white
-              hover:bg-emerald-500 hover:shadow-lg hover:shadow-emerald-500/30
-                transition active:scale-95">
+            {onPublish && (
+                <button onClick={onPublish} disabled className="px-6 py-3 rounded-xl bg-emerald-600 text-white
+            hover:bg-emerald-500 hover:shadow-lg hover:shadow-emerald-500/30
+            transition active:scale-95">
                 Save Draft
             </button>
              )
-           }
+            }
 
                 <span className="ml-auto text-sm text-gray-400 self-center">
                     Editing {editorType}
@@ -55,5 +47,6 @@ const CMSActions = ({actionType, editorType,
             </div>
         )
     }
+    
 
     export default CMSActions

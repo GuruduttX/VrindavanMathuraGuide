@@ -1,27 +1,28 @@
 export default function AboutPackages() {
   return (
-    <section className="bg-white py-24">
-      <div className="max-w-7xl mx-auto ">
+    <section className="bg-white py-16 sm:py-20 lg:py-24">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6">
 
         {/* HEADING */}
-        <div className="mb-8">
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-900">
+        <div className="mb-6 sm:mb-8">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900">
             About Our Vrindavan Tour Packages
           </h2>
 
           {/* ORANGE GRADIENT UNDERLINE */}
-          <div className="mt-3 h-[3px] w-44 bg-gradient-to-r from-orange-600 via-orange-400 to-transparent rounded-full" />
-          </div>
+          <div className="mt-3 h-[3px] w-32 sm:w-40 md:w-44
+            bg-gradient-to-r from-orange-600 via-orange-400 to-transparent rounded-full" />
+        </div>
 
         {/* DETAILS */}
-        <details className="group relative rounded-2xl border border-orange-300 shadow-lg p-6">
+        <details className="group relative rounded-2xl border border-orange-300 shadow-lg p-4 sm:p-6">
 
           {/* SUMMARY */}
-          <summary className="list-none cursor-pointer">
+          <summary className="list-none cursor-pointer focus:outline-none">
             <div className="relative">
 
               {/* INTRO TEXT */}
-              <p className="text-gray-700 text-lg leading-relaxed pr-6">
+              <p className="text-gray-700 text-base sm:text-lg leading-relaxed pr-4 sm:pr-6">
                 Our Vrindavan tour packages are thoughtfully designed for
                 devotees seeking a peaceful and spiritually enriching journey
                 in the holy land of Shri Krishna. Each yatra focuses on
@@ -30,13 +31,15 @@ export default function AboutPackages() {
               </p>
 
               {/* FADE OVERLAY */}
-              <div className="pointer-events-none absolute bottom-0 left-0 right-0 h-12 
-                bg-linear-to-t from-white to-transparent group-open:hidden" />
+              <div
+                className="pointer-events-none absolute bottom-0 left-0 right-0 h-10 sm:h-12
+                bg-gradient-to-t from-white to-transparent group-open:hidden"
+              />
 
               {/* EXPAND CUE */}
-              <div className="mt-4 flex items-center gap-2 text-orange-600 font-medium">
+              <div className="mt-4 flex items-center gap-2 text-orange-600 font-medium text-sm sm:text-base">
                 <span>Continue reading</span>
-                <span className="transition-transform group-open:rotate-180">
+                <span className="transition-transform duration-300 group-open:rotate-180">
                   ↓
                 </span>
               </div>
@@ -45,7 +48,7 @@ export default function AboutPackages() {
           </summary>
 
           {/* EXPANDED CONTENT */}
-          <div className="mt-6 text-gray-700 space-y-4 leading-relaxed">
+          <div className="mt-6 text-gray-700 space-y-4 leading-relaxed text-sm sm:text-base">
             <p>
               Vrindavan is not merely a destination but a sacred experience,
               where every temple, ghat, and parikrama path carries deep

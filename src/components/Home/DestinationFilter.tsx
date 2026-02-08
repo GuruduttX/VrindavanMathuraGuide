@@ -139,9 +139,9 @@ export default function DestinationFilter() {
 
       {/* ---------- CATEGORY CAROUSEL ---------- */}
       <div className="flex gap-8 overflow-x-auto scrollbar-hide p-4 bg-[#ffeeda] rounded-3xl shadow-xl">
-        {CATEGORIES.map((cat) => (
+        {CATEGORIES.map((cat, idx) => (
           <button
-            key={cat}
+            key={idx}
             onClick={() => setActiveCategory(cat)}
             className={`flex flex-col items-center gap-1 min-w-fit transition-all cursor-pointer rounded-3xl px-7 py-2
               ${

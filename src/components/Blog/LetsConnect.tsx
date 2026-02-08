@@ -28,8 +28,8 @@ const LetsConnect = () => {
       >
         {/* Overlay */}
 
-        <div className="hidden sm:block absolute inset-0 bg-linear-to-r from-orange-400 via-orange-600/70 to-orange-600" />
-        <div className="block sm:hidden absolute inset-0 bg-linear-to-r from-[#6493cc] via-[#538ed6] to-[#6493cc]" />
+        <div className="block absolute inset-0 bg-linear-to-r from-orange-400 via-orange-600/70 to-orange-600" />
+        {/* <div className="block sm:hidden absolute inset-0 bg-linear-to-r from-[#6493cc] via-[#538ed6] to-[#6493cc]" /> */}
 
         <div className="
           relative z-10 

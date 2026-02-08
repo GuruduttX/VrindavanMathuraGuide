@@ -4,7 +4,7 @@ interface DurationItem {
 }
 
 interface PackageDurationStripProps {
-  duration: string; // e.g. "2D/1N"
+  duration: string; 
   breakdown: DurationItem[];
 }
 
@@ -13,35 +13,52 @@ export default function PackageDurationStrip({
   breakdown,
 }: PackageDurationStripProps) {
   return (
-    <section className="py-6">
-      <div className="max-w-7xl mx-auto ">
-        <div className="flex flex-wrap items-center gap-6">
+    <section className="py-5 md:py-6">
+      <div className="max-w-7xl mx-auto px-4 md:px-0">
+        <div className="flex flex-wrap items-center gap-4 md:gap-6">
 
           {/* LEFT DURATION PILL */}
-          <span className="inline-flex items-center rounded-full
-            bg-orange-600 text-white
-            px-4 py-1.5 text-sm font-semibold">
+          <span
+            className="
+              inline-flex items-center rounded-full
+              bg-orange-600 text-white
+              px-4 py-1.5 text-sm font-semibold
+              shrink-0
+            "
+          >
             {duration}
           </span>
 
           {/* RIGHT BREAKDOWN */}
-          <div className="flex items-center gap-6">
+          <div className="flex flex-wrap items-center gap-4 md:gap-6">
             {breakdown.map((item, index) => (
-              <div key={index} className="flex items-center gap-4">
+              <div key={index} className="flex items-center gap-3 md:gap-4">
 
                 {/* Divider */}
                 {index !== 0 && (
-                  <span className="h-8 w-px bg-gray-300" />
+                  <>
+                    {/* Desktop divider (unchanged) */}
+                    <span className="hidden md:block h-8 w-px bg-gray-300" />
+
+                    {/* Mobile divider (dot) */}
+                    <span className="md:hidden w-1.5 h-1.5 rounded-full bg-gray-300" />
+                  </>
                 )}
 
                 {/* Day Count */}
-                <span className="text-3xl font-bold text-gray-300 leading-none">
+                <span
+                  className="
+                    text-2xl md:text-3xl
+                    font-bold text-gray-300
+                    leading-none
+                  "
+                >
                   {item.days}
                 </span>
 
                 {/* Text */}
                 <div className="flex flex-col leading-tight">
-                  <span className="text-xs text-gray-500">
+                  <span className="text-[11px] md:text-xs text-gray-500">
                     Days in
                   </span>
                   <span className="text-sm font-semibold text-gray-900">
