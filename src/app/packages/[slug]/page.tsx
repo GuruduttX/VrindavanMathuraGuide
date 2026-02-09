@@ -13,34 +13,36 @@ import Navbar from "@/utils/Navbar";
 import SideForm from "@/components/PackageDetail/SideForm";
 import FooterCTA from "@/utils/FooterCTA";
 import PackageTestimonial from "@/components/PackageDetail/PackageTestimonial";
+import PackageFaqSection from "@/components/PackageDetail/PackageFaqSection";
 import PackageTestimonials from "@/components/PackageDetail/PackageTestimonial";
 import { supabase } from "@/lib/supabase/SupabaseConfig";
 
-const getPackageData = async (slug : string) => {
-  const {data , error} = await supabase.from("Package").select("*").eq("slug", slug).single();
+const getPackageData = async (slug: string) => {
+  const { data, error } = await supabase.from("Package").select("*").eq("slug", slug).single();
 
-  if(error){
+  if (error) {
     console.log("There is some of the error I have get : ");
     console.log(error);
   }
-  
+
   return data;
 }
 
-const page = async ({params} : {params : Promise<{slug : string }>}) => {
+const page = async ({ params }: { params: Promise<{ slug: string }> }) => {
 
-  const {slug} = await params;
+  const { slug } = await params;
   console.log("The slug is : ");
   console.log(slug);
   const PackageData = await getPackageData(slug);
   console.log(PackageData);
+
 
   return (
     <>
       <Navbar />
 
       {/* HERO */}
-      <PackageHero PackageData = {PackageData}/>
+      <PackageHero PackageData={PackageData} />
 
       {/* MAIN CONTENT + SIDEBAR */}
       <section className="w-full min-h-screen bg-white  ">
@@ -65,23 +67,23 @@ const page = async ({params} : {params : Promise<{slug : string }>}) => {
 
               <DestinationRoute />
 
-              <PackageHighlights PackageData={PackageData}/>
+              <PackageHighlights PackageData={PackageData} />
 
-              <ItineraryAccordion PackageData={PackageData}/>
+              <ItineraryAccordion PackageData={PackageData} />
 
-              <InclusionExclusion PackageData={PackageData}/>
+              <InclusionExclusion PackageData={PackageData} />
 
             </main>
 
             {/* RIGHT SIDEBAR */}
-           
-             <aside className="hidden lg:block ">
-                <div className="sticky top-28">
-                    <SideForm />
-                </div>
+
+            <aside className="hidden lg:block ">
+              <div className="sticky top-28">
+                <SideForm />
+              </div>
             </aside>
 
-            
+
 
           </div>
         </div>
@@ -90,9 +92,10 @@ const page = async ({params} : {params : Promise<{slug : string }>}) => {
       {/* BELOW CONTENT */}
       <GroupCta />
       <ProductRatings />
-      <PackageTestimonials PackageData={PackageData}/>
-      <Policies PackageData={PackageData}/>
-      <FooterCTA/>
+      <PackageTestimonials PackageData={PackageData} />
+      <PackageFaqSection PackageData={PackageData}/>
+      <Policies PackageData={PackageData} />
+      <FooterCTA />
       <Footer />
     </>
   );
