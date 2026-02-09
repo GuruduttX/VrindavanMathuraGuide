@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { Star } from "lucide-react";
 
-export default function PackageHero() {
+export default function PackageHero({PackageData} : any) {
   return (
     <section className="relative w-full px-6 py-12 lg:px-16">
       {/* Orange Glow Background */}
@@ -14,8 +14,8 @@ export default function PackageHero() {
         {/* LEFT BIG IMAGE */}
         <div className="relative col-span-2 h-[420px] rounded-3xl overflow-hidden group cursor-pointer">
           <Image
-            src="https://images.unsplash.com/photo-1548013146-72479768bada"
-            alt="Main Destination"
+            src={PackageData.heroimage.image}
+            alt={PackageData.heroimage.alt}
             fill
             className="object-cover transition-transform duration-700 group-hover:scale-105"
           />
@@ -62,7 +62,7 @@ export default function PackageHero() {
         {/* Title */}
         <div>
           <h1 className="text-3xl lg:text-5xl font-extrabold text-gray-900 leading-tight">
-            Spiritual Vrindavan
+            {PackageData.title}
             <span className="text-orange-600"> Diamond Circle</span>
           </h1>
 

@@ -12,14 +12,35 @@ import Footer from "@/utils/Footer";
 import Navbar from "@/utils/Navbar";
 import SideForm from "@/components/PackageDetail/SideForm";
 import FooterCTA from "@/utils/FooterCTA";
+import PackageTestimonial from "@/components/PackageDetail/PackageTestimonial";
+import PackageTestimonials from "@/components/PackageDetail/PackageTestimonial";
+import { supabase } from "@/lib/supabase/SupabaseConfig";
 
-const page = () => {
+const getPackageData = async (slug : string) => {
+  const {data , error} = await supabase.from("Package").select("*").eq("slug", slug).single();
+
+  if(error){
+    console.log("There is some of the error I have get : ");
+    console.log(error);
+  }
+  
+  return data;
+}
+
+const page = async ({params} : {params : Promise<{slug : string }>}) => {
+
+  const {slug} = await params;
+  console.log("The slug is : ");
+  console.log(slug);
+  const PackageData = await getPackageData(slug);
+  console.log(PackageData);
+
   return (
     <>
       <Navbar />
 
       {/* HERO */}
-      <PackageHero />
+      <PackageHero PackageData = {PackageData}/>
 
       {/* MAIN CONTENT + SIDEBAR */}
       <section className="w-full min-h-screen bg-white  ">
@@ -44,34 +65,11 @@ const page = () => {
 
               <DestinationRoute />
 
-              <PackageHighlights
-                highlights={[
-                  "Begin your spiritual journey at Shri Krishna Janmabhoomi, the birthplace of Lord Krishna, and experience the divine atmosphere of Mathura.",
-                  "Seek blessings at the revered Banke Bihari Temple in Vrindavan, known for its unique darshan style and devotional energy.",
-                  "Witness the grandeur of Prem Mandir during the evening aarti, beautifully illuminated with lights and spiritual hymns.",
-                  "Enjoy a peaceful walk along the sacred Yamuna Ghats and experience the serene evening aarti by the river.",
-                  "Travel comfortably with an AC vehicle and local Braj guide ensuring smooth darshan and cultural insights throughout the tour.",
-                ]}
-              />
+              <PackageHighlights PackageData={PackageData}/>
 
-              <ItineraryAccordion />
+              <ItineraryAccordion PackageData={PackageData}/>
 
-              <InclusionExclusion
-                inclusions={[
-                  "Pickup & drop from Mathura Railway Station or hotel",
-                  "AC vehicle for all transfers and sightseeing",
-                  "Local Braj guide assistance during temple darshan",
-                  "Visit to Shri Krishna Janmabhoomi, Banke Bihari Temple & Prem Mandir",
-                  "All parking, tolls, and driver allowances",
-                ]}
-                exclusions={[
-                  "Personal expenses such as shopping or tips",
-                  "Meals not mentioned in the itinerary",
-                  "Entry fees for special temple darshan (if any)",
-                  "Travel insurance",
-                  "Anything not mentioned under inclusions",
-                ]}
-              />
+              <InclusionExclusion PackageData={PackageData}/>
 
             </main>
 
@@ -92,7 +90,8 @@ const page = () => {
       {/* BELOW CONTENT */}
       <GroupCta />
       <ProductRatings />
-      <Policies />
+      <PackageTestimonials PackageData={PackageData}/>
+      <Policies PackageData={PackageData}/>
       <FooterCTA/>
       <Footer />
     </>

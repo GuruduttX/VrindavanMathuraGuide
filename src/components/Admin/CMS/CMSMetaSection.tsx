@@ -1,6 +1,34 @@
 import React from 'react'
 
-const CMSMetaSection = ({ title, category, slug, onChange, editorType }: { title: string, category: string, slug: string, onChange: any , editorType : "Blog" | "Package"}) => {
+export const categories = [
+    
+            "1 Day Tour Package",
+        
+            "2 Day Tour Package",
+       
+            "3 Day Tour Package",
+
+            "4 Day Tour Package",
+       
+            "5 Day Tour Package",
+       
+            "6 Day Tour Package",
+      
+            "7 Day Tour Package",
+        
+            "8 Day Tour Package",
+        
+            "9 Day Tour Package",
+        
+            "10 Day Tour Package"
+        
+
+];
+
+
+
+
+const CMSMetaSection = ({ title, category, slug, onChange, editorType }: { title: string, category: string, slug: string, onChange: any, editorType: "Blog" | "Package" }) => {
     return (
         <div className="space-y-6">
             {/* Blog Title */}
@@ -20,7 +48,7 @@ const CMSMetaSection = ({ title, category, slug, onChange, editorType }: { title
 
             {/* category + Slug */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-               <div>
+                <div>
                     <label className="text-sm text-white/70">Category</label>
                     <select
                         required
@@ -29,19 +57,37 @@ const CMSMetaSection = ({ title, category, slug, onChange, editorType }: { title
                         className="mt-2 w-full px-5 py-3 rounded-xl bg-white/5 text-white
                         border border-white/10 focus:ring-2 focus:ring-sky-500 transition cursor-pointer"
                     >
-                        <option value="">Select Category</option>
 
-                        <option value="travel" className="bg-[#0b1220]">
-                        Travel
-                        </option>
+                        {
+                            editorType == "Blog" ?
+                                <>
+                                    <option value="">Select Category</option>
 
-                        <option value="spiritual" className="bg-[#0b1220]">
-                        Spiritual
-                        </option>
+                                    <option value="travel" className="bg-[#0b1220]">
+                                        Travel
+                                    </option>
 
-                        <option value="culture" className="bg-[#0b1220]">
-                        Culture
-                        </option>
+                                    <option value="spiritual" className="bg-[#0b1220]">
+                                        Spiritual
+                                    </option>
+
+                                    <option value="culture" className="bg-[#0b1220]">
+                                        Culture
+                                    </option>
+                                </> :
+                                <>
+                                    <option value="">Select Category</option>
+                                    {
+                                        categories.map((cat) => {
+                                            return <option value={cat} className="bg-[#0b1220]">
+                                                {cat}
+                                            </option>
+
+
+                                        })
+                                    }
+                                </>
+                        }
                     </select>
                 </div>
 

@@ -1,14 +1,8 @@
 import { CheckCircle, XCircle } from "lucide-react";
 
-interface InclusionsExclusionsProps {
-  inclusions: string[];
-  exclusions: string[];
-}
 
-export default function InclusionExclusion({
-  inclusions,
-  exclusions,
-}: InclusionsExclusionsProps) {
+
+export default function InclusionExclusion({PackageData} : any) {
   return (
     <section className="py-12 px-6 sm:px-0">
       <div className="max-w-7xl mx-auto ">
@@ -27,11 +21,11 @@ export default function InclusionExclusion({
             </h3>
 
             <ul className="space-y-3">
-              {inclusions.map((item, index) => (
+              {PackageData.inclusions.map((item : any , index : any) => (
                 <li key={index} className="flex items-center gap-3">
                   <span><CheckCircle  className="w-5 h-5 text-green-600 mt-0.5" /></span>
                   <p className="text-gray-800 leading-relaxed">
-                    {item}
+                    {item.description}
                   </p>
                 </li>
               ))}
@@ -45,11 +39,11 @@ export default function InclusionExclusion({
             </h3>
 
             <ul className="space-y-3">
-              {exclusions.map((item, index) => (
+              {PackageData.exclusions.map((item : any , index : any) => (
                 <li key={index} className="flex items-start gap-3">
                   <XCircle className="w-5 h-5 text-red-500 mt-0.5" />
                   <span className="text-gray-800 leading-relaxed">
-                    {item}
+                    {item.description}
                   </span>
                 </li>
               ))}

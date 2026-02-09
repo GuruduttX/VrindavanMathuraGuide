@@ -1,10 +1,8 @@
 import { Sparkles } from "lucide-react";
 
-interface PackageHighlightsProps {
-  highlights: string[];
-}
 
-export default function PackageHighlights({ highlights }: PackageHighlightsProps) {
+
+export default function PackageHighlights({ PackageData }: any) {
   return (
     <section className="py-10">
       <div className="max-w-7xl mx-auto px-6">
@@ -17,7 +15,7 @@ export default function PackageHighlights({ highlights }: PackageHighlightsProps
         </h2>
 
         <div className="space-y-4">
-          {highlights.map((item, index) => (
+          {PackageData.highlights.map((item : any, index : any) => (
             <div
               key={index}
               className="flex gap-4 items-start rounded-xl
@@ -30,7 +28,7 @@ export default function PackageHighlights({ highlights }: PackageHighlightsProps
 
               {/* TEXT */}
               <p className="text-gray-800 leading-relaxed">
-                {item}
+                {item.description}
               </p>
             </div>
           ))}

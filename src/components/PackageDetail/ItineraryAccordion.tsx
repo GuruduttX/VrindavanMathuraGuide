@@ -1,36 +1,17 @@
-"use client";
+"use client"
 
 import { useState } from "react";
 import { ChevronDown, MapPin, Clock } from "lucide-react";
 
-const itinerary = [
-  {
-    day: "Day 1",
-    title: "Arrival in Reykjavik | Day at Leisure",
-    description:
-      "Arrive in Reykjavik and enjoy a relaxed day exploring the city at your own pace. Visit cafes, walk the streets, or rest after your journey.",
-  },
-  {
-    day: "Day 2",
-    title: "Day Trip to Iceland Golden Circle",
-    description:
-      "Explore the iconic Golden Circle including Thingvellir National Park, Geysir hot springs, and Gullfoss waterfall.",
-  },
-  {
-    day: "Day 3",
-    title: "Whale Watching Tour",
-    description:
-      "Experience a thrilling whale-watching adventure in the North Atlantic Ocean with expert guides.",
-  },
-];
 
-export default function ItineraryAccordion() {
+
+export default function ItineraryAccordion({PackageData} : any) {
   const [active, setActive] = useState<number | null>(0);
 
   return (
     <section className="w-full max-w-4xl p-5 space-y-4">
       <div className="text-2xl font-bold">Itinerary</div>
-      {itinerary.map((item, index) => {
+      {PackageData.itinerary.map((item : any , index : any) => {
         const isOpen = active === index;
 
         return (
@@ -51,7 +32,7 @@ export default function ItineraryAccordion() {
               <div className="flex items-center gap-4">
                 {/* Day Badge */}
                 <span className="rounded-full bg-gradient-to-r from-orange-500 to-orange-600 px-4 py-1 text-sm font-bold text-white shadow">
-                  {item.day}
+                  Day {item.day}
                 </span>
 
                 {/* Title */}

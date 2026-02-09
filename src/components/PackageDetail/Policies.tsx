@@ -3,40 +3,9 @@
 import { useState } from "react";
 import { ChevronDown, ShieldCheck, FileText, Wallet } from "lucide-react";
 
-const policies = [
-  {
-    title: "More on Iceland Tourism",
-    icon: FileText,
-    content:
-      "Iceland offers breathtaking landscapes, volcanoes, glaciers, waterfalls, and unique cultural experiences. Tourism is well-organized with a strong focus on sustainability.",
-  },
-  {
-    title: "Confirmation Policy",
-    icon: ShieldCheck,
-    content:
-      "Your booking will be confirmed instantly after full or partial payment as per the selected package. A confirmation voucher will be shared via email.",
-  },
-  {
-    title: "Refund Policy",
-    icon: Wallet,
-    content:
-      "Refunds, if applicable, will be processed within 7–14 working days to the original mode of payment after approval.",
-  },
-  {
-    title: "Cancellation Policy",
-    icon: FileText,
-    content:
-      "Cancellation charges vary based on the time remaining before departure. Please review the detailed cancellation slab before booking.",
-  },
-  {
-    title: "Payment Policy",
-    icon: Wallet,
-    content:
-      "100% of the total tour cost must be paid at least 0 days before the date of booking to confirm your reservation.",
-  },
-];
 
-export default function Policies() {
+
+export default function Policies({PackageData} : any) {
   const [active, setActive] = useState<number | null>(null);
 
   return (
@@ -46,9 +15,9 @@ export default function Policies() {
       </h2>
 
       <div className="space-y-4 cursor-pointer">
-        {policies.map((item, index) => {
+        {PackageData.policies.map((item : any, index : any) => {
           const isOpen = active === index;
-          const Icon = item.icon;
+        
 
           return (
             <div
@@ -75,7 +44,7 @@ export default function Policies() {
                         : "bg-orange-100 text-orange-600"
                     }`}
                   >
-                    <Icon size={18} />
+                    {/* <Icon size={18} /> */}
                   </span>
 
                   {/* Title */}
@@ -99,7 +68,7 @@ export default function Policies() {
                 }`}
               >
                 <div className="px-6 pb-6 text-gray-700 leading-relaxed">
-                  <p>{item.content}</p>
+                  <p>{item.description}</p>
 
                   {/* Accent Divider */}
                   <div className="mt-4 h-1 w-20 rounded-full bg-gradient-to-r from-orange-400 to-orange-600" />

@@ -18,6 +18,7 @@ import Policy from '@/components/Admin/PackageEditor/Policy';
 import Document from '@/components/Admin/PackageEditor/Document';
 import Testimonials from '@/components/Admin/PackageEditor/Testimonials';
 import ItinearyMaker from '@/components/Admin/PackageEditor/Itinerary';
+import DANDestination from '@/components/Admin/PackageEditor/DANDestination';
 
 type PackageForm = {
   title: string;
@@ -33,6 +34,9 @@ type PackageForm = {
   cancel: string,
   confirmation: string,
   payment: string,
+  day: number,
+  night: number,
+  destination: string
 }
 
 type FAQ = {
@@ -85,6 +89,9 @@ export default function CreateNewPackage() {
     slug: "",
     price: "",
     duration: "",
+    day: 0,
+    night: 0,
+    destination: "",
     metaTitle: "",
     metaDescription: "",
     image: "",
@@ -149,22 +156,44 @@ export default function CreateNewPackage() {
       category: form.category,
       slug: form.slug,
       price: form.price,
-      heroimage : {
-        image : form.image,
-        alt : form.alt
+      day : form.day,
+      night : form.night,
+      destination : form.destination,
+      heroimage: {
+        image: form.image,
+        alt: form.alt
       },
       duration: form.duration,
-      meta : {
-        title : form.metaTitle,
-        description : form.metaDescription
+      meta: {
+        title: form.metaTitle,
+        description: form.metaDescription
       },
-      refund: form.refund,
-      cancel: form.cancel,
-      confirmation: form.confirmation,
-      payment: form.payment,
+      policies: [
+        {
+          id : crypto.randomUUID(),
+          title : "Refund Policy",
+          description : form.refund
+        },
+        {
+          id : crypto.randomUUID(),
+          title : "Cancel Policy",
+          description : form.cancel
+        },
+       {
+          id : crypto.randomUUID(),
+          title : "Confirmation  Policy",
+          description : form.confirmation
+        },
+        {
+          id : crypto.randomUUID(),
+          title : "Payment Ploicy",
+          description : form.payment
+        }
+
+      ],
       faqs,
       testimonials,
-      highlights : highLights,
+      highlights: highLights,
       inclusions,
       exclusions,
       documents,
@@ -203,6 +232,7 @@ export default function CreateNewPackage() {
         <CMSHeader editorType="Package" />
         <CMSMetaSection title={form.title} category={form.category} slug={form.slug} onChange={updateForm} editorType="Package" />
         <PackageDetails price={form.price} duration={form.duration} onChange={updateForm} editorType="Package" />
+        <DANDestination day={form.day} night={form.night} destination={form.destination} onChange={updateForm} editorType='Package' />
         <CMSSeoSection metaTitle={form.metaTitle} metaDescription={form.metaDescription} onChange={updateForm} editorType="Package" />
         <ItinearyMaker itinerary={itinerary} setItinerary={setItinerary} editorType='Package' />
         <FaqHandler faqs={faqs} setFaqs={setFaqs} editorType="Package" />
