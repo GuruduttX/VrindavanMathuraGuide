@@ -17,7 +17,7 @@ const CMSMediaSection = ({
   editorType,
 }: CMSMediaSectionProps) => {
 
-  const bucketName = editorType === "Blog" ? "BlogImages" : "PackageImages";
+  const bucketName = editorType === "Blog" ? "BlogImages" : "ProductImages";
 
   const handleImageUpload = async (
     e: React.ChangeEvent<HTMLInputElement>

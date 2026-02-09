@@ -5,7 +5,7 @@ const CMSMetaSection = ({ title, category, slug, onChange, editorType }: { title
         <div className="space-y-6">
             {/* Blog Title */}
             <div>
-                <label className="text-sm text-white/70">Blog {editorType}</label>
+                <label className="text-sm text-white/70">{editorType} Title</label>
                 <input
                     value={title}
                     placeholder="A Way to Grow Your Online Business With Digital Marketing"

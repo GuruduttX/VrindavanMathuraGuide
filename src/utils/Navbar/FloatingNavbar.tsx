@@ -35,7 +35,8 @@ export default function FloatingNavbar() {
             : "opacity-0 -translate-y-8 pointer-events-none"
           }`}
       >
-        <nav className="flex items-center justify-between rounded-full bg-white px-6 py-3 backdrop-blur-xl shadow-xl border border-white/40">
+        <div className="flex items-center justify-between rounded-full bg-white px-6 py-3 backdrop-blur-xl shadow-xl border border-white/40"  role="navigation"
+  aria-label="Secondary navigation">
 
           {/* Logo */}
           <Link href="/" className="flex items-center gap-2">
@@ -43,7 +44,7 @@ export default function FloatingNavbar() {
               src="/images/Admin/Experience_my_India.webp"
               width={140}
               height={30}
-              alt="logo"
+              alt="Mathura Vrindavan Tour Guide logo"
               className="cursor-pointer"
             />
           </Link>
@@ -75,7 +76,7 @@ export default function FloatingNavbar() {
             Enquire Now
 
           </button>
-        </nav>
+        </div>
       </div>
 
     </>

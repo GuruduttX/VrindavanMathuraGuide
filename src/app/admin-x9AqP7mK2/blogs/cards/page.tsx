@@ -4,6 +4,7 @@ import { supabase } from "@/lib/supabase/SupabaseConfig";
 import DeleteConfirmModal from "@/utils/Admin/DeleteConfirmModal";
 import toast from "react-hot-toast";
 import Link from "next/link";
+import CMSLoading from "@/components/Admin/CMS/CMSLoading";
 
 type BlogType = {
   id : string;
@@ -81,7 +82,7 @@ export default function ProductCards() {
 };
   
     if (loading) {
-      return <p className="text-white">Loading blogs...</p>;
+      return <CMSLoading/>
     }
   
     if (blogs.length === 0) {

@@ -10,7 +10,7 @@ export default function InclusionExclusion({
   exclusions,
 }: InclusionsExclusionsProps) {
   return (
-    <section className="py-12">
+    <section className="py-12 px-6 sm:px-0">
       <div className="max-w-7xl mx-auto ">
 
         {/* SECTION TITLE */}

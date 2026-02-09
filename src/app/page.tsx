@@ -13,11 +13,148 @@ import Footer from '@/utils/Footer'
 import FooterCTA from '@/utils/FooterCTA'
 import DestinationFilter from '@/components/Home/DestinationFilter'
 import WhyChooseUs from '@/components/Home/WhyChooseUs'
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Mathura Vrindavan Tour Packages | Local Guide, Taxi & Temple Darshan",
+  description:
+    "Explore Mathura & Vrindavan with trusted local tour guides. Book temple darshan, taxi services and customized spiritual tour packages at the best price.",
+
+  openGraph: {
+    title: "Mathura Vrindavan Tour Packages | Local Guide & Darshan",
+    description:
+      "Discover Mathura & Vrindavan with expert local guides. Taxi, temple darshan & spiritual tour packages available.",
+    url: "https://yourwebsite.com",
+    siteName: "Mathura Vrindavan Tour Guide",
+    images: [
+      {
+        url: "/og-mathura-vrindavan-tour.jpg",
+        width: 1600,
+        height: 900,
+        alt: "Mathura Vrindavan Tour",
+      },
+    ],
+    type: "website",
+  },
+
+  twitter: {
+    card: "summary_large_image",
+    title: "Mathura Vrindavan Tour Packages",
+    description:
+      "Book Mathura Vrindavan tours with local guides, taxi & darshan services.",
+    images: ["/og-mathura-vrindavan.jpg"],
+  },
+};
 
 
 const Home = () => {
+
+  const websiteSchema = {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "Mathura Vrindavan Tour Guide",
+    "url": "https://yourwebsite.com",
+    "potentialAction": {
+      "@type": "SearchAction",
+      "target": "https://yourwebsite.com/search?q={search_term_string}",
+      "query-input": "required name=search_term_string"
+    }
+  };
+
+  const organizationSchema = {
+    "@context": "https://schema.org",
+    "@type": "TravelAgency",
+    "name": "Mathura Vrindavan Tour Guide",
+    "url": "https://yourwebsite.com",
+    "logo": "https://yourwebsite.com/logo.png",
+    "description":
+      "Mathura Vrindavan Tour Guide offers local guides, taxi services, temple darshan assistance and customized spiritual tour packages.",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Mathura",
+      "addressRegion": "Uttar Pradesh",
+      "addressCountry": "IN"
+    },
+    "areaServed": {
+      "@type": "Place",
+      "name": "Mathura Vrindavan"
+    },
+    "sameAs": [
+      "https://www.facebook.com/yourpage",
+      "https://www.instagram.com/yourpage",
+      "https://www.youtube.com/yourchannel"
+    ]
+  };
+
+  const touristAttractionSchema = {
+    "@context": "https://schema.org",
+    "@type": "TouristAttraction",
+    "name": "Mathura Vrindavan Temples",
+    "description":
+      "Sacred Krishna temples in Mathura and Vrindavan including Banke Bihari Temple, ISKCON Temple and Shri Krishna Janmabhoomi.",
+    "touristType": "Spiritual Travelers",
+    "address": {
+      "@type": "PostalAddress",
+      "addressRegion": "Uttar Pradesh",
+      "addressCountry": "IN"
+    }
+  };
+
+  const faqSchema = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Which is the best tour guide for Mathura and Vrindavan?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text":
+            "The best Mathura Vrindavan tour guide is one who provides local expertise, flexible tour planning, temple darshan assistance and reliable taxi services. A trusted local guide ensures a peaceful and well-organized spiritual journey."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is included in Mathura Vrindavan tour packages?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text":
+            "Mathura Vrindavan tour packages usually include local sightseeing, temple darshan assistance, taxi services, guided tours, and customized itineraries based on your travel duration."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is one day enough for Mathura Vrindavan tour?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text":
+            "One day is sufficient for a quick Mathura Vrindavan tour covering major temples, but a 2–3 day tour is recommended for a relaxed and complete spiritual experience."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Do you provide taxi services for Mathura Vrindavan?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text":
+            "Yes, reliable taxi services are available for Mathura and Vrindavan sightseeing, including pickup from Delhi, Agra and nearby cities."
+        }
+      }
+    ]
+  };
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify([
+            websiteSchema,
+            organizationSchema,
+            touristAttractionSchema,
+            faqSchema
+          ])
+        }}
+      />
       <Navbar />
       <HeroSection />
       <DestinationFilter />

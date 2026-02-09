@@ -12,6 +12,7 @@ import { supabase } from '@/lib/supabase/SupabaseConfig';
 import toast from 'react-hot-toast';
 
 type BlogForm = {
+
   title: string;
   category: string,
   slug: string,
@@ -22,17 +23,21 @@ type BlogForm = {
   alt: string,
   subContent: string
   content: string
+
 }
 
 type FAQ = {
+
   id : string, 
   question : string,
   answer : string
+
 }
 
 
 
 export default function CreateNewBlog() {
+
   const [form, setForm] = useState<BlogForm>({
     title: "",
     category: "",
@@ -48,11 +53,7 @@ export default function CreateNewBlog() {
 
   const [faqs , setFaqs ] = useState<FAQ[]>([])
 
-  // console.log("This is the Form Data for the create new Blog : ");
-  // console.log(form);
-
-  // console.log("THE DATA OF THE FAQS IS : ");
-  // console.log(faqs);
+ 
 
   const updateForm = (field : keyof BlogForm , value : string)=>{
 
@@ -88,7 +89,7 @@ export default function CreateNewBlog() {
         toast.error("Blog category is missing")
      }
 
-      const { data: existingData, error:existingError } = await supabase
+      const { data : existingData, error : existingError } = await supabase
       .from("Blog")
       .select("id")
       .eq("slug", form.slug);

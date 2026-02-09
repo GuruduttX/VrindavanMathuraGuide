@@ -1,165 +1,227 @@
-const cards = [
-  {
-    image: "https://images.unsplash.com/photo-1519389950473-47ba0277781c",
-    category: "Technology",
-    title: "What's New in 2022 Tech",
-    desc: "Keeping up with digital trends requires adapting fast and staying ahead of innovation.",
-    author: "Jane Doe",
-    time: "2h ago",
-  },
-  {
-    image: "https://images.unsplash.com/photo-1546069901-ba9599a7e63c",
-    category: "Food",
-    title: "Delicious Food",
-    desc: "Explore mouth-watering dishes and culinary experiences from around the world.",
-    author: "John Doe",
-    time: "Yesterday",
-  },
-  {
-    image: "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee",
-    category: "Automobile",
-    title: "Race To Your Heart Content",
-    desc: "Experience speed, passion, and adrenaline through automotive storytelling.",
-    author: "John Doe",
-    time: "1d ago",
-  },
-  {
-    image: "https://images.unsplash.com/photo-1519389950473-47ba0277781c",
-    category: "Technology",
-    title: "What's New in 2022 Tech",
-    desc: "Keeping up with digital trends requires adapting fast and staying ahead of innovation.",
-    author: "Jane Doe",
-    time: "2h ago",
-  },
-  {
-    image: "https://images.unsplash.com/photo-1546069901-ba9599a7e63c",
-    category: "Food",
-    title: "Delicious Food",
-    desc: "Explore mouth-watering dishes and culinary experiences from around the world.",
-    author: "John Doe",
-    time: "Yesterday",
-  },
-  {
-    image: "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee",
-    category: "Automobile",
-    title: "Race To Your Heart Content",
-    desc: "Experience speed, passion, and adrenaline through automotive storytelling.",
-    author: "John Doe",
-    time: "1d ago",
-  },
-  {
-    image: "https://images.unsplash.com/photo-1519389950473-47ba0277781c",
-    category: "Technology",
-    title: "What's New in 2022 Tech",
-    desc: "Keeping up with digital trends requires adapting fast and staying ahead of innovation.",
-    author: "Jane Doe",
-    time: "2h ago",
-  },
-  {
-    image: "https://images.unsplash.com/photo-1546069901-ba9599a7e63c",
-    category: "Food",
-    title: "Delicious Food",
-    desc: "Explore mouth-watering dishes and culinary experiences from around the world.",
-    author: "John Doe",
-    time: "Yesterday",
-  },
-  {
-    image: "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee",
-    category: "Automobile",
-    title: "Race To Your Heart Content",
-    desc: "Experience speed, passion, and adrenaline through automotive storytelling.",
-    author: "John Doe",
-    time: "1d ago",
-  },
-];
+"use client"
+import { useEffect, useState } from "react";
+import { supabase } from "@/lib/supabase/SupabaseConfig";
+import DeleteConfirmModal from "@/utils/Admin/DeleteConfirmModal";
+import toast from "react-hot-toast";
+import Link from "next/link";
+import CMSLoading from "@/components/Admin/CMS/CMSLoading";
+
+type PackageType = {
+  id: string;
+  title: string;
+  category: string,
+  slug: string,
+  price: string,
+  duration: string,
+  metaTitle: string,
+  metaDescription: string,
+  image: string,
+  alt: string,
+  refund: string,
+  cancel: string,
+  confirmation: string,
+  payment: string,
+  faqs: FAQ[]
+  testimonials: Testimonial[],
+  highLights: HighLights[],
+  inclusions: Inclusions[],
+  exclusions: Exclusions[],
+  documents: Documents[],
+  itinerary: Itinerary[],
+  created_at: Date,
+
+
+
+}
+
+type FAQ = {
+  id: string,
+  question: string,
+  answer: string
+}
+
+type Testimonial = {
+  id: string,
+  name: string,
+  description: string
+}
+
+type HighLights = {
+  id: string
+  description: string
+}
+
+type Inclusions = {
+  id: string
+  description: string
+}
+
+type Exclusions = {
+  id: string
+  description: string
+}
+
+type Documents = {
+  id: string
+  description: string
+}
+
+type Itinerary = {
+  id: string
+  day: number,
+  title: string,
+  description: string
+}
+
+
+
+type PackageForm = {
+
+}
+
+
+
+
 
 
 
 export default function ProductCards() {
-  return (
-    <section className="min-h-screen p-6 md:p-10">
+  const [packages, setPackage] = useState<PackageType[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [open, setOpen] = useState(false)
+  const [selectedId, setSelectedId] = useState<string | null>(null);
 
-      <div
-        className="grid gap-8 cursor-pointer"
-        style={{
-          gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))",
-        }}
-      >
-        {cards.map((card, index) => (
-          <article
-            key={index}
-            className="group relative rounded-2xl overflow-hidden
+
+
+  useEffect(() => {
+    const getBlogs = async () => {
+      const { data, error } = await supabase
+        .from("Package")
+        .select("*");
+
+      if (error) {
+        console.error(error);
+        setLoading(false);
+        return;
+      }
+
+      setPackage(data ?? []);
+      setLoading(false);
+    };
+
+    getBlogs();
+  }, []);
+
+  const handleDelete = async () => {
+    if (!selectedId) {
+      return;
+    }
+    const { error } = await supabase
+      .from("Package")
+      .delete()
+      .eq("id", selectedId);
+
+    if (error) {
+      toast.error(error.message);
+      return;
+    }
+
+    toast.success("Package Deleted Successfully");
+
+    setPackage((prev) => prev.filter((b) => b.id !== selectedId));
+    setSelectedId("");
+    setOpen(false);
+  };
+
+  if (loading) {
+    return <CMSLoading />
+  }
+
+  if (packages.length === 0) {
+    return <p className="text-white">No blogs found.</p>;
+  }
+
+  return (
+    <>
+      <DeleteConfirmModal open={open} onConfirm={handleDelete} onCancel={() => setOpen(false)} />
+      <section className="min-h-screen p-6 md:p-10">
+
+        <div
+          className="grid gap-8 cursor-pointer"
+          style={{
+            gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))",
+          }}
+        >
+          {packages.map((packag) => (
+            <article
+              key={packag.id}
+              className="group relative rounded-2xl overflow-hidden
             bg-gradient-to-br from-[#0b1437] to-[#060b1f]
             border border-white/10
             shadow-[0_10px_40px_rgba(0,0,0,0.6)]
             hover:-translate-y-1 hover:shadow-[0_20px_60px_rgba(0,0,0,0.8)]
             transition-all duration-300"
-          >
-
-
-            {/* Image */}
-            <div className="h-48 overflow-hidden">
-              <img
-                src={card.image}
-                alt={card.title}
-                loading="lazy"
-                className="w-full h-full object-cover
+            >
+              <div className="h-48 overflow-hidden">
+                <img
+                  src={packag.image}
+                  alt={packag.title}
+                  className="w-full h-full object-cover
                 group-hover:scale-105 transition duration-500"
-              />
-            </div>
-
-            {/* Content */}
-            <div className="p-5">
-              <span className="inline-block mb-3 px-3 py-1 text-xs font-medium
-                rounded-full bg-blue-500/10 text-blue-400 border border-blue-400/20">
-                {card.category}
-              </span>
-
-              <h3 className="text-base font-semibold text-white mb-2">
-                {card.title}
-              </h3>
-
-              <p className="text-sm text-gray-400 leading-relaxed line-clamp-3">
-                {card.desc}
-              </p>
-
-              {/* ACTION BUTTONS */}
-              <div className="flex justify-between transition mt-5">
-                <button
-                  className="w-18 h-10 rounded-3xl
-                bg-blue-600/20 border border-blue-500/30
-                hover:bg-blue-600/30 transition text-white cursor-pointer"
-                >
-                  Edit
-                </button>
-
-                <button
-                  className="w-18 h-10 rounded-3xl
-                bg-red-600/20 text-white
-                border border-red-500/30
-                hover:bg-red-600/30 transition cursor-pointer"
-                >
-                  Delete
-                </button>
+                />
               </div>
-            </div>
 
-            {/* Footer */}
-            <div className="px-5 py-4 border-t border-white/10 flex items-center justify-between">
-              <div className="flex items-center gap-2">
-                <div className="w-8 h-8 rounded-full bg-white/10" />
-                <span className="text-sm text-gray-300">
-                  {card.author}
+              <div className="p-5">
+                <span className="inline-block mb-3 px-3 py-1 text-xs
+                rounded-full bg-blue-500/10 text-blue-400 border border-blue-400/20">
+                  {packag.category}
+                </span>
+
+                <h3 className="text-base font-semibold text-white mb-2">
+                  {packag.title}
+                </h3>
+
+                <p className="text-sm text-gray-400 line-clamp-3">
+                  {packag.itinerary[0].description}
+                </p>
+
+
+                <div className="flex justify-between transition mt-5">
+                  <Link href={`/admin-x9AqP7mK2/products/edit/${packag.id}`} className="px-6 py-2 rounded-2xl
+                  bg-blue-600/20 border border-blue-500/30
+                  hover:bg-blue-600/30 transition text-white">
+                    Edit
+                  </Link>
+
+
+                  <button
+                    disabled={open}
+                    onClick={() => {
+                      setSelectedId(packag.id);
+                      setOpen(true);
+                    }}
+                    className="px-4 py-1.5 rounded-2xl text-sm
+                  bg-red-600/20 text-red-400 border border-red-500/30
+                  hover:bg-red-600/30 transition disabled:opacity-50"
+                  >
+                    Delete
+                  </button>
+
+                </div>
+              </div>
+
+              <div className="px-5 py-4 border-t border-white/10 flex justify-between">
+                <span className="text-sm text-gray-300">{packag.price}</span>
+                <span className="text-xs text-gray-500">
+                  {new Date(packag.created_at).toDateString()}
                 </span>
               </div>
+            </article>
+          ))}
 
-              <span className="text-xs text-gray-500">
-                {card.time}
-              </span>
-            </div>
-          </article>
-        ))}
-      </div>
-    </section>
+
+        </div>
+      </section>
+    </>
   );
 }

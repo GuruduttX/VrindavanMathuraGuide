@@ -7,19 +7,86 @@ import WhyChooseUs from '@/components/Home/WhyChooseUs'
 import Footer from '@/utils/Footer'
 import FooterCTA from '@/utils/FooterCTA'
 import Navbar from '@/utils/Navbar'
-import React from 'react'
 
 const About = () => {
+
+  const aboutPageSchema = {
+    "@context": "https://schema.org",
+    "@type": "AboutPage",
+    "@id": "https://mathuravrindavantourguide.com/about",
+    "name": "About Mathura Vrindavan Tour Guide",
+    "url": "https://mathuravrindavantourguide.com/about",
+
+    "description":
+      "Learn about Mathura Vrindavan Tour Guide, our mission, local expertise, trusted services, and commitment to providing peaceful and well-organized spiritual journeys.",
+
+    "inLanguage": "en-IN",
+
+    
+  };
+
+
+  const organizationSchema = {
+    "@context": "https://schema.org",
+    "@type": "TravelAgency",
+
+    "name": "Mathura Vrindavan Tour Guide",
+    "url": "https://mathuravrindavantourguide.com",
+
+    "logo": "https://mathuravrindavantourguide.com/logo.png",
+
+    "description":
+      "Mathura Vrindavan Tour Guide is a local travel agency providing expert guides, taxi services, temple darshan assistance, and customized spiritual tour packages in Mathura and Vrindavan.",
+
+
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Mathura",
+      "addressRegion": "Uttar Pradesh",
+      "addressCountry": "IN"
+    },
+
+    "areaServed": {
+      "@type": "Place",
+      "name": "Mathura Vrindavan"
+    },
+
+    "contactPoint": {
+      "@type": "ContactPoint",
+      "telephone": "+91-XXXXXXXXXX",
+      "contactType": "Customer Support",
+      "availableLanguage": ["English", "Hindi"]
+    },
+
+    "sameAs": [
+      "https://www.facebook.com/yourpage",
+      "https://www.instagram.com/yourpage",
+      "https://www.youtube.com/yourchannel"
+    ]
+  };
+
+
   return (
     <>
+
+    <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify([
+            aboutPageSchema,
+            organizationSchema,
+            
+          ])
+        }}
+      />
       <Navbar />
       <AboutHero />
       <AboutMissionSection />
-      <WhyChooseUs/>
+      <WhyChooseUs />
       <PhotoGalleryCarousel />
-      <TrustBuildingSection/>
-      <PopularTours/>
-      <FooterCTA/>
+      <TrustBuildingSection />
+      <PopularTours />
+      <FooterCTA />
       <Footer />
     </>
   )

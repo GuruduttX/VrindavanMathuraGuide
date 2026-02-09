@@ -7,62 +7,111 @@ import CMSMediaSection from '@/components/Admin/CMS/CMSMediaSection';
 import CMSMetaSection from '@/components/Admin/CMS/CMSMetaSection';
 import CMSSeoSection from '@/components/Admin/CMS/CMSSeoSection';
 import FaqHandler from '@/components/Admin/CMS/FaqHandler';
-import { useState } from 'react';
+import { useState, useSyncExternalStore } from 'react';
 import { supabase } from '@/lib/supabase/SupabaseConfig';
 import toast from 'react-hot-toast';
+import PackageDetails from '@/components/Admin/PackageEditor/PackageDetails';
+import TripHighlights from '@/components/Admin/PackageEditor/TripHighlights';
+import Inclusion from '@/components/Admin/PackageEditor/Inclusion';
+import Exclusion from '@/components/Admin/PackageEditor/Exclusion';
+import Policy from '@/components/Admin/PackageEditor/Policy';
+import Document from '@/components/Admin/PackageEditor/Document';
+import Testimonials from '@/components/Admin/PackageEditor/Testimonials';
+import ItinearyMaker from '@/components/Admin/PackageEditor/Itinerary';
 
-type ProductForm = {
+type PackageForm = {
   title: string;
   category: string,
   slug: string,
-  author : string,
+  price: "",
+  duration: "",
   metaTitle: string,
   metaDescription: string,
   image: string,
   alt: string,
-  subContent: string
-  content: string
+  refund: string,
+  cancel: string,
+  confirmation: string,
+  payment: string,
 }
 
 type FAQ = {
-  id : string, 
-  question : string,
-  answer : string
+  id: string,
+  question: string,
+  answer: string
 }
+
+type Testimonial = {
+  id: string,
+  name: string,
+  description: string
+}
+
+type HighLights = {
+  id: string
+  description: string
+}
+
+type Inclusions = {
+  id: string
+  description: string
+}
+
+type Exclusions = {
+  id: string
+  description: string
+}
+
+type Documents = {
+  id: string
+  description: string
+}
+
+type Itinerary = {
+  id: string
+  day: number,
+  title: string,
+  description: string
+}
+
 
 
 
 export default function CreateNewPackage() {
 
-  const [form, setForm] = useState<ProductForm>({
+  const [form, setForm] = useState<PackageForm>({
     title: "",
     category: "",
     slug: "",
-    author : "",
+    price: "",
+    duration: "",
     metaTitle: "",
     metaDescription: "",
     image: "",
     alt: "",
-    subContent: "",
-    content: ""
+    refund: "",
+    cancel: "",
+    confirmation: "",
+    payment: "",
   });
 
-  const [faqs , setFaqs ] = useState<FAQ[]>([])
+  const [faqs, setFaqs] = useState<FAQ[]>([]);
+  const [testimonials, setTestimonials] = useState<Testimonial[]>([]);
+  const [highLights, setHighLights] = useState<HighLights[]>([]);
+  const [inclusions, setInclusions] = useState<Inclusions[]>([]);
+  const [exclusions, setExclusions] = useState<Exclusions[]>([]);
+  const [documents, setDocuments] = useState<Documents[]>([]);
+  const [itinerary, setItinerary] = useState<Itinerary[]>([]);
 
-  // console.log("This is the Form Data for the create new Blog : ");
-  // console.log(form);
 
-  // console.log("THE DATA OF THE FAQS IS : ");
-  // console.log(faqs);
-
-  const updateForm = (field : keyof ProductForm , value : string)=>{
+  const updateForm = (field: keyof PackageForm, value: string) => {
 
     setForm((prev) => {
-      return {...prev , [field] : value}
+      return { ...prev, [field]: value }
     })
 
   }
-  
+
   const handleSave = async (
     e: React.FormEvent<HTMLFormElement>
   ) => {
@@ -74,50 +123,56 @@ export default function CreateNewPackage() {
       return;
     }
 
+    if (!form.image) {
+      toast.error("Package image is missing");
+      return;
+    };
 
-    if (form.content.length < 300) {
-      toast.error("At least 300 characters required in blog content");
+    if (!form.category) {
+      toast.error("Package category is missing");
       return;
     }
 
-    if(!form.image){
-       toast.error("Blog image is missing");
-       return;
-    };
-    
-     if(!form.category){
-        toast.error("Blog category is missing")
-     }
-
-      const { data: existingData, error:existingError } = await supabase
-      .from("Blog")
+    const { data: existingData, error: existingError } = await supabase
+      .from("Package")
       .select("id")
       .eq("slug", form.slug);
 
-      if (existingData && existingData?.length > 0) {
-        toast.error("Slug already exists");
-        return;
-      }
+    if (existingData && existingData?.length > 0) {
+      toast.error("Slug already exists");
+      return;
+    }
 
 
-     const payload = {
+    const payload = {
       title: form.title,
       category: form.category,
       slug: form.slug,
-      meta: {
-        title: form.metaTitle,
-        description: form.metaDescription,
+      price: form.price,
+      heroimage : {
+        image : form.image,
+        alt : form.alt
       },
-      image: form.image,
-      alt: form.alt,
-      subcontent: form.subContent,
-      content: form.content,
-      author: form.author,
+      duration: form.duration,
+      meta : {
+        title : form.metaTitle,
+        description : form.metaDescription
+      },
+      refund: form.refund,
+      cancel: form.cancel,
+      confirmation: form.confirmation,
+      payment: form.payment,
       faqs,
+      testimonials,
+      highlights : highLights,
+      inclusions,
+      exclusions,
+      documents,
+      itinerary
     };
 
     const { data, error } = await supabase
-      .from("Blog")
+      .from("Package")
       .insert(payload)
       .select("*")
       .single();
@@ -127,8 +182,8 @@ export default function CreateNewPackage() {
       return;
     }
 
-  toast.success("Blog Published Successfully");
-};
+    toast.success("Package Published Successfully");
+  };
 
 
   const handlePreview = () => {
@@ -146,27 +201,19 @@ export default function CreateNewPackage() {
 
       <form className='space-y-6' onSubmit={handleSave}>
         <CMSHeader editorType="Package" />
-        <CMSMetaSection title = {form.title} category = {form.category} slug = {form.slug} onChange = {updateForm} editorType="Package"/>
-        <div>
-            <label className="text-sm text-white/70">Author</label>
-            <input
-                value={form.author}
-                required
-                onChange={(e) => { updateForm("author", e.target.value) }}
-                placeholder="author name..."
-                className="mt-2 w-full px-5 py-3 rounded-xl bg-white/5 text-white
-                    border border-white/10 focus:ring-2 focus:ring-sky-500 transition"
-            />
-       </div>
-        <CMSSeoSection metaTitle = {form.metaTitle} metaDescription = {form.metaDescription} onChange = {updateForm} editorType="Blog"/>
-        <FaqHandler faqs = {faqs} setFaqs = {setFaqs} editorType="Blog"/>
-        <CMSMediaSection image = {form.image} alt = {form.alt} onChange = {updateForm} editorType="Blog"/>
-        <CMSContentSection subContent={form.subContent} content = {form.content} onChange = {updateForm} editorType="Blog"/>
-        <CMSActions 
-         actionType='create'
-         editorType='Blog'
-         onPreview={handlePreview}
-         onPublish={handlePublish} />
+        <CMSMetaSection title={form.title} category={form.category} slug={form.slug} onChange={updateForm} editorType="Package" />
+        <PackageDetails price={form.price} duration={form.duration} onChange={updateForm} editorType="Package" />
+        <CMSSeoSection metaTitle={form.metaTitle} metaDescription={form.metaDescription} onChange={updateForm} editorType="Package" />
+        <ItinearyMaker itinerary={itinerary} setItinerary={setItinerary} editorType='Package' />
+        <FaqHandler faqs={faqs} setFaqs={setFaqs} editorType="Package" />
+        <TripHighlights highLights={highLights} setHighLights={setHighLights} editorType='Package' />
+        <Inclusion inclusions={inclusions} setInclusions={setInclusions} editorType='Package' />
+        <Exclusion exclusions={exclusions} setExclusions={setExclusions} editorType='Package' />
+        <Testimonials testimonials={testimonials} setTestimonials={setTestimonials} editorType='Package' />
+        <Document documents={documents} setDocuments={setDocuments} editorType='Package' />
+        <Policy refund={form.refund} cancel={form.cancel} confirm={form.confirmation} payment={form.payment} editorType='Package' onChange={updateForm} />
+        <CMSMediaSection image={form.image} alt={form.alt} onChange={updateForm} editorType="Package" />
+        <CMSActions actionType='create' editorType='Package' onPreview={handlePreview} onPublish={handlePublish} />
       </form>
 
     </div>

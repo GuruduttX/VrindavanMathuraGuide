@@ -1,57 +1,69 @@
-import React from 'react'
-import dynamic from 'next/dynamic';
-import "suneditor/dist/css/suneditor.min.css";
+import React, { useState } from 'react'
+
+type HighLights = {
+    id: string
+    description: string
+}
+
+const TripHighlights = ({ highLights, setHighLights }: { highLights: HighLights[], setHighLights: React.Dispatch<React.SetStateAction<HighLights[]>>, editorType: "Blog" | "Package" }) => {
 
 
-const SunEditor = dynamic(() => import("suneditor-react"), {
-    ssr: false,
-});
+    const handleAddHighlights = () => {
+        setHighLights((prev) => {
+            return [...prev, { id: crypto.randomUUID(), description: "" }]
+        })
+    }
 
-const CMSContentSection = ({ subContent, content, onChange }: { subContent: string, content: string, onChange: any, editorType : "Blog" | "Package" }) => {
+    const handleHighlightChnage = (highlightId: string, value: string) => {
+        setHighLights((prev) => {
+            return prev.map((highlight) => {
+                return highlight.id == highlightId ? {
+                    ...highlight,
+                    description: value
+                } : highlight
+            })
+        })
+    }
+
+    const handleDeleteHighLight = (highlightId: string) => {
+
+        setHighLights((prev) => {
+            return prev.filter((highlight) => {
+                return highlight.id != highlightId
+            })
+        })
+    }
+
     return (
-        <div className='space-y-6'>
-            {/* SubContent */}
-            <div>
-                <label className="text-sm text-white/70">Sub Content</label>
-                <textarea
-                    required
-                    rows={5}
-                    value={subContent}
-                    onChange={(e) => { onChange("subContent", e.target.value) }}
-                    placeholder="Let’s be real for a second..."
-                    className="mt-2 w-full px-5 py-3 rounded-xl bg-white/5 text-white
-          border border-white/10 focus:ring-2 focus:ring-sky-500 transition resize-none"
-                />
-            </div>
+        <div className='border-2 border-indigo-500 rounded-3xl w-full p-8 shadow-md shadow-indigo-500 hover:shadow-lg cursor-pointer transition'>
+            <div className='w-full text-3xl text-extrabold text-white text-center mb-5'>Trip HighLights</div>
 
+            {highLights.map((highLight) => (
+                <div key={highLight.id} className='border-2 border-indigo-500 rounded-3xl w-full p-6 shadow-md shadow-indigo-500 cursor-pointer mb-5'>
+                    <textarea rows={3}
+                        required
+                        placeholder="Enter the description of your trip highlights"
+                        className="mt-2 w-full px-5 py-3 rounded-xl bg-white/5 text-white border border-white/10 focus:ring-2 focus:ring-sky-500 transition resize-none"
+                        value={highLight.description}
+                        onChange={(e) => { handleHighlightChnage(highLight.id, e.target.value) }}
+                    >
 
+                    </textarea>
 
-            <div className="dark-sun-editor h-[85vh] w-full rounded-2xl p-5 overflow-hidden shadow-xl hover:shadow-2xl hover:shadow-indigo-400 border border-indigo-400 shadow-indigo-400 hover:border-2 hover:border-indigo-400 transition cursor-pointer">
-
-                <SunEditor
-
-                    defaultValue={content}
-                    setOptions={{
-                        minHeight: "65vh",
-                        maxHeight: "70vh",
-                        buttonList: [
-                            ["undo", "redo"],
-                            ["formatBlock"],   // H1, H2, H3 works here
-                            ["bold", "italic", "underline"],
-                            ["list"],
-                            ["align"],
-                            ["link", "image"],
-                            ["table"]
-                        ],
-                    }}
-
-                    onChange={(content) => {
-                        onChange("content", content)
-                    }}
-                />
+                    <div className='mt-4'>
+                        <button className='px-3 py-2 rounded-3xl text-white cursor-pointer bg-red-400 hover:bg-red-500 transition' onClick={() => handleDeleteHighLight(highLight.id)}>
+                            Delete Button
+                        </button>
+                    </div>
+                </div>
+            ))}
+            <div className='mt-10 w-full flex justify-center'>
+                <button onClick={handleAddHighlights} type='button' className='px-16 py-4 rounded-4xl bg-[#080874] text-white hover:bg-green-500 cursor-pointer transition'>
+                    Add HighLights
+                </button>
             </div>
         </div>
     )
 }
 
-export default CMSContentSection
+export default TripHighlights

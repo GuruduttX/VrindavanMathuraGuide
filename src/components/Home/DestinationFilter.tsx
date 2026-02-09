@@ -17,33 +17,25 @@ type PackageType = {
 }
 
 const CATEGORIES = [
-  "Explore",
-  "Europe",
-  "Japan",
-  "Singapore",
-  "Maldives",
-  "North East India",
-  "Dubai",
-  "Thailand",
-  "Vietnam",
-  "Norway",
-  "Explore",
-  "Europe",
-  "Japan",
-  "Singapore",
-  "Maldives",
-  "North East India",
-  "Dubai",
-  "Thailand",
-  "Vietnam",
-  "Norway",
+  "Explore All",
+  "1 Day Tour Package",,
+  "2 Day Tour Package",
+  "3 Day Tour Package",
+  "4 Day Tour Package",
+  "5 Day Tour Package",
+  "6 Day Tour Package",
+  "7 Day Tour Package",
+  "8 Day Tour Package",
+  "9 Day Tour Package",
+  "10 Day Tour Package",
+ 
 ]
 
 const PACKAGES: PackageType[] = [
   {
     id: 1,
     title: "Scenic Iceland With Diamond Circle",
-    category: "Europe",
+    category: "1 Day Tour Package",
     duration: "7 Days & 6 Nights",
     rating: 4.5,
     reviews: 40,
@@ -53,7 +45,7 @@ const PACKAGES: PackageType[] = [
   {
     id: 2,
     title: "Journey Through Iceland Hidden Treasures",
-    category: "Europe",
+    category: "2 Day Tour Package",
     duration: "10 Days & 9 Nights",
     rating: 4.5,
     reviews: 23,
@@ -63,7 +55,7 @@ const PACKAGES: PackageType[] = [
   {
     id: 3,
     title: "Highlights Of Iceland With Southern Shores",
-    category: "Europe",
+    category: "3 Day Tour Package",
     duration: "5 Days & 4 Nights",
     rating: 5.0,
     reviews: 614,
@@ -73,7 +65,7 @@ const PACKAGES: PackageType[] = [
   {
     id: 4,
     title: "Tokyo Cherry Blossom Tour",
-    category: "Japan",
+    category: "4 Day Tour Package",
     duration: "6 Days & 5 Nights",
     rating: 4.7,
     reviews: 120,
@@ -83,37 +75,37 @@ const PACKAGES: PackageType[] = [
   {
     id: 5,
     title: "Thailand Beach Escape",
-    category: "Thailand",
+    category: "5 Day Tour Package",
     duration: "5 Days & 4 Nights",
     rating: 4.6,
     reviews: 88,
     price: 98000,
     image: "/images/Home/mathura-vrindavan.webp",
   },
-   {
+  {
     id: 6,
     title: "Thailand Beach Escape",
-    category: "Thailand",
+    category: "6 Day Tour Package",
     duration: "5 Days & 4 Nights",
     rating: 4.6,
     reviews: 88,
     price: 98000,
     image: "/images/Home/mathura-vrindavan.webp",
   },
-   {
+  {
     id: 7,
     title: "Thailand Beach Escape",
-    category: "Thailand",
+    category: "7 Day Tour Package",
     duration: "5 Days & 4 Nights",
     rating: 4.6,
     reviews: 88,
     price: 98000,
     image: "/images/Home/mathura-vrindavan.webp",
   },
-   {
+  {
     id: 8,
     title: "Thailand Beach Escape",
-    category: "Thailand",
+    category: "8 Day Tour Package",
     duration: "5 Days & 4 Nights",
     rating: 4.6,
     reviews: 88,
@@ -125,41 +117,47 @@ const PACKAGES: PackageType[] = [
 /* -------------------- COMPONENT -------------------- */
 
 export default function DestinationFilter() {
-  const [activeCategory, setActiveCategory] = useState("Explore")
+  const [activeCategory, setActiveCategory] = useState("Explore All")
 
   const filteredPackages = useMemo(() => {
-    if (activeCategory === "Explore") return PACKAGES
+    if (activeCategory === "Explore All") return PACKAGES
     return PACKAGES.filter(
       (pkg) => pkg.category === activeCategory
     )
   }, [activeCategory])
 
   return (
-    <section className="max-w-7xl mx-auto px-4 py-10 space-y-8">
+    <section className="mt-5 bg-gradient-to-b from-orange-50 to-white w-full mx-auto px-4 py-10 space-y-8">
+
+      <div className="w-full">
+        <div className="w-full text-center sm:text-4xl md:text-4xl lg:text-5xl text-orange-400 font-extrabold">Our Tour Packages
+
+        </div>
+        <p></p>
+      </div>
 
       {/* ---------- CATEGORY CAROUSEL ---------- */}
-      <div className="flex gap-8 overflow-x-auto scrollbar-hide p-4 bg-[#ffeeda] rounded-3xl shadow-xl">
-        {CATEGORIES.map((cat) => (
+      <div className="flex gap-8 overflow-x-auto scrollbar-hide p-6 bg-[#ffeeda] rounded-3xl shadow-xl">
+        {CATEGORIES.map((cat, idx) => (
           <button
-            key={cat}
-            onClick={() => setActiveCategory(cat)}
-            className={`flex flex-col items-center gap-1 min-w-fit transition-all cursor-pointer rounded-3xl px-7 py-2
-              ${
-                activeCategory === cat
-                  ? "text-black font-semibold bg-orange-400"
-                  : "text-black hover:text-black bg-orange-200"
+            key={idx}
+            onClick={() => setActiveCategory(cat ?? "")}
+            className={`flex flex-col items-center gap-1 min-w-fit transition-all cursor-pointer rounded-3xl px-7 py-3
+              ${activeCategory === cat
+                ? "text-black font-semibold bg-orange-400"
+                : "text-black hover:text-black bg-orange-200"
               }
             `}
           >
             <span className="text-sm">{cat}</span>
-            
+
           </button>
         ))}
       </div>
 
       {/* ---------- TITLE ---------- */}
-      <div className="flex justify-between items-center">
-        <h2 className="text-2xl font-semibold">
+      <div className="flex justify-between items-center px-5">
+        <h2 className="text-3xl font-semibold text-orange-400">
           {activeCategory}
         </h2>
         <button className="text-orange-500 font-medium hover:underline">
@@ -168,7 +166,7 @@ export default function DestinationFilter() {
       </div>
 
       {/* ---------- CARDS GRID ---------- */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 transition-all">
+      <div className="grid grid-cols-1 md:grid-cols-4 gap-6 transition-all p-5">
         {filteredPackages.map((pkg) => (
           <div
             key={pkg.id}

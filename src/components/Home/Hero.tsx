@@ -1,11 +1,11 @@
-"use client";
-
 import { MapPin, Calendar, Users, Search } from "lucide-react";
+import DestinationDropdown from "../../utils/search/DestinationDropDown";
+import SearchBar from "@/utils/search/SearchBar";
 
 export default function HeroSection() {
   return (
-    <section className="relative min-h-[90vh] w-full overflow-hidden">
-      
+    <section className="relative min-h-[90vh] w-full">
+
 
       {/* Orange Gradient Overlay */}
       <div className="absolute inset-0 bg-gradient-to-r from-[#b3500a] via-[#cf7602] to-[#c45800]" />
@@ -31,44 +31,8 @@ export default function HeroSection() {
         </p>
 
         {/* Search Box */}
-        <div className="mt-10 rounded-4xl bg-white/90 p-4 shadow-lg shadow-orange-400 backdrop-blur-md hover:shadow-xl hover:shadow-yellow-500 cursor-pointer transition border-2 border-orange-400">
-          <div className="grid grid-cols-1 gap-4 md:grid-cols-4">
-            {/* Destination */}
-            <div className="flex items-center gap-3 rounded-xl bg-orange-50 px-4 py-3">
-              <MapPin className="text-orange-500" />
-              <input
-                type="text"
-                placeholder="Destination"
-                className="w-full bg-transparent text-sm outline-none rounded-3xl"
-              />
-            </div>
+        <SearchBar/>
 
-            {/* Date */}
-            <div className="flex items-center gap-3 rounded-xl bg-orange-50 px-4 py-3">
-              <Calendar className="text-orange-500" />
-              <input
-                type="date"
-                className="w-full bg-transparent text-sm outline-none rounded-4xl"
-              />
-            </div>
-
-            {/* Travelers */}
-            <div className="flex items-center gap-3 rounded-xl bg-orange-50 px-4 py-3">
-              <Users className="text-orange-500" />
-              <input
-                type="number"
-                placeholder="Travelers"
-                className="w-full bg-transparent text-sm outline-none"
-              />
-            </div>
-
-            {/* Button */}
-            <button className="flex items-center justify-center gap-2 rounded-3xl bg-gradient-to-r from-orange-500 to-orange-600 px-6 py-3 font-semibold text-white transition-all hover:scale-[1.02] hover:shadow-lg cursor-pointer">
-              <Search size={18} />
-              Search
-            </button>
-          </div>
-        </div>
 
         {/* Stats */}
         <div className="mt-20 grid grid-cols-2 gap-6 text-center md:grid-cols-4">
@@ -80,13 +44,43 @@ export default function HeroSection() {
           ].map((item, i) => (
             <div
               key={i}
-              className="rounded-xl bg-gradient-to-r from-orange-500 via-orange-400 to-orange-300 p-5 backdrop-blur transition hover:scale-105 cursor-pointer"
+              className="
+                  rounded-xl
+                  bg-gradient-to-r from-orange-500 via-orange-400 to-orange-300
+                  p-4 sm:p-5
+                  backdrop-blur
+                  -z-10
+                  transition hover:scale-105
+                  cursor-pointer
+                "
             >
-              <h3 className="text-3xl font-bold text-white">{item.value}</h3>
-              <p className="mt-1 text-sm text-orange-200">{item.label}</p>
+
+              <h3
+                className="
+                    font-bold text-white
+                    text-2xl sm:text-3xl
+                    leading-tight
+                    whitespace-nowrap
+                  "
+              >
+                {item.value}
+              </h3>
+
+
+              <p
+                className="
+                    mt-1
+                    text-xs sm:text-sm
+                    text-orange-200
+                    leading-snug
+                  "
+              >
+                {item.label}
+              </p>
             </div>
           ))}
         </div>
+
       </div>
 
       {/* Bottom Curve */}

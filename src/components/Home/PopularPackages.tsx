@@ -1,3 +1,4 @@
+import Link from "next/link";
 import TourCard from "./TourCard";
 
 const tours = [
@@ -54,49 +55,60 @@ const tours = [
 
 export default function PopularTours() {
   return (
-    <section className="py-20 bg-gradient-to-b from-white to-orange-50">
-      <div className="max-w-7xl mx-auto px-6">
+    <section className="py-16 sm:py-20 bg-gradient-to-b from-white to-orange-50">
+      <div className="max-w-7xl mx-auto px-5 sm:px-6">
 
         {/* HEADER */}
-        <div className="mb-10 flex items-center justify-between">
+        <div className="mb-8 sm:mb-10 flex flex-col md:flex-row md:items-center md:justify-between gap-3">
           <div>
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900">
               Popular Mathura–Vrindavan Packages
             </h2>
-            <p className="mt-2 text-gray-600">
+            <p className="mt-1.5 sm:mt-2 text-sm sm:text-base text-gray-600">
               Most loved spiritual tours by pilgrims
             </p>
           </div>
 
-          <button className="hidden  cursor-pointer md:block text-orange-600 font-semibold">
+          {/* Desktop button */}
+          <Link href={'/packages'} className="hidden md:block text-orange-600 font-semibold cursor-pointer">
             View All →
-          </button>
+          </Link>
+           
         </div>
 
+        {/* SLIDER */}
         <div className="relative">
           <div
             className="
-              flex gap-6 overflow-x-auto pb-4
+              flex gap-4 sm:gap-6
+              overflow-x-auto pb-4
               scroll-smooth
               snap-x snap-mandatory
               orange-scrollbar
-            
             "
           >
             {tours.map((tour, index) => (
               <div
                 key={index}
                 className="
-                  min-w-[85%]
-                  sm:min-w-[48%]
-                  lg:min-w-[32%]
                   snap-start
+                  min-w-[90%]
+                  sm:min-w-[70%]
+                  md:min-w-[48%]
+                  lg:min-w-[32%]
                 "
               >
                 <TourCard {...tour} />
               </div>
             ))}
           </div>
+        </div>
+
+        {/* Mobile View All */}
+        <div className="mt-6 text-center md:hidden">
+          <button className="text-orange-600 font-semibold">
+            View All Packages →
+          </button>
         </div>
 
       </div>
