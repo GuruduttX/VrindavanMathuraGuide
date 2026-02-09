@@ -12,6 +12,7 @@ import Footer from "@/utils/Footer";
 import Navbar from "@/utils/Navbar";
 import SideForm from "@/components/PackageDetail/SideForm";
 import FooterCTA from "@/utils/FooterCTA";
+import PackageFaqSection from "@/components/PackageDetail/PackageFaqSection";
 
 const page = () => {
   return (
@@ -92,6 +93,7 @@ const page = () => {
       {/* BELOW CONTENT */}
       <GroupCta />
       <ProductRatings />
+      <PackageFaqSection/>
       <Policies />
       <FooterCTA/>
       <Footer />
