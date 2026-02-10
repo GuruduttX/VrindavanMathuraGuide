@@ -3,7 +3,7 @@ import { supabase } from "@/lib/supabase/SupabaseConfig"
 
 export async function GET() {
   const { data: packages } = await supabase
-    .from('Packages')
+    .from('Package')
     .select('slug, created_at')
     
     const urls = packages?.map(pack => `

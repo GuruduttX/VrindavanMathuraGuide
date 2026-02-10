@@ -207,7 +207,9 @@ export default function CreateNewPackage() {
       inclusions,
       exclusions,
       documents,
-      itinerary
+      itinerary,
+      durationbreakdown : breakdown
+      
     };
 
     const { data, error } = await supabase
