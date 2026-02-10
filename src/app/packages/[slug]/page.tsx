@@ -19,6 +19,7 @@ import { supabase } from "@/lib/supabase/SupabaseConfig";
 import KnowBeforeYouGo from "@/components/PackageDetail/KnowBeforeYouGo";
 import TrustBuildingSection from "@/components/Home/TrustBuildSec";
 import Script from "next/script";
+import { notFound } from "next/navigation";
 
 
 
@@ -57,10 +58,21 @@ const getPackageData = async (slug: string) => {
 const page = async ({ params }: { params: Promise<{ slug: string }> }) => {
 
   const { slug } = await params;
-  console.log("The slug is : ");
-  console.log(slug);
+ 
   const PackageData = await getPackageData(slug);
-  console.log(PackageData);
+
+   const { data: packages, error } = await supabase
+          .from("Package")
+          .select("id, slug")
+          .eq("slug", slug)
+          .maybeSingle();
+  
+  
+      if (!packages || error) {
+  
+          notFound();
+  
+      }
 
 const baseUrl = "https://vrindavanmathuraguide.com";
 const packageUrl = `${baseUrl}/packages/${PackageData?.slug}`;
