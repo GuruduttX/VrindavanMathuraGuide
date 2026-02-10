@@ -12,6 +12,7 @@ import { supabase } from '@/lib/supabase/SupabaseConfig';
 import { useParams } from 'next/navigation';
 import toast from 'react-hot-toast';
 import CMSLoading from '@/components/Admin/CMS/CMSLoading';
+import CMSSchema from '@/components/Admin/CMS/CMSSchema';
 
 
 type FAQ = {
@@ -31,6 +32,8 @@ type BlogForm = {
   alt: string;
   subContent: string;
   content: string;
+  schemaTitle : string,
+  schemaDescription : string
 };
 
 
@@ -48,6 +51,8 @@ export default  function BlogEditor() {
       alt: "",
       subContent: "",
       content: "",
+      schemaTitle : "",
+      schemaDescription : ""
     });
 
     const [faqs, setFaqs] = useState<FAQ[]>([]);
@@ -76,6 +81,9 @@ export default  function BlogEditor() {
           alt: data.alt ?? "",
           subContent: data.subcontent ?? "",
           content: data.content ?? "",
+          schemaTitle : data.schema.title ?? "",
+          schemaDescription : data.schema.description ?? ""
+
       });
 
       setFaqs(data.faqs ?? []);
@@ -124,7 +132,12 @@ export default  function BlogEditor() {
         title: form.metaTitle,
         description: form.metaDescription,
       },
+      schema : {
+        title : form.schemaTitle,
+        description : form.schemaDescription
+      },
       faqs: faqs,
+
     }).eq("id", id);
     
 
@@ -174,6 +187,7 @@ export default  function BlogEditor() {
             />
        </div>
         <CMSSeoSection metaTitle = {form.metaTitle} metaDescription = {form.metaDescription} onChange = {updateForm} editorType="Blog"/>
+         <CMSSchema schemaTitle={form.schemaTitle} schemaDescription={form.schemaDescription} onChange={updateForm} editorType='Blog' />
         <FaqHandler faqs = {faqs} setFaqs = {setFaqs} editorType="Blog"/>
         <CMSMediaSection image = {form.image} alt = {form.alt} onChange = {updateForm} editorType="Blog"/>
         <CMSContentSection subContent={form.subContent} content = {form.content} onChange = {updateForm} editorType="Blog"/>

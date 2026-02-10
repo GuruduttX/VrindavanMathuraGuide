@@ -76,9 +76,8 @@ export const destinations = [
 
 
 
-export default function DestinationDropdown() {
+export default function DestinationDropdown({ destination, onChange }: any) {
   const [open, setOpen] = useState(false);
-  const [value, setValue] = useState("");
   const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -100,9 +99,9 @@ export default function DestinationDropdown() {
       <input
         type="text"
         placeholder="Destination"
-        value={value}
+        value={destination}
         onClick={() => setOpen((prev) => !prev)}
-        onChange={(e) => setValue(e.target.value)}
+        onChange={(e) => onChange("destination", e.target.value)}
         className="w-full px-4 py-3 rounded-xl focus:outline-none focus:ring-2 focus:ring-orange-400 bg-orange-50"
       />
 
@@ -118,7 +117,7 @@ export default function DestinationDropdown() {
                 <div
                   key={item}
                   onClick={() => {
-                    setValue(item);
+                    onChange("destination",item);
                     setOpen(false);
                   }}
                   className="cursor-pointer px-4 py-2 text-sm hover:bg-orange-100"

@@ -14,6 +14,8 @@ import FooterCTA from '@/utils/FooterCTA'
 import DestinationFilter from '@/components/Home/DestinationFilter'
 import WhyChooseUs from '@/components/Home/WhyChooseUs'
 import type { Metadata } from "next";
+import { supabase } from '@/lib/supabase/SupabaseConfig'
+import Script from 'next/script'
 
 export const metadata: Metadata = {
   title: "Mathura Vrindavan Tour Packages | Local Guide, Taxi & Temple Darshan",
@@ -24,7 +26,7 @@ export const metadata: Metadata = {
     title: "Mathura Vrindavan Tour Packages | Local Guide & Darshan",
     description:
       "Discover Mathura & Vrindavan with expert local guides. Taxi, temple darshan & spiritual tour packages available.",
-    url: "https://yourwebsite.com",
+    url: " https://vrindavanmathuraguide.com/",
     siteName: "Mathura Vrindavan Tour Guide",
     images: [
       {
@@ -46,17 +48,32 @@ export const metadata: Metadata = {
   },
 };
 
+const getPackageData = async () => {
 
-const Home = () => {
+  const {data , error} = await supabase.from("Package").select("*");
+
+  if(error) {
+    console.log("This is the error I have get in the Home Page Packages Filter : ");
+    console.log(error);
+  }
+
+  return data;
+}
+
+
+
+const Home = async () => {
+
+  const PackageData = await getPackageData();
 
   const websiteSchema = {
     "@context": "https://schema.org",
     "@type": "WebSite",
     "name": "Mathura Vrindavan Tour Guide",
-    "url": "https://yourwebsite.com",
+    "url": " https://vrindavanmathuraguide.com/",
     "potentialAction": {
       "@type": "SearchAction",
-      "target": "https://yourwebsite.com/search?q={search_term_string}",
+      "target": " https://vrindavanmathuraguide.com/search?q={search_term_string}",
       "query-input": "required name=search_term_string"
     }
   };
@@ -65,8 +82,8 @@ const Home = () => {
     "@context": "https://schema.org",
     "@type": "TravelAgency",
     "name": "Mathura Vrindavan Tour Guide",
-    "url": "https://yourwebsite.com",
-    "logo": "https://yourwebsite.com/logo.png",
+    "url": " https://vrindavanmathuraguide.com/",
+    "logo": " https://vrindavanmathuraguide.com/Experience_my_India.webp",
     "description":
       "Mathura Vrindavan Tour Guide offers local guides, taxi services, temple darshan assistance and customized spiritual tour packages.",
     "address": {
@@ -79,11 +96,6 @@ const Home = () => {
       "@type": "Place",
       "name": "Mathura Vrindavan"
     },
-    "sameAs": [
-      "https://www.facebook.com/yourpage",
-      "https://www.instagram.com/yourpage",
-      "https://www.youtube.com/yourchannel"
-    ]
   };
 
   const touristAttractionSchema = {
@@ -144,7 +156,7 @@ const Home = () => {
   };
   return (
     <>
-      <script
+      <Script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
           __html: JSON.stringify([
@@ -157,7 +169,7 @@ const Home = () => {
       />
       <Navbar />
       <HeroSection />
-      <DestinationFilter />
+      <DestinationFilter PackageData={PackageData}/>
       <EnquirySection />
       <PopularTours />
       <GroupCta />

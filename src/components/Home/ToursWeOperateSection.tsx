@@ -154,6 +154,7 @@ export default function ToursWeOperate() {
                 font-medium
                 hover:bg-orange-600
                 transition
+                cursor-pointer
               "
             >
               Enquire & Book Your Yatra

@@ -16,6 +16,8 @@ import PackageTestimonial from "@/components/PackageDetail/PackageTestimonial";
 import PackageFaqSection from "@/components/PackageDetail/PackageFaqSection";
 import PackageTestimonials from "@/components/PackageDetail/PackageTestimonial";
 import { supabase } from "@/lib/supabase/SupabaseConfig";
+import KnowBeforeYouGo from "@/components/PackageDetail/KnowBeforeYouGo";
+import TrustBuildingSection from "@/components/Home/TrustBuildSec";
 
 const getPackageData = async (slug: string) => {
   const { data, error } = await supabase.from("Package").select("*").eq("slug", slug).single();
@@ -90,9 +92,11 @@ const page = async ({ params }: { params: Promise<{ slug: string }> }) => {
       </section>
 
       {/* BELOW CONTENT */}
+      <KnowBeforeYouGo PackageData={PackageData}/>
       <GroupCta />
       <ProductRatings />
       <PackageTestimonials PackageData={PackageData} />
+      <TrustBuildingSection/>
       <PackageFaqSection PackageData={PackageData}/>
       <Policies PackageData={PackageData} />
       <FooterCTA />

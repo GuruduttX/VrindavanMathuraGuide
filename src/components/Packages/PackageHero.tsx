@@ -5,6 +5,7 @@ import { Car, Users, MapPin, User, Calendar, Search } from 'lucide-react'
 import Link from "next/link";
 import EnquiryPopup from "@/utils/EnquiryForm";
 import { useState } from "react";
+import SearchBar from "@/utils/search/SearchBar";
 
 interface PackageHeroProps {
   badge: string;
@@ -15,8 +16,8 @@ interface PackageHeroProps {
 }
 
 
-
 function Breadcrumbs() {
+
   return (
     <nav className="text-sm text-orange-100 mb-4 -mt-14 px-8 sm:px-16 md:px-36">
       <Link href="/" className="hover:text-white">
@@ -26,10 +27,11 @@ function Breadcrumbs() {
       <span className="text-white font-medium">Packages</span>
     </nav>
   );
+  
 }
 
 
-export default function PackageHero({ badge, title, description, image,}: PackageHeroProps) {
+export default function PackageHero({ badge, title, description, image, }: PackageHeroProps) {
 
   const [isOpen, setIsOpen] = useState(false);
 
@@ -166,122 +168,16 @@ export default function PackageHero({ badge, title, description, image,}: Packag
             from-orange-600/40 via-yellow-300/20 to-transparent" /> */}
           </div>
 
+
+
         </div>
 
-        {/* Serach Bar,  */}
-        <div className="max-w-5xl mx-auto">
-          <div
-            className="
-          mt-10
-          rounded-4xl
-          bg-white/90
-          p-4 sm:p-5
-          shadow-lg shadow-orange-400
-          backdrop-blur-md
-          hover:shadow-xl hover:shadow-yellow-500
-          transition
-          border-2 border-orange-400
-        "
-          >
-            <div
-              className="
-            grid
-            grid-cols-1
-            sm:grid-cols-2
-            lg:grid-cols-4
-            gap-3 sm:gap-4
-          "
-            >
-              {/* Destination */}
-              <div
-                className="
-              flex items-center gap-3
-              rounded-xl
-              bg-orange-50
-              px-4
-              py-3 sm:py-3.5
-            "
-              >
-                <MapPin className="text-orange-500 shrink-0" />
-                <input
-                  type="text"
-                  placeholder="Destination"
-                  className="
-                w-full
-                bg-transparent
-                text-sm sm:text-base
-                outline-none
-              "
-                />
-              </div>
-
-              {/* Date */}
-              <div
-                className="
-              flex items-center gap-3
-              rounded-xl
-              bg-orange-50
-              px-4
-              py-3 sm:py-3.5
-            "
-              >
-                <Calendar className="text-orange-500 shrink-0" />
-                <input
-                  type="date"
-                  className="
-                w-full
-                bg-transparent
-                text-sm sm:text-base
-                outline-none
-              "
-                />
-              </div>
-
-              {/* Travelers */}
-              <div
-                className="
-              flex items-center gap-3
-              rounded-xl
-              bg-orange-50
-              px-4
-              py-3 sm:py-3.5
-            "
-              >
-                <Users className="text-orange-500 shrink-0" />
-                <input
-                  type="number"
-                  placeholder="Travelers"
-                  className="
-                w-full
-                bg-transparent
-                text-sm sm:text-base
-                outline-none
-              "
-                />
-              </div>
-
-              {/* Button */}
-              <button
-                className="
-              flex items-center justify-center gap-2
-              rounded-3xl
-              bg-gradient-to-r from-orange-500 to-orange-600
-              px-6
-              py-3 sm:py-3.5
-              font-semibold
-              text-white
-              transition-all
-              hover:scale-[1.02]
-              hover:shadow-lg
-              w-full
-            "
-              >
-                <Search size={18} />
-                Search
-              </button>
-            </div>
-          </div>
+        <div className="max-w-7xl mx-auto px-6 mt-12 pb-10">
+          <SearchBar />
         </div>
+
+
+
 
       </section>
     </>

@@ -10,33 +10,19 @@ import VrindavanTrustStats from '@/components/Home/VrindavanTrustStats';
 import GroupCta from '@/components/Home/GroupCta';
 import PopularTours from '@/components/Home/PopularPackages';
 import BlogArchive from '@/components/Blog/BlogArchive';
+import Script from 'next/script';
 
 
 export const metadata: Metadata = {
-
-    title: "Course Unbox Blogs | Digital Marketing, Tech & Career Insights",
-    description: "Explore expert-written blogs on digital marketing, technology, online courses, and career growth. Stay updated with the latest learning insights from Course Unbox."
-
-}
-
-
-// const getBlogData = async() => { 
-
-//     const {data , error} = await supabase.from("Blog").select("*"); 
-
-//     if(error){
-//         console.log("This is the error I have get in the Blog Archive Page : ");
-//         console.log(error);
-//     }
-
-//     return data;
-// }
+  title: "Mathura Vrindavan Blogs | Travel, Temples, Darshan & Spiritual Guides",
+  description:
+    "Read our latest blogs on Mathura and Vrindavan covering temples, darshan timings, travel tips, festivals, Krishna leelas, tour guides, and spiritual experiences."
+};
 
 
 const page = async () => {
 
-    // const blog = await getBlogData();
-
+    
     const webPageSchema = {
 
         "@context": "https://schema.org",
@@ -44,7 +30,7 @@ const page = async () => {
         "name": "Blog",
         "description":
             "Read the latest articles on digital marketing, technology, careers, and skill development from Course Unbox.",
-        "url": "https://courseunbox.com/blog"
+        "url": " https://vrindavanmathuraguide.com/blog"
 
     };
 
@@ -57,13 +43,13 @@ const page = async () => {
                 "@type": "ListItem",
                 "position": 1,
                 "name": "Home",
-                "item": "https://courseunbox.com"
+                "item": " https://vrindavanmathuraguide.com/"
             },
             {
                 "@type": "ListItem",
                 "position": 2,
                 "name": "Blog",
-                "item": "https://courseunbox.com/blog"
+                "item": " https://vrindavanmathuraguide.com/blog"
             }
         ]
 
@@ -73,7 +59,7 @@ const page = async () => {
     return (
 
         <>
-            <script
+            <Script
                 type="application/ld+json"
                 dangerouslySetInnerHTML={{
                     __html: JSON.stringify([webPageSchema, breadcrumbSchema])

@@ -3,7 +3,7 @@
 import { useState, useRef, useEffect } from "react";
 
 
-export const destinations = [
+export const categories = [
   {
     group: "1 Day",
     items: [
@@ -62,9 +62,8 @@ export const destinations = [
 
 
 
-export default function CategoryDropDown() {
+export default function CategoryDropDown({category , onChange} : any) {
   const [open, setOpen] = useState(false);
-  const [value, setValue] = useState("");
   const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -86,15 +85,15 @@ export default function CategoryDropDown() {
       <input
         type="text"
         placeholder="Days Of Tour Package"
-        value={value}
+        value={category}
         onClick={() => setOpen((prev) => !prev)}
-        onChange={(e) => setValue(e.target.value)}
+        onChange={(e) => onChange("category", e.target.value)}
         className="w-full px-4 py-3 rounded-xl focus:outline-none focus:ring-2 focus:ring-orange-400 bg-orange-50"
       />
 
       {open && (
         <div className="absolute z-[9999] mt-2 w-full max-h-72 overflow-y-auto rounded-xl border border-orange-200 bg-white shadow-xl no-scrollbar">
-          {destinations.map((section) => (
+          {categories.map((section) => (
             <div key={section.group}>
               <div className="sticky top-0 bg-orange-50 px-4 py-2 text-sm font-semibold text-orange-600">
                 📍 {section.group}
@@ -104,7 +103,7 @@ export default function CategoryDropDown() {
                 <div
                   key={item}
                   onClick={() => {
-                    setValue(item);
+                    onChange("category", item)
                     setOpen(false);
                   }}
                   className="cursor-pointer px-4 py-2 text-sm hover:bg-orange-100"

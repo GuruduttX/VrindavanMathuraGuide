@@ -8,9 +8,25 @@ import PackagesGrid from "@/components/Packages/PackagesGrid";
 import Footer from "@/utils/Footer";
 import VrindavanTrustStats from "@/components/Home/VrindavanTrustStats";
 import FooterCTA from "@/utils/FooterCTA";
+import { supabase } from "@/lib/supabase/SupabaseConfig";
 
 
-export default function Page() {
+const getPackageData = async () => {
+  const {data , error} = await supabase.from("Package").select("*").single();
+
+  if(error) {
+    console.log("This is the error I have get in the Home Page Packages Filter : ");
+    console.log(error);
+  }
+
+  return data;
+}
+
+
+export default async function Page() {
+
+  const PackageData = await getPackageData();
+
   return (
     <div>
       <Navbar />
@@ -20,6 +36,7 @@ export default function Page() {
         title="Vrindavan Tour Package"
         description="Experience the divine land of Shri Krishna with a peaceful and well-planned Vrindavan tour. This package covers major temples, sacred ghats, and spiritual landmarks with comfort, devotion, and local guidance."
         image="/images/Packages/package-hero.webp"
+       
         
       />
 

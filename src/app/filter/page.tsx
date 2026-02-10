@@ -11,12 +11,14 @@ import { supabase } from "@/lib/supabase/SupabaseConfig";
 import VrindavanTrustStats from "@/components/Home/VrindavanTrustStats";
 import TrustBuildingSection from "@/components/Home/TrustBuildSec";
 import FooterCTA from "@/utils/FooterCTA";
+import EnquiryPopup from "@/utils/EnquiryForm";
 
 
 export default function FilteredPackagesPage() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const [packages, setPackages] =  useState<any[]>([]);
+  const [isOpen, setIsOpen] = useState(false);
 
   const destination = searchParams.get("destination");
   const duration = searchParams.get("duration");
@@ -70,6 +72,7 @@ export default function FilteredPackagesPage() {
 
       return (
         <>
+         <EnquiryPopup onClose={() => setIsOpen(false)} open={isOpen} />
         <Navbar/>
         <section className="bg-[#FFF7ED] py-16">
             <div className="max-w-7xl mx-auto px-6">
@@ -110,7 +113,7 @@ export default function FilteredPackagesPage() {
 
             
               <div className="mt-10">
-                <FiterGrid packages = {packages}/>
+                <FiterGrid packages = {packages} setIsOpen={setIsOpen}/>
               </div>
 
               <PackagesCTA/>

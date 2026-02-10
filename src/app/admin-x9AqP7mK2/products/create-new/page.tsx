@@ -1,13 +1,11 @@
 "use client"
-
 import CMSActions from '@/components/Admin/CMS/CMSActions';
-import CMSContentSection from '@/components/Admin/CMS/CMSContentSection';
 import CMSHeader from '@/components/Admin/CMS/CMSHeader';
 import CMSMediaSection from '@/components/Admin/CMS/CMSMediaSection';
 import CMSMetaSection from '@/components/Admin/CMS/CMSMetaSection';
 import CMSSeoSection from '@/components/Admin/CMS/CMSSeoSection';
 import FaqHandler from '@/components/Admin/CMS/FaqHandler';
-import { useState, useSyncExternalStore } from 'react';
+import { useState } from 'react';
 import { supabase } from '@/lib/supabase/SupabaseConfig';
 import toast from 'react-hot-toast';
 import PackageDetails from '@/components/Admin/PackageEditor/PackageDetails';
@@ -19,6 +17,8 @@ import Document from '@/components/Admin/PackageEditor/Document';
 import Testimonials from '@/components/Admin/PackageEditor/Testimonials';
 import ItinearyMaker from '@/components/Admin/PackageEditor/Itinerary';
 import DANDestination from '@/components/Admin/PackageEditor/DANDestination';
+import ChildImagePicker from '@/components/Admin/PackageEditor/ChildImagePicker';
+import CMSSchema from '@/components/Admin/CMS/CMSSchema';
 
 type PackageForm = {
   title: string;
@@ -28,6 +28,8 @@ type PackageForm = {
   duration: "",
   metaTitle: string,
   metaDescription: string,
+  schemaTitle : string,
+  schemaDescription : string,
   image: string,
   alt: string,
   refund: string,
@@ -78,6 +80,13 @@ type Itinerary = {
   description: string
 }
 
+type ChildImage = {
+  id: string;
+  image: string;
+  alt: string;
+};
+
+
 
 
 
@@ -94,6 +103,8 @@ export default function CreateNewPackage() {
     destination: "",
     metaTitle: "",
     metaDescription: "",
+    schemaTitle : "",
+    schemaDescription : "",
     image: "",
     alt: "",
     refund: "",
@@ -102,6 +113,7 @@ export default function CreateNewPackage() {
     payment: "",
   });
 
+  const[childImage , setChildImage] = useState<ChildImage[]>([]);
   const [faqs, setFaqs] = useState<FAQ[]>([]);
   const [testimonials, setTestimonials] = useState<Testimonial[]>([]);
   const [highLights, setHighLights] = useState<HighLights[]>([]);
@@ -140,6 +152,10 @@ export default function CreateNewPackage() {
       return;
     }
 
+    if(childImage.length < 4){
+      toast.error(`You Only Add ${childImage.length} Child Images But We Need To Add 4 Child Images : `)
+    }
+
     const { data: existingData, error: existingError } = await supabase
       .from("Package")
       .select("id")
@@ -167,6 +183,10 @@ export default function CreateNewPackage() {
       meta: {
         title: form.metaTitle,
         description: form.metaDescription
+      },
+      schema : {
+        title : form.schemaTitle,
+        description : form.schemaDescription
       },
       policies: [
         {
@@ -234,6 +254,7 @@ export default function CreateNewPackage() {
         <PackageDetails price={form.price} duration={form.duration} onChange={updateForm} editorType="Package" />
         <DANDestination day={form.day} night={form.night} destination={form.destination} onChange={updateForm} editorType='Package' />
         <CMSSeoSection metaTitle={form.metaTitle} metaDescription={form.metaDescription} onChange={updateForm} editorType="Package" />
+        <CMSSchema schemaTitle={form.schemaTitle} schemaDescription={form.schemaDescription} onChange={updateForm} editorType='Package' />
         <ItinearyMaker itinerary={itinerary} setItinerary={setItinerary} editorType='Package' />
         <FaqHandler faqs={faqs} setFaqs={setFaqs} editorType="Package" />
         <TripHighlights highLights={highLights} setHighLights={setHighLights} editorType='Package' />
@@ -243,6 +264,7 @@ export default function CreateNewPackage() {
         <Document documents={documents} setDocuments={setDocuments} editorType='Package' />
         <Policy refund={form.refund} cancel={form.cancel} confirm={form.confirmation} payment={form.payment} editorType='Package' onChange={updateForm} />
         <CMSMediaSection image={form.image} alt={form.alt} onChange={updateForm} editorType="Package" />
+        <ChildImagePicker childImage={childImage} setChildImage={setChildImage}/>
         <CMSActions actionType='create' editorType='Package' onPreview={handlePreview} onPublish={handlePublish} />
       </form>
 

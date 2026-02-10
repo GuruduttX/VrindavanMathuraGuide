@@ -18,6 +18,8 @@ import Document from '@/components/Admin/PackageEditor/Document';
 import Testimonials from '@/components/Admin/PackageEditor/Testimonials';
 import ItinearyMaker from '@/components/Admin/PackageEditor/Itinerary';
 import { useParams } from 'next/navigation';
+import ChildImagePicker from '@/components/Admin/PackageEditor/ChildImagePicker';
+import CMSSchema from '@/components/Admin/CMS/CMSSchema';
 
 type PackageForm = {
   title: string;
@@ -27,6 +29,8 @@ type PackageForm = {
   duration: "",
   metaTitle: string,
   metaDescription: string,
+  schemaTitle : string,
+  schemaDescription : string,
   image: string,
   alt: string,
   refund: string,
@@ -74,6 +78,12 @@ type Itinerary = {
   description: string
 }
 
+type ChildImage = {
+  id : string,
+  image : string,
+  alt : string
+}
+
 
 
 
@@ -89,6 +99,8 @@ export default function CreateNewPackage() {
     duration: "",
     metaTitle: "",
     metaDescription: "",
+    schemaTitle : "",
+    schemaDescription : "",
     image: "",
     alt: "",
     refund: "",
@@ -97,6 +109,7 @@ export default function CreateNewPackage() {
     payment: "",
   });
 
+  const [childImage , setChildImage] = useState<ChildImage[]>([])
   const [faqs, setFaqs] = useState<FAQ[]>([]);
   const [testimonials, setTestimonials] = useState<Testimonial[]>([]);
   const [highLights, setHighLights] = useState<HighLights[]>([]);
@@ -122,12 +135,14 @@ export default function CreateNewPackage() {
         slug: data.slug ?? "",
         metaTitle: data.meta?.title ?? "",
         metaDescription: data.meta?.description ?? "",
+        schemaTitle : data.schema.title,
+        schemaDescription : data.schema.description,
         image: data.heroimage.image ?? "",
         alt: data.heroimage.alt ?? "",
-        refund: data.refund ?? "",
-        cancel: data.cancel ?? "",
-        confirmation: data.confirmation ?? "",
-        payment: data.payment ?? "",
+        refund: data.policies[0].description ?? "",
+        cancel: data.policies[1].description ?? "",
+        confirmation: data.policies[2].description ?? "",
+        payment: data.policies[3].description ?? "",
       });
 
       setFaqs(data.faqs ?? []);
@@ -138,6 +153,7 @@ export default function CreateNewPackage() {
       setExclusions(data.exclusions ?? [])
       setDocuments(data.documents ?? [])
       setItinerary(data.itinerary ?? [])
+      setChildImage(data.childImage ?? []);
 
     }
 
@@ -200,6 +216,10 @@ export default function CreateNewPackage() {
         title: form.metaTitle,
         description: form.metaDescription
       },
+      schema : {
+        title : form.schemaTitle,
+        description : form.schemaDescription
+      },
       refund: form.refund,
       cancel: form.cancel,
       confirmation: form.confirmation,
@@ -245,6 +265,7 @@ export default function CreateNewPackage() {
         <CMSMetaSection title={form.title} category={form.category} slug={form.slug} onChange={updateForm} editorType="Package" />
         <PackageDetails price={form.price} duration={form.duration} onChange={updateForm} editorType="Package" />
         <CMSSeoSection metaTitle={form.metaTitle} metaDescription={form.metaDescription} onChange={updateForm} editorType="Package" />
+        <CMSSchema schemaTitle={form.schemaTitle} schemaDescription={form.schemaDescription} onChange={updateForm} editorType='Package' />
         <ItinearyMaker itinerary={itinerary} setItinerary={setItinerary} editorType='Package' />
         <FaqHandler faqs={faqs} setFaqs={setFaqs} editorType="Package" />
         <TripHighlights highLights={highLights} setHighLights={setHighLights} editorType='Package' />
@@ -254,6 +275,7 @@ export default function CreateNewPackage() {
         <Document documents={documents} setDocuments={setDocuments} editorType='Package' />
         <Policy refund={form.refund} cancel={form.cancel} confirm={form.confirmation} payment={form.payment} editorType='Package' onChange={updateForm} />
         <CMSMediaSection image={form.image} alt={form.alt} onChange={updateForm} editorType="Package" />
+        <ChildImagePicker childImage={childImage} setChildImage={setChildImage}/>
         <CMSActions actionType='create' editorType='Package' onPreview={handlePreview} onPublish={handlePublish} />
       </form>
 
