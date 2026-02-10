@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Roboto } from "next/font/google";
 import "./globals.css";
 import GlobalQuickEnquiry from "@/components/Home/GlobalWrapQuickEnquiry";
+import FloatingWhatsApp from "@/utils/FloatingWhatsApp";
 
 // const geistSans = Geist({
 //   variable: "--font-geist-sans",
@@ -35,6 +36,7 @@ export default function RootLayout({
       >
         {children}
         <GlobalQuickEnquiry />
+        <FloatingWhatsApp/>
 
       </body>
 

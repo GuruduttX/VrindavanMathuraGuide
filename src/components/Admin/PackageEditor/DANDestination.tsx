@@ -48,7 +48,7 @@ export const destinations = [
 
 
 
-const DANDestination = ({ day , night, destination , onChange, editorType }: { day: number, night: number, destination: string, onChange: any, editorType: "Blog" | "Package" }) => {
+const DANDestination = ({  destination , onChange, editorType }: {  destination: string, onChange: any, editorType: "Blog" | "Package" }) => {
     return (
         <div className="space-y-6">
             {/* Blog Title */}
@@ -82,29 +82,8 @@ const DANDestination = ({ day , night, destination , onChange, editorType }: { d
             {/* Day and Night */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
 
-                <div>
-                    <label className="text-sm text-white/70">Day</label>
-                    <input
-                        value={day}
-                        type='number'
-                        className="mt-2 w-full px-5 py-3 rounded-xl bg-white/5 text-white
-                             placeholder-white/40 border border-white/10
-                               focus:ring-2 focus:ring-sky-500 transition"
-                        required
+                
 
-                        onChange={(e) => { onChange("day", e.target.value) }}
-                    />
-                </div>
-
-                <div>
-                    <label className="text-sm text-white/70">Night</label>
-                    <input
-                        value={night}
-                        onChange={(e) => { onChange("night", e.target.value) }}
-                        className="mt-2 w-full px-5 py-3 rounded-xl bg-white/5 text-white
-            border border-white/10 focus:ring-2 focus:ring-sky-500 transition"
-                    />
-                </div>
 
             </div>
         </div>

@@ -19,6 +19,7 @@ import Document from '@/components/Admin/PackageEditor/Document';
 import Testimonials from '@/components/Admin/PackageEditor/Testimonials';
 import ItinearyMaker from '@/components/Admin/PackageEditor/Itinerary';
 import DANDestination from '@/components/Admin/PackageEditor/DANDestination';
+import DurationSection from '@/components/Admin/PackageEditor/DurationSection';
 
 type PackageForm = {
   title: string;
@@ -78,6 +79,12 @@ type Itinerary = {
   description: string
 }
 
+type BreakdownItem = {
+   id : string;
+   days : number;
+   place : string;
+}
+
 
 
 
@@ -109,6 +116,9 @@ export default function CreateNewPackage() {
   const [exclusions, setExclusions] = useState<Exclusions[]>([]);
   const [documents, setDocuments] = useState<Documents[]>([]);
   const [itinerary, setItinerary] = useState<Itinerary[]>([]);
+  const [breakdown, setBreakdown] = useState<BreakdownItem[]>([
+      { id: crypto.randomUUID(), days: 1, place: "" },
+    ]);
 
 
   const updateForm = (field: keyof PackageForm, value: string) => {
@@ -232,8 +242,10 @@ export default function CreateNewPackage() {
         <CMSHeader editorType="Package" />
         <CMSMetaSection title={form.title} category={form.category} slug={form.slug} onChange={updateForm} editorType="Package" />
         <PackageDetails price={form.price} duration={form.duration} onChange={updateForm} editorType="Package" />
-        <DANDestination day={form.day} night={form.night} destination={form.destination} onChange={updateForm} editorType='Package' />
+
+        <DANDestination destination={form.destination} onChange={updateForm} editorType='Package' />
         <CMSSeoSection metaTitle={form.metaTitle} metaDescription={form.metaDescription} onChange={updateForm} editorType="Package" />
+        <DurationSection days={form.day} nights={form.night} onChange={updateForm} breakdown={breakdown} setBreakdown={setBreakdown} />
         <ItinearyMaker itinerary={itinerary} setItinerary={setItinerary} editorType='Package' />
         <FaqHandler faqs={faqs} setFaqs={setFaqs} editorType="Package" />
         <TripHighlights highLights={highLights} setHighLights={setHighLights} editorType='Package' />

@@ -3,9 +3,15 @@
 import { useState } from "react";
 import QuickEnquiry from "./QuickEnquiry";
 import { Phone } from "lucide-react";
+import { usePathname } from "next/navigation";
 
 export default function GlobalQuickEnquiry() {
   const [open, setOpen] = useState(true);
+  const pathname  = usePathname();
+
+  if(pathname.startsWith('/admin')){
+    return  null;
+  }
 
   return (
     <>

@@ -18,6 +18,7 @@ import Document from '@/components/Admin/PackageEditor/Document';
 import Testimonials from '@/components/Admin/PackageEditor/Testimonials';
 import ItinearyMaker from '@/components/Admin/PackageEditor/Itinerary';
 import { useParams } from 'next/navigation';
+import DurationSection from '@/components/Admin/PackageEditor/DurationSection';
 
 type PackageForm = {
   title: string;
@@ -33,6 +34,8 @@ type PackageForm = {
   cancel: string,
   confirmation: string,
   payment: string,
+  day : number;
+  night : number;
 }
 
 type FAQ = {
@@ -74,6 +77,12 @@ type Itinerary = {
   description: string
 }
 
+type BreakdownItem = {
+   id : string;
+   days : number;
+   place : string;
+}
+
 
 
 
@@ -86,6 +95,8 @@ export default function CreateNewPackage() {
     category: "",
     slug: "",
     price: "",
+    day : 0,
+    night :  0,
     duration: "",
     metaTitle: "",
     metaDescription: "",
@@ -95,6 +106,7 @@ export default function CreateNewPackage() {
     cancel: "",
     confirmation: "",
     payment: "",
+   
   });
 
   const [faqs, setFaqs] = useState<FAQ[]>([]);
@@ -104,6 +116,9 @@ export default function CreateNewPackage() {
   const [exclusions, setExclusions] = useState<Exclusions[]>([]);
   const [documents, setDocuments] = useState<Documents[]>([]);
   const [itinerary, setItinerary] = useState<Itinerary[]>([]);
+  const [breakdown, setBreakdown] = useState<BreakdownItem[]>([
+        { id: crypto.randomUUID(), days: 1, place: "" },
+      ]);
 
   useEffect(() => {
     const getBlogs = async () => {
@@ -128,6 +143,8 @@ export default function CreateNewPackage() {
         cancel: data.cancel ?? "",
         confirmation: data.confirmation ?? "",
         payment: data.payment ?? "",
+        day : data.day ?? "",
+        night : data.day ?? ""
       });
 
       setFaqs(data.faqs ?? []);
@@ -138,6 +155,7 @@ export default function CreateNewPackage() {
       setExclusions(data.exclusions ?? [])
       setDocuments(data.documents ?? [])
       setItinerary(data.itinerary ?? [])
+      setBreakdown(data.breakdown ?? []);
 
     }
 
@@ -245,6 +263,8 @@ export default function CreateNewPackage() {
         <CMSMetaSection title={form.title} category={form.category} slug={form.slug} onChange={updateForm} editorType="Package" />
         <PackageDetails price={form.price} duration={form.duration} onChange={updateForm} editorType="Package" />
         <CMSSeoSection metaTitle={form.metaTitle} metaDescription={form.metaDescription} onChange={updateForm} editorType="Package" />
+       <DurationSection days={form.day} nights={form.night} onChange={updateForm} breakdown={breakdown} setBreakdown={setBreakdown} />
+        
         <ItinearyMaker itinerary={itinerary} setItinerary={setItinerary} editorType='Package' />
         <FaqHandler faqs={faqs} setFaqs={setFaqs} editorType="Package" />
         <TripHighlights highLights={highLights} setHighLights={setHighLights} editorType='Package' />
