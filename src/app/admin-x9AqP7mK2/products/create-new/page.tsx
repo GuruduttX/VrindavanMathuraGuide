@@ -19,13 +19,14 @@ import ItinearyMaker from '@/components/Admin/PackageEditor/Itinerary';
 import DANDestination from '@/components/Admin/PackageEditor/DANDestination';
 import ChildImagePicker from '@/components/Admin/PackageEditor/ChildImagePicker';
 import CMSSchema from '@/components/Admin/CMS/CMSSchema';
+import DurationSection from '@/components/Admin/PackageEditor/DurationSection';
 
 type PackageForm = {
   title: string;
   category: string,
   slug: string,
-  price: "",
-  duration: "",
+  price: string,
+  duration: string,
   metaTitle: string,
   metaDescription: string,
   schemaTitle : string,
@@ -36,8 +37,8 @@ type PackageForm = {
   cancel: string,
   confirmation: string,
   payment: string,
-  day: number,
-  night: number,
+  day: string,
+  night: string,
   destination: string
 }
 
@@ -86,6 +87,11 @@ type ChildImage = {
   alt: string;
 };
 
+type BreakdownItem = {
+   id : string;
+   days : string;
+   place : string;
+}
 
 
 
@@ -98,8 +104,8 @@ export default function CreateNewPackage() {
     slug: "",
     price: "",
     duration: "",
-    day: 0,
-    night: 0,
+    day: "",
+    night: "",
     destination: "",
     metaTitle: "",
     metaDescription: "",
@@ -121,6 +127,9 @@ export default function CreateNewPackage() {
   const [exclusions, setExclusions] = useState<Exclusions[]>([]);
   const [documents, setDocuments] = useState<Documents[]>([]);
   const [itinerary, setItinerary] = useState<Itinerary[]>([]);
+  const [breakdown, setBreakdown] = useState<BreakdownItem[]>([
+      { id: crypto.randomUUID(), days: "0", place: "" },
+    ]);
 
 
   const updateForm = (field: keyof PackageForm, value: string) => {
@@ -217,7 +226,8 @@ export default function CreateNewPackage() {
       inclusions,
       exclusions,
       documents,
-      itinerary
+      itinerary,
+      durationbreakdown : breakdown
     };
 
     const { data, error } = await supabase
@@ -252,9 +262,11 @@ export default function CreateNewPackage() {
         <CMSHeader editorType="Package" />
         <CMSMetaSection title={form.title} category={form.category} slug={form.slug} onChange={updateForm} editorType="Package" />
         <PackageDetails price={form.price} duration={form.duration} onChange={updateForm} editorType="Package" />
-        <DANDestination day={form.day} night={form.night} destination={form.destination} onChange={updateForm} editorType='Package' />
+
+        <DANDestination destination={form.destination} onChange={updateForm} editorType='Package' />
         <CMSSeoSection metaTitle={form.metaTitle} metaDescription={form.metaDescription} onChange={updateForm} editorType="Package" />
         <CMSSchema schemaTitle={form.schemaTitle} schemaDescription={form.schemaDescription} onChange={updateForm} editorType='Package' />
+        <DurationSection days={form.day} nights={form.night} onChange={updateForm} breakdown={breakdown} setBreakdown={setBreakdown} />
         <ItinearyMaker itinerary={itinerary} setItinerary={setItinerary} editorType='Package' />
         <FaqHandler faqs={faqs} setFaqs={setFaqs} editorType="Package" />
         <TripHighlights highLights={highLights} setHighLights={setHighLights} editorType='Package' />

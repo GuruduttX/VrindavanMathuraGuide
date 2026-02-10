@@ -61,7 +61,7 @@ export default function LeftContent({ Blogs }: { Blogs: Blog }) {
             </h1>
 
             {/* Gradient underline */}
-            <div className="mt-3 h-1 w-24 bg-linear-to-r from-blue-500 via-indigo-500 to-transparent rounded-full"></div>
+            <div className="mt-3 h-1 w-24 bg-linear-to-r from-orange-500 via-orange-500 to-transparent rounded-full"></div>
 
             <p className="mt-4 text-sm text-slate-600">
                 By <span className="font-medium text-slate-800">{Blogs?.author}</span>

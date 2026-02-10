@@ -9,6 +9,9 @@ import FinalCTASection from "@/components/Blog/FinalCTASection";
 import LeftContent from "@/components/Blog/LeftContent";
 import { supabase } from "@/lib/supabase/SupabaseConfig";
 import Script from "next/script";
+import FooterCTA from "@/utils/FooterCTA";
+import TrustBuildingSection from "@/components/Home/TrustBuildSec";
+import GroupCta from "@/components/Home/GroupCta";
 
 
 
@@ -77,7 +80,7 @@ const Page = async ({ params }: { params: Promise<{ slug: string }> }) => {
 
         "@context": "https://schema.org",
         "@type": "BlogPosting",
-        "headline": Blogs.title,
+        "headline": Blogs.schema?.title,
         "description": Blogs.schema?.description,
         "image": Blogs.image,
         "author": {
@@ -174,14 +177,13 @@ const Page = async ({ params }: { params: Promise<{ slug: string }> }) => {
 
                 </div>
 
+                <GroupCta />
 
                 <BlogFAQ Blogs={Blogs} />
 
-
                 <RelatedBlog slug={slug} />
 
-
-                <FinalCTASection />
+                <FooterCTA />
 
             </div>
 

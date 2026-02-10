@@ -20,13 +20,14 @@ import ItinearyMaker from '@/components/Admin/PackageEditor/Itinerary';
 import { useParams } from 'next/navigation';
 import ChildImagePicker from '@/components/Admin/PackageEditor/ChildImagePicker';
 import CMSSchema from '@/components/Admin/CMS/CMSSchema';
+import DurationSection from '@/components/Admin/PackageEditor/DurationSection';
 
 type PackageForm = {
   title: string;
   category: string,
   slug: string,
-  price: "",
-  duration: "",
+  price: string,
+  duration: string,
   metaTitle: string,
   metaDescription: string,
   schemaTitle : string,
@@ -37,6 +38,8 @@ type PackageForm = {
   cancel: string,
   confirmation: string,
   payment: string,
+  day : string;
+  night : string;
 }
 
 type FAQ = {
@@ -84,6 +87,12 @@ type ChildImage = {
   alt : string
 }
 
+type BreakdownItem = {
+   id : string;
+   days : string;
+   place : string;
+}
+
 
 
 
@@ -96,6 +105,8 @@ export default function CreateNewPackage() {
     category: "",
     slug: "",
     price: "",
+    day : "",
+    night :  "",
     duration: "",
     metaTitle: "",
     metaDescription: "",
@@ -107,6 +118,7 @@ export default function CreateNewPackage() {
     cancel: "",
     confirmation: "",
     payment: "",
+   
   });
 
   const [childImage , setChildImage] = useState<ChildImage[]>([])
@@ -117,6 +129,9 @@ export default function CreateNewPackage() {
   const [exclusions, setExclusions] = useState<Exclusions[]>([]);
   const [documents, setDocuments] = useState<Documents[]>([]);
   const [itinerary, setItinerary] = useState<Itinerary[]>([]);
+  const [breakdown, setBreakdown] = useState<BreakdownItem[]>([
+        { id: crypto.randomUUID(), days: "", place: "" },
+      ]);
 
   useEffect(() => {
     const getBlogs = async () => {
@@ -135,14 +150,16 @@ export default function CreateNewPackage() {
         slug: data.slug ?? "",
         metaTitle: data.meta?.title ?? "",
         metaDescription: data.meta?.description ?? "",
-        schemaTitle : data.schema.title,
-        schemaDescription : data.schema.description,
+        schemaTitle : data?.schema?.title ?? "",
+        schemaDescription : data?.schema?.description ?? "",
         image: data.heroimage.image ?? "",
         alt: data.heroimage.alt ?? "",
         refund: data.policies[0].description ?? "",
         cancel: data.policies[1].description ?? "",
         confirmation: data.policies[2].description ?? "",
         payment: data.policies[3].description ?? "",
+        day : data.day ?? "",
+        night : data.day ?? ""
       });
 
       setFaqs(data.faqs ?? []);
@@ -154,6 +171,7 @@ export default function CreateNewPackage() {
       setDocuments(data.documents ?? [])
       setItinerary(data.itinerary ?? [])
       setChildImage(data.childImage ?? []);
+      setBreakdown(data.breakdown ?? []);
 
     }
 
@@ -230,7 +248,8 @@ export default function CreateNewPackage() {
       inclusions,
       exclusions,
       documents,
-      itinerary
+      itinerary,
+      durationbreakdown : breakdown
     };
 
     const { data, error } = await supabase
@@ -266,6 +285,8 @@ export default function CreateNewPackage() {
         <PackageDetails price={form.price} duration={form.duration} onChange={updateForm} editorType="Package" />
         <CMSSeoSection metaTitle={form.metaTitle} metaDescription={form.metaDescription} onChange={updateForm} editorType="Package" />
         <CMSSchema schemaTitle={form.schemaTitle} schemaDescription={form.schemaDescription} onChange={updateForm} editorType='Package' />
+       <DurationSection days={form.day} nights={form.night} onChange={updateForm} breakdown={breakdown} setBreakdown={setBreakdown} />
+        
         <ItinearyMaker itinerary={itinerary} setItinerary={setItinerary} editorType='Package' />
         <FaqHandler faqs={faqs} setFaqs={setFaqs} editorType="Package" />
         <TripHighlights highLights={highLights} setHighLights={setHighLights} editorType='Package' />

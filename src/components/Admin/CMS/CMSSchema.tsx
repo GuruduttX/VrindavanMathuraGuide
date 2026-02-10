@@ -4,7 +4,7 @@ const CMSSchema = ({ schemaTitle, schemaDescription, onChange }: { schemaTitle: 
     return (
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
-                <label className="text-sm text-white/70">Meta Title</label>
+                <label className="text-sm text-white/70">Schema Title</label>
                 <input
                     value={schemaTitle}
                     required
@@ -16,7 +16,7 @@ const CMSSchema = ({ schemaTitle, schemaDescription, onChange }: { schemaTitle: 
             </div>
 
             <div>
-                <label className="text-sm text-white/70">Meta Description</label>
+                <label className="text-sm text-white/70">Schema Description</label>
                 <input
                     value={schemaDescription}
                     required
