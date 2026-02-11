@@ -16,7 +16,6 @@ import WhyChooseUs from '@/components/Home/WhyChooseUs'
 import type { Metadata } from "next";
 import { supabase } from '@/lib/supabase/SupabaseConfig'
 import Script from 'next/script'
-import DestinationRoute from '@/components/PackageDetail/DestinationRoute'
 
 export const metadata: Metadata = {
   title: "Mathura Vrindavan Tour Packages | Local Guide, Taxi & Temple Darshan",
@@ -49,23 +48,13 @@ export const metadata: Metadata = {
   },
 };
 
-const getPackageData = async () => {
 
-  const {data , error} = await supabase.from("Package").select("*");
-
-  if(error) {
-    console.log("This is the error I have get in the Home Page Packages Filter : ");
-    console.log(error);
-  }
-
-  return data;
-}
 
 
 
 const Home = async () => {
 
-  const PackageData = await getPackageData();
+  
 
   const websiteSchema = {
     "@context": "https://schema.org",
@@ -170,7 +159,7 @@ const Home = async () => {
       />
       <Navbar />
       <HeroSection />
-      <DestinationFilter PackageData={PackageData}/>
+      <DestinationFilter/>
       <EnquirySection />
       <PopularTours />
       <GroupCta />

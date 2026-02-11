@@ -54,23 +54,14 @@ const faqs = [
 
 
 
-async function getAllPackages() {
-  const { data, error } = await supabase.from('Package').select('*');
 
-  if (error) {
-    console.log("package", error.message)
-    return [];
-  }
-
-  return data;
-}
 
 
 
 export default async function Page() {
-  const packages = await getAllPackages();
 
-  console.log("packages", packages)
+
+
   return (
     <div>
 
@@ -154,7 +145,7 @@ export default async function Page() {
       />
 
       <AboutPackages />
-      <PackagesGrid packages={packages} />
+      <PackagesGrid />
       <PackagesCTA />
       <TrustBuildingSection />
       <VrindavanTrustStats />
