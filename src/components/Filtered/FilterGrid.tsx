@@ -23,7 +23,7 @@ import Link from "next/link";
 //   },
 // ];
 
-export default function FiterGrid({packages} : {packages : any[]}) {
+export default function FilterGrid({packages , setIsOpen} : {packages : any[], setIsOpen : any}) {
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
 
@@ -75,7 +75,7 @@ export default function FiterGrid({packages} : {packages : any[]}) {
             {/* LOCATION */}
             <p className="flex items-center gap-2 text-sm text-gray-600">
               <MapPin className="w-4 h-4 text-orange-500" />
-              {pkg.location}
+              {pkg.destination}
             </p>
 
             {/* INFO ROW */}
@@ -113,7 +113,7 @@ export default function FiterGrid({packages} : {packages : any[]}) {
             {/* CTA */}
             <div className="flex gap-3 pt-2">
               <Link
-                href={`/packages/${pkg.id}`}
+                href={`/packages/${pkg.slug}`}
                 className="
                   flex-1 text-center cursor-pointer
                   bg-orange-500 hover:bg-orange-600
@@ -132,6 +132,8 @@ export default function FiterGrid({packages} : {packages : any[]}) {
                   font-semibold py-2.5
                   rounded-xl transition
                 "
+
+                onClick={() => setIsOpen(true)}
               >
                 Enquire Now
               </button>

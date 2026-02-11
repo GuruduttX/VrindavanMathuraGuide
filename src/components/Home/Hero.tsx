@@ -35,7 +35,7 @@ export default function HeroSection() {
 
 
         {/* Stats */}
-        <div className="mt-20 grid grid-cols-2 gap-6 text-center md:grid-cols-4">
+        <div className="mt-10 grid grid-cols-2 gap-6 text-center md:grid-cols-4">
           {[
             { value: "500+", label: "Sacred Temples" },
             { value: "50K+", label: "Happy Pilgrims" },

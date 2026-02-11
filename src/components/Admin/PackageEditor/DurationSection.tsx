@@ -6,20 +6,20 @@ import React from "react";
 
 type BreakdownItem = {
   id: string;
-  days: number;
+  days: string;
   place: string;
 };
 
-export default function DurationSection({days, nights, onChange, breakdown, setBreakdown} : {
-   days : number, nights : number,  onChange : any, breakdown : BreakdownItem[], setBreakdown : React.Dispatch<SetStateAction<BreakdownItem[]>>
+export default function DurationSection({ days, nights, onChange, breakdown, setBreakdown }: {
+  days: string , nights: string , onChange: any, breakdown: BreakdownItem[], setBreakdown: React.Dispatch<SetStateAction<BreakdownItem[]>>
 }) {
-  
+
 
 
   const addBreakdown = () => {
     setBreakdown((prev) => [
       ...prev,
-      { id: crypto.randomUUID(), days: 1, place: "" },
+      { id: crypto.randomUUID(), days: "1", place: "" },
     ]);
   };
 
@@ -39,48 +39,52 @@ export default function DurationSection({days, nights, onChange, breakdown, setB
     );
   };
 
- 
+
 
   return (
-    <div className="w-full space-y-8">
+    <div className='border-2 border-indigo-500 rounded-3xl w-full p-8 shadow-md shadow-indigo-500 hover:shadow-lg cursor-pointer transition'>
 
-      <div className="border rounded-3xl p-6 shadow-md ">
+      <div className="border rounded-3xl p-6 shadow-md border-2 border-indigo-500 rounded-3xl w-full p-8 shadow-md shadow-indigo-500 hover:shadow-lg cursor-pointer transition mb-2">
         <h3 className="text-lg font-semibold text-gray-200 mb-4">
           Package Duration
         </h3>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-gray-300">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 border-2 border-indigo-500 rounded-3xl w-full p-6 shadow-md shadow-indigo-500 cursor-pointer mb-5">
           <div>
 
-            <label className="text-sm text-white/70">Days</label> 
-          <input
-            type="number"
-            placeholder="Days"
-            value={days}
-            onChange={(e)=>
-             onChange('day', e.target.value)
-            }
-            className="input"
-          />
-            
+            <label className="text-sm text-white/70">Days</label>
+            <input
+              type="number"
+              placeholder="Days"
+              required
+              value={days}
+              onChange={(e) =>
+                onChange('day', e.target.value)
+              }
+               className="mt-2 w-full px-5 py-3 rounded-xl bg-white/5 text-white
+            border border-white/10 focus:ring-2 focus:ring-sky-500 transition"
+            />
+
           </div>
 
           <div>
 
-             <label className="text-sm text-white/70">Night</label> 
-          <input
-            type="number"
-            placeholder="Nights"
-            value={nights}
-            onChange={
-              (e)=>onChange('night', e.target.value)
-            }
-            className="input text-gray-200"
-          />
+            <label className="text-sm text-white/70">Night</label>
+            <input
+              type="number"
+              placeholder="Nights"
+              required
+              value={nights}
+              onChange={
+                (e) => onChange('night', e.target.value)
+              }
+               className="mt-2 w-full px-5 py-3 rounded-xl bg-white/5 text-white
+            border border-white/10 focus:ring-2 focus:ring-sky-500 transition"
+            />
 
           </div>
-         
-          
+
+
         </div>
 
         {/* Preview */}
@@ -94,7 +98,7 @@ export default function DurationSection({days, nights, onChange, breakdown, setB
         )}
       </div>
 
-      <div className="border rounded-3xl p-6 shadow-md ">
+      <div className="border-2 border-indigo-500 rounded-3xl w-full p-6 shadow-md shadow-indigo-500 cursor-pointer mb-5">
         <h3 className="text-lg font-semibold text-gray-100 mb-4">
           Duration Breakdown
         </h3>
@@ -103,27 +107,31 @@ export default function DurationSection({days, nights, onChange, breakdown, setB
           {breakdown.map((item, index) => (
             <div
               key={item.id}
-              className="border rounded-2xl p-4 flex flex-col gap-3 text-gray-100"
+              className="border-2 border-indigo-500 rounded-3xl w-full p-6 shadow-md shadow-indigo-500 cursor-pointer mb-5"
             >
               <div className="flex  gap-3">
                 <input
+                  required
                   type="number"
                   min={1}
                   value={item.days}
                   onChange={(e) =>
                     updateBreakdown(item.id, "days", e.target.value)
                   }
-                  className="input w-28"
+                   className="mt-2 w-full px-5 py-3 rounded-xl bg-white/5 text-white
+            border border-white/10 focus:ring-2 focus:ring-sky-500 transition"
                 />
 
                 <input
+                  required
                   type="text"
                   placeholder="Place (e.g. Vrindavan)"
                   value={item.place}
                   onChange={(e) =>
                     updateBreakdown(item.id, "place", e.target.value)
                   }
-                  className="input"
+                  className="mt-2 w-full px-5 py-3 rounded-xl bg-white/5 text-white
+                            border border-white/10 focus:ring-2 focus:ring-sky-500 transition"
                 />
               </div>
 
@@ -152,6 +160,7 @@ export default function DurationSection({days, nights, onChange, breakdown, setB
             className="flex items-center gap-2 px-6 py-3 rounded-full
             bg-blue-800 hover:bg-blue-900 text-white font-semibold
             transition cursor-pointer"
+        
           >
             <Plus size={16} /> Add Breakdown
           </button>

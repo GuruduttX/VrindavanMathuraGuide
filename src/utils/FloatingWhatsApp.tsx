@@ -7,7 +7,7 @@ export default function FloatingWhatsApp() {
 
   if (pathname.startsWith("/admin")) return null;
 
-  const whatsappNumber = "917302265809"; 
+  const whatsappNumber = "7302265809"; 
   const message = encodeURIComponent(
     "Hi, I want to enquire about Mathura Vrindavan tour packages."
   );

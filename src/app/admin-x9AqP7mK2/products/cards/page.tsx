@@ -6,87 +6,9 @@ import toast from "react-hot-toast";
 import Link from "next/link";
 import CMSLoading from "@/components/Admin/CMS/CMSLoading";
 
-type PackageType = {
-  id: string;
-  title: string;
-  category: string,
-  slug: string,
-  price: string,
-  duration: string,
-  metaTitle: string,
-  metaDescription: string,
-  image: string,
-  alt: string,
-  refund: string,
-  cancel: string,
-  confirmation: string,
-  payment: string,
-  faqs: FAQ[]
-  testimonials: Testimonial[],
-  highLights: HighLights[],
-  inclusions: Inclusions[],
-  exclusions: Exclusions[],
-  documents: Documents[],
-  itinerary: Itinerary[],
-  created_at: Date,
-
-
-
-}
-
-type FAQ = {
-  id: string,
-  question: string,
-  answer: string
-}
-
-type Testimonial = {
-  id: string,
-  name: string,
-  description: string
-}
-
-type HighLights = {
-  id: string
-  description: string
-}
-
-type Inclusions = {
-  id: string
-  description: string
-}
-
-type Exclusions = {
-  id: string
-  description: string
-}
-
-type Documents = {
-  id: string
-  description: string
-}
-
-type Itinerary = {
-  id: string
-  day: number,
-  title: string,
-  description: string
-}
-
-
-
-type PackageForm = {
-
-}
-
-
-
-
-
-
 
 export default function ProductCards() {
-  const [packages, setPackage] = useState<PackageType[]>([]);
+  const [packages, setPackage] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
   const [open, setOpen] = useState(false)
   const [selectedId, setSelectedId] = useState<string | null>(null);
@@ -164,7 +86,7 @@ export default function ProductCards() {
             >
               <div className="h-48 overflow-hidden">
                 <img
-                  src={packag.image}
+                  src={packag.heroimage.image}
                   alt={packag.title}
                   className="w-full h-full object-cover
                 group-hover:scale-105 transition duration-500"

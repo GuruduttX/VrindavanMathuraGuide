@@ -10,27 +10,30 @@ import FaqHandler from '@/components/Admin/CMS/FaqHandler';
 import { useState } from 'react';
 import { supabase } from '@/lib/supabase/SupabaseConfig';
 import toast from 'react-hot-toast';
+import CMSSchema from '@/components/Admin/CMS/CMSSchema';
 
 type BlogForm = {
 
   title: string;
   category: string,
   slug: string,
-  author : string,
+  author: string,
   metaTitle: string,
   metaDescription: string,
   image: string,
   alt: string,
   subContent: string
   content: string
+  schemaTitle: string,
+  schemaDescription: string
 
 }
 
 type FAQ = {
 
-  id : string, 
-  question : string,
-  answer : string
+  id: string,
+  question: string,
+  answer: string
 
 }
 
@@ -42,27 +45,29 @@ export default function CreateNewBlog() {
     title: "",
     category: "",
     slug: "",
-    author : "",
+    author: "",
     metaTitle: "",
     metaDescription: "",
     image: "",
     alt: "",
     subContent: "",
-    content: ""
+    content: "",
+    schemaTitle: "",
+    schemaDescription: ""
   });
 
-  const [faqs , setFaqs ] = useState<FAQ[]>([])
+  const [faqs, setFaqs] = useState<FAQ[]>([])
 
- 
 
-  const updateForm = (field : keyof BlogForm , value : string)=>{
+
+  const updateForm = (field: keyof BlogForm, value: string) => {
 
     setForm((prev) => {
-      return {...prev , [field] : value}
+      return { ...prev, [field]: value }
     })
 
   }
-  
+
   const handleSave = async (
     e: React.FormEvent<HTMLFormElement>
   ) => {
@@ -80,33 +85,37 @@ export default function CreateNewBlog() {
       return;
     }
 
-    if(!form.image){
-       toast.error("Blog image is missing");
-       return;
+    if (!form.image) {
+      toast.error("Blog image is missing");
+      return;
     };
-    
-     if(!form.category){
-        toast.error("Blog category is missing")
-     }
 
-      const { data : existingData, error : existingError } = await supabase
+    if (!form.category) {
+      toast.error("Blog category is missing")
+    }
+
+    const { data: existingData, error: existingError } = await supabase
       .from("Blog")
       .select("id")
       .eq("slug", form.slug);
 
-      if (existingData && existingData?.length > 0) {
-        toast.error("Slug already exists");
-        return;
-      }
+    if (existingData && existingData?.length > 0) {
+      toast.error("Slug already exists");
+      return;
+    }
 
 
-     const payload = {
+    const payload = {
       title: form.title,
       category: form.category,
       slug: form.slug,
       meta: {
         title: form.metaTitle,
         description: form.metaDescription,
+      },
+      schema : {
+        title : form.schemaTitle,
+        description : form.schemaDescription
       },
       image: form.image,
       alt: form.alt,
@@ -127,8 +136,8 @@ export default function CreateNewBlog() {
       return;
     }
 
-  toast.success("Blog Published Successfully");
-};
+    toast.success("Blog Published Successfully");
+  };
 
 
   const handlePreview = () => {
@@ -146,27 +155,28 @@ export default function CreateNewBlog() {
 
       <form className='space-y-6' onSubmit={handleSave}>
         <CMSHeader editorType="Blog" />
-        <CMSMetaSection title = {form.title} category = {form.category} slug = {form.slug} onChange = {updateForm} editorType="Blog"/>
+        <CMSMetaSection title={form.title} category={form.category} slug={form.slug} onChange={updateForm} editorType="Blog" />
         <div>
-            <label className="text-sm text-white/70">Author</label>
-            <input
-                value={form.author}
-                required
-                onChange={(e) => { updateForm("author", e.target.value) }}
-                placeholder="author name..."
-                className="mt-2 w-full px-5 py-3 rounded-xl bg-white/5 text-white
+          <label className="text-sm text-white/70">Author</label>
+          <input
+            value={form.author}
+            required
+            onChange={(e) => { updateForm("author", e.target.value) }}
+            placeholder="author name..."
+            className="mt-2 w-full px-5 py-3 rounded-xl bg-white/5 text-white
                     border border-white/10 focus:ring-2 focus:ring-sky-500 transition"
-            />
-       </div>
-        <CMSSeoSection metaTitle = {form.metaTitle} metaDescription = {form.metaDescription} onChange = {updateForm} editorType="Blog"/>
-        <FaqHandler faqs = {faqs} setFaqs = {setFaqs} editorType="Blog"/>
-        <CMSMediaSection image = {form.image} alt = {form.alt} onChange = {updateForm} editorType="Blog"/>
-        <CMSContentSection subContent={form.subContent} content = {form.content} onChange = {updateForm} editorType="Blog"/>
-        <CMSActions 
-         actionType='create'
-         editorType='Blog'
-         onPreview={handlePreview}
-         onPublish={handlePublish} />
+          />
+        </div>
+        <CMSSeoSection metaTitle={form.metaTitle} metaDescription={form.metaDescription} onChange={updateForm} editorType="Blog" />
+        <CMSSchema schemaTitle={form.schemaTitle} schemaDescription={form.schemaDescription} onChange={updateForm} editorType='Blog' />
+        <FaqHandler faqs={faqs} setFaqs={setFaqs} editorType="Blog" />
+        <CMSMediaSection image={form.image} alt={form.alt} onChange={updateForm} editorType="Blog" />
+        <CMSContentSection subContent={form.subContent} content={form.content} onChange={updateForm} editorType="Blog" />
+        <CMSActions
+          actionType='create'
+          editorType='Blog'
+          onPreview={handlePreview}
+          onPublish={handlePublish} />
       </form>
 
     </div>

@@ -1,9 +1,33 @@
+"use client"
+
 import DestinationDropdown from '@/utils/search/DestinationDropDown'
 import { Calendar, Search, Users } from 'lucide-react'
-import React from 'react'
+import React, { useState } from 'react'
 import CategoryDropDown from './CategoryDropDown'
+import { useRouter } from 'next/navigation'
 
 const SearchBar = () => {
+    const router = useRouter();
+    const [filter , setFilter] = useState({
+        destination : "",
+        category : "",
+        travellers : ""
+    });
+
+    console.log("THE DATA OF THE FILTER IS : ");
+    console.log(filter);
+
+    const updateFilter = (type : string , value : string) => {
+        setFilter((prev) => {
+            return {...prev , [type] : value}
+        });
+    }
+
+    const handleSearch = () => {
+        router.push(`/filter?destination=${filter.destination}&duration=${filter.category}`)
+    }
+
+
     return (
 
         <div
@@ -18,10 +42,10 @@ const SearchBar = () => {
           "
             >
                 {/* Destination */}
-                <DestinationDropdown />
+                <DestinationDropdown destination={filter.destination} onChange={updateFilter}/>
 
                 {/* Category */}
-                <CategoryDropDown/>
+                <CategoryDropDown category={filter.category} onChange={updateFilter}/>
                 
 
                 {/* Travelers */}
@@ -37,7 +61,9 @@ const SearchBar = () => {
                     <Users className="text-black shrink-0" />
                     <input
                         type="number"
+                        value={filter.travellers}
                         placeholder="No. Of Travelers"
+                        onChange={(e)=>{updateFilter("travellers", e.target.value)}}
                         className="
                 w-full
                 bg-transparent
@@ -62,6 +88,8 @@ const SearchBar = () => {
               hover:shadow-lg
               w-full cursor-pointer
             "
+
+            onClick={handleSearch}
                 >
                     <Search size={18} />
                     Search

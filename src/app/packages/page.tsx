@@ -54,15 +54,15 @@ const faqs = [
 
 
 
- async function  getAllPackages(){
-   const {data , error} = await supabase.from('Package').select('*');
-   
-   if(error){
-      console.log("package", error.message)
-      return [];
-   }
+async function getAllPackages() {
+  const { data, error } = await supabase.from('Package').select('*');
 
-   return data;
+  if (error) {
+    console.log("package", error.message)
+    return [];
+  }
+
+  return data;
 }
 
 
@@ -74,7 +74,7 @@ export default async function Page() {
   return (
     <div>
 
-      
+
 
       <Script
         type="application/ld+json"
@@ -100,27 +100,27 @@ export default async function Page() {
       />
 
       <Script
-      type="application/ld+json"
-      dangerouslySetInnerHTML={{
-        __html: JSON.stringify({
-          "@context": "https://schema.org",
-          "@type": "BreadcrumbList",
-          "itemListElement": [
-            {
-              "@type": "ListItem",
-              "position": 1,
-              "name": "Home",
-              "item": "https://vrindavanmathuraguide.com"
-            },
-            {
-              "@type": "ListItem",
-              "position": 2,
-              "name": "Packages",
-              "item": "https://vrindavanmathuraguide.com/packages"
-            }
-          ]
-        })
-      }}
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "BreadcrumbList",
+            "itemListElement": [
+              {
+                "@type": "ListItem",
+                "position": 1,
+                "name": "Home",
+                "item": "https://vrindavanmathuraguide.com"
+              },
+              {
+                "@type": "ListItem",
+                "position": 2,
+                "name": "Packages",
+                "item": "https://vrindavanmathuraguide.com/packages"
+              }
+            ]
+          })
+        }}
       />
 
       <Script
@@ -137,9 +137,9 @@ export default async function Page() {
                 "text": faq.answer,
               },
             })),
-        })
-      }}
-    />
+          })
+        }}
+      />
 
 
 
@@ -150,13 +150,13 @@ export default async function Page() {
         title="Vrindavan Tour Package"
         description="Experience the divine land of Shri Krishna with a peaceful and well-planned Vrindavan tour. This package covers major temples, sacred ghats, and spiritual landmarks with comfort, devotion, and local guidance."
         image="/images/Packages/package-hero.webp"
-        
+
       />
 
       <AboutPackages />
-      <PackagesGrid packages={packages}/>
+      <PackagesGrid packages={packages} />
       <PackagesCTA />
-       <TrustBuildingSection/>
+      <TrustBuildingSection />
       <VrindavanTrustStats />
       <PackagesFaq />
       <FooterCTA />

@@ -16,6 +16,8 @@ import PackageTestimonial from "@/components/PackageDetail/PackageTestimonial";
 import PackageFaqSection from "@/components/PackageDetail/PackageFaqSection";
 import PackageTestimonials from "@/components/PackageDetail/PackageTestimonial";
 import { supabase } from "@/lib/supabase/SupabaseConfig";
+import KnowBeforeYouGo from "@/components/PackageDetail/KnowBeforeYouGo";
+import TrustBuildingSection from "@/components/Home/TrustBuildSec";
 import Script from "next/script";
 
 
@@ -55,8 +57,6 @@ const getPackageData = async (slug: string) => {
 const page = async ({ params }: { params: Promise<{ slug: string }> }) => {
 
   const { slug } = await params;
-  console.log("The slug is : ");
-  console.log(slug);
   const PackageData = await getPackageData(slug);
   console.log(PackageData);
 
@@ -185,17 +185,13 @@ return (
             <main className="space-y-12">
 
               <PackageDurationStrip
-                duration="4D / 3N"
-                breakdown={[
-                  { days: 1, location: "Mathura" },
-                  { days: 2, location: "Vrindavan" },
-                  { days: 1, location: "Govardhan" },
-                ]}
+                duration={`${PackageData.day}D / ${PackageData.night}N`}
+                breakdown={PackageData.durationbreakdown}
               />
 
               <PackageInclusionsStrip />
 
-              <DestinationRoute />
+              <DestinationRoute routeData={PackageData.destroutes} />
 
               <PackageHighlights PackageData={PackageData} />
 
@@ -220,9 +216,11 @@ return (
       </section>
 
       {/* BELOW CONTENT */}
+      <KnowBeforeYouGo PackageData={PackageData}/>
       <GroupCta />
       <ProductRatings />
       <PackageTestimonials PackageData={PackageData} />
+      <TrustBuildingSection/>
       <PackageFaqSection PackageData={PackageData}/>
       <Policies PackageData={PackageData} />
       <FooterCTA />

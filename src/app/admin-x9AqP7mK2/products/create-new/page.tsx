@@ -1,13 +1,11 @@
 "use client"
-
 import CMSActions from '@/components/Admin/CMS/CMSActions';
-import CMSContentSection from '@/components/Admin/CMS/CMSContentSection';
 import CMSHeader from '@/components/Admin/CMS/CMSHeader';
 import CMSMediaSection from '@/components/Admin/CMS/CMSMediaSection';
 import CMSMetaSection from '@/components/Admin/CMS/CMSMetaSection';
 import CMSSeoSection from '@/components/Admin/CMS/CMSSeoSection';
 import FaqHandler from '@/components/Admin/CMS/FaqHandler';
-import { useState, useSyncExternalStore } from 'react';
+import { useState } from 'react';
 import { supabase } from '@/lib/supabase/SupabaseConfig';
 import toast from 'react-hot-toast';
 import PackageDetails from '@/components/Admin/PackageEditor/PackageDetails';
@@ -19,24 +17,28 @@ import Document from '@/components/Admin/PackageEditor/Document';
 import Testimonials from '@/components/Admin/PackageEditor/Testimonials';
 import ItinearyMaker from '@/components/Admin/PackageEditor/Itinerary';
 import DANDestination from '@/components/Admin/PackageEditor/DANDestination';
+import ChildImagePicker from '@/components/Admin/PackageEditor/ChildImagePicker';
+import CMSSchema from '@/components/Admin/CMS/CMSSchema';
 import DurationSection from '@/components/Admin/PackageEditor/DurationSection';
-
+import DestRoutes from '@/components/Admin/PackageEditor/DestRoute';
 type PackageForm = {
   title: string;
   category: string,
   slug: string,
-  price: "",
-  duration: "",
+  price: string,
+  duration: string,
   metaTitle: string,
   metaDescription: string,
+  schemaTitle : string,
+  schemaDescription : string,
   image: string,
   alt: string,
   refund: string,
   cancel: string,
   confirmation: string,
   payment: string,
-  day: number,
-  night: number,
+  day: string,
+  night: string,
   destination: string
 }
 
@@ -79,11 +81,29 @@ type Itinerary = {
   description: string
 }
 
+type ChildImage = {
+  id: string;
+  image: string;
+  alt: string;
+};
+
 type BreakdownItem = {
    id : string;
-   days : number;
+   days : string;
    place : string;
 }
+
+type SegmentType = {
+  id: string;
+  from: string;
+  to: string;
+};
+
+type RouteType = {
+  source: string;
+  destination: string;
+  segments: SegmentType[];
+};
 
 
 
@@ -96,11 +116,13 @@ export default function CreateNewPackage() {
     slug: "",
     price: "",
     duration: "",
-    day: 0,
-    night: 0,
+    day: "",
+    night: "",
     destination: "",
     metaTitle: "",
     metaDescription: "",
+    schemaTitle : "",
+    schemaDescription : "",
     image: "",
     alt: "",
     refund: "",
@@ -109,16 +131,18 @@ export default function CreateNewPackage() {
     payment: "",
   });
 
-  const [faqs, setFaqs] = useState<FAQ[]>([]);
-  const [testimonials, setTestimonials] = useState<Testimonial[]>([]);
-  const [highLights, setHighLights] = useState<HighLights[]>([]);
-  const [inclusions, setInclusions] = useState<Inclusions[]>([]);
-  const [exclusions, setExclusions] = useState<Exclusions[]>([]);
-  const [documents, setDocuments] = useState<Documents[]>([]);
-  const [itinerary, setItinerary] = useState<Itinerary[]>([]);
+  const[childImage , setChildImage] = useState<ChildImage[]>([]);
+  const [faqs, setFaqs] = useState<FAQ[]>([{id : crypto.randomUUID() , question : "",  answer : ""}]);
+  const [testimonials, setTestimonials] = useState<Testimonial[]>([{id : crypto.randomUUID() , name : "", description : ""}]);
+  const [highLights, setHighLights] = useState<HighLights[]>([{id : crypto.randomUUID() , description : ""}]);
+  const [inclusions, setInclusions] = useState<Inclusions[]>([{id : crypto.randomUUID() , description : ""}]);
+  const [exclusions, setExclusions] = useState<Exclusions[]>([{id : crypto.randomUUID() , description : ""}]);
+  const [documents, setDocuments] = useState<Documents[]>([{id : crypto.randomUUID() , description : ""}]);
+  const [itinerary, setItinerary] = useState<Itinerary[]>([{id : crypto.randomUUID() ,  day : 1, title : "", description : ""}]);
   const [breakdown, setBreakdown] = useState<BreakdownItem[]>([
-      { id: crypto.randomUUID(), days: 1, place: "" },
+      { id: crypto.randomUUID(), days: "0", place: "" },
     ]);
+  const [route, setRoute] = useState<RouteType>({source : "", destination : "", segments : []});
 
 
   const updateForm = (field: keyof PackageForm, value: string) => {
@@ -150,6 +174,11 @@ export default function CreateNewPackage() {
       return;
     }
 
+    if(childImage.length < 4 || !childImage[0].image || !childImage[1].image || !childImage[2].image || !childImage[3].image){
+      toast.error(`You Only Add ${childImage.length} Child Images But We Need To Add 4 Child Images : `)
+      return;
+    }
+
     const { data: existingData, error: existingError } = await supabase
       .from("Package")
       .select("id")
@@ -178,6 +207,10 @@ export default function CreateNewPackage() {
         title: form.metaTitle,
         description: form.metaDescription
       },
+      schema : {
+        title : form.schemaTitle,
+        description : form.schemaDescription
+      },
       policies: [
         {
           id : crypto.randomUUID(),
@@ -201,6 +234,7 @@ export default function CreateNewPackage() {
         }
 
       ],
+      childImage,
       faqs,
       testimonials,
       highlights: highLights,
@@ -208,8 +242,8 @@ export default function CreateNewPackage() {
       exclusions,
       documents,
       itinerary,
-      durationbreakdown : breakdown
-      
+      durationbreakdown : breakdown,
+      destroutes : route
     };
 
     const { data, error } = await supabase
@@ -247,7 +281,9 @@ export default function CreateNewPackage() {
 
         <DANDestination destination={form.destination} onChange={updateForm} editorType='Package' />
         <CMSSeoSection metaTitle={form.metaTitle} metaDescription={form.metaDescription} onChange={updateForm} editorType="Package" />
+        <CMSSchema schemaTitle={form.schemaTitle} schemaDescription={form.schemaDescription} onChange={updateForm} editorType='Package' />
         <DurationSection days={form.day} nights={form.night} onChange={updateForm} breakdown={breakdown} setBreakdown={setBreakdown} />
+        <DestRoutes route={route} setRoute={setRoute}/>
         <ItinearyMaker itinerary={itinerary} setItinerary={setItinerary} editorType='Package' />
         <FaqHandler faqs={faqs} setFaqs={setFaqs} editorType="Package" />
         <TripHighlights highLights={highLights} setHighLights={setHighLights} editorType='Package' />
@@ -257,6 +293,7 @@ export default function CreateNewPackage() {
         <Document documents={documents} setDocuments={setDocuments} editorType='Package' />
         <Policy refund={form.refund} cancel={form.cancel} confirm={form.confirmation} payment={form.payment} editorType='Package' onChange={updateForm} />
         <CMSMediaSection image={form.image} alt={form.alt} onChange={updateForm} editorType="Package" />
+        <ChildImagePicker childImage={childImage} setChildImage={setChildImage}/>
         <CMSActions actionType='create' editorType='Package' onPreview={handlePreview} onPublish={handlePublish} />
       </form>
 

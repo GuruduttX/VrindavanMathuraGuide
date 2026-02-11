@@ -1,5 +1,6 @@
 import React from "react";
 import { supabase } from "@/lib/supabase/SupabaseConfig";
+import toast from "react-hot-toast";
 
 type EditorType = "Blog" | "Package";
 
@@ -26,15 +27,17 @@ const CMSMediaSection = ({
     if (!file) return;
 
   
-    // if (!["image/png", "image/jpeg"].includes(file.type)) {
-    //   alert("Only PNG and JPG images are allowed");
-    //   return;
-    // }
+   
 
-    if (file.size > 5 * 1024 * 1024) {
-      alert("Image must be under 5MB");
+    if (file.size > 2 * 1024 * 1024) {
+      alert("Image must be under 2MB");
       return;
     }
+
+    if (file.type !== "image/webp") {
+    toast.error("Only WEBP images are allowed");
+    return;
+  }
 
     const fileName = `${Date.now()}-${file.name}`;
 
@@ -80,7 +83,7 @@ const CMSMediaSection = ({
                 Drag & drop image or <span className="text-sky-400">Upload</span>
               </p>
               <p className="text-xs text-white/40 mt-1">
-                PNG, JPG and webp up to 5MB
+                One and Only webp up to 2MB
               </p>
             </>
           )}
@@ -88,7 +91,6 @@ const CMSMediaSection = ({
           <input
             id="image-upload"
             type="file"
-            accept="image/png,image/jpeg"
             className="hidden"
             onChange={handleImageUpload}
           />

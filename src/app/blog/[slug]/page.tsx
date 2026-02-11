@@ -8,6 +8,10 @@ import BlogCategories from "@/components/Blog/BlogCategories";
 import FinalCTASection from "@/components/Blog/FinalCTASection";
 import LeftContent from "@/components/Blog/LeftContent";
 import { supabase } from "@/lib/supabase/SupabaseConfig";
+import Script from "next/script";
+import FooterCTA from "@/utils/FooterCTA";
+import TrustBuildingSection from "@/components/Home/TrustBuildSec";
+import GroupCta from "@/components/Home/GroupCta";
 
 
 
@@ -23,7 +27,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
         .single();
 
     return {
-        title: data?.meta?.title ?? "CourseUnbox Blog",
+        title: data?.meta?.title ?? "VrindavanTourGuide Blog",
         description: data?.meta?.description ?? "",
     };
 
@@ -76,8 +80,8 @@ const Page = async ({ params }: { params: Promise<{ slug: string }> }) => {
 
         "@context": "https://schema.org",
         "@type": "BlogPosting",
-        "headline": Blogs.title,
-        "description": Blogs.meta?.description,
+        "headline": Blogs.schema?.title,
+        "description": Blogs.schema?.description,
         "image": Blogs.image,
         "author": {
             "@type": "Person",
@@ -89,17 +93,17 @@ const Page = async ({ params }: { params: Promise<{ slug: string }> }) => {
             "name": "Course Unbox",
             "logo": {
                 "@type": "ImageObject",
-                "url": "https://courseunbox.com/favicon.ico"
+                "url": " https://vrindavanmathuraguide.com/favicon.ico"
             }
         },
 
         "dateModified": Blogs.created_at,
         "mainEntityOfPage": {
             "@type": "WebPage",
-            "@id": `https://courseunbox.com/blog/${Blogs.slug}`
+            "@id": ` https://vrindavanmathuraguide.com/blog/${Blogs.slug}`
         },
 
-        "url": `https://courseunbox.com/blog/${Blogs.slug}`
+        "url": ` https://vrindavanmathuraguide.com/blog/${Blogs.slug}`
 
     };
 
@@ -108,8 +112,8 @@ const Page = async ({ params }: { params: Promise<{ slug: string }> }) => {
         "@context": "https://schema.org",
         "@type": "BreadcrumbList",
         "itemListElement": [
-            { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://courseunbox.com" },
-            { "@type": "ListItem", "position": 2, "name": "Blog", "item": "https://courseunbox.com/blog" },
+            { "@type": "ListItem", "position": 1, "name": "Home", "item": " https://vrindavanmathuraguide.com/" },
+            { "@type": "ListItem", "position": 2, "name": "Blog", "item": " https://vrindavanmathuraguide.com/blog" },
             { "@type": "ListItem", "position": 3, "name": Blogs.domain }
         ]
 
@@ -135,7 +139,7 @@ const Page = async ({ params }: { params: Promise<{ slug: string }> }) => {
     return (
 
         <>
-            <script
+            <Script
                 type="application/ld+json"
                 dangerouslySetInnerHTML={{
                     __html: JSON.stringify(
@@ -173,14 +177,13 @@ const Page = async ({ params }: { params: Promise<{ slug: string }> }) => {
 
                 </div>
 
+                <GroupCta />
 
                 <BlogFAQ Blogs={Blogs} />
 
-
                 <RelatedBlog slug={slug} />
 
-
-                <FinalCTASection />
+                <FooterCTA />
 
             </div>
 

@@ -1,29 +1,41 @@
 import React from 'react'
 
 export const categories = [
-    
-            "1 Day Tour Package",
-        
-            "2 Day Tour Package",
-       
-            "3 Day Tour Package",
 
-            "4 Day Tour Package",
-       
-            "5 Day Tour Package",
-       
-            "6 Day Tour Package",
-      
-            "7 Day Tour Package",
-        
-            "8 Day Tour Package",
-        
-            "9 Day Tour Package",
-        
-            "10 Day Tour Package"
-        
+    "1 Day Tour Package",
 
+    "2 Day Tour Package",
+
+    "3 Day Tour Package",
+
+    "4 Day Tour Package",
+
+    "5 Day Tour Package",
+
+    "6 Day Tour Package",
+
+    "7 Day Tour Package",
+
+    "8 Day Tour Package",
+
+    "9 Day Tour Package",
+
+    "10 Day Tour Package"
 ];
+
+const Blogcategories = [
+    "All Blogs",
+    "Krishna Leela & Spirtuality",
+    "Temple Guides",
+    "Sacred Places & Nature",
+    "Travel Guides",
+    "Festivals & Events",
+    "Pilgrimage & Yatra",
+    "Food & Culture",
+    "Tour Packages & Services",
+    "Stories & Experiences",
+];
+
 
 
 
@@ -62,28 +74,23 @@ const CMSMetaSection = ({ title, category, slug, onChange, editorType }: { title
                             editorType == "Blog" ?
                                 <>
                                     <option value="">Select Category</option>
-
-                                    <option value="travel" className="bg-[#0b1220]">
-                                        Travel
-                                    </option>
-
-                                    <option value="spiritual" className="bg-[#0b1220]">
-                                        Spiritual
-                                    </option>
-
-                                    <option value="culture" className="bg-[#0b1220]">
-                                        Culture
-                                    </option>
-                                </> :
-                                <>
-                                    <option value="">Select Category</option>
                                     {
-                                        categories.map((cat) => {
+                                        Blogcategories.map((cat) => {
                                             return <option value={cat} className="bg-[#0b1220]">
                                                 {cat}
                                             </option>
 
 
+                                        })
+                                    }
+                                </> :
+                                <>
+                                    <option value="">Select Category</option>
+                                    {
+                                        categories.map((cat,idx) => {
+                                            return <option key={idx} value={cat} className="bg-[#0b1220]">
+                                                        {cat}
+                                                    </option>
                                         })
                                     }
                                 </>
