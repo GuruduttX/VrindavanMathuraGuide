@@ -56,6 +56,7 @@ export default function DurationSection({ days, nights, onChange, breakdown, set
             <input
               type="number"
               placeholder="Days"
+              required
               value={days}
               onChange={(e) =>
                 onChange('day', e.target.value)
@@ -72,6 +73,7 @@ export default function DurationSection({ days, nights, onChange, breakdown, set
             <input
               type="number"
               placeholder="Nights"
+              required
               value={nights}
               onChange={
                 (e) => onChange('night', e.target.value)
@@ -109,6 +111,7 @@ export default function DurationSection({ days, nights, onChange, breakdown, set
             >
               <div className="flex  gap-3">
                 <input
+                  required
                   type="number"
                   min={1}
                   value={item.days}
@@ -120,6 +123,7 @@ export default function DurationSection({ days, nights, onChange, breakdown, set
                 />
 
                 <input
+                  required
                   type="text"
                   placeholder="Place (e.g. Vrindavan)"
                   value={item.place}
@@ -127,7 +131,7 @@ export default function DurationSection({ days, nights, onChange, breakdown, set
                     updateBreakdown(item.id, "place", e.target.value)
                   }
                   className="mt-2 w-full px-5 py-3 rounded-xl bg-white/5 text-white
-            border border-white/10 focus:ring-2 focus:ring-sky-500 transition"
+                            border border-white/10 focus:ring-2 focus:ring-sky-500 transition"
                 />
               </div>
 
@@ -156,6 +160,7 @@ export default function DurationSection({ days, nights, onChange, breakdown, set
             className="flex items-center gap-2 px-6 py-3 rounded-full
             bg-blue-800 hover:bg-blue-900 text-white font-semibold
             transition cursor-pointer"
+        
           >
             <Plus size={16} /> Add Breakdown
           </button>
