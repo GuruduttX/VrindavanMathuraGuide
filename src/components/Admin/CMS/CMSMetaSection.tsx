@@ -87,12 +87,10 @@ const CMSMetaSection = ({ title, category, slug, onChange, editorType }: { title
                                 <>
                                     <option value="">Select Category</option>
                                     {
-                                        categories.map((cat) => {
-                                            return <option value={cat} className="bg-[#0b1220]">
-                                                {cat}
-                                            </option>
-
-
+                                        categories.map((cat,idx) => {
+                                            return <option key={idx} value={cat} className="bg-[#0b1220]">
+                                                        {cat}
+                                                    </option>
                                         })
                                     }
                                 </>

@@ -4,6 +4,7 @@ import Image from "next/image";
 import { Star } from "lucide-react";
 
 export default function PackageHero({PackageData} : any) {
+  
   return (
     <section className="relative w-full px-6 py-12 lg:px-16">
       {/* Orange Glow Background */}
@@ -31,7 +32,7 @@ export default function PackageHero({PackageData} : any) {
 
         {/* RIGHT IMAGE GRID */}
         <div className="grid grid-cols-2 grid-rows-2 gap-4 cursor-pointer">
-          {PackageData.childimage.map((item : any , i : any) => (
+          {PackageData.childImage?.map((item : any , i : any) => (
             <div
               key={i}
               className="relative rounded-2xl overflow-hidden group"
@@ -58,7 +59,6 @@ export default function PackageHero({PackageData} : any) {
         <div>
           <h1 className="text-3xl lg:text-5xl font-extrabold text-gray-900 leading-tight">
             {PackageData.title}
-            <span className="text-orange-600"> Diamond Circle</span>
           </h1>
 
           <div className="flex items-center gap-2 mt-3 text-sm">

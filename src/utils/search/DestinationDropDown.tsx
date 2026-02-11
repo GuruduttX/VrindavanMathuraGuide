@@ -4,75 +4,17 @@ import { useState, useRef, useEffect } from "react";
 
 
 export const destinations = [
-  {
-    group: "Mathura",
-    items: [
-      "Shri Krishna Janmabhoomi",
-      "Dwarkadhish Temple",
-      "Vishram Ghat",
-      "Gita Mandir",
-      "Govardhan Mandir",
-      "Government Museum",
-      "Kans Qila",
-      "Jama Masjid",
-    ],
-  },
-  {
-    group: "Vrindavan",
-    items: [
-      "Banke Bihari Temple",
-      "ISKCON Temple",
-      "Prem Mandir",
-      "Radha Raman Temple",
-      "Radha Vallabh Temple",
-      "Shahji Temple",
-      "Madan Mohan Temple",
-      "Seva Kunj",
-      "Nidhivan",
-      "Keshi Ghat",
-      "Imli Tala",
-    ],
-  },
-  {
-    group: "Govardhan",
-    items: [
-      "Govardhan Hill",
-      "Govardhan Parikrama",
-      "Mansi Ganga",
-      "Punchari Ka Lotha",
-      "Radha Kund",
-      "Shyam Kund",
-      "Kusum Sarovar",
-      "Suraj Kund",
-    ],
-  },
-  {
-    group: "Barsana",
-    items: [
-      "Radha Rani Temple",
-      "Rangeeli Mahal",
-      "Mor Kutir",
-      "Lathmar Holi Site",
-    ],
-  },
-  {
-    group: "Nandgaon",
-    items: ["Nand Bhavan", "Pan Sarovar", "Charan Pahadi"],
-  },
-  {
-    group: "Gokul",
-    items: [
-      "Nand Bhavan",
-      "Chaurasi Khamba",
-      "Raman Reti",
-      "Brahmand Ghat",
-    ],
-  },
-  {
-    group: "Baldev",
-    items: ["Dauji Temple", "Huranga Holi Site"],
-  },
+  "Gokul",
+  "Mathura",
+  "Vrindavan",
+  "Govardhan",
+  "Barsana",
+  "Agra",
+  "Fatehpur Sikri",
+  "Delhi",
+  "Bhandirvan"
 ];
+
 
 
 
@@ -107,24 +49,24 @@ export default function DestinationDropdown({ destination, onChange }: any) {
 
       {open && (
         <div className="absolute z-[9999] mt-2 w-full max-h-72 overflow-y-auto rounded-xl border border-orange-200 bg-white shadow-xl no-scrollbar">
-          {destinations.map((section) => (
-            <div key={section.group}>
+          {destinations.map((place) => (
+            <div key={place}>
               <div className="sticky top-0 bg-orange-50 px-4 py-2 text-sm font-semibold text-orange-600">
-                📍 {section.group}
+                📍 {place}
               </div>
 
-              {section.items.map((item) => (
+             
                 <div
-                  key={item}
+                  key={place}
                   onClick={() => {
-                    onChange("destination",item);
+                    onChange("destination",place);
                     setOpen(false);
                   }}
                   className="cursor-pointer px-4 py-2 text-sm hover:bg-orange-100"
                 >
-                  {item}
+                  {place}
                 </div>
-              ))}
+              
             </div>
           ))}
         </div>

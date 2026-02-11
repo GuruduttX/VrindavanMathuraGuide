@@ -58,7 +58,6 @@ const getPackageData = async (slug: string) => {
 const page = async ({ params }: { params: Promise<{ slug: string }> }) => {
 
   const { slug } = await params;
- 
   const PackageData = await getPackageData(slug);
 
    const { data: packages, error } = await supabase
@@ -199,17 +198,13 @@ return (
             <main className="space-y-12">
 
               <PackageDurationStrip
-                duration="4D / 3N"
-                breakdown={[
-                  { days: 1, location: "Mathura" },
-                  { days: 2, location: "Vrindavan" },
-                  { days: 1, location: "Govardhan" },
-                ]}
+                duration={`${PackageData.day}D / ${PackageData.night}N`}
+                breakdown={PackageData.durationbreakdown}
               />
 
               <PackageInclusionsStrip />
 
-              <DestinationRoute />
+              <DestinationRoute routeData={PackageData.destroutes} />
 
               <PackageHighlights PackageData={PackageData} />
 

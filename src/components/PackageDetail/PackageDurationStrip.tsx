@@ -1,6 +1,7 @@
 interface DurationItem {
+  id : string
   days: number;
-  location: string;
+  place: string;
 }
 
 interface PackageDurationStripProps {
@@ -13,7 +14,7 @@ export default function PackageDurationStrip({
   breakdown,
 }: PackageDurationStripProps) {
   return (
-    <section className="py-5 md:py-6">
+    <section className="py-2 md:py-3">
       <div className="max-w-7xl mx-auto px-4 md:px-0">
         <div className="flex flex-wrap items-center gap-4 md:gap-6">
 
@@ -53,7 +54,7 @@ export default function PackageDurationStrip({
                     leading-none
                   "
                 >
-                  {item.days}
+                  {item?.days}
                 </span>
 
                 {/* Text */}
@@ -62,7 +63,7 @@ export default function PackageDurationStrip({
                     Days in
                   </span>
                   <span className="text-sm font-semibold text-gray-900">
-                    {item.location}
+                    {item.place}
                   </span>
                 </div>
 

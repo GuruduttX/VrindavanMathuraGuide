@@ -1,56 +1,24 @@
 import React from 'react'
 
 export const destinations = [
-
-    "Shri Krishna Janmabhoomi",
-    "Dwarkadhish Temple",
-    "Vishram Ghat",
-    "Gita Mandir",
-    "Govardhan Mandir",
-    "Government Museum",
-    "Kans Qila",
-    "Jama Masjid",
-    "Banke Bihari Temple",
-    "ISKCON Temple",
-    "Prem Mandir",
-    "Radha Raman Temple",
-    "Radha Vallabh Temple",
-    "Shahji Temple",
-    "Madan Mohan Temple",
-    "Seva Kunj",
-    "Nidhivan",
-    "Keshi Ghat",
-    "Imli Tala",
-    "Govardhan Hill",
-    "Govardhan Parikrama",
-    "Mansi Ganga",
-    "Punchari Ka Lotha",
-    "Radha Kund",
-    "Shyam Kund",
-    "Kusum Sarovar",
-    "Suraj Kund",
-    "Radha Rani Temple",
-    "Rangeeli Mahal",
-    "Mor Kutir",
-    "Lathmar Holi Site",
-    "Nand Bhavan",
-    "Pan Sarovar",
-    "Charan Pahadi",
-    "Nand Bhavan",
-    "Chaurasi Khamba",
-    "Raman Reti",
-    "Brahmand Ghat",
-    "Dauji Temple",
-    "Huranga Holi Site"
-
+  "Gokul",
+  "Mathura",
+  "Vrindavan",
+  "Govardhan",
+  "Barsana",
+  "Agra",
+  "Fatehpur Sikri",
+  "Delhi",
+  "Bhandirvan"
 ];
+
 
 
 
 
 const DANDestination = ({  destination , onChange, editorType }: {  destination: string, onChange: any, editorType: "Blog" | "Package" }) => {
     return (
-        <div className="space-y-6">
+        <div className="space-y-3">
             {/* Blog Title */}
 
 
@@ -68,7 +36,7 @@ const DANDestination = ({  destination , onChange, editorType }: {  destination:
                     <option value="">Select Destinations</option>
                     {
                         destinations.map((des, index) => {
-                            return <option value={des} className="bg-[#0b1220]">
+                            return <option key={index} value={des} className="bg-[#0b1220]">
                                 {des}
                             </option>
 

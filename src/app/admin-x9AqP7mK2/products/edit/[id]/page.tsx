@@ -21,6 +21,7 @@ import { useParams } from 'next/navigation';
 import ChildImagePicker from '@/components/Admin/PackageEditor/ChildImagePicker';
 import CMSSchema from '@/components/Admin/CMS/CMSSchema';
 import DurationSection from '@/components/Admin/PackageEditor/DurationSection';
+import DestRoutes from '@/components/Admin/PackageEditor/DestRoute';
 
 type PackageForm = {
   title: string;
@@ -93,6 +94,18 @@ type BreakdownItem = {
    place : string;
 }
 
+type SegmentType = {
+  id: string;
+  from: string;
+  to: string;
+};
+
+type RouteType = {
+  source: string;
+  destination: string;
+  segments: SegmentType[];
+};
+
 
 
 
@@ -121,17 +134,19 @@ export default function CreateNewPackage() {
    
   });
 
-  const [childImage , setChildImage] = useState<ChildImage[]>([])
-  const [faqs, setFaqs] = useState<FAQ[]>([]);
-  const [testimonials, setTestimonials] = useState<Testimonial[]>([]);
-  const [highLights, setHighLights] = useState<HighLights[]>([]);
-  const [inclusions, setInclusions] = useState<Inclusions[]>([]);
-  const [exclusions, setExclusions] = useState<Exclusions[]>([]);
-  const [documents, setDocuments] = useState<Documents[]>([]);
-  const [itinerary, setItinerary] = useState<Itinerary[]>([]);
-  const [breakdown, setBreakdown] = useState<BreakdownItem[]>([
-        { id: crypto.randomUUID(), days: "", place: "" },
+  
+    const[childImage , setChildImage] = useState<ChildImage[]>([]);
+    const [faqs, setFaqs] = useState<FAQ[]>([{id : crypto.randomUUID() , question : "",  answer : ""}]);
+    const [testimonials, setTestimonials] = useState<Testimonial[]>([{id : crypto.randomUUID() , name : "", description : ""}]);
+    const [highLights, setHighLights] = useState<HighLights[]>([{id : crypto.randomUUID() , description : ""}]);
+    const [inclusions, setInclusions] = useState<Inclusions[]>([{id : crypto.randomUUID() , description : ""}]);
+    const [exclusions, setExclusions] = useState<Exclusions[]>([{id : crypto.randomUUID() , description : ""}]);
+    const [documents, setDocuments] = useState<Documents[]>([{id : crypto.randomUUID() , description : ""}]);
+    const [itinerary, setItinerary] = useState<Itinerary[]>([{id : crypto.randomUUID() ,  day : 1, title : "", description : ""}]);
+    const [breakdown, setBreakdown] = useState<BreakdownItem[]>([
+        { id: crypto.randomUUID(), days: "0", place: "" },
       ]);
+    const [route, setRoute] = useState<RouteType>({source : "", destination : "", segments : []});
 
   useEffect(() => {
     const getBlogs = async () => {
@@ -172,6 +187,8 @@ export default function CreateNewPackage() {
       setItinerary(data.itinerary ?? [])
       setChildImage(data.childImage ?? []);
       setBreakdown(data.breakdown ?? []);
+      setRoute(data.destroutes ?? {source: "", destination : "", segments : []})
+     
 
     }
 
@@ -208,6 +225,10 @@ export default function CreateNewPackage() {
       toast.error("Package category is missing");
       return;
     }
+    if(childImage.length < 4 || !childImage[0].image || !childImage[1].image || !childImage[2].image || !childImage[3].image){
+      toast.error(`You Only Add ${childImage.length} Child Images But We Need To Add 4 Child Images : `)
+      return;
+    }
 
     const { data: existingData, error: existingError } = await supabase
       .from("Package")
@@ -238,10 +259,31 @@ export default function CreateNewPackage() {
         title : form.schemaTitle,
         description : form.schemaDescription
       },
-      refund: form.refund,
-      cancel: form.cancel,
-      confirmation: form.confirmation,
-      payment: form.payment,
+      policies: [
+        {
+          id : crypto.randomUUID(),
+          title : "Refund Policy",
+          description : form.refund
+        },
+        {
+          id : crypto.randomUUID(),
+          title : "Cancel Policy",
+          description : form.cancel
+        },
+       {
+          id : crypto.randomUUID(),
+          title : "Confirmation  Policy",
+          description : form.confirmation
+        },
+        {
+          id : crypto.randomUUID(),
+          title : "Payment Ploicy",
+          description : form.payment
+        }
+
+      ],
+      childImage ,
+     
       faqs,
       testimonials,
       highlights: highLights,
@@ -249,7 +291,8 @@ export default function CreateNewPackage() {
       exclusions,
       documents,
       itinerary,
-      durationbreakdown : breakdown
+      durationbreakdown : breakdown,
+      destroutes : route
     };
 
     const { data, error } = await supabase
@@ -285,8 +328,8 @@ export default function CreateNewPackage() {
         <PackageDetails price={form.price} duration={form.duration} onChange={updateForm} editorType="Package" />
         <CMSSeoSection metaTitle={form.metaTitle} metaDescription={form.metaDescription} onChange={updateForm} editorType="Package" />
         <CMSSchema schemaTitle={form.schemaTitle} schemaDescription={form.schemaDescription} onChange={updateForm} editorType='Package' />
-       <DurationSection days={form.day} nights={form.night} onChange={updateForm} breakdown={breakdown} setBreakdown={setBreakdown} />
-        
+        <DurationSection days={form.day} nights={form.night} onChange={updateForm} breakdown={breakdown} setBreakdown={setBreakdown} />
+        <DestRoutes route={route} setRoute={setRoute}/>
         <ItinearyMaker itinerary={itinerary} setItinerary={setItinerary} editorType='Package' />
         <FaqHandler faqs={faqs} setFaqs={setFaqs} editorType="Package" />
         <TripHighlights highLights={highLights} setHighLights={setHighLights} editorType='Package' />
