@@ -1,11 +1,11 @@
 "use client"
 
-import { useState, useMemo } from "react"
+import { useState, useMemo, useEffect } from "react"
 import Image from "next/image"
 import Link from "next/link"
 import { CheckCircle, Clock, MapPin, Users } from "lucide-react"
-import { supabase } from "@/lib/supabase/SupabaseConfig"
 import EnquiryPopup from "@/utils/EnquiryForm"
+import { supabase } from "@/lib/supabase/SupabaseConfig"
 
 /* -------------------- DATA -------------------- */
 
@@ -17,7 +17,11 @@ type PackageType = {
   rating: number
   reviews: number
   price: number
-  image: string
+  heroimage: {
+    id: string,
+    image: string,
+    alt: string
+  }
 }
 
 const CATEGORIES = [
@@ -41,16 +45,31 @@ const CATEGORIES = [
 
 /* -------------------- COMPONENT -------------------- */
 
-export default function DestinationFilter({ PackageData }: any) {
+export default function DestinationFilter() {
   const [activeCategory, setActiveCategory] = useState("Explore All")
+  const [packages, setPackages] = useState<PackageType[]>([])
   const [isOpen, setIsOpen] = useState(false);
 
-  const filteredPackages = useMemo(() => {
-    if (activeCategory === "Explore All") return PackageData
-    return PackageData.filter(
-      (pkg: any) => pkg.category === activeCategory
-    )
-  }, [activeCategory])
+  const getPackageData = async () => {
+
+    const { data, error } = await supabase.from("Package").select("*");
+
+    if (error) {
+      console.log("This is the error I have get in the Home Page Packages Filter : ");
+      console.log(error);
+    }
+
+    setPackages(data ?? []);
+  }
+
+  useEffect(() => {
+    getPackageData();
+  }, [])
+
+  const filteredPackages = activeCategory === "Explore All" ? packages : packages.filter(
+    (pkg: any) => pkg.category === activeCategory
+  )
+
 
   return (
     <>
