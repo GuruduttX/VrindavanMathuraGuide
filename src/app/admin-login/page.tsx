@@ -35,6 +35,7 @@ export default function AdminLoginPage() {
      if (data.user.email !== process.env.NEXT_PUBLIC_ADMIN_EMAIL) {
         await supabase.auth.signOut();
         setError("Unauthorized access");
+        setLoading(false);
         return;
     }
 
@@ -42,62 +43,76 @@ export default function AdminLoginPage() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-linear-to-br from-orange-50 to-orange-100 px-4">
-      
-      <div className="w-full max-w-md bg-white rounded-3xl shadow-xl p-8 border border-orange-200">
-        
-        {/* Heading */}
-        <h1 className="text-2xl font-bold text-gray-900 text-center">
-          Admin Login
-        </h1>
-        <p className="text-sm text-gray-500 text-center mt-1">
-          Mathura Vrindavan Tour Panel
-        </p>
+    <div className="relative min-h-screen flex items-center justify-center bg-gradient-to-br from-orange-50 via-white to-orange-100 px-4 overflow-hidden">
 
-        {/* Form */}
-        <form onSubmit={handleLogin} className="mt-6 space-y-4">
+        {/* Background Glow */}
+        <div className="absolute -top-40 -right-40 w-96 h-96 bg-orange-300 opacity-20 blur-3xl rounded-full"></div>
+        <div className="absolute -bottom-40 -left-40 w-96 h-96 bg-orange-400 opacity-20 blur-3xl rounded-full"></div>
 
-          {/* Email */}
-          <div className="relative">
-            <Mail className="absolute left-3 top-3 text-orange-500 w-4 h-4" />
-            <input
-              type="email"
-              required
-              placeholder="Admin Email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              className="w-full pl-10 pr-4 py-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-orange-400 outline-none"
-            />
+        <div className="relative w-full max-w-md bg-white/80 backdrop-blur-lg rounded-3xl shadow-2xl p-10 border border-orange-100 transition-all duration-500 hover:shadow-orange-200">
+
+          {/* Top Icon Badge */}
+          <div className="flex justify-center mb-6">
+            <div className="bg-gradient-to-br from-orange-500 to-orange-600 p-4 rounded-2xl shadow-lg">
+              <Lock className="text-white w-6 h-6" />
+            </div>
           </div>
 
-          {/* Password */}
-          <div className="relative">
-            <Lock className="absolute left-3 top-3 text-orange-500 w-4 h-4" />
-            <input
-              type="password"
-              required
-              placeholder="Password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              className="w-full pl-10 pr-4 py-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-orange-400 outline-none"
-            />
-          </div>
+          {/* Heading */}
+          <h1 className="text-3xl font-extrabold text-gray-900 text-center">
+            Admin Panel
+          </h1>
+          <p className="text-sm text-gray-500 text-center mt-1">
+            Mathura Vrindavan Tour Access
+          </p>
 
-          {/* Error Handling */}
-          {error && (
-            <p className="text-sm text-red-600 font-medium">{error}</p>
-          )}
+          {/* Form */}
+          <form onSubmit={handleLogin} className="mt-8 space-y-5">
 
-          {/* Button */}
-          <button
-            type="submit"
-            disabled={loading}
-            className="w-full bg-orange-500 hover:bg-orange-600 text-white font-semibold py-3 rounded-xl transition disabled:opacity-70"
-          >
-            {loading ? "Signing in..." : "Login"}
-          </button>
-        </form>
-      </div>
+            {/* Email */}
+            <div className="relative">
+              <Mail className="absolute left-4 top-4 text-orange-500 w-4 h-4" />
+              <input
+                type="email"
+                required
+                placeholder="Admin Email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                className="w-full pl-12 pr-4 py-3 rounded-xl border border-gray-200 bg-white focus:border-orange-400 focus:ring-2 focus:ring-orange-200 outline-none transition-all"
+              />
+            </div>
+
+            {/* Password */}
+            <div className="relative">
+              <Lock className="absolute left-4 top-4 text-orange-500 w-4 h-4" />
+              <input
+                type="password"
+                required
+                placeholder="Password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                className="w-full pl-12 pr-4 py-3 rounded-xl border border-gray-200 bg-white focus:border-orange-400 focus:ring-2 focus:ring-orange-200 outline-none transition-all"
+              />
+            </div>
+
+            {/* Error */}
+            {error && (
+              <p className="text-sm text-red-600 font-medium text-center animate-pulse">
+                {error}
+              </p>
+            )}
+
+            {/* Button */}
+            <button
+              type="submit"
+              disabled={loading}
+              className="w-full cursor-pointer bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white font-semibold py-3 rounded-xl shadow-md hover:shadow-lg transition-all duration-300 disabled:opacity-70"
+            >
+              {loading ? "Signing in..." : "Secure Login"}
+            </button>
+          </form>
+        </div>
     </div>
+
   );
 }

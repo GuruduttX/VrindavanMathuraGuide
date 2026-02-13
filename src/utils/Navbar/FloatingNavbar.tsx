@@ -8,9 +8,9 @@ import EnquiryPopup from "../EnquiryForm";
 
 const navItems = [
   { name: "Home", href: "/" },
-  { name: "Packages", href: "/packages" },
+  { name: "Packages", href: "/tour-packages" },
   { name: "About", href: "/about" },
-  { name: "Blog", href: "/blog" },
+  // { name: "Blog", href: "/blog" },
 
 ];
 

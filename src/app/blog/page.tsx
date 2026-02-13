@@ -14,46 +14,75 @@ import Script from 'next/script';
 
 
 export const metadata: Metadata = {
-  title: "Mathura Vrindavan Blogs | Travel, Temples, Darshan & Spiritual Guides",
+  title: "Mathura Vrindavan Blog | Temple Darshan, Travel & Spiritual Guides",
   description:
-    "Read our latest blogs on Mathura and Vrindavan covering temples, darshan timings, travel tips, festivals, Krishna leelas, tour guides, and spiritual experiences."
+    "Explore detailed guides on Mathura & Vrindavan temples, darshan timings, travel tips, festivals, Govardhan Parikrama and Krishna leelas.",
+  alternates: {
+    canonical: "https://vrindavanmathuraguide.com/blog",
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
+  openGraph: {
+    title: "Mathura Vrindavan Blog",
+    description:
+      "Temple darshan guides, travel tips, festival updates and spiritual insights from Mathura & Vrindavan.",
+    url: "https://vrindavanmathuraguide.com/blog",
+    type: "website",
+    images: [
+      {
+        url: "https://vrindavanmathuraguide.com/og-blog.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Mathura Vrindavan Blog",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Mathura Vrindavan Blog",
+    description:
+      "Temple darshan timings, Govardhan Parikrama guide and travel tips.",
+    images: ["https://vrindavanmathuraguide.com/og-blog.jpg"],
+  },
 };
+
 
 
 const page = async () => {
 
     
     const webPageSchema = {
-
         "@context": "https://schema.org",
-        "@type": "WebPage",
-        "name": "Blog",
+        "@type": "CollectionPage",
+        "@id": "https://vrindavanmathuraguide.com/blog#webpage",
+        "name": "Mathura Vrindavan Blog",
         "description":
-            "Read the latest articles on digital marketing, technology, careers, and skill development from Course Unbox.",
-        "url": " https://vrindavanmathuraguide.com/blog"
-
+            "Read travel guides, temple information, darshan timings and spiritual articles about Mathura and Vrindavan.",
+        "url": "https://vrindavanmathuraguide.com/blog"
     };
 
     const breadcrumbSchema = {
-
         "@context": "https://schema.org",
         "@type": "BreadcrumbList",
+        "@id": "https://vrindavanmathuraguide.com/blog#breadcrumb",
         "itemListElement": [
             {
-                "@type": "ListItem",
-                "position": 1,
-                "name": "Home",
-                "item": " https://vrindavanmathuraguide.com/"
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "https://vrindavanmathuraguide.com/"
             },
             {
-                "@type": "ListItem",
-                "position": 2,
-                "name": "Blog",
-                "item": " https://vrindavanmathuraguide.com/blog"
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Blog",
+            "item": "https://vrindavanmathuraguide.com/blog"
             }
         ]
-
     };
+
 
 
     return (

@@ -52,7 +52,7 @@ export default function ItineraryAccordion({PackageData} : any) {
             {/* Content */}
             <div
               className={`overflow-hidden transition-all duration-500 ${
-                isOpen ? "max-h-96 opacity-100" : "max-h-0 opacity-0"
+                isOpen ? "max-h-full pacity-100" : "max-h-0 opacity-0"
               }`}
             >
               <div className="px-6 pb-6 pt-2 text-gray-700 space-y-4">
@@ -69,9 +69,19 @@ export default function ItineraryAccordion({PackageData} : any) {
                 </div>
 
                 {/* Description */}
-                <p className="leading-relaxed">
-                  {item.description}
-                </p>
+              <section className="mx-auto px-4 py-4 ">
+                <div className="ItineraryContent
+                    prose prose-slate max-w-none
+                    prose-ul:list-disc prose-ul:pl-6
+                    prose-ol:list-decimal prose-ol:pl-6
+                    prose-li:my-1
+                    prose-li:marker:text-slate-500
+                    prose-p:leading-7
+                    "
+                    dangerouslySetInnerHTML={{ __html: item?.description ?? "bhjbhjbh" }}
+                />
+
+            </section>
 
                 {/* Accent Line */}
                 <div className="h-1 w-24 rounded-full bg-gradient-to-r from-orange-400 to-orange-600" />

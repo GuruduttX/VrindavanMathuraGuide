@@ -22,6 +22,7 @@ import ChildImagePicker from '@/components/Admin/PackageEditor/ChildImagePicker'
 import CMSSchema from '@/components/Admin/CMS/CMSSchema';
 import DurationSection from '@/components/Admin/PackageEditor/DurationSection';
 import DestRoutes from '@/components/Admin/PackageEditor/DestRoute';
+import SelectedInclusion from '@/components/Admin/PackageEditor/SelectedInclusion';
 
 type PackageForm = {
   title: string;
@@ -39,8 +40,14 @@ type PackageForm = {
   cancel: string,
   confirmation: string,
   payment: string,
-  day : string;
-  night : string;
+  day: string,
+  night: string,
+  reviews : string;
+  rating : string;
+  breakfast_included : boolean;
+  stay_included  : boolean;
+  transfer_included : boolean;
+  sightseeing_included  : boolean
 }
 
 type FAQ = {
@@ -113,26 +120,31 @@ export default function CreateNewPackage() {
 
   const { id } = useParams();
 
-  const [form, setForm] = useState<PackageForm>({
-    title: "",
-    category: "",
-    slug: "",
-    price: "",
-    day : "",
-    night :  "",
-    duration: "",
-    metaTitle: "",
-    metaDescription: "",
-    schemaTitle : "",
-    schemaDescription : "",
-    image: "",
-    alt: "",
-    refund: "",
-    cancel: "",
-    confirmation: "",
-    payment: "",
-   
-  });
+ const [form, setForm] = useState<PackageForm>({
+     title: "",
+     category: "",
+     slug: "",
+     price: "",
+     duration: "",
+     day: "",
+     night: "",
+     metaTitle: "",
+     metaDescription: "",
+     schemaTitle : "",
+     schemaDescription : "",
+     image: "",
+     alt: "",
+     refund: "",
+     cancel: "",
+     confirmation: "",
+     payment: "",
+     reviews : "",
+     rating : "",
+     breakfast_included : false,
+     stay_included  : false,
+     transfer_included : false,
+     sightseeing_included  : false
+   });
 
   
     const[childImage , setChildImage] = useState<ChildImage[]>([]);
@@ -158,6 +170,7 @@ export default function CreateNewPackage() {
       }
 
       setForm({
+
         title: data.title ?? "",
         price: data.price,
         duration: data.duration,
@@ -174,7 +187,15 @@ export default function CreateNewPackage() {
         confirmation: data.policies[2].description ?? "",
         payment: data.policies[3].description ?? "",
         day : data.day ?? "",
-        night : data.day ?? ""
+        night : data.day ?? "",
+        reviews : data.reviews ?? "",
+        rating : data.rating ?? "",
+
+        breakfast_included : data.breakfast_included ,
+        stay_included  : data.stay_included,
+        transfer_included : data.transfer_included,
+        sightseeing_included  : data.sightseeing_included
+
       });
 
       setFaqs(data.faqs ?? []);
@@ -186,7 +207,7 @@ export default function CreateNewPackage() {
       setDocuments(data.documents ?? [])
       setItinerary(data.itinerary ?? [])
       setChildImage(data.childImage ?? []);
-      setBreakdown(data.breakdown ?? []);
+      setBreakdown(data.durationbreakdown ?? []);
       setRoute(data.destroutes ?? {source: "", destination : "", segments : []})
      
 
@@ -198,7 +219,6 @@ export default function CreateNewPackage() {
 
 
   const updateForm = (field: keyof PackageForm, value: string) => {
-
     setForm((prev) => {
       return { ...prev, [field]: value }
     })
@@ -246,6 +266,10 @@ export default function CreateNewPackage() {
       category: form.category,
       slug: form.slug,
       price: form.price,
+      day : form.day,
+      night : form.night,
+      reviews : form.reviews,
+      rating : form.rating,
       heroimage: {
         image: form.image,
         alt: form.alt
@@ -292,7 +316,11 @@ export default function CreateNewPackage() {
       documents,
       itinerary,
       durationbreakdown : breakdown,
-      destroutes : route
+      destroutes : route,
+      breakfast_included : form.breakfast_included ,
+      stay_included  : form.stay_included,
+      transfer_included : form.transfer_included,
+      sightseeing_included  : form.sightseeing_included
     };
 
     const { data, error } = await supabase
@@ -325,9 +353,10 @@ export default function CreateNewPackage() {
       <form className='space-y-6' onSubmit={handleSave}>
         <CMSHeader editorType="Package" />
         <CMSMetaSection title={form.title} category={form.category} slug={form.slug} onChange={updateForm} editorType="Package" />
-        <PackageDetails price={form.price} duration={form.duration} onChange={updateForm} editorType="Package" />
+        <PackageDetails reviews={form.reviews} rating={form.rating} price={form.price} duration={form.duration} onChange={updateForm} editorType="Package" />
         <CMSSeoSection metaTitle={form.metaTitle} metaDescription={form.metaDescription} onChange={updateForm} editorType="Package" />
         <CMSSchema schemaTitle={form.schemaTitle} schemaDescription={form.schemaDescription} onChange={updateForm} editorType='Package' />
+        <SelectedInclusion transfer_included={form.transfer_included} breakfast_included={form.breakfast_included} stay_included={form.stay_included} sightseeing_included={form.sightseeing_included} onChange={updateForm}/>
         <DurationSection days={form.day} nights={form.night} onChange={updateForm} breakdown={breakdown} setBreakdown={setBreakdown} />
         <DestRoutes route={route} setRoute={setRoute}/>
         <ItinearyMaker itinerary={itinerary} setItinerary={setItinerary} editorType='Package' />

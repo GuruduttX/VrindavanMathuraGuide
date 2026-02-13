@@ -279,6 +279,122 @@ body::-webkit-scrollbar {
   transition: background-color 0.2s ease;
 }
 
+
+.ItineraryContent {
+  font-size: 16px;
+  line-height: 1.9;
+  color: #374151;
+}
+
+/* Paragraph */
+.ItineraryContent p {
+  margin-bottom: 1rem;
+}
+
+/* Ordered List */
+.ItineraryContent ol {
+  list-style-type: decimal !important;
+  padding-left: 1.75rem !important;
+  margin: 1rem 0 !important;
+}
+
+/* Unordered List */
+.ItineraryContent ul {
+  list-style-type: disc !important;
+  padding-left: 1.75rem !important;
+  margin: 1rem 0 !important;
+}
+
+/* List Items */
+.ItineraryContent li {
+  margin-bottom: 0.5rem;
+  display: list-item !important;
+}
+
+/* Headings */
+.ItineraryContent h1 {
+  font-size: 26px;
+  font-weight: 700;
+  margin-top: 1.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.ItineraryContent h2 {
+  font-size: 22px;
+  font-weight: 600;
+  margin-top: 1.25rem;
+  margin-bottom: 0.75rem;
+}
+
+/* Links */
+.ItineraryContent a {
+  color: #ea580c;
+  text-decoration: underline;
+}
+
+.ItineraryContent a:hover {
+  color: #c2410c;
+}
+
+/* Links */
+.ItineraryContent a {
+  color: #ea580c; /* orange-600 */
+  text-decoration: underline;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+.ItineraryContent a:hover {
+  color: #c2410c; /* darker orange */
+}
+
+/* Images */
+.ItineraryContent img {
+  margin: 20px 0;
+  border-radius: 12px;
+  max-width: 100%;
+  height: auto;
+}
+
+/* Tables */
+.ItineraryContent table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 20px 0;
+}
+
+.ItineraryContent th,
+.ItineraryContent td {
+  border: 1px solid #e5e7eb;
+  padding: 10px;
+  text-align: left;
+}
+
+.ItineraryContent th {
+  background-color: #f3f4f6;
+  font-weight: 600;
+}
+
+/* Blockquote */
+.ItineraryContent blockquote {
+  border-left: 4px solid #fb923c;
+  padding-left: 16px;
+  margin: 16px 0;
+  color: #6b7280;
+  font-style: italic;
+  background: #fff7ed;
+  padding: 12px 16px;
+  border-radius: 8px;
+}
+
+/* Horizontal Line */
+.ItineraryContent hr {
+  margin: 24px 0;
+  border: none;
+  border-top: 1px solid #e5e7eb;
+}
+
+
 /* Responsive table (mobile friendly) */
 @media (max-width: 768px) {
   .BlogContent table {

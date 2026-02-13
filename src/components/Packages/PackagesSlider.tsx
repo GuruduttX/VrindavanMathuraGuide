@@ -11,7 +11,7 @@ const packages = [
     duration: "1 Day",
     price: "2999",
     image: "/images/Packages/vrindavan-darshan.webp",
-    slug: "/packages/vrindavan-darshan",
+    slug: "/tour-packages/vrindavan-darshan",
   },
   {
     title: "Vrindavan Tour Package",
@@ -19,7 +19,7 @@ const packages = [
     duration: "2 Days / 1 Night",
     price: "4999",
     image: "/images/Packages/vrindavan-tour.webp",
-    slug: "/packages/vrindavan-tour",
+    slug: "/tour-packages/vrindavan-tour",
   },
   {
     title: "Govardhan Parikrama Tour",
@@ -27,7 +27,7 @@ const packages = [
     duration: "1 Day",
     price: "6999",
     image: "/images/Packages/govardhan-parikrama.webp",
-    slug: "/packages/govardhan-parikrama",
+    slug: "/tour-packages/govardhan-parikrama",
   },
   {
     title: "Barsana & Nandgaon Tour",
@@ -35,7 +35,7 @@ const packages = [
     duration: "1 Day",
     price: "3999",
     image: "/images/Packages/barsana-nandgaon.webp",
-    slug: "/packages/barsana-nandgaon",
+    slug: "/tour-packages/barsana-nandgaon",
   },
 ];
 

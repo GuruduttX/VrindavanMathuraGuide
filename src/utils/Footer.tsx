@@ -90,8 +90,8 @@ export default function Footer() {
 
               <h4 className="font-semibold  mb-5 sm:ml-12 ml-0 ">Quick Links</h4>
               <ul className="space-y-2 text-sm sm:ml-12 ml-0">
-                <li><Link href="/packages">All Packages</Link></li>
-                <li><Link href="/blog">Blogs</Link></li>
+                <li><Link href="/tour-packages">All Packages</Link></li>
+                {/* <li><Link href="/blog">Blogs</Link></li> */}
                 <li><Link href="/">Custom Yatra</Link></li>
               </ul>
             </div>

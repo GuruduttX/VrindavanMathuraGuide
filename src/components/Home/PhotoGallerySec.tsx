@@ -130,11 +130,11 @@ export default function GallerySection() {
         </div>
 
         {/* CTA */}
-        <div className="text-center mt-12">
+        {/* <div className="text-center mt-12">
           <button className="px-8 py-3 rounded-full bg-orange-500 text-white font-medium hover:bg-orange-600 transition">
             View All Photos
           </button>
-        </div>
+        </div> */}
 
       </div>
     </section>

@@ -174,7 +174,7 @@ export default function PackagesGrid({packages} : {packages : any}) {
                 {/* CTA */}
                 <div className="flex gap-3 pt-2">
                   <Link
-                    href={`/packages/${pkg.id}`}
+                    href={`/tour-packages/${pkg.slug}`}
                     className="
                       flex-1 text-center cursor-pointer
                       bg-orange-500 hover:bg-orange-600

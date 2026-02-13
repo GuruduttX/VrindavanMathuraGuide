@@ -8,7 +8,7 @@ export async function GET() {
     
     const urls = packages?.map(pack => `
     <url>
-        <loc>${process.env.BASE_URL}/packages/${pack.slug}</loc>
+        <loc>${process.env.BASE_URL}/tour-packages/${pack.slug}</loc>
         <lastmod>${new Date(pack.created_at).toISOString()}</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.9</priority>

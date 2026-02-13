@@ -19,6 +19,8 @@ import { supabase } from "@/lib/supabase/SupabaseConfig";
 import KnowBeforeYouGo from "@/components/PackageDetail/KnowBeforeYouGo";
 import TrustBuildingSection from "@/components/Home/TrustBuildSec";
 import Script from "next/script";
+import { notFound } from "next/navigation";
+import Link from "next/link";
 
 
 
@@ -31,14 +33,60 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
         .select("*")
         .eq("slug", slug)
         .single();
+     
+  const baseUrl = "https://vrindavanmathuraguide.com";
+  const url = `${baseUrl}/tour-packages/${slug}`;    
 
     return {
-        title: data?.meta?.title ?? "Trvel Package",
-        description: data?.meta?.description ?? "",
+      title: data?.meta?.title ?? data?.title ?? "Travel Package",
+      description: data?.meta?.description ?? data?.shortDescription ?? "",
+
+      alternates: {
+        canonical: url,
+      },
+
+      openGraph: {
+        title: data?.meta?.title ?? data?.title,
+        description: data?.meta?.description ?? data?.shortDescription,
+        url,
+        siteName: "Vrindavan Mathura Guide",
+        images: [
+          {
+            url: data?.heroImage ?? `${baseUrl}/default-og.jpg`,
+            width: 1600,
+            height: 900,
+            alt: data?.title,
+          },
+        ],
+        type: "website",
+      },
+
+      twitter: {
+        card: "summary_large_image",
+        title: data?.meta?.title ?? data?.title,
+        description: data?.meta?.description ?? data?.shortDescription,
+        images: [data?.heroImage ?? `${baseUrl}/default-og.jpg`],
+      },
+
+      robots: {
+        index: true,
+        follow: true,
+      },
     };
 
 
 }
+
+export async function generateStaticParams() {
+  const { data } = await supabase
+    .from("Package")
+    .select("slug");
+
+  return data?.map((item) => ({
+    slug: item.slug,
+  })) ?? [];
+}
+
 
 const getPackageData = async (slug: string) => {
   const { data, error } = await supabase.from("Package").select("*").eq("slug", slug).single();
@@ -54,14 +102,30 @@ const getPackageData = async (slug: string) => {
 
 
 
+
+
+
 const page = async ({ params }: { params: Promise<{ slug: string }> }) => {
 
   const { slug } = await params;
+ 
   const PackageData = await getPackageData(slug);
-  console.log(PackageData);
+
+   const { data: packages, error } = await supabase
+          .from("Package")
+          .select("id, slug")
+          .eq("slug", slug)
+          .maybeSingle();
+  
+  
+      if (!packages || error) {
+  
+          notFound();
+  
+      }
 
 const baseUrl = "https://vrindavanmathuraguide.com";
-const packageUrl = `${baseUrl}/packages/${PackageData?.slug}`;
+const packageUrl = `${baseUrl}/tour-packages/${PackageData?.slug}`;
 
 
 
@@ -103,13 +167,19 @@ const productSchema = {
     "@type": "Brand",
     "name": "Vrindavan Mathura Guide"
   },
-  "offers": {
-    "@type": "Offer",
-    "url": packageUrl,
-    "priceCurrency": "INR",
-    "price": PackageData?.price,
-    "availability": "https://schema.org/InStock"
-  },
+ "offers": {
+  "@type": "Offer",
+  "url": packageUrl,
+  "priceCurrency": "INR",
+  "price": PackageData?.price,
+  "availability": "https://schema.org/InStock",
+  "priceValidUntil": "2026-12-31",
+  "seller": {
+    "@type": "TravelAgency",
+    "name": "Vrindavan Mathura Guide"
+  }
+}
+,
   "aggregateRating": PackageData?.rating && {
     "@type": "AggregateRating",
     "ratingValue": PackageData.rating,
@@ -148,7 +218,7 @@ const breadcrumbSchema = {
       "@type": "ListItem",
       "position": 2,
       "name": "Packages",
-      "item": `${baseUrl}/packages`
+      "item": `${baseUrl}/tour-packages`
     },
     {
       "@type": "ListItem",
@@ -158,6 +228,9 @@ const breadcrumbSchema = {
     }
   ]
 };
+
+
+
 
 return (
   <>
@@ -170,6 +243,8 @@ return (
       }}
     />
       <Navbar />
+
+     
 
       {/* HERO */}
       <PackageHero PackageData={PackageData} />
@@ -189,7 +264,7 @@ return (
                 breakdown={PackageData.durationbreakdown}
               />
 
-              <PackageInclusionsStrip />
+              <PackageInclusionsStrip packageData={PackageData} />
 
               <DestinationRoute routeData={PackageData.destroutes} />
 
@@ -197,7 +272,7 @@ return (
 
               <ItineraryAccordion PackageData={PackageData} />
 
-              <InclusionExclusion PackageData={PackageData} />
+              <InclusionExclusion PackageData={PackageData}/>
 
             </main>
 

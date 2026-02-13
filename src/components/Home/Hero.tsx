@@ -1,6 +1,7 @@
 import { MapPin, Calendar, Users, Search } from "lucide-react";
 import DestinationDropdown from "../../utils/search/DestinationDropDown";
 import SearchBar from "@/utils/search/SearchBar";
+import CountUp from "@/utils/CountUp";
 
 export default function HeroSection() {
   return (
@@ -13,7 +14,8 @@ export default function HeroSection() {
       {/* Content */}
       <div className="relative z-10 mx-auto max-w-7xl px-6 pt-12">
         {/* Badge */}
-        <span className="inline-flex items-center gap-2 rounded-full bg-orange-500/20 px-5 py-2 text-sm font-medium text-orange-200 backdrop-blur">
+        <span className="inline-flex items-center backdrop-blur-md cursor-pointer
+         border border-white/20 gap-2 rounded-full bg-orange-500/20 px-5 py-2 text-sm font-medium text-orange-200 backdrop-blur">
           🔱 Experience Divine Spirituality
         </span>
 
@@ -35,12 +37,12 @@ export default function HeroSection() {
 
 
         {/* Stats */}
-        <div className="mt-10 grid grid-cols-2 gap-6 text-center md:grid-cols-4">
+        <div className="mt-16 grid grid-cols-2 gap-6 text-center md:grid-cols-4">
           {[
-            { value: "500+", label: "Sacred Temples" },
-            { value: "50K+", label: "Happy Pilgrims" },
-            { value: "100+", label: "Curated Tours" },
-            { value: "4.9★", label: "Average Rating" },
+            { value: "500", label: "Sacred Temples" , suffix : "+"},
+            { value: "50", label: "Happy Pilgrims" , suffix : "K+"},
+            { value: "100", label: "Curated Tours" , suffix : "+" },
+            { value: "4.9", label: "Average Rating" , suffix : "★" },
           ].map((item, i) => (
             <div
               key={i}
@@ -63,7 +65,9 @@ export default function HeroSection() {
                     whitespace-nowrap
                   "
               >
-                {item.value}
+                <CountUp end={Number(item.value)} suffix={item.suffix}/>
+
+               
               </h3>
 
 
