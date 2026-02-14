@@ -108,10 +108,7 @@ const getPackageData = async (slug: string) => {
 const page = async ({ params }: { params: Promise<{ slug: string }> }) => {
 
   const { slug } = await params;
-<<<<<<< HEAD:src/app/tour-packages/[slug]/page.tsx
  
-=======
->>>>>>> main:src/app/packages/[slug]/page.tsx
   const PackageData = await getPackageData(slug);
 
    const { data: packages, error } = await supabase
