@@ -76,15 +76,24 @@ export default function DestinationFilter() {
       <EnquiryPopup onClose={() => setIsOpen(false)} open={isOpen} />
       <section className="mt-5 bg-gradient-to-b from-orange-50 to-white w-full mx-auto px-4 py-10 space-y-8">
 
-        <div className="w-full">
-          <div className="w-full text-center sm:text-4xl md:text-4xl lg:text-5xl text-orange-400 font-extrabold">Our Tour Packages
+        <div className="w-full text-center space-y-4">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-orange-500">
+            Our Tour Packages
+          </h2>
 
+          {/* Gradient Underline */}
+          <div className="flex justify-center">
+            <div className="h-1 w-70  sm:w-80 md:w-90 lg:w-100 rounded-full 
+                            bg-gradient-to-r 
+                            from-transparent 
+                            via-orange-500 
+                            to-transparent" />
           </div>
-          <p></p>
         </div>
 
+
         {/* ---------- CATEGORY CAROUSEL ---------- */}
-        <div className="flex gap-8 overflow-x-auto scrollbar-hide p-6 bg-[#ffeeda] rounded-3xl shadow-xl">
+        <div className="flex gap-8 overflow-x-auto scrollbar-hide p-6 bg-[#ffeeda] rounded-3xl shadow-xl max-w-7xl mx-auto">
           {CATEGORIES.map((cat, idx) => (
             <button
               key={idx}
@@ -103,17 +112,18 @@ export default function DestinationFilter() {
         </div>
 
         {/* ---------- TITLE ---------- */}
-        <div className="flex justify-between items-center px-5">
-          <h2 className="text-3xl font-semibold text-orange-400">
-            {activeCategory}
-          </h2>
-          <button className="text-orange-500 font-medium hover:underline">
-            View All →
-          </button>
+        <div className="max-w-7xl mx-auto">
+          <div className="flex justify-between items-center px-5 py-4">
+            <h2 className="text-3xl font-semibold text-orange-400">
+              {activeCategory}
+            </h2>
+            <Link href={'/tour-packages'}  className="text-orange-500 font-medium hover:underline">
+              View All →
+            </Link>
         </div>
 
         {/* ---------- CARDS GRID ---------- */}
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-6 transition-all p-5">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 transition-all p-5">
           {filteredPackages.map((pkg: any) => (
             <div
               key={pkg.id}
@@ -138,7 +148,7 @@ export default function DestinationFilter() {
               bg-orange-500 text-white text-xs font-semibold
               px-3 py-1 rounded-full shadow"
                 >
-                  {pkg.duration}
+                  {pkg.duration} day
                 </span>
 
                 {/* PRICE BADGE */}
@@ -200,7 +210,7 @@ export default function DestinationFilter() {
                 {/* CTA */}
                 <div className="flex gap-3 pt-2">
                   <Link
-                    href={`/packages/${pkg.slug}`}
+                    href={`/tour-packages/${pkg.slug}`}
                     className="flex-1 text-center cursor-pointer
                   bg-orange-500 hover:bg-orange-600
                   text-white font-semibold py-2.5
@@ -229,6 +239,10 @@ export default function DestinationFilter() {
             </div>
           ))}
         </div>
+
+        </div>
+      
+
 
         {/* ---------- EMPTY STATE ---------- */}
         {filteredPackages.length === 0 && (

@@ -23,6 +23,8 @@ export default function DurationSection({ days, nights, onChange, breakdown, set
     ]);
   };
 
+
+
   const removeBreakdown = (id: string) => {
     setBreakdown((prev) => prev.filter((b) => b.id !== id));
   };
@@ -42,7 +44,7 @@ export default function DurationSection({ days, nights, onChange, breakdown, set
 
 
   return (
-    <div className='border-2 border-indigo-500 rounded-3xl w-full p-8 shadow-md shadow-indigo-500 hover:shadow-lg cursor-pointer transition'>
+    <div className='border-2 border-indigo-500 rounded-3xl w-full  p-8 shadow-md shadow-indigo-500 hover:shadow-lg cursor-pointer transition'>
 
       <div className="border rounded-3xl p-6 shadow-md border-2 border-indigo-500 rounded-3xl w-full p-8 shadow-md shadow-indigo-500 hover:shadow-lg cursor-pointer transition mb-2">
         <h3 className="text-lg font-semibold text-gray-200 mb-4">

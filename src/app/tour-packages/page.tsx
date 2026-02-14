@@ -15,10 +15,50 @@ import TrustBuildingSection from "@/components/Home/TrustBuildSec";
 
 
 export const metadata: Metadata = {
-  title: "Vrindavan Tour Packages | Mathura Vrindavan Yatra",
+  title: "Vrindavan Tour Packages | Mathura Vrindavan Yatra & Darshan Tours",
   description:
-    "Explore the best Vrindavan tour packages including Mathura, Govardhan Parikrama and spiritual yatras. Well-planned itineraries, trusted guides, and affordable pricing.",
-}
+    "Book the best Vrindavan tour packages with Mathura, Govardhan Parikrama and temple darshan. Trusted local guides, AC taxi service and customizable spiritual itineraries.",
+  keywords: [
+    "Vrindavan tour packages",
+    "Mathura Vrindavan yatra",
+    "Vrindavan darshan package",
+    "Govardhan parikrama tour",
+    "Mathura Vrindavan taxi tour"
+  ],
+  alternates: {
+    canonical: "https://vrindavanmathuraguide.com/packages",
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
+  openGraph: {
+    title: "Vrindavan Tour Packages | Mathura Vrindavan Yatra",
+    description:
+      "Explore curated Vrindavan tour packages including temple darshan, Govardhan Parikrama and spiritual yatras.",
+    url: "https://vrindavanmathuraguide.com/packages",
+    siteName: "Vrindavan Mathura Guide",
+    images: [
+      {
+        url: "https://vrindavanmathuraguide.com/images/Packages/package-hero.webp",
+        width: 1600,
+        height: 900,
+        alt: "Vrindavan Tour Packages",
+      },
+    ],
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Vrindavan Tour Packages",
+    description:
+      "Explore Mathura Vrindavan yatra packages with trusted guides and taxi services.",
+    images: [
+      "https://vrindavanmathuraguide.com/images/Packages/package-hero.webp",
+    ],
+  },
+};
+
 const faqs = [
   {
     question: "Which Mathura Vrindavan tour package is best for first-time visitors?",
@@ -54,17 +94,24 @@ const faqs = [
 
 
 
+async function getAllPackages() {
+  const { data, error } = await supabase.from('Package').select('*');
 
+  if (error) {
+    console.log("package", error.message)
+    return [];
+  }
+
+  return data;
+}
 
 
 
 export default async function Page() {
-
-
+  const packages = await getAllPackages();
 
   return (
     <div>
-
 
 
       <Script
@@ -74,21 +121,16 @@ export default async function Page() {
             "@context": "https://schema.org",
             "@type": "ItemList",
             "name": "Vrindavan Tour Packages",
-            "itemListElement": [
-              {
-                "@type": "ListItem",
-                "position": 1,
-                "url": "https://vrindavanmathuraguide.com/packages/mathura-vrindavan-tour"
-              },
-              {
-                "@type": "ListItem",
-                "position": 2,
-                "url": "https://vrindavanmathuraguide.com/packages/govardhan-parikrama"
-              }
-            ]
-          })
+            "itemListElement": packages.map((pkg: any, index: number) => ({
+              "@type": "ListItem",
+              "position": index + 1,
+              "url": `https://vrindavanmathuraguide.com/packages/${pkg.slug}`,
+              "name": pkg.title,
+            })),
+          }),
         }}
       />
+
 
       <Script
         type="application/ld+json"

@@ -14,7 +14,7 @@ export async function GET() {
         <url>
             <loc>${process.env.BASE_URL}/about</loc>
             <changefreq>monthly</changefreq>
-            <priority>0.5</priority>
+            <priority>0.6</priority>
         </url>
 
         <url>

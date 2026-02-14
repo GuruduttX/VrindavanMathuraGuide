@@ -52,7 +52,7 @@ export default function NotFound() {
             </Link>
 
             <Link
-              href="/packages"
+              href="/tour-packages"
               className="inline-flex items-center gap-2 rounded-full border border-orange-400 px-6 py-3 text-orange-600 font-semibold hover:bg-orange-50 transition"
             >
               <MapPin size={18} />

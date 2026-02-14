@@ -70,7 +70,7 @@ export default function PopularTours() {
           </div>
 
           {/* Desktop button */}
-          <Link href={'/packages'} className="hidden md:block text-orange-600 font-semibold cursor-pointer">
+          <Link href={'/tour-packages'} className="hidden md:block text-orange-600 font-semibold cursor-pointer">
             View All →
           </Link>
            

@@ -2,12 +2,32 @@
 
 import Image from "next/image";
 import { Star } from "lucide-react";
+import Link from "next/link";
+import EnquiryPopup from "@/utils/EnquiryForm";
+import { useState } from "react";
+import { IndianRupee } from "lucide-react";
 
 export default function PackageHero({PackageData} : any) {
+  const [isOpen, setIsOpen] = useState(false);
+  
   
   return (
-    <section className="relative w-full px-6 py-12 lg:px-16">
+    <> <EnquiryPopup open={isOpen} onClose={()=>setIsOpen(false)}/>
+       <section className="relative w-full px-6 py-12 lg:px-16">
       {/* Orange Glow Background */}
+
+         {/* BreadCrumbs */}
+         
+      <nav className="text-sm text-orange-400 mb-4 px-8 sm:px-16 -mt-6 flex flex-wrap">
+        <Link href="/" className="">
+          Home
+        </Link>
+        <span className="mx-2">/</span>
+        <Link href={'/tour-packages'} className=" font-medium">Packages</Link>
+        <span className="mx-2">/</span>
+        <span className="font-medium">{PackageData.title}</span>
+
+     </nav>
       <div className="absolute inset-0 -z-10 bg-gradient-to-br from-orange-100 via-orange-50 to-white" />
 
       <div className="mx-auto max-w-7xl grid grid-cols-1 lg:grid-cols-3 gap-6">
@@ -54,34 +74,59 @@ export default function PackageHero({PackageData} : any) {
 
       {/* BOTTOM CONTENT */}
       <div className="mx-auto max-w-7xl mt-10 flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6">
-        
-        {/* Title */}
-        <div>
-          <h1 className="text-3xl lg:text-5xl font-extrabold text-gray-900 leading-tight">
+
+        {/* Title Section */}
+        <div className="flex-1 min-w-0">
+          <h1 className="text-3xl lg:text-4xl font-extrabold text-gray-900 leading-tight break-words">
             {PackageData.title}
           </h1>
 
           <div className="flex items-center gap-2 mt-3 text-sm">
             <Star className="w-4 h-4 text-orange-500 fill-orange-500" />
-            <span className="font-semibold">4.8</span>
-            <span className="text-gray-500">(120 Reviews)</span>
+            <span className="font-semibold">{PackageData.rating ||  "4.8"}</span>
+            <span className="text-gray-600">({PackageData.reviews || "120"}) reviews</span>
           </div>
         </div>
 
         {/* Price + CTA */}
-        <div className="flex items-center gap-6">
-          <div className="text-right">
-            <p className="text-sm text-gray-500">Starting from</p>
-            <p className="text-3xl font-bold text-orange-600">₹18,999</p>
-            <p className="text-xs text-gray-500">per person</p>
+       <div className="shrink-0 bg-white/70 backdrop-blur-md border border-orange-100 shadow-xl rounded-2xl px-6 py-5 flex items-center gap-8">
+
+        {/* Price Section */}
+        <div className="text-right">
+          <p className="text-xs uppercase tracking-wide text-gray-500">
+            Starting from
+          </p>
+
+          <div className="flex items-end justify-end gap-1">
+            <span className="text-4xl font-extrabold text-orange-600 flex items-center">
+              <IndianRupee size={34}/>
+              {PackageData.price}
+            </span>
+            <span className="text-sm text-gray-500 mb-1">
+              /person
+            </span>
           </div>
 
-          <button className="relative px-8 py-4 rounded-full bg-gradient-to-r from-orange-500 to-orange-600 text-white font-semibold shadow-lg hover:shadow-orange-300 transition-all duration-300 hover:scale-105 cursor-pointer">
-            Book Now
-            <span className="absolute inset-0 rounded-full blur-xl bg-orange-400/40 -z-10" />
-          </button>
+          <span className="inline-block mt-2 text-xs bg-orange-50 text-orange-600 px-3 py-1 rounded-full font-medium">
+            Best Price Guarantee
+          </span>
         </div>
+
+        {/* CTA */}
+        <button
+          onClick={() => setIsOpen(true)}
+          className="whitespace-nowrap cursor-pointer px-8 py-4 rounded-xl bg-gradient-to-r from-orange-500 to-orange-600 text-white font-semibold shadow-md hover:shadow-xl hover:scale-105 transition-all duration-300"
+        >
+          Book Now →
+        </button>
+
       </div>
+
+
+      </div>
+
     </section>
+    </>
+   
   );
 }

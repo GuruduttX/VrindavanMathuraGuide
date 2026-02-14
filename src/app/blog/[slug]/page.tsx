@@ -21,17 +21,49 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     const { slug } = await params;
 
     const { data } = await supabase
-        .from("Blog")
-        .select("*")
-        .eq("slug", slug)
-        .single();
+    .from("Blog")
+    .select("*")
+    .eq("slug", slug)
+    .single();
 
-    return {
-        title: data?.meta?.title ?? "VrindavanTourGuide Blog",
-        description: data?.meta?.description ?? "",
-    };
+  const baseUrl = "https://vrindavanmathuraguide.com";
+  const url = `${baseUrl}/blog/${slug}`;
 
+  return {
+    title: data?.meta?.title ?? data?.title ?? "Vrindavan Blog",
+    description: data?.meta?.description ?? data?.excerpt ?? "",
 
+    alternates: {
+      canonical: url,
+    },
+
+    openGraph: {
+      title: data?.meta?.title ?? data?.title,
+      description: data?.meta?.description ?? data?.excerpt,
+      url,
+      type: "article",
+      images: [
+        {
+          url: data?.image ?? `${baseUrl}/default-blog.jpg`,
+          width: 1200,
+          height: 630,
+          alt: data?.title,
+        },
+      ],
+    },
+
+    twitter: {
+      card: "summary_large_image",
+      title: data?.title,
+      description: data?.excerpt,
+      images: [data?.image],
+    },
+
+    robots: {
+      index: true,
+      follow: true,
+    },
+  };
 }
 
 
@@ -54,12 +86,12 @@ const getBlogData = async (BlogId: string) => {
 }
 
 
+
+
 const Page = async ({ params }: { params: Promise<{ slug: string }> }) => {
 
     const { slug } = await params;
 
-    console.log("THE ID WE HAVE GOT IS : ");
-    console.log(slug);
 
     const { data: blog, error } = await supabase
         .from("Blog")
@@ -77,35 +109,34 @@ const Page = async ({ params }: { params: Promise<{ slug: string }> }) => {
     const Blogs = await getBlogData(slug);
 
     const articleSchema = {
-
         "@context": "https://schema.org",
         "@type": "BlogPosting",
-        "headline": Blogs.schema?.title,
+        "@id": `https://vrindavanmathuraguide.com/blog/${Blogs.slug}#article`,
+        "headline": Blogs.title,
         "description": Blogs.schema?.description,
         "image": Blogs.image,
         "author": {
             "@type": "Person",
-            "name": Blogs.author || "Course Unbox Editorial Team"
+            "name": Blogs.author || "Vrindavan Mathura Guide Team"
         },
-
         "publisher": {
             "@type": "Organization",
-            "name": "Course Unbox",
+            "name": "Vrindavan Mathura Guide",
             "logo": {
-                "@type": "ImageObject",
-                "url": " https://vrindavanmathuraguide.com/favicon.ico"
+            "@type": "ImageObject",
+            "url": "https://vrindavanmathuraguide.com/favicon.ico"
             }
         },
-
-        "dateModified": Blogs.created_at,
+        "datePublished": Blogs.created_at,
+        "dateModified": Blogs.updated_at || Blogs.created_at,
         "mainEntityOfPage": {
             "@type": "WebPage",
-            "@id": ` https://vrindavanmathuraguide.com/blog/${Blogs.slug}`
+            "@id": `https://vrindavanmathuraguide.com/blog/${Blogs.slug}`
         },
-
-        "url": ` https://vrindavanmathuraguide.com/blog/${Blogs.slug}`
-
+        "articleSection": Blogs.category || "Travel Guide",
+        "keywords": Blogs.tags?.join(", ")
     };
+
 
     const breadcrumbSchema = {
 

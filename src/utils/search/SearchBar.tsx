@@ -9,10 +9,13 @@ import { useRouter } from 'next/navigation'
 const SearchBar = () => {
     const router = useRouter();
     const [filter , setFilter] = useState({
-        destination : "",
+        selectedDest : [],
         category : "",
         travellers : ""
     });
+
+    const params = new URLSearchParams();
+    
 
     console.log("THE DATA OF THE FILTER IS : ");
     console.log(filter);
@@ -24,7 +27,10 @@ const SearchBar = () => {
     }
 
     const handleSearch = () => {
-        router.push(`/filter?destination=${filter.destination}&duration=${filter.category}`)
+        filter.selectedDest.forEach((place)=>{
+            params.append('destination', place);
+        })
+        router.push(`/filter?${params.toString()}&duration=${filter.category}`)
     }
 
 
@@ -34,15 +40,15 @@ const SearchBar = () => {
             className="mt-10 rounded-4xl bg-white/90 p-4 sm:p-5 shadow-lg shadow-orange-400 backdrop-blur-md hover:shadow-xl hover:shadow-yellow-500 transition border-2 border-orange-400 ">
             <div
                 className="
-            grid
-            grid-cols-1
-            sm:grid-cols-2
-            lg:grid-cols-4
-            gap-3 sm:gap-4
-          "
+                grid
+                grid-cols-1
+                sm:grid-cols-2
+                lg:grid-cols-4
+                gap-3 sm:gap-4
+              "
             >
                 {/* Destination */}
-                <DestinationDropdown destination={filter.destination} onChange={updateFilter}/>
+                <DestinationDropdown selectedDest={filter.selectedDest} onChange={updateFilter}/>
 
                 {/* Category */}
                 <CategoryDropDown category={filter.category} onChange={updateFilter}/>
@@ -51,12 +57,12 @@ const SearchBar = () => {
                 {/* Travelers */}
                 <div
                     className="
-              flex items-center gap-3
-              rounded-xl
-              bg-orange-50
-              px-4
-              py-3 sm:py-3.5
-            "
+                    flex items-center gap-3
+                    rounded-xl
+                    bg-orange-50
+                    px-4
+                    py-3 sm:py-3.5
+                    "
                 >
                     <Users className="text-black shrink-0" />
                     <input
@@ -65,10 +71,10 @@ const SearchBar = () => {
                         placeholder="No. Of Travelers"
                         onChange={(e)=>{updateFilter("travellers", e.target.value)}}
                         className="
-                w-full
-                bg-transparent
-                text-sm sm:text-base
-                outline-none
+                        w-full
+                        bg-transparent
+                        text-sm sm:text-base
+                        outline-none
               "
                     />
                 </div>

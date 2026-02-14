@@ -11,6 +11,7 @@ import TrustBuildingSection from "@/components/Home/TrustBuildSec";
 import FooterCTA from "@/utils/FooterCTA";
 import EnquiryPopup from "@/utils/EnquiryForm";
 import FilterGrid from "./FilterGrid";
+import Link from "next/link";
 
 
 export default function FilteredPackagesClient() {
@@ -19,35 +20,43 @@ export default function FilteredPackagesClient() {
   const [packages, setPackages] =  useState<any[]>([]);
   const [isOpen, setIsOpen] = useState(false);
 
-  const destination = searchParams.get("destination");
+  const destination = searchParams.getAll("destination");
   const duration = searchParams.get("duration");
+
+  console.log("Destinations", destination)
 
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
   const getPackages = async () => {
-    try {
-      setLoading(true);
-      setError(null);
+  try {
+    setLoading(true);
+    setError(null);
 
-      const { data, error } = await supabase
-        .from("Package")
-        .select("*")
-        .eq("destination", destination)
-        .eq("category", duration); 
+    let query = supabase
+      .from("Package")
+      .select("*");
 
-      if (error) {
-        throw error;
-      }
-
-      setPackages(data || []);
-    } catch (err: any) {
-      console.error("Error fetching packages:", err.message);
-      setError("Failed to load packages");
-    } finally {
-      setLoading(false);
+    if (duration) {
+      query = query.eq("category", duration);
     }
-  };
+
+    if (destination.length > 0) {
+      query = query.in("destination", destination);
+    }
+
+    const { data, error } = await query;
+
+    if (error) throw error;
+
+    setPackages(data || []);
+  } catch (err: any) {
+    console.error("Error fetching packages:", err.message);
+    setError("Failed to load packages");
+  } finally {
+    setLoading(false);
+  }
+};
 
     // redirect safety
     useEffect(() => {
@@ -73,58 +82,90 @@ export default function FilteredPackagesClient() {
         <>
          <EnquiryPopup onClose={() => setIsOpen(false)} open={isOpen} />
         <Navbar/>
-        <section className="bg-[#FFF7ED] py-16">
-            <div className="max-w-7xl mx-auto px-6">
+          <section className="bg-[#FFF7ED] py-12 sm:py-16">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
-              {/* BREADCRUMBS */}
-              <nav className="text-sm text-gray-500 mb-6">
-                <span className="hover:text-orange-600 cursor-pointer">Home</span>
-                <span className="mx-2">/</span>
-                <span className="hover:text-orange-600 cursor-pointer">Packages</span>
-                <span className="mx-2">/</span>
-                <span className="text-orange-600 font-medium capitalize">
-                  {duration} Day {destination}
-                </span>
-              </nav>
+            {/* ---------- BREADCRUMB ---------- */}
+            <nav className="flex flex-wrap items-center text-xs sm:text-sm text-gray-500 gap-1 mb-6">
+              <Link href={'/home'} className="hover:text-orange-600 cursor-pointer">Home</Link>
+              <span>/</span>
+              
+              <Link href={'/tour-packages'} className="hover:text-orange-600 cursor-pointer">Packages</Link>
+              <span>/</span>
+              <span className="text-orange-600 font-medium break-words">
+                {duration} 
+              </span>
+            </nav>
 
-              {/* PAGE TITLE */}
-              <h1 className="text-3xl md:text-4xl font-bold text-gray-900">
-                {readableTitle}
-              </h1>
+            {/* ---------- TITLE ---------- */}
+            <h1 className="
+                text-2xl sm:text-3xl md:text-4xl 
+                font-bold text-gray-900 
+                leading-tight 
+                break-words
+              ">
+              {readableTitle}
+            </h1>
 
-              {/* SUBTITLE */}
-              <p className="mt-3 text-gray-700 max-w-3xl">
-                Explore our best {duration}-day {destination} tour packages,
-                designed for peaceful darshan, comfortable travel, and a
-                spiritually fulfilling journey.
-              </p>
+            {/* ---------- SUBTITLE ---------- */}
+            <p className="mt-4 text-gray-700 max-w-3xl text-sm sm:text-base leading-relaxed">
+              Explore our best {duration}-day spiritual tour packages,
+              designed for peaceful darshan, comfortable travel,
+              and a fulfilling journey across sacred destinations.
+            </p>
 
-              {/* DIVIDER */}
-              <div className="mt-4 h-[3px] w-48 bg-gradient-to-r from-orange-600 via-orange-400 to-transparent rounded-full" />
-
-              <p className="mt-6 text-sm text-gray-500">
-                Showing tour packages for{" "}
-                <span className="font-medium text-gray-700 capitalize">
-                  {destination}
-                </span>{" "}
-                ({duration} Day)
-              </p>
-
-            
-              <div className="mt-10">
-                <FilterGrid packages = {packages} setIsOpen={setIsOpen}/>
-              </div>
-
-              <PackagesCTA/>
-              <VrindavanTrustStats/>
-              <TrustBuildingSection/>
-             
+            {/* ---------- DESTINATION TAGS ---------- */}
+            <div className="mt-5 flex flex-wrap gap-2">
+              {Array.isArray(destination)
+                ? destination.map((place: string) => (
+                    <span
+                      key={place}
+                      className="px-3 py-1.5 text-xs sm:text-sm 
+                                bg-orange-100 text-orange-700 
+                                rounded-full font-medium"
+                    >
+                      📍 {place}
+                    </span>
+                  ))
+                : (
+                  <span className="px-3 py-1.5 text-xs sm:text-sm 
+                                  bg-orange-100 text-orange-700 
+                                  rounded-full font-medium">
+                    📍 {destination}
+                  </span>
+                )}
             </div>
+
+            {/* ---------- DIVIDER ---------- */}
+            <div className="mt-6 h-[3px] w-40 sm:w-48 bg-gradient-to-r from-orange-600 via-orange-400 to-transparent rounded-full" />
+
+            {/* ---------- RESULT TEXT ---------- */}
+            <p className="mt-6 text-xs sm:text-sm text-gray-500">
+              Showing tour packages for{" "}
+              <span className="font-medium text-gray-700">
+                {Array.isArray(destination)
+                  ? destination.join(", ")
+                  : destination}
+              </span>{" "}
+              ({duration} Day)
+            </p>
+
+            {/* ---------- FILTER GRID ---------- */}
+            <div className="mt-10">
+              <FilterGrid packages={packages} setIsOpen={setIsOpen} />
+            </div>
+
+            <PackagesCTA />
+            <VrindavanTrustStats />
+            <TrustBuildingSection />
+
+          </div>
           </section>
+
            <FooterCTA/>
 
           <Footer/>
           
         </>
       );
-    }
+}

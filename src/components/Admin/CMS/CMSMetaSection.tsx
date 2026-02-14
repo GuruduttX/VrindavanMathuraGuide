@@ -107,6 +107,7 @@ const CMSMetaSection = ({ title, category, slug, onChange, editorType }: { title
                         placeholder="a-human-approach-to-digital-marketing"
                         className="mt-2 w-full px-5 py-3 rounded-xl bg-white/5 text-white
             border border-white/10 focus:ring-2 focus:ring-sky-500 transition"
+                        required
                     />
                 </div>
 

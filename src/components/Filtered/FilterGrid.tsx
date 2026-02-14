@@ -2,7 +2,7 @@ import Image from "next/image";
 import { MapPin, Clock, Users, CheckCircle } from "lucide-react";
 import Link from "next/link";
 
-// const packages = [
+// const tour-packages = [
 //   {
 //     id: 1,
 //     title: "2 Day Vrindavan Darshan Package",
@@ -113,7 +113,7 @@ export default function FilterGrid({packages , setIsOpen} : {packages : any[], s
             {/* CTA */}
             <div className="flex gap-3 pt-2">
               <Link
-                href={`/packages/${pkg.slug}`}
+                href={`/tour-packages/${pkg.slug}`}
                 className="
                   flex-1 text-center cursor-pointer
                   bg-orange-500 hover:bg-orange-600

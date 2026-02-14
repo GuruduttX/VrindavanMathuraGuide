@@ -21,16 +21,29 @@ export const metadata: Metadata = {
   title: "Mathura Vrindavan Tour Packages | Local Guide, Taxi & Temple Darshan",
   description:
     "Explore Mathura & Vrindavan with trusted local tour guides. Book temple darshan, taxi services and customized spiritual tour packages at the best price.",
-
+  keywords: [
+    "Mathura Vrindavan tour package",
+    "Vrindavan local guide",
+    "Mathura taxi service",
+    "Temple darshan package",
+    "Mathura Vrindavan travel guide",
+  ],
+  alternates: {
+    canonical: "https://vrindavanmathuraguide.com/",
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
   openGraph: {
     title: "Mathura Vrindavan Tour Packages | Local Guide & Darshan",
     description:
       "Discover Mathura & Vrindavan with expert local guides. Taxi, temple darshan & spiritual tour packages available.",
-    url: " https://vrindavanmathuraguide.com/",
+    url: "https://vrindavanmathuraguide.com/",
     siteName: "Mathura Vrindavan Tour Guide",
     images: [
       {
-        url: "/og-mathura-vrindavan-tour.jpg",
+        url: "https://vrindavanmathuraguide.com/og-mathura-vrindavan-tour.jpg",
         width: 1600,
         height: 900,
         alt: "Mathura Vrindavan Tour",
@@ -38,13 +51,12 @@ export const metadata: Metadata = {
     ],
     type: "website",
   },
-
   twitter: {
     card: "summary_large_image",
     title: "Mathura Vrindavan Tour Packages",
     description:
       "Book Mathura Vrindavan tours with local guides, taxi & darshan services.",
-    images: ["/og-mathura-vrindavan.jpg"],
+    images: ["https://vrindavanmathuraguide.com/og-mathura-vrindavan-tour.jpg"],
   },
 };
 
@@ -72,7 +84,7 @@ const Home = async () => {
     "@context": "https://schema.org",
     "@type": "TravelAgency",
     "name": "Mathura Vrindavan Tour Guide",
-    "url": " https://vrindavanmathuraguide.com/",
+    "url": "https://vrindavanmathuraguide.com/",
     "logo": " https://vrindavanmathuraguide.com/Experience_my_India.webp",
     "description":
       "Mathura Vrindavan Tour Guide offers local guides, taxi services, temple darshan assistance and customized spiritual tour packages.",

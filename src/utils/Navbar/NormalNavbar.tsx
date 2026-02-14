@@ -31,7 +31,7 @@ export default function NormalNavbar() {
 
             {/* DESKTOP LINKS */}
             <div className="hidden lg:flex items-center space-x-16 ml-30 font-bold text-gray-700">
-              {[{name : "Home", url : '/'}, {name :"Packages", url : '/packages'}, {name :"About Us", url : "/about"},{name : "Blogs", url : "/blog"}].map((item) => (
+              {[{name : "Home", url : '/'}, {name :"Packages", url : '/tour-packages'}, {name :"About Us", url : "/about"}].map((item) => (
                 <Link
                   key={item.url}
                   href={`${item.url}`}
@@ -75,9 +75,9 @@ export default function NormalNavbar() {
           <div className="lg:hidden border-t bg-white px-6 py-6 space-y-5 shadow-md">
             <div className="flex flex-col gap-4 font-semibold text-gray-700">
               <Link href="/" onClick={() => setMobileOpen(false)}>Home</Link>
-              <Link href="/packages" onClick={() => setMobileOpen(false)}>Packages</Link>
+              <Link href="/tour-packages" onClick={() => setMobileOpen(false)}>Packages</Link>
               <Link href="/about" onClick={() => setMobileOpen(false)}>About Us</Link>
-              <Link href="/blog" onClick={() => setMobileOpen(false)}>Blogs</Link>
+              {/* <Link href="/blog" onClick={() => setMobileOpen(false)}>Blogs</Link> */}
             </div>
 
             <button

@@ -337,7 +337,7 @@ export default function EnquiryPopup({ open, onClose }: EnquiryPopupProps) {
           <button
             type="submit"
             disabled={loading}
-            className="bg-orange-600 hover:bg-orange-700 text-white px-6 py-3 rounded-3xl font-semibold"
+            className="bg-orange-600 hover:bg-orange-700 text-white px-6 py-3 rounded-3xl font-semibold cursor-pointer"
           >
             {loading ? "Sending..." : "Send Enquiry"}
           </button>

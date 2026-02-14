@@ -25,7 +25,7 @@ export default function DestinationRoute({
   const mainRoute = `${routeData.source} → ${routeData.destination}`;
 
   return (
-    <div className="w-full max-w-3xl px-5 py-3">
+    <div className="w-full max-w-3xl px-5 ">
 
       {/* MAIN BUTTON */}
       <button

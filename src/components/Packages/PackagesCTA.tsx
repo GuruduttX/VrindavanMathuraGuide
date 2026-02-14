@@ -11,7 +11,7 @@ const openWhatsApp = (source: string) => {
     "Hi, I’m planning a group yatra to Mathura & Vrindavan. Please guide me with packages and pricing."
   );
 
-  const phone = "91XXXXXXXXXX";
+  const phone = "917302265809";
   window.open(`https://wa.me/${phone}?text=${message}`, "_blank");
 };
 
