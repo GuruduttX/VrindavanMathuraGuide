@@ -179,7 +179,7 @@ export default function DestinationFilter() {
                 <div className="flex flex-wrap gap-3 text-xs text-gray-700">
                   <span className="flex items-center gap-1">
                     <Clock className="w-4 h-4 text-orange-500" />
-                    {pkg.duration}
+                    {pkg.duration} day
                   </span>
                   <span className="flex items-center gap-1">
                     <Users className="w-4 h-4 text-orange-500" />
@@ -210,7 +210,7 @@ export default function DestinationFilter() {
                 {/* CTA */}
                 <div className="flex gap-3 pt-2">
                   <Link
-                    href={`/tour-packages/${pkg.slug}`}
+                    href={`/tour-packages/${pkg.duration}/${pkg.slug}`}
                     className="flex-1 text-center cursor-pointer
                   bg-orange-500 hover:bg-orange-600
                   text-white font-semibold py-2.5

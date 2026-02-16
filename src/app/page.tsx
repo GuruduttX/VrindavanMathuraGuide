@@ -16,6 +16,7 @@ import WhyChooseUs from '@/components/Home/WhyChooseUs'
 import type { Metadata } from "next";
 import { supabase } from '@/lib/supabase/SupabaseConfig'
 import Script from 'next/script'
+import DivineDivider from '@/utils/DivineDivider'
 
 export const metadata: Metadata = {
   title: "Mathura Vrindavan Tour Packages | Local Guide, Taxi & Temple Darshan",
@@ -173,6 +174,7 @@ const Home = async () => {
       <HeroSection />
       <DestinationFilter/>
       <EnquirySection />
+  
       <PopularTours />
       <GroupCta />
       <WhyChooseUs />

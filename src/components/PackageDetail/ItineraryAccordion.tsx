@@ -31,8 +31,9 @@ export default function ItineraryAccordion({PackageData} : any) {
             >
               <div className="flex items-center gap-4">
                 {/* Day Badge */}
-                <span className="rounded-full bg-gradient-to-r from-orange-500 to-orange-600 px-4 py-1 text-sm font-bold text-white shadow">
-                  Day {item.day}
+                <span className="flex gap-2 rounded-full bg-gradient-to-r from-orange-500 to-orange-600 px-4 py-1 text-xs md:text-sm font-bold text-white shadow">
+                 <span>Day </span> 
+                  {item.day}
                 </span>
 
                 {/* Title */}

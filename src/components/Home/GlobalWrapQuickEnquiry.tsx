@@ -16,20 +16,36 @@ export default function GlobalQuickEnquiry() {
   return (
     <>
       {/* Floating Trigger Button */}
-      <button
-        onClick={() => setOpen(true)}
-        className="
-          fixed bottom-14 left-6 z-40
-          h-18 w-18 rounded-full
-          bg-gradient-to-br from-orange-500 to-amber-500
-          text-white
-          flex items-center justify-center
-          shadow-xl
-          hover:scale-110 transition cursor-pointer
-        "
-      >
-        <Phone />
-      </button>
+      <div className="fixed bottom-14 left-6 z-40">
+
+  {/* Wave Ring */}
+  <span className="absolute inset-0 rounded-full bg-orange-400 opacity-40 animate-ping"></span>
+
+  {/* Soft Outer Glow */}
+  <span className="absolute inset-0 rounded-full bg-orange-500 blur-xl opacity-40"></span>
+
+  {/* Main Button */}
+  <button
+    onClick={() => setOpen(true)}
+    className="
+      relative
+      h-16 w-16
+      rounded-full
+      bg-gradient-to-br from-orange-500 to-amber-500
+      text-white
+      flex items-center justify-center
+      shadow-[0_0_25px_rgba(255,140,0,0.6)]
+      hover:scale-110
+      transition
+      duration-800
+      cursor-pointer
+    "
+  >
+    <Phone className="w-6 h-6" />
+  </button>
+
+</div>
+
 
       {/* Popup */}
       <QuickEnquiry open={open} onClose={() => setOpen(false)} />

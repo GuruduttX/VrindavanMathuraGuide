@@ -9,10 +9,14 @@ export default function HeroSection() {
 
 
       {/* Orange Gradient Overlay */}
+     
+
       <div className="absolute inset-0 bg-gradient-to-r from-[#b3500a] via-[#cf7602] to-[#c45800]" />
 
       {/* Content */}
       <div className="relative z-10 mx-auto max-w-7xl px-6 pt-12">
+
+   
         {/* Badge */}
         <span className="inline-flex items-center backdrop-blur-md cursor-pointer
          border border-white/20 gap-2 rounded-full bg-orange-500/20 px-5 py-2 text-sm font-medium text-orange-200 backdrop-blur">

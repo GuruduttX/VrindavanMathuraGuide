@@ -16,17 +16,19 @@ const PackageDetails = ({ price , duration , onChange, rating, reviews }: { pric
                 />
             </div>
 
-            {/* <div>
-                <label className="text-sm text-white/70">Duration</label>
+            <div>
+                <label className="text-sm text-white/70">Duration <span className='text-red-500'>*</span></label>
                 <input
                     value={duration}
                     required
+                    placeholder='eg : one-day, four-day '
                     onChange={(e) => { onChange("duration", e.target.value) }}
-                    type='number '
+                    type='text '
                     className="mt-2 w-full px-5 py-3 rounded-xl bg-white/5 text-white
                         border border-white/10 focus:ring-2 focus:ring-sky-500 transition"
                 />
-            </div> */}
+                    
+            </div>
 
             <div>
 

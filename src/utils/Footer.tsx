@@ -20,6 +20,9 @@ export default function Footer() {
     <footer className="bg-gradient-to-br from-orange-500 via-orange-600 to-orange-700 text-white">
       
       {/* MAIN FOOTER */}
+    
+    {/* Dark Overlay */}
+
       <div className="max-w-7xl mx-auto px-6 lg:px-14 xl:px-6 py-16">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-12">
 
@@ -37,7 +40,7 @@ export default function Footer() {
             <div className="space-y-4 text-sm">
               <div className="flex gap-3 items-center">
                 <Phone size={16} />
-                <span>+91 89236 60886</span>
+                <span>+91 7302265809</span>
               </div>
 
               <div className="flex gap-3 items-start">
@@ -47,7 +50,7 @@ export default function Footer() {
 
               <div className="flex gap-3 items-center">
                 <Mail size={16} />
-                <span>support@mathuravrindavantour.com</span>
+                <span>info@vrindavanmathuraguide.com</span>
               </div>
             </div>
           </div>

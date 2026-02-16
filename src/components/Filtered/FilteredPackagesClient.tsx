@@ -51,7 +51,7 @@ export default function FilteredPackagesClient() {
 
     setPackages(data || []);
   } catch (err: any) {
-    console.error("Error fetching packages:", err.message);
+    console.log("Error fetching packages:", err.message);
     setError("Failed to load packages");
   } finally {
     setLoading(false);

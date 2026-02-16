@@ -2,6 +2,39 @@
 
 import { useState } from "react";
 import { ChevronDown, ShieldCheck, FileText, Wallet } from "lucide-react";
+import { RotateCcw, Ban, BadgeCheck, CreditCard } from "lucide-react";
+
+
+const getIcon = {
+    "Refund Policy" : <RotateCcw className="w-6 h-6 text-orange-400" />,
+    "Cancel Policy" : <Ban className="w-6 h-6 text-orange-400"/>,
+    "Confirmation  Policy" : <BadgeCheck className="w-6 h-6 text-orange-400" />,
+    "Payment Ploicy" : <CreditCard className="w-6 h-6 text-orange-400"/>
+}
+
+
+// {
+//     "id": "67cb2026-af18-41ce-8d94-dd8b879aa386",
+//     "title": "Refund Policy",
+//     "description": "100% refund if cancelled 48 hours before trip starting time."
+//   },
+//   {
+//     "id": "9a186572-e56c-447d-87c8-78246c47c7ca",
+//     "title": "Cancel Policy",
+//     "description": "To cancel your trip, simply text or call at our official booking contact or mail us at info@vrindavanmathuraguide.com"
+//   },
+//   {
+//     "id": "e677d7ff-5f87-4996-ac1d-1374a702ac23",
+//     "title": "Confirmation  Policy",
+//     "description": "You will have to pay an advance to confirm your trip, make payment at the verified channels only."
+//   },
+//   {
+//     "id": "dddad492-0b89-4eee-8004-606735b19296",
+//     "title": "Payment Ploicy",
+//     "description": "50% to be paid as advance and remaining at the start of the tour."
+//   }
+// ]
+
 
 
 
@@ -38,13 +71,9 @@ export default function Policies({PackageData} : any) {
                   {/* Icon */}
                   <span
                     className={`flex h-10 w-10 items-center justify-center rounded-full transition-all
-                    ${
-                      isOpen
-                        ? "bg-gradient-to-br from-orange-500 to-orange-600 text-white"
-                        : "bg-orange-100 text-orange-600"
-                    }`}
+                    `}
                   >
-                    {/* <Icon size={18} /> */}
+                      {getIcon[item.title as keyof typeof getIcon]}
                   </span>
 
                   {/* Title */}

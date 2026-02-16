@@ -21,21 +21,23 @@ import TrustBuildingSection from "@/components/Home/TrustBuildSec";
 import Script from "next/script";
 import { notFound } from "next/navigation";
 import Link from "next/link";
+import DurationSection from "@/components/Admin/PackageEditor/DurationSection";
 
 
 
-export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
+export async function generateMetadata({ params }: { params: Promise<{ slug: string , duration : string }> }) {
 
-    const { slug } = await params;
+    const { slug , duration} = await params;
 
     const { data } = await supabase
         .from("Package")
         .select("*")
         .eq("slug", slug)
+        .eq('duartion', duration)
         .single();
      
   const baseUrl = "https://vrindavanmathuraguide.com";
-  const url = `${baseUrl}/tour-packages/${slug}`;    
+  const url = `${baseUrl}/tour-packages/${duration}/${slug}`;    
 
     return {
       title: data?.meta?.title ?? data?.title ?? "Travel Package",
@@ -77,19 +79,20 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 
 }
 
-export async function generateStaticParams() {
-  const { data } = await supabase
-    .from("Package")
-    .select("slug");
+// export async function generateStaticParams() {
+//   const { data } = await supabase
+//     .from("Package")
+//     .select("slug");
 
-  return data?.map((item) => ({
-    slug: item.slug,
-  })) ?? [];
-}
+//   return data?.map((item) => ({
+//     slug: item.slug,
+//   })) ?? [];
+// }
 
 
-const getPackageData = async (slug: string) => {
-  const { data, error } = await supabase.from("Package").select("*").eq("slug", slug).single();
+const getPackageData = async (slug: string , duration : string) => {
+  const { data, error } = await supabase.from("Package").select("*").
+                         eq("slug", slug).eq('duration', duration).single();
 
   if (error) {
     console.log("There is some of the error I have get : ");
@@ -105,19 +108,16 @@ const getPackageData = async (slug: string) => {
 
 
 
-const page = async ({ params }: { params: Promise<{ slug: string }> }) => {
+const page = async ({ params }: { params: Promise<{ slug: string , duration : string}> }) => {
 
-  const { slug } = await params;
-<<<<<<< HEAD:src/app/tour-packages/[slug]/page.tsx
- 
-=======
->>>>>>> main:src/app/packages/[slug]/page.tsx
-  const PackageData = await getPackageData(slug);
+  const { slug , duration } = await params;
+  const PackageData = await getPackageData(slug, duration);
 
    const { data: packages, error } = await supabase
           .from("Package")
           .select("id, slug")
           .eq("slug", slug)
+          .eq('duration', duration)
           .maybeSingle();
   
   

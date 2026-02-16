@@ -100,7 +100,7 @@ const CMSMetaSection = ({ title, category, slug, onChange, editorType }: { title
 
 
                 <div>
-                    <label className="text-sm text-white/70">Slug</label>
+                    <label className="text-sm text-white/70">Slug  <span className='text-red-500'>*</span></label>
                     <input
                         value={slug}
                         onChange={(e) => { onChange("slug", e.target.value) }}
