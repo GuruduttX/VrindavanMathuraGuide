@@ -1,4 +1,3 @@
-const BASE_URL = 'https://courseunbox.com'
 
 export async function GET() {
   return new Response(

@@ -683,6 +683,16 @@ body::-webkit-scrollbar {
     scrollbar-width: none;
 }
 
+.sun-editor {
+  background: white !important;
+  border-radius: 16px;
+}
+
+.sun-editor-editable {
+  background: white !important;
+  color: #1f2937 !important;
+}
+
 
 
 

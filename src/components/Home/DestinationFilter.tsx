@@ -148,7 +148,7 @@ export default function DestinationFilter() {
               bg-orange-500 text-white text-xs font-semibold
               px-3 py-1 rounded-full shadow"
                 >
-                  {pkg.duration} day
+                  {pkg.duration} 
                 </span>
 
                 {/* PRICE BADGE */}
@@ -179,7 +179,7 @@ export default function DestinationFilter() {
                 <div className="flex flex-wrap gap-3 text-xs text-gray-700">
                   <span className="flex items-center gap-1">
                     <Clock className="w-4 h-4 text-orange-500" />
-                    {pkg.duration} day
+                    {pkg.duration}
                   </span>
                   <span className="flex items-center gap-1">
                     <Users className="w-4 h-4 text-orange-500" />

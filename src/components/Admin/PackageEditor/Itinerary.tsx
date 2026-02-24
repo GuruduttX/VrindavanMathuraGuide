@@ -128,25 +128,27 @@ const ItinearyMaker = ({
            <label className="text-gray-400 font-semibold py-6">
                  Description
           </label>
-          <SunEditor
-            defaultValue={item.description}
-            setOptions={{
-              minHeight: "35vh",
-              maxHeight: "40vh",
-              buttonList: [
-                ["undo", "redo"],
-                ["formatBlock"], // H1, H2, H3 works here
-                ["bold", "italic", "underline"],
-                 ["list", "outdent", "indent"],
-                ["align"],
-                ["link", "image"],
-                ["table"],
-              ],
-            }}
-            onChange={(content) => {
-              handleDescriptionChange(item.id, content);
-            }}
-          />
+          <div className="bg-white rounded-2xl border border-sky-100 shadow-sm">
+            <SunEditor
+              defaultValue={item.description}
+              setOptions={{
+                minHeight: "35vh",
+                maxHeight: "40vh",
+                buttonList: [
+                  ["undo", "redo"],
+                  ["formatBlock"],
+                  ["bold", "italic", "underline"],
+                  ["list", "outdent", "indent"],
+                  ["align"],
+                  ["link", "image"],
+                  ["table"],
+                ],
+              }}
+              onChange={(content) => {
+                handleDescriptionChange(item.id, content);
+              }}
+              />
+            </div>
           </div>
 
           <div className="mt-4">
