@@ -113,7 +113,7 @@ export default function FilterGrid({packages , setIsOpen} : {packages : any[], s
             {/* CTA */}
             <div className="flex gap-3 pt-2">
               <Link
-                href={`/tour-packages/${pkg.slug}`}
+                href={`/tour-packages/${pkg.duration}/${pkg.slug}`}
                 className="
                   flex-1 text-center cursor-pointer
                   bg-orange-500 hover:bg-orange-600

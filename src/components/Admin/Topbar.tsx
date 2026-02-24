@@ -1,15 +1,8 @@
 "use client"
-import { supabase } from "@/lib/supabase/SupabaseConfig";
 import { Bell, Mail, LogOut } from "lucide-react";
-import { useRouter } from "next/navigation";
 
 export default function Topbar() {
-    const router = useRouter();
 
-    const handleLogout = async () => {
-    await supabase.auth.signOut();
-    router.push("/admin-login");
-  };
 
     return (
         <header className="flex items-center justify-between px-6 py-4 border-b border-white/10 bg-[#0f172a] w-[80vw] rounded-2xl ml-67 shadow-sm shadow-indigo-300 hover:shadow-md hover:shadow-indigo-400 cursor-pointer transition fixed z-10">
@@ -30,7 +23,6 @@ export default function Topbar() {
                     />
                     <span>Admin</span>
                 </div>
-                <LogOut onClick={handleLogout} />
             </div>
         </header>
     );

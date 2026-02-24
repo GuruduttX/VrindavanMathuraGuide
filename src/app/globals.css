@@ -551,3 +551,148 @@ body::-webkit-scrollbar {
 
 
 
+@keyframes softPulse {
+  0%, 100% {
+    box-shadow: 0 0 15px rgba(255,140,0,0.6);
+  }
+  50% {
+    box-shadow: 0 0 35px rgba(255,140,0,0.9);
+  }
+}
+.pulse-orange {
+  animation: softPulse 2.5s infinite;
+}
+
+@keyframes floatOrb {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+@keyframes glowBreath {
+  0%, 100% {
+    box-shadow: 0 0 20px rgba(37, 211, 102, 0.6);
+  }
+  50% {
+    box-shadow: 0 0 40px rgba(37, 211, 102, 0.9);
+  }
+}
+
+.whatsapp-float {
+  animation: floatOrb 3s ease-in-out infinite;
+}
+
+.whatsapp-glow {
+  animation: glowBreath 2.5s ease-in-out infinite;
+}
+
+/* Soft Glow Animation */
+@keyframes glowLine {
+  0%, 100% {
+    box-shadow: 0 0 10px rgba(255,140,0,0.4);
+  }
+  50% {
+    box-shadow: 0 0 25px rgba(255,160,0,0.8);
+  }
+}
+
+.divine-glow {
+  animation: glowLine 3s ease-in-out infinite;
+}
+
+/* Spark Floating Animation */
+@keyframes floatSpark {
+  0% {
+    transform: translateY(0px);
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-30px);
+    opacity: 0;
+  }
+}
+
+.spark {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  background: radial-gradient(circle, #ffd27f 0%, #ff9800 70%);
+  border-radius: 50%;
+  opacity: 0;
+  animation: floatSpark 4s linear infinite;
+}
+
+.spark-1 { left: 30%; animation-delay: 0s; }
+.spark-2 { left: 45%; animation-delay: 1s; }
+.spark-3 { left: 60%; animation-delay: 2s; }
+.spark-4 { left: 75%; animation-delay: 3s; }
+
+@keyframes floatDust {
+  0% {
+    transform: translateY(0px) translateX(0px);
+    opacity: 0;
+  }
+  20% {
+    opacity: 0.6;
+  }
+  100% {
+    transform: translateY(-120px) translateX(20px);
+    opacity: 0;
+  }
+}
+
+.dust-particle {
+  position: absolute;
+  bottom: -20px;
+  width: 4px;
+  height: 4px;
+  background: radial-gradient(circle, rgba(255,255,255,0.8), rgba(255,165,0,0.4));
+  border-radius: 50%;
+  animation: floatDust linear infinite;
+}
+
+/* Random positions + speeds */
+.dust-particle:nth-child(odd) {
+  left: 20%;
+  animation-duration: 8s;
+}
+
+.dust-particle:nth-child(even) {
+  left: 60%;
+  animation-duration: 12s;
+}
+
+.dust-particle:nth-child(3n) {
+  left: 40%;
+  animation-duration: 10s;
+}
+
+.dust-particle:nth-child(4n) {
+  left: 80%;
+  animation-duration: 14s;
+}
+
+
+.destination-scroll::-webkit-scrollbar {
+    scrollbar-width: none;
+}
+
+.sun-editor {
+  background: white !important;
+  border-radius: 16px;
+}
+
+.sun-editor-editable {
+  background: white !important;
+  color: #1f2937 !important;
+}
+
+
+
+

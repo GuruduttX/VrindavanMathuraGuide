@@ -1,3 +1,4 @@
+import DivineDivider from "@/utils/DivineDivider";
 import { HeartHandshake, Star, Flower2, PhoneCall } from "lucide-react";
 
 const features = [
@@ -36,9 +37,10 @@ export default function WhyChooseUs() {
           </h2>
 
           {/* Connected Gradient Line */}
-          <div className="mt-5 flex justify-center">
+          {/* <div className="mt-5 flex justify-center">
             <div className="h-1 w-48 rounded-full bg-gradient-to-r from-transparent via-orange-500 to-transparent" />
-          </div>
+          </div> */}
+          <DivineDivider/>
         </div>
 
         {/* FEATURES GRID */}

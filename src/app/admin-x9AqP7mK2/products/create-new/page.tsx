@@ -144,7 +144,7 @@ export default function CreateNewPackage() {
     sightseeing_included  : false
   });
 
-  const[childImage , setChildImage] = useState<ChildImage[]>([]);
+  const [childImage , setChildImage] = useState<ChildImage[]>([]);
   const [faqs, setFaqs] = useState<FAQ[]>([{id : crypto.randomUUID() , question : "",  answer : ""}]);
   const [testimonials, setTestimonials] = useState<Testimonial[]>([{id : crypto.randomUUID() , name : "", description : ""}]);
   const [highLights, setHighLights] = useState<HighLights[]>([{id : crypto.randomUUID() , description : ""}]);

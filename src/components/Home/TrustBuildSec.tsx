@@ -1,5 +1,4 @@
 
-
 import {
   HeartHandshake,
   MapPin,
@@ -49,6 +48,8 @@ const trustCards = [
 ];
 
 export default function TrustBuildingSection() {
+
+
   return (
     <section className="bg-gradient-to-b from-orange-50 to-white py-16 sm:py-20 lg:py-24 overflow-hidden">
       <div className="max-w-7xl mx-auto px-5 sm:px-6 grid grid-cols-1 lg:grid-cols-2 gap-10 sm:gap-12 lg:gap-14 items-center">
@@ -101,7 +102,8 @@ export default function TrustBuildingSection() {
                     key={index}
                     className="
                       min-w-[240px] sm:min-w-[260px] lg:min-w-[280px]
-                      bg-gradient-to-br from-orange-500 to-orange-400
+                      reveal bg-gradient-to-br from-orange-500 to-orange-400
+                     
                       cursor-pointer
                       text-white
                       rounded-3xl

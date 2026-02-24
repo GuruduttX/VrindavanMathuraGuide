@@ -98,6 +98,7 @@ export default function PackageTestimonials({ PackageData }: any) {
 
             {/* CTA Button */}
             <button className="mt-7 w-full 
+            
                                 bg-orange-500 
                                 hover:bg-orange-600 
                                 text-white 
@@ -211,22 +212,22 @@ export default function PackageTestimonials({ PackageData }: any) {
                 {/* ARROWS — Visible from md and up */}
                 <button
                 onClick={() => scroll("left")}
-                className="hidden md:flex absolute left-0 top-1/2 -translate-y-1/2 z-20 
+                className="hidden text-orange-500 md:flex absolute left-0 top-1/2 -translate-y-1/2 z-20 
                             h-10 w-10 rounded-full bg-white shadow-lg border 
                             items-center justify-center hover:bg-orange-50 
                             transition cursor-pointer"
                 >
-                <ChevronLeft className="w-5 h-5 text-gray-700" />
+                <ChevronLeft className="w-5 h-5 text-orange-700" />
                 </button>
 
                 <button
                 onClick={() => scroll("right")}
-                className="hidden md:flex absolute right-0 top-1/2 -translate-y-1/2 z-20 
+                className="hidden md:flex absolute right-0 top-1/2 -translate-y-1/2 z-20 text-orange-500 
                             h-10 w-10 rounded-full bg-white shadow-lg border 
                             items-center justify-center hover:bg-orange-50 
                             transition cursor-pointer"
                 >
-                <ChevronRight className="w-5 h-5 text-gray-700" />
+                <ChevronRight className="w-5 h-5 text-orange-700" />
                 </button>
             </div>
         </div>

@@ -148,7 +148,7 @@ export default function DestinationFilter() {
               bg-orange-500 text-white text-xs font-semibold
               px-3 py-1 rounded-full shadow"
                 >
-                  {pkg.duration} day
+                  {pkg.duration} 
                 </span>
 
                 {/* PRICE BADGE */}
@@ -210,7 +210,7 @@ export default function DestinationFilter() {
                 {/* CTA */}
                 <div className="flex gap-3 pt-2">
                   <Link
-                    href={`/tour-packages/${pkg.slug}`}
+                    href={`/tour-packages/${pkg.duration}/${pkg.slug}`}
                     className="flex-1 text-center cursor-pointer
                   bg-orange-500 hover:bg-orange-600
                   text-white font-semibold py-2.5

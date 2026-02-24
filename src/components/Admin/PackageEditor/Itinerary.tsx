@@ -82,19 +82,31 @@ const ItinearyMaker = ({
           className="border-2 border-indigo-500 rounded-3xl w-full p-6 shadow-md shadow-indigo-500 cursor-pointer mb-5"
         >
           <div className="flex gap-3">
-            <input
-              required
-              type="number"
-              placeholder="Enter Day Of The Itineray"
-              className="mt-2 w-full px-5 py-3 rounded-xl bg-white/5 text-white
-            border border-white/10 focus:ring-2 focus:ring-sky-500 transition"
-              value={item.day}
-              onChange={(e) => {
-                handleDurationChange(item.id, e.target.value);
-              }}
+            <div>
+               <label className="text-gray-400 font-semibold">
+                 Day
+              </label>
+
+               <input
+                required
+                type="number"
+                placeholder="Enter Day Of The Itineray"
+                className="mt-2 w-full px-5 py-3 rounded-xl bg-white/5 text-white
+                border border-white/10 focus:ring-2 focus:ring-sky-500 transition"
+                value={item.day}
+                onChange={(e) => {
+                  handleDurationChange(item.id, e.target.value);
+                }}
             />
 
-            <input
+            </div>
+
+            <div>
+               <label className="text-gray-400 font-semibold">
+                 Title
+              </label>
+
+              <input
               required
               type="text"
               placeholder="Enter The Title Of The Itineary Day"
@@ -105,29 +117,38 @@ const ItinearyMaker = ({
                 handleTitleChange(item.id, e.target.value);
               }}
             />
+              
+            </div>
+           
+
+            
           </div>
 
      <div className="dark-sun-editor h-[45vh] w-full rounded-2xl p-5  my-7 overflow-hidden shadow-xl hover:shadow-2xl hover:shadow-indigo-400 border border-indigo-400 shadow-indigo-400 hover:border-2 hover:border-indigo-400 transition cursor-pointer">
-
-          <SunEditor
-            defaultValue={item.description}
-            setOptions={{
-              minHeight: "35vh",
-              maxHeight: "40vh",
-              buttonList: [
-                ["undo", "redo"],
-                ["formatBlock"], // H1, H2, H3 works here
-                ["bold", "italic", "underline"],
-                 ["list", "outdent", "indent"],
-                ["align"],
-                ["link", "image"],
-                ["table"],
-              ],
-            }}
-            onChange={(content) => {
-              handleDescriptionChange(item.id, content);
-            }}
-          />
+           <label className="text-gray-400 font-semibold py-6">
+                 Description
+          </label>
+          <div className="bg-white rounded-2xl border border-sky-100 shadow-sm">
+            <SunEditor
+              defaultValue={item.description}
+              setOptions={{
+                minHeight: "35vh",
+                maxHeight: "40vh",
+                buttonList: [
+                  ["undo", "redo"],
+                  ["formatBlock"],
+                  ["bold", "italic", "underline"],
+                  ["list", "outdent", "indent"],
+                  ["align"],
+                  ["link", "image"],
+                  ["table"],
+                ],
+              }}
+              onChange={(content) => {
+                handleDescriptionChange(item.id, content);
+              }}
+              />
+            </div>
           </div>
 
           <div className="mt-4">

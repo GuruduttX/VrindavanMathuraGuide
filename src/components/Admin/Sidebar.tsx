@@ -1,13 +1,17 @@
 "use client"
 
+import { supabase } from "@/lib/supabase/SupabaseConfig";
 import {
     LayoutDashboard,
     FileText,
     Users,
     Settings,
     Package,
+    LogOut,
+    LogOutIcon,
 } from "lucide-react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 const menu = [
@@ -17,14 +21,21 @@ const menu = [
     { name: "Product Editor", icon: Package, slug: "/admin-x9AqP7mK2/products" },
     { name: "User Management", icon: Users, slug: "/admin-x9AqP7mK2" },
     { name: "Settings Panel", icon: Settings, slug: "/admin-x9AqP7mK2" },
+   
 ];
 
 export default function Sidebar() {
 
     const [active , setActive] = useState("Dashboard");
+    const router = useRouter();
 
     const handleSideButtonClick = (item : string) => { 
-        setActive(item)
+        setActive(item);
+    }
+    
+    const handleLogout = async () => {
+        await supabase.auth.signOut();
+        router.push("/admin-login");
     }
 
     return (
@@ -47,6 +58,16 @@ export default function Sidebar() {
                         </button>
                     </Link>
                 ))}
+
+                <button
+                           
+                    className={`w-full flex items-center gap-3 px-4 rounded-lg hover:bg-white/10 cursor-pointer text-white text-md py-3 mb-2}`}
+
+                    onClick={() => {handleLogout}}
+                >
+                    <LogOutIcon size={18} />
+                    <span>LogOut</span>
+                </button>
             </nav>
         </aside>
     );

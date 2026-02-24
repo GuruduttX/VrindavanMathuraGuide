@@ -14,7 +14,6 @@ import FooterCTA from '@/utils/FooterCTA'
 import DestinationFilter from '@/components/Home/DestinationFilter'
 import WhyChooseUs from '@/components/Home/WhyChooseUs'
 import type { Metadata } from "next";
-import { supabase } from '@/lib/supabase/SupabaseConfig'
 
 
 export const metadata: Metadata = {
@@ -173,6 +172,7 @@ const Home = async () => {
       <HeroSection />
       <DestinationFilter/>
       <EnquirySection />
+  
       <PopularTours />
       <GroupCta />
       <WhyChooseUs />

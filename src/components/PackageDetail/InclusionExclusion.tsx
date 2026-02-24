@@ -41,7 +41,7 @@ export default function InclusionExclusion({PackageData} : any) {
             <ul className="space-y-3">
               {PackageData.exclusions.map((item : any , index : any) => (
                 <li key={index} className="flex items-start gap-3">
-                  <XCircle className="w-5 h-5 text-red-500 mt-0.5" />
+                  <span><XCircle className="w-5 h-5 text-red-500 mt-0.5" /></span> 
                   <span className="text-gray-800 leading-relaxed">
                     {item.description}
                   </span>

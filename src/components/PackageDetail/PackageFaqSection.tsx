@@ -1,3 +1,5 @@
+import { ChevronDown } from "lucide-react";
+
 interface PackageFAQ {
   question: string;
   answer: string;
@@ -57,39 +59,57 @@ export default function PackageFaqSection({PackageData} : any) {
         </div>
 
         {/* FAQ LIST */}
-        <div className="space-y-5">
-          {PackageData.faqs.map((faq : any , index : any) => (
-            <details
-              key={index}
-              className="group relative bg-white rounded-2xl 
-              shadow-sm hover:shadow-md transition overflow-hidden"
-            >
-              {/* LEFT ACCENT */}
-              <div className="absolute left-0 top-0 h-full w-1 
-                bg-gradient-to-b from-orange-500 to-orange-300" />
+       <div className="space-y-6">
+        {PackageData.faqs.map((faq: any, index: number) => (
+          <details
+            key={index}
+            className="group relative bg-white rounded-3xl border border-orange-100
+            shadow-sm transition-all duration-300
+            hover:shadow-lg hover:-translate-y-1"
+          >
 
-              <summary className="list-none cursor-pointer px-6 py-5 
-                flex items-start justify-between gap-6">
+            {/* Summary */}
+            <summary className="list-none cursor-pointer px-6 py-6 flex items-center justify-between gap-6">
+
+              {/* LEFT SIDE */}
+              <div className="flex items-start gap-4">
+
+                {/* Number Badge */}
+                <div className="flex items-center justify-center w-9 h-9 rounded-full 
+                  bg-orange-100 text-orange-600 font-semibold text-sm shrink-0">
+                  {index + 1}
+                </div>
+
+                {/* Question */}
                 <h3 className="font-semibold text-gray-900 text-base md:text-lg leading-snug">
                   {faq.question}
                 </h3>
+              </div>
 
-                {/* ICON */}
-                <span className="mt-1 text-orange-500 transition-transform 
-                  group-open:rotate-180">
-                  ⌄
-                </span>
-              </summary>
+              {/* Toggle Icon */}
+              <span
+                className="w-8 h-8 flex items-center justify-center 
+                rounded-full bg-orange-50 text-orange-500 
+                transition-all duration-300
+                group-open:bg-orange-500 group-open:text-white
+                group-open:rotate-180"
+              >
+                <ChevronDown/>
+              </span>
+            </summary>
 
-              {/* ANSWER */}
-              <div className="px-6 pb-6 pt-1">
-                <p className="text-gray-700 leading-relaxed">
+            {/* Answer */}
+            <div className="px-6 pb-6 pt-0">
+              <div className="pl-13 border-l-2 border-orange-100">
+                <p className="text-gray-700 leading-relaxed text-sm md:text-base">
                   {faq.answer}
                 </p>
               </div>
-            </details>
-          ))}
-        </div>
+            </div>
+          </details>
+        ))}
+      </div>
+
 
       </div>
     </section>

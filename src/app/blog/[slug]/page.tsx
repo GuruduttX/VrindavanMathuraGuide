@@ -110,10 +110,6 @@ const Page = async ({ params }: { params: Promise<{ slug: string }> }) => {
 
     const Blogs = await getBlogData(slug);
 
-    console.log("The data of the Blogs is the schema");
-    console.log(Blogs);
-    console.log(Blogs.schema);
-
     const articleSchema = {
         "@context": "https://schema.org",
         "@type": "BlogPosting",
