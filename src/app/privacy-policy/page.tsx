@@ -1,9 +1,91 @@
 import Footer from "@/utils/Footer";
 import Navbar from "@/utils/Navbar";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+    metadataBase: new URL("https://vrindavanmathuraguide.com"),
+
+    title: "Privacy Policy | Vrindavan Mathura Guide",
+
+    description:
+        "Read the official privacy policy of Vrindavan Mathura Guide to understand how we collect, use and protect your personal information.",
+
+    alternates: {
+        canonical: "/privacy-policy",
+    },
+
+    robots: {
+        index: true,
+        follow: true,
+    },
+
+    openGraph: {
+        type: "website",
+        url: "/privacy-policy",
+        title: "Privacy Policy | Vrindavan Mathura Guide",
+        description:
+            "Learn how Vrindavan Mathura Guide protects your personal data and ensures secure travel bookings.",
+        siteName: "Vrindavan Mathura Guide",
+    },
+
+    twitter: {
+        card: "summary",
+        title: "Privacy Policy | Vrindavan Mathura Guide",
+        description:
+            "Official privacy policy of Vrindavan Mathura Guide.",
+    },
+};
 
 export default function PrivacyPolicyPage() {
+
+    const privacySchema = {
+        "@context": "https://schema.org",
+        "@type": "PrivacyPolicy",
+        "@id": "https://vrindavanmathuraguide.com/privacy-policy#webpage",
+        "url": "https://vrindavanmathuraguide.com/privacy-policy",
+        "name": "Privacy Policy - Vrindavan Mathura Guide",
+        "description":
+            "Official privacy policy of Vrindavan Mathura Guide explaining data collection, security practices and user rights.",
+        "inLanguage": "en-IN",
+        "isPartOf": {
+            "@id": "https://vrindavanmathuraguide.com/#website"
+        },
+        "publisher": {
+            "@id": "https://vrindavanmathuraguide.com/#organization"
+        },
+        "datePublished": "2026-01-01",
+        "dateModified": "2026-01-01"
+    };
+
+    const breadcrumbSchema = {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "@id": "https://vrindavanmathuraguide.com/privacy-policy#breadcrumb",
+        "itemListElement": [
+            {
+                "@type": "ListItem",
+                "position": 1,
+                "name": "Home",
+                "item": "https://vrindavanmathuraguide.com/"
+            },
+            {
+                "@type": "ListItem",
+                "position": 2,
+                "name": "Privacy Policy",
+                "item": "https://vrindavanmathuraguide.com/privacy-policy"
+            }
+        ]
+    };
     return (
         <>
+
+            <script
+                id="privacy-schema"
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{
+                    __html: JSON.stringify([privacySchema, breadcrumbSchema])
+                }}
+            />
             <Navbar />
             <section className="relative min-h-screen bg-gradient-to-b from-orange-50 via-white to-orange-100">
 

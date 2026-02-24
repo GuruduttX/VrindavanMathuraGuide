@@ -5,65 +5,67 @@ import RelatedBlog from "@/components/Blog/RelatedBlog";
 import BlogFAQ from "@/components/Blog/BlogFAQ";
 import AddCard from "@/components/Blog/AddCTA";
 import BlogCategories from "@/components/Blog/BlogCategories";
-import FinalCTASection from "@/components/Blog/FinalCTASection";
 import LeftContent from "@/components/Blog/LeftContent";
 import { supabase } from "@/lib/supabase/SupabaseConfig";
-import Script from "next/script";
 import FooterCTA from "@/utils/FooterCTA";
-import TrustBuildingSection from "@/components/Home/TrustBuildSec";
 import GroupCta from "@/components/Home/GroupCta";
 
+export async function generateMetadata({ params }: { params: { slug: string } }) {
 
-
-
-export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
-
-    const { slug } = await params;
+    const { slug } = params;
 
     const { data } = await supabase
-    .from("Blog")
-    .select("*")
-    .eq("slug", slug)
-    .single();
+        .from("Blog")
+        .select("*")
+        .eq("slug", slug)
+        .single();
 
-  const baseUrl = "https://vrindavanmathuraguide.com";
-  const url = `${baseUrl}/blog/${slug}`;
+    const baseUrl = "https://vrindavanmathuraguide.com";
+    const url = `${baseUrl}/blog/${slug}`;
 
-  return {
-    title: data?.meta?.title ?? data?.title ?? "Vrindavan Blog",
-    description: data?.meta?.description ?? data?.excerpt ?? "",
+    const title = data?.meta?.title ?? data?.title ?? "Vrindavan Blog";
+    const description = data?.meta?.description ?? "";
 
-    alternates: {
-      canonical: url,
-    },
+    return {
+        metadataBase: new URL(baseUrl),
 
-    openGraph: {
-      title: data?.meta?.title ?? data?.title,
-      description: data?.meta?.description ?? data?.excerpt,
-      url,
-      type: "article",
-      images: [
-        {
-          url: data?.image ?? `${baseUrl}/default-blog.jpg`,
-          width: 1200,
-          height: 630,
-          alt: data?.title,
+        title,
+        description,
+
+        alternates: {
+            canonical: url,
         },
-      ],
-    },
 
-    twitter: {
-      card: "summary_large_image",
-      title: data?.title,
-      description: data?.excerpt,
-      images: [data?.image],
-    },
+        openGraph: {
+            type: "article",
+            url,
+            title,
+            description,
+            siteName: "Vrindavan Mathura Guide",
+            images: [
+                {
+                    url: data?.image ?? `${baseUrl}/og-blog.jpg`,
+                    width: 1200,
+                    height: 630,
+                    alt: data?.title ?? "Vrindavan Blog",
+                },
+            ],
+        },
 
-    robots: {
-      index: true,
-      follow: true,
-    },
-  };
+        twitter: {
+            card: "summary_large_image",
+            title,
+            description,
+            images: [
+                data?.image ?? `${baseUrl}/og-blog.jpg`
+            ],
+        },
+
+        robots: {
+            index: true,
+            follow: true,
+        },
+    };
 }
 
 
@@ -108,46 +110,72 @@ const Page = async ({ params }: { params: Promise<{ slug: string }> }) => {
 
     const Blogs = await getBlogData(slug);
 
+    console.log("The data of the Blogs is the schema");
+    console.log(Blogs);
+    console.log(Blogs.schema);
+
     const articleSchema = {
         "@context": "https://schema.org",
         "@type": "BlogPosting",
         "@id": `https://vrindavanmathuraguide.com/blog/${Blogs.slug}#article`,
+
         "headline": Blogs.title,
         "description": Blogs.schema?.description,
-        "image": Blogs.image,
+        "image": Blogs.image ?? "https://vrindavanmathuraguide.com/og-blog.jpg",
+
         "author": {
             "@type": "Person",
             "name": Blogs.author || "Vrindavan Mathura Guide Team"
         },
+
         "publisher": {
             "@type": "Organization",
+            "@id": "https://vrindavanmathuraguide.com/#organization",
             "name": "Vrindavan Mathura Guide",
             "logo": {
-            "@type": "ImageObject",
-            "url": "https://vrindavanmathuraguide.com/favicon.ico"
+                "@type": "ImageObject",
+                "url": "https://vrindavanmathuraguide.com/favicon.ico",
+                "width": 300,
+                "height": 300
             }
         },
+
         "datePublished": Blogs.created_at,
-        "dateModified": Blogs.updated_at || Blogs.created_at,
+        "dateModified": Blogs.created_at,
+
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": `https://vrindavanmathuraguide.com/blog/${Blogs.slug}`
         },
+
         "articleSection": Blogs.category || "Travel Guide",
-        "keywords": Blogs.tags?.join(", ")
     };
 
 
     const breadcrumbSchema = {
-
         "@context": "https://schema.org",
         "@type": "BreadcrumbList",
+        "@id": `https://vrindavanmathuraguide.com/blog/${Blogs.slug}#breadcrumb`,
         "itemListElement": [
-            { "@type": "ListItem", "position": 1, "name": "Home", "item": " https://vrindavanmathuraguide.com/" },
-            { "@type": "ListItem", "position": 2, "name": "Blog", "item": " https://vrindavanmathuraguide.com/blog" },
-            { "@type": "ListItem", "position": 3, "name": Blogs.domain }
+            {
+                "@type": "ListItem",
+                "position": 1,
+                "name": "Home",
+                "item": "https://vrindavanmathuraguide.com/"
+            },
+            {
+                "@type": "ListItem",
+                "position": 2,
+                "name": "Blog",
+                "item": "https://vrindavanmathuraguide.com/blog"
+            },
+            {
+                "@type": "ListItem",
+                "position": 3,
+                "name": Blogs.title,
+                "item": `https://vrindavanmathuraguide.com/blog/${Blogs.slug}`
+            }
         ]
-
     };
 
     const faqSchema =
@@ -170,7 +198,7 @@ const Page = async ({ params }: { params: Promise<{ slug: string }> }) => {
     return (
 
         <>
-            <Script
+            <script
                 type="application/ld+json"
                 dangerouslySetInnerHTML={{
                     __html: JSON.stringify(
