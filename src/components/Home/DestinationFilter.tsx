@@ -6,7 +6,7 @@ import Link from "next/link"
 import { CheckCircle, Clock, MapPin, Users } from "lucide-react"
 import EnquiryPopup from "@/utils/EnquiryForm"
 import { supabase } from "@/lib/supabase/SupabaseConfig"
-import { useRouter } from "next/router"
+import { useRouter } from "next/navigation"
 
 /* -------------------- DATA -------------------- */
 
@@ -125,7 +125,12 @@ export default function DestinationFilter() {
         </div>
 
         {/* ---------- CARDS GRID ---------- */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 transition-all p-5">
+        <div className="
+            max-h-[95vh] sm:max-h-[78vh]
+            overflow-y-auto pr-2 orange-scrollbar
+          "
+            style={{ scrollbarGutter: "stable" }}>
+               <div className="grid grid-cols-1 md:grid-cols-3 gap-6 transition-all p-5  overflow-y-auto pr-2 orange-scrollbar">
           {filteredPackages.map((pkg: any) => (
             <div
               key={pkg.id}
@@ -136,7 +141,7 @@ export default function DestinationFilter() {
           "
             >
               {/* Image */}
-              <div className="relative h-56 overflow-hidden" onClick={()=>router.push(`/tour-packages/${pkg.duration}/${pkg.slug}`)}>
+              <div className="relative h-56 overflow-hidden cursor-pointer" onClick={()=>router.push(`/tour-packages/${pkg.duration}/${pkg.slug}`)}>
                 <Image
                   src={pkg.heroimage.image}
                   alt={pkg.heroimage.alt}
@@ -167,7 +172,7 @@ export default function DestinationFilter() {
               <div className="p-6 space-y-4">
 
                 {/* TITLE */}
-                <h3 className="text-lg font-bold text-gray-900 leading-snug" onClick={()=>router.push(`/tour-packages/${pkg.duration}/${pkg.slug}`)}>
+                <h3 className="text-lg font-bold text-gray-900 leading-snug cursor-pointer" onClick={()=>router.push(`/tour-packages/${pkg.duration}/${pkg.slug}`)}>
                   {pkg.title}
                 </h3>
 
@@ -241,6 +246,9 @@ export default function DestinationFilter() {
             </div>
           ))}
         </div>
+
+        </div>
+       
 
         </div>
       

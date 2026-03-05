@@ -44,7 +44,7 @@ export default function PackageInclusionsStrip({packageData} : {packageData : an
         {/* TOP BORDER */}
         <div className="border-t border-gray-200 pt-6">
 
-          <div className="flex flex-wrap gap-x-10 gap-y-4 items-center">
+          <div className="grid sm:grid-cols-4 grid-cols-2 gap-x-10 gap-y-4 items-center">
 
             {inclusions.map((item, index) => (
               <div

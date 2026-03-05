@@ -22,6 +22,7 @@ import Script from "next/script";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import DurationSection from "@/components/Admin/PackageEditor/DurationSection";
+import PackageOverview from "@/components/PackageDetail/PackageOverview";
 
 
 
@@ -269,7 +270,9 @@ return (
 
               <PackageInclusionsStrip packageData={PackageData} />
 
+
               <DestinationRoute routeData={PackageData.destroutes} />
+              <PackageOverview/>
 
               <PackageHighlights PackageData={PackageData} />
 
@@ -281,7 +284,12 @@ return (
 
             {/* RIGHT SIDEBAR */}
 
-           
+                <aside className="hidden lg:block ">
+              <div className="sticky top-28">
+                <SideForm />
+              </div>
+            </aside>
+
 
 
 

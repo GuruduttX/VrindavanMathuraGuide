@@ -49,7 +49,9 @@ export default function KnowBeforeYouGo({ PackageData }: any) {
                   key={index}
                   className="group flex items-start gap-4 p-4 rounded-xl transition-all duration-300 hover:bg-orange-50"
                 >
-                  <CheckCircle className="w-5 h-5 mt-1 text-orange-500 group-hover:scale-110 transition-transform cursor-pointer" />
+                  <div>
+                    <CheckCircle className="w-5 h-5 mt-1 text-orange-500 group-hover:scale-110 transition-transform cursor-pointer" />
+                 </div>
                   <p className="text-gray-700 leading-relaxed">
                     {item.description}
                   </p>

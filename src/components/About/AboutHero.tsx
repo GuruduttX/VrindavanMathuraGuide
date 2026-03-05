@@ -75,7 +75,7 @@ export default function AboutHero() {
             rounded-[28px] sm:rounded-[32px]
             overflow-hidden border-8 border-white shadow-xl">
             <Image
-              src="/images/About/AboutHero.png"
+              src="/images/About/AboutHero.webp"
               alt="Banke Bihari Temple Vrindavan"
               fill
               className="object-cover"

@@ -5,6 +5,7 @@ import { MapPin, Clock, Users, CheckCircle } from "lucide-react";
 import Link from "next/link";
 import { supabase } from "@/lib/supabase/SupabaseConfig";
 import EnquiryPopup from "@/utils/EnquiryForm";
+import { useRouter } from "next/navigation";
 
 type PackageType = {
   id: number
@@ -39,9 +40,11 @@ const CATEGORIES = [
 
 
 export default function PackagesGrid() {
+  const router = useRouter();
   const [activeCategory, setActiveCategory] = useState("Explore All");
   const [packages, setPackages] = useState<PackageType[]>([]);
   const [isOpen, setIsOpen] = useState(false);
+  
 
   async function getAllPackages() {
     const { data, error } = await supabase.from('Package').select('*');
@@ -125,7 +128,7 @@ export default function PackagesGrid() {
                 "
                 >
                   {/* Image */}
-                  <div className="relative h-56 overflow-hidden">
+                  <div className="relative h-56 overflow-hidden cursor-pointer" onClick={()=>router.push(`/tour-packages/${pkg.duration}/${pkg.slug}`)}>
                     <Image
                       src={pkg.heroimage.image}
                       alt={pkg.heroimage.alt}
@@ -139,7 +142,7 @@ export default function PackagesGrid() {
                   bg-orange-500 text-white text-xs font-semibold
                   px-3 py-1 rounded-full shadow"
                     >
-                      {pkg.duration} day
+                      {pkg.duration} 
                     </span>
 
                     {/* PRICE BADGE */}
@@ -156,7 +159,7 @@ export default function PackagesGrid() {
                   <div className="p-6 space-y-4">
 
                     {/* TITLE */}
-                    <h3 className="text-lg font-bold text-gray-900 leading-snug">
+                    <h3 className="text-lg font-bold text-gray-900 leading-snug cursor-pointer" onClick={()=>router.push(`/tour-packages/${pkg.duration}/${pkg.slug}`)}>
                       {pkg.title}
                     </h3>
 
@@ -170,7 +173,7 @@ export default function PackagesGrid() {
                     <div className="flex flex-wrap gap-3 text-xs text-gray-700">
                       <span className="flex items-center gap-1">
                         <Clock className="w-4 h-4 text-orange-500" />
-                        {pkg.duration} {pkg.duration > 1 ? "days" : "day"}
+                        {pkg.duration}
                       </span>
                       <span className="flex items-center gap-1">
                         <Users className="w-4 h-4 text-orange-500" />

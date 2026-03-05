@@ -12,7 +12,7 @@ export default function AdCTA() {
             >
                 {/* IMAGE */}
                 <img
-                    src="/images/Blog/BlogRightImage.png"
+                    src="/images/Blog/BlogRightImage.webp"
                     alt="Mathura Vrindavan Tour Booking"
                     className="w-full h-[50vh] object-cover transition-transform duration-500 group-hover:scale-110 cursor-pointer"
                 />

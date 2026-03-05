@@ -58,7 +58,8 @@ type FAQ = {
 type Testimonial = {
   id: string,
   name: string,
-  description: string
+  description: string,
+  rating : string
 }
 
 type HighLights = {
@@ -146,7 +147,7 @@ export default function CreateNewPackage() {
 
   const [childImage , setChildImage] = useState<ChildImage[]>([]);
   const [faqs, setFaqs] = useState<FAQ[]>([{id : crypto.randomUUID() , question : "",  answer : ""}]);
-  const [testimonials, setTestimonials] = useState<Testimonial[]>([{id : crypto.randomUUID() , name : "", description : ""}]);
+  const [testimonials, setTestimonials] = useState<Testimonial[]>([{id : crypto.randomUUID() , name : "", description : "", rating : ""}]);
   const [highLights, setHighLights] = useState<HighLights[]>([{id : crypto.randomUUID() , description : ""}]);
   const [inclusions, setInclusions] = useState<Inclusions[]>([{id : crypto.randomUUID() , description : ""}]);
   const [exclusions, setExclusions] = useState<Exclusions[]>([{id : crypto.randomUUID() , description : ""}]);
