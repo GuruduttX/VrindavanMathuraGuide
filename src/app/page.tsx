@@ -1,6 +1,6 @@
 import Navbar from '@/utils/Navbar'
 import React from 'react'
-import EnquirySection from '@/components/Home/Enquiryform'
+
 import GroupCta from '@/components/Home/GroupCta'
 import HomeFAQSection from '@/components/Home/HomeFaqs'
 import PhotoGallerySection from '@/components/Home/PhotoGallerySec'
@@ -16,7 +16,7 @@ import WhyChooseUs from '@/components/Home/WhyChooseUs'
 import type { Metadata } from "next";
 import { supabase } from '@/lib/supabase/SupabaseConfig'
 import Script from 'next/script'
-import DivineDivider from '@/utils/DivineDivider'
+import EnquirySection from '@/components/Home/EnquiryForm'
 
 export const metadata: Metadata = {
   title: "Mathura Vrindavan Tour Packages | Local Guide, Taxi & Temple Darshan",

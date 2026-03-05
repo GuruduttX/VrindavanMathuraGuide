@@ -281,11 +281,7 @@ return (
 
             {/* RIGHT SIDEBAR */}
 
-            <aside className="hidden lg:block ">
-              <div className="sticky top-28">
-                <SideForm />
-              </div>
-            </aside>
+           
 
 
 

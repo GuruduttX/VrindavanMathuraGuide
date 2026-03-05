@@ -6,6 +6,7 @@ import Link from "next/link"
 import { CheckCircle, Clock, MapPin, Users } from "lucide-react"
 import EnquiryPopup from "@/utils/EnquiryForm"
 import { supabase } from "@/lib/supabase/SupabaseConfig"
+import { useRouter } from "next/router"
 
 /* -------------------- DATA -------------------- */
 
@@ -46,6 +47,7 @@ const CATEGORIES = [
 /* -------------------- COMPONENT -------------------- */
 
 export default function DestinationFilter() {
+  const router = useRouter();
   const [activeCategory, setActiveCategory] = useState("Explore All")
   const [packages, setPackages] = useState<PackageType[]>([])
   const [isOpen, setIsOpen] = useState(false);
@@ -134,7 +136,7 @@ export default function DestinationFilter() {
           "
             >
               {/* Image */}
-              <div className="relative h-56 overflow-hidden">
+              <div className="relative h-56 overflow-hidden" onClick={()=>router.push(`/tour-packages/${pkg.duration}/${pkg.slug}`)}>
                 <Image
                   src={pkg.heroimage.image}
                   alt={pkg.heroimage.alt}
@@ -165,7 +167,7 @@ export default function DestinationFilter() {
               <div className="p-6 space-y-4">
 
                 {/* TITLE */}
-                <h3 className="text-lg font-bold text-gray-900 leading-snug">
+                <h3 className="text-lg font-bold text-gray-900 leading-snug" onClick={()=>router.push(`/tour-packages/${pkg.duration}/${pkg.slug}`)}>
                   {pkg.title}
                 </h3>
 
