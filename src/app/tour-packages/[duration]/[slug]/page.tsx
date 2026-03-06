@@ -272,7 +272,7 @@ return (
 
 
               <DestinationRoute routeData={PackageData.destroutes} />
-              <PackageOverview/>
+              <PackageOverview overview={PackageData.overview}/>
 
               <PackageHighlights PackageData={PackageData} />
 

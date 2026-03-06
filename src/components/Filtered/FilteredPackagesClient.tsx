@@ -12,6 +12,7 @@ import FooterCTA from "@/utils/FooterCTA";
 import EnquiryPopup from "@/utils/EnquiryForm";
 import FilterGrid from "./FilterGrid";
 import Link from "next/link";
+import { TourCardSkeleton } from "@/utils/TourCardSkeleton";
 
 
 export default function FilteredPackagesClient() {
@@ -25,12 +26,11 @@ export default function FilteredPackagesClient() {
 
   console.log("Destinations", destination)
 
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
   const getPackages = async () => {
   try {
-    setLoading(true);
     setError(null);
 
     let query = supabase
@@ -50,6 +50,7 @@ export default function FilteredPackagesClient() {
     if (error) throw error;
 
     setPackages(data || []);
+     
   } catch (err: any) {
     console.log("Error fetching packages:", err.message);
     setError("Failed to load packages");
@@ -68,7 +69,9 @@ export default function FilteredPackagesClient() {
 
     }, [destination, duration, router]);
 
-    if (!destination || !duration || !packages) return <div>
+
+
+    if (!destination || !duration || !packages ) return <div  className="text-xl text-center">
       
          Packages Not Found
      
@@ -151,9 +154,26 @@ export default function FilteredPackagesClient() {
             </p>
 
             {/* ---------- FILTER GRID ---------- */}
-            <div className="mt-10">
-              <FilterGrid packages={packages} setIsOpen={setIsOpen} />
-            </div>
+           {
+              loading ? (
+                <div className="max-w-7xl mx-auto px-4 sm:px-6">
+                  <div className="grid md:grid-cols-3 gap-8">
+                    {Array.from({ length: 3 }).map((_, i) => (
+                      <TourCardSkeleton key={i} />
+                    ))}
+                  </div>
+                </div>
+              ) : packages.length === 0 ? (
+                <div className="mt-10 text-center text-gray-600">
+                  No packages found
+                </div>
+              ) : (
+                <div className="mt-10">
+                  <FilterGrid packages={packages} setIsOpen={setIsOpen} />
+                </div>
+              )
+            }
+           
 
             <PackagesCTA />
             <VrindavanTrustStats />

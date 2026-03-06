@@ -693,6 +693,54 @@ body::-webkit-scrollbar {
   color: #1f2937 !important;
 }
 
+.shimmer {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to top,
+    transparent,
+    rgba(255,255,255,0.7),
+    transparent
+  );
+  animation: shimmerMove 1.8s infinite;
+}
+
+@keyframes shimmerMove {
+  0% {
+    transform: translateY(100%);
+  }
+  100% {
+    transform: translateY(-100%);
+  }
+}
+
+.shimmer {
+  position: relative;
+  overflow: hidden;
+}
+
+.shimmer::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    transparent,
+    rgba(255,255,255,0.7),
+    transparent
+  );
+  animation: shimmerMove 1.5s infinite;
+}
+
+@keyframes shimmerMove {
+  0% {
+    transform: translateY(100%);
+  }
+  100% {
+    transform: translateY(-100%);
+  }
+}
+
 
 
 

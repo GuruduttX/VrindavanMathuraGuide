@@ -87,7 +87,7 @@ export default function CategoryDropDown({category , onChange} : any) {
         placeholder="Days Of Tour Package"
         value={category}
         onClick={() => setOpen((prev) => !prev)}
-        onChange={(e) => onChange("category", e.target.value)}
+        onChange={()=>true}
         className="w-full px-4 py-3 rounded-xl focus:outline-none focus:ring-2 focus:ring-orange-400 bg-orange-50"
       />
 

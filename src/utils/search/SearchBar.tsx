@@ -82,17 +82,17 @@ const SearchBar = () => {
                 {/* Button */}
                 <button
                     className="
-              flex items-center justify-center gap-2
-              rounded-3xl
-              bg-gradient-to-r from-orange-500 to-orange-600
-              px-6
-              py-3 sm:py-3.5
-              font-semibold
-              text-white
-              transition-all
-              hover:scale-[1.02]
-              hover:shadow-lg
-              w-full cursor-pointer
+                    flex items-center justify-center gap-2
+                    rounded-3xl
+                    bg-gradient-to-r from-orange-500 to-orange-600
+                    px-6
+                    py-3 sm:py-3.5
+                    font-semibold
+                    text-white
+                    transition-all
+                    hover:scale-[1.02]
+                    hover:shadow-lg
+                    w-full cursor-pointer
             "
 
             onClick={handleSearch}
