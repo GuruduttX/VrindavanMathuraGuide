@@ -9,23 +9,23 @@ export default function AboutBrajSection() {
 
         {/* HEADING */}
         <div className="mb-6 sm:mb-8">
-          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900">
+          <h2 className="text-2xl  md:text-4xl font-bold text-gray-900">
             Experience Braj Like a Local: Plan Your Perfect Trip with the Vrindavan Mathura Guide.
           </h2>
 
           {/* ORANGE GRADIENT UNDERLINE */}
           <div className="mt-3 h-[3px] w-32 sm:w-40 md:w-44
             bg-gradient-to-r from-orange-600 via-orange-400 to-transparent rounded-full" />
-        </div>
+          </div>
 
         {/* DETAILS */}
-        <details className="group relative rounded-2xl border border-orange-300 shadow-lg p-4 sm:p-6">
+        <details className="group relative rounded-2xl border border-orange-300 shadow-lg p-6 sm:p-">
 
           {/* SUMMARY */}
           <summary className="list-none cursor-pointer focus:outline-none">
             <div className="relative">
 
-              <h3 className="text-xl font-semibold mb-6 sm:text-2xl md:text-3xl">Vrindavan Mathura Guide – Explore the Heart of Braj</h3>
+              <h3 className="text-xl font-semibold mb-6 sm:text-2xl ">Vrindavan Mathura Guide – Explore the Heart of Braj</h3>
 
               {/* INTRO TEXT */}
               <p className="text-gray-700 text-base sm:text-lg leading-relaxed pr-4 sm:pr-6">
@@ -53,7 +53,9 @@ export default function AboutBrajSection() {
 
           {/* EXPANDED CONTENT */}
           <div className="mt-6 text-gray-700 space-y-4 leading-relaxed text-sm sm:text-base">
-            <p>
+            <div className="mb-8">
+
+              <p>
               When someone visits Braj for the first time, the temples may seem many,
               the lanes may look similar, and the crowds may feel overwhelming.
                 But when the journey is explained gently, everything becomes clear.
@@ -63,8 +65,10 @@ export default function AboutBrajSection() {
               devotion. Together they create the heart of Braj.
 
             </p>
+            </div>
+            <div className="mb-8">
 
-             <h3 className="text-xl sm:text-2xl md:text-3xl font-semibold mb-6">Understanding the spirit of Braj before beginning the journey</h3>
+             <h3 className="text-xl sm:text-2xl  font-semibold mb-6">Understanding the spirit of Braj before beginning the journey</h3>
 
             <p className="mb-4">
               Before following any <b>Vrindavan Mathura Guide</b>, it helps to understand the mood of this region. Braj is not only about famous temples. It is about small moments that quietly touch the mind.
@@ -86,7 +90,10 @@ export default function AboutBrajSection() {
 
             </p>
 
-            <h3 className="text-xl sm:text-2xl md:text-3xl font-semibold mb-6">
+
+            </div>
+            
+            <h3 className="text-xl sm:text-2xl  font-semibold mb-6">
                Mathura Vrindavan temple travel guide for first-time visitors
             </h3>
 
@@ -112,7 +119,7 @@ Following this temple sequence helps visitors experience Braj without unnecessar
 
             <section className="mt-10">
 
-      <h3 className="text-2xl sm:text-3xl font-semibold text-gray-900 mb-4">
+      <h3 className="text-2xl  font-semibold text-gray-900 mb-4">
         Best places to visit in Mathura and Vrindavan
       </h3>
 
@@ -196,10 +203,10 @@ Following this temple sequence helps visitors experience Braj without unnecessar
     </section>
 
 
-     <section className="mt-10 max-w-3xl">
+     <section className="mt-10">
 
       {/* SECTION 1 */}
-      <h3 className="text-2xl sm:text-3xl font-semibold text-gray-900 mb-4">
+      <h3 className="text-2xl font-semibold text-gray-900 mb-4">
         Best time to visit Braj for a peaceful experience
       </h3>
 
@@ -237,7 +244,7 @@ Following this temple sequence helps visitors experience Braj without unnecessar
       </p>
 
       {/* SECTION 2 */}
-      <h3 className="text-2xl sm:text-3xl font-semibold text-gray-900 mt-10 mb-4">
+      <h3 className="text-2xl  font-semibold text-gray-900 mt-10 mb-4">
         Mathura Vrindavan pilgrimage travel tips
       </h3>
 
@@ -280,10 +287,10 @@ Following this temple sequence helps visitors experience Braj without unnecessar
 
     </section>
 
-     <section className="mt-10 max-w-3xl">
+     <section className="mt-10">
 
       {/* SECTION 1 */}
-      <h3 className="text-2xl sm:text-3xl font-semibold text-gray-900 mb-4">
+      <h3 className="text-2xl  font-semibold text-gray-900 mb-4">
         Understanding the rhythm of temple darshan
       </h3>
 
@@ -311,7 +318,7 @@ Following this temple sequence helps visitors experience Braj without unnecessar
       </p>
 
       {/* SECTION 2 */}
-      <h3 className="text-2xl sm:text-3xl font-semibold text-gray-900 mt-10 mb-4">
+      <h3 className="text-2xl  font-semibold text-gray-900 mt-10 mb-4">
         Why guidance matters during a Braj visit
       </h3>
 
@@ -334,9 +341,9 @@ Following this temple sequence helps visitors experience Braj without unnecessar
 
     </section>
 
-    <section className="mt-10 max-w-3xl">
+    <section className="mt-10">
 
-      <h3 className="text-2xl sm:text-3xl font-semibold text-gray-900 mb-4">
+      <h3 className="text-2xl  font-semibold text-gray-900 mb-4">
         Experience and support from Vrindavan Mathura Guide
       </h3>
 
@@ -359,9 +366,9 @@ Following this temple sequence helps visitors experience Braj without unnecessar
       </p>
 
     </section>
-        <section className="mt-10 max-w-3xl">
+        <section className="mt-10">
 
-      <h3 className="text-2xl sm:text-3xl font-semibold text-gray-900 mb-4">
+      <h3 className="text-2xl font-semibold text-gray-900 mb-4">
         Mathura Vrindavan Tour Packages – A Complete Spiritual Getaway
       </h3>
 
@@ -392,7 +399,7 @@ Following this temple sequence helps visitors experience Braj without unnecessar
         living tradition.
       </p>
 
-      <h3 className="text-2xl sm:text-3xl font-semibold text-gray-900 mt-10 mb-4">
+      <h3 className="text-2xl  font-semibold text-gray-900 mt-10 mb-4">
         Why Mathura Vrindavan Tour Packages feel different from ordinary trips
       </h3>
 
@@ -426,9 +433,9 @@ Following this temple sequence helps visitors experience Braj without unnecessar
     </section>
 
 
-    <section className="mt-10 max-w-3xl">
+    <section className="mt-10">
 
-      <h3 className="text-2xl sm:text-3xl font-semibold text-gray-900 mb-4">
+      <h3 className="text-2xl  font-semibold text-gray-900 mb-4">
         Mathura Vrindavan Temple Tour Packages and the sacred temple circuit
       </h3>
 
@@ -485,9 +492,9 @@ Following this temple sequence helps visitors experience Braj without unnecessar
     </section>
 
 
-    <section className="mt-10 max-w-3xl">
+    <section className="mt-10">
 
-      <h3 className="text-2xl sm:text-3xl font-semibold text-gray-900 mb-4">
+      <h3 className="text-2xl font-semibold text-gray-900 mb-4">
         Best Mathura Vrindavan Travel Packages from Delhi
       </h3>
 
@@ -519,9 +526,9 @@ Following this temple sequence helps visitors experience Braj without unnecessar
 
     </section>
 
-    <section className="mt-10 max-w-3xl">
+    <section className="mt-10">
 
-      <h3 className="text-2xl sm:text-3xl font-semibold text-gray-900 mb-4">
+      <h3 className="text-2xl  font-semibold text-gray-900 mb-4">
         Mathura Vrindavan Pilgrimage Tour Package and the deeper spiritual experience
       </h3>
 
@@ -555,9 +562,9 @@ Following this temple sequence helps visitors experience Braj without unnecessar
       </p>
 
     </section>
-    <section className="mt-10 max-w-3xl">
+    <section className="mt-10">
 
-      <h3 className="text-2xl sm:text-3xl font-semibold text-gray-900 mb-4">
+      <h3 className="text-2xl  font-semibold text-gray-900 mb-4">
         Best time to plan Mathura Vrindavan Tour Packages
       </h3>
 
@@ -590,7 +597,7 @@ Following this temple sequence helps visitors experience Braj without unnecessar
         dates.
       </p>
 
-      <h3 className="text-2xl sm:text-3xl font-semibold text-gray-900 mb-4">
+      <h3 className="text-2xl  font-semibold text-gray-900 mb-4">
         Crowd patterns and practical travel advice
       </h3>
 
@@ -621,9 +628,9 @@ Following this temple sequence helps visitors experience Braj without unnecessar
       </p>
 
     </section>
-     <section className="mt-10 max-w-3xl">
+     <section className="mt-10">
 
-      <h3 className="text-2xl sm:text-3xl font-semibold text-gray-900 mb-4">
+      <h3 className="text-2xl font-semibold text-gray-900 mb-4">
         Why travellers choose Vrindavan Mathura Guide
       </h3>
 
@@ -647,7 +654,7 @@ Following this temple sequence helps visitors experience Braj without unnecessar
       </p>
 
 
-      <h3 className="text-2xl sm:text-3xl font-semibold text-gray-900 mb-4">
+      <h3 className="text-2xl  font-semibold text-gray-900 mb-4">
         The emotional side of Mathura Vrindavan Tour Packages
       </h3>
 
@@ -669,9 +676,9 @@ Following this temple sequence helps visitors experience Braj without unnecessar
       </p>
 
     </section>
-     <section className="mt-10 max-w-3xl">
+     <section className="mt-10">
 
-      <h3 className="text-2xl sm:text-3xl font-semibold text-gray-900 mb-4">
+      <h3 className="text-2xl  font-semibold text-gray-900 mb-4">
         Conclusion
       </h3>
 
