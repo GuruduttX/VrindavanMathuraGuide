@@ -81,7 +81,7 @@ export default function CategoryDropDown({category , onChange} : any) {
   }, []);
 
   return (
-    <div className="relative w-full z-50" ref={containerRef}>
+    <div className="relative w-full z-40" ref={containerRef}>
       <input
         type="text"
         placeholder="Days Of Tour Package"
@@ -92,7 +92,7 @@ export default function CategoryDropDown({category , onChange} : any) {
       />
 
       {open && (
-        <div className="absolute z-[9999] mt-2 w-full max-h-72 overflow-y-auto rounded-xl border border-orange-200 bg-white shadow-xl no-scrollbar">
+        <div className="absolute z-[999] mt-2 w-full max-h-72 overflow-y-auto rounded-xl border border-orange-200 bg-white shadow-xl no-scrollbar">
           {categories.map((section) => (
             <div key={section.group}>
               <div className="sticky top-0 bg-orange-50 px-4 py-2 text-sm font-semibold text-orange-600">

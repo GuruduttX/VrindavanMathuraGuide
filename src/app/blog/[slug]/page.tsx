@@ -214,7 +214,6 @@ const Page = async ({ params }: { params: Promise<{ slug: string }> }) => {
 
                 <RelatedBlog slug={slug} />
 
-                <FooterCTA />
 
             </div>
 

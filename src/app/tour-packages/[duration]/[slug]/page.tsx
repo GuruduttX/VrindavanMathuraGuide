@@ -305,7 +305,7 @@ return (
       <TrustBuildingSection/>
       <PackageFaqSection PackageData={PackageData}/>
       <Policies PackageData={PackageData} />
-      <FooterCTA />
+    
       <Footer />
     </>
   );

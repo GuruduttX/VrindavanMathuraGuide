@@ -28,7 +28,7 @@ export default function AboutBrajSection() {
               <h3 className="text-xl font-semibold mb-6 sm:text-2xl ">Vrindavan Mathura Guide – Explore the Heart of Braj</h3>
 
               {/* INTRO TEXT */}
-              <p className="text-gray-700 text-base sm:text-lg leading-relaxed pr-4 sm:pr-6">
+              <p className="text-gray-700 text-base leading-relaxed pr-4 sm:pr-6">
                 Many people arrive in Braj with excitement. They have heard stories of temples, devotion, and old traditions. 
                 But when they actually reach here, they realize something simple. Mathura and Vrindavan are not places you only see.
                 They are places you slowly understand. A Vrindavan Mathura Guide helps travellers move through these sacred towns with calm understanding instead of confusion.
@@ -52,10 +52,10 @@ export default function AboutBrajSection() {
           </summary>
 
           {/* EXPANDED CONTENT */}
-          <div className="mt-6 text-gray-700 space-y-4 leading-relaxed text-sm sm:text-base">
+          <div className="mt-6  space-y-4 leading-relaxed">
             <div className="mb-8">
 
-              <p>
+              <p className="text-base text-gray-700">
               When someone visits Braj for the first time, the temples may seem many,
               the lanes may look similar, and the crowds may feel overwhelming.
                 But when the journey is explained gently, everything becomes clear.
@@ -70,19 +70,19 @@ export default function AboutBrajSection() {
 
              <h3 className="text-xl sm:text-2xl  font-semibold mb-6">Understanding the spirit of Braj before beginning the journey</h3>
 
-            <p className="mb-4">
+            <p className="mb-4 text-base text-gray-700">
               Before following any <b>Vrindavan Mathura Guide</b>, it helps to understand the mood of this region. Braj is not only about famous temples. It is about small moments that quietly touch the mind.
 
             </p>
 
 
 
-            <p className="mb-4">
+            <p className=" mb-4 text-base text-gray-700">
              The streets are narrow. Cows walk slowly beside you. Bells ring in temples that have stood for centuries. Devotees sing bhajans in low voices. Nothing here tries to impress visitors with noise. Instead, everything moves gently.
 
             </p>
 
-            <p className="mb-4">
+            <p className="mb-4 mb-4 text-base text-gray-700">
 
               A good Vrindavan Mathura Guide reminds travellers to slow down. When you walk slowly, you begin to notice things you would otherwise miss. The fragrance of flowers offered at temples. The sound of Yamuna flowing near the ghats. The peaceful expressions on the faces of devotees.
               This is how Braj reveals itself.
@@ -97,23 +97,23 @@ export default function AboutBrajSection() {
                Mathura Vrindavan temple travel guide for first-time visitors
             </h3>
 
-            <p className="mb-4">Many travellers ask where they should begin their journey. A simple <b>Mathura Vrindavan temple travel guide</b> suggests starting in Mathura and then moving to Vrindavan.
+            <p className="mb-4 text-base text-gray-700">Many travellers ask where they should begin their journey. A simple <b>Mathura Vrindavan temple travel guide</b> suggests starting in Mathura and then moving to Vrindavan.
             Mathura is known as the birthplace of Lord Krishna. The main temple here is Shri Krishna Janmabhoomi Temple. The atmosphere around the temple feels devotional and respectful. Security is present, so visitors should arrive early and carry minimal belongings.
             </p>
 
-            <p className="mb-4">
+            <p className="mb-4 text-base text-gray-700">
               After Janmabhoomi darshan, travellers often visit Dwarkadhish Temple. The temple courtyard fills with devotees, and the sound of bhajans spreads across the hall. The energy here feels joyful and welcoming.
 Later, many visitors spend some time at Vishram Ghat. The Yamuna flows nearby, and the evening aarti creates a peaceful atmosphere. Sitting quietly near the river often becomes one of the most memorable moments of the journey.
  
             </p>
 
-            <p className="mb-4">
+            <p className="mb-4 text-base text-gray-700">
 
               The next part of the Vrindavan Mathura Guide moves toward Vrindavan.
-Vrindavan holds hundreds of temples, but a few places remain especially important for pilgrims. Banke Bihari Temple is one of the most visited temples in the region. Darshan here happens in short intervals as curtains open and close. Devotees wait patiently for each glimpse.
-ISKCON Temple offers a calm and organized environment. Devotees chant together, and the hall feels peaceful and spacious.
-Prem Mandir is usually visited in the evening. The temple glows beautifully when lights turn on after sunset. Families often walk around the temple complex slowly, enjoying the quiet atmosphere.
-Following this temple sequence helps visitors experience Braj without unnecessary stress.
+              Vrindavan holds hundreds of temples, but a few places remain especially important for pilgrims. Banke Bihari Temple is one of the most visited temples in the region. Darshan here happens in short intervals as curtains open and close. Devotees wait patiently for each glimpse.
+              ISKCON Temple offers a calm and organized environment. Devotees chant together, and the hall feels peaceful and spacious.
+              Prem Mandir is usually visited in the evening. The temple glows beautifully when lights turn on after sunset. Families often walk around the temple complex slowly, enjoying the quiet atmosphere.
+              Following this temple sequence helps visitors experience Braj without unnecessary stress.
 
             </p>
 

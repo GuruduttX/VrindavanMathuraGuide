@@ -20,6 +20,7 @@ import Script from 'next/script'
 import TestimonialsSection from '@/components/Home/TestimonialsSection'
 import ServicesSection from '@/components/Home/ServicesSection'
 import AboutBrajSection from '@/components/Home/AboutBrajSection'
+import HomeAboutSection from '@/components/Home/HomeAboutSection'
 
 export const metadata: Metadata = {
   title: "Mathura Vrindavan Tour Packages | Local Guide, Taxi & Temple Darshan",
@@ -182,14 +183,15 @@ const Home = async () => {
       <PopularTours />
       <GroupCta />
       <ServicesSection/>
+      <HomeAboutSection/>
       <WhyChooseUs />
       <TrustBuildingSection />
       <PhotoGallerySection />
-      <HomeFAQSection />
-      <ToursWeOperate />
       <TestimonialsSection/>
+      <ToursWeOperate />
+      <HomeFAQSection />
       <VrindavanTrustStats />
-      <FooterCTA />
+      {/* <FooterCTA /> */}
       <Footer />
     </>
   )

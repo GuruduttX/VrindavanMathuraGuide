@@ -107,7 +107,6 @@ const page = async () => {
 
             <VrindavanTrustStats />
 
-            <FooterCTA />
 
             <Footer />
         </>
