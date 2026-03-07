@@ -20,24 +20,26 @@ const About = () => {
     "description":
       "Learn about Mathura Vrindavan Tour Guide, our mission, local expertise, trusted services, and commitment to providing peaceful and well-organized spiritual journeys.",
 
+    "isPartOf": {
+      "@id": "https://mathuravrindavantourguide.com/#organization"
+    },
+
     "inLanguage": "en-IN",
 
-    
   };
 
 
   const organizationSchema = {
     "@context": "https://schema.org",
     "@type": "TravelAgency",
+    "@id": "https://mathuravrindavantourguide.com/#organization",
 
     "name": "Mathura Vrindavan Tour Guide",
     "url": "https://mathuravrindavantourguide.com",
-
-    "logo": "https://mathuravrindavantourguide.com/logo.png",
+    "logo": "https://mathuravrindavantourguide.com/favicon.ico",
 
     "description":
       "Mathura Vrindavan Tour Guide is a local travel agency providing expert guides, taxi services, temple darshan assistance, and customized spiritual tour packages in Mathura and Vrindavan.",
-
 
     "address": {
       "@type": "PostalAddress",
@@ -53,29 +55,23 @@ const About = () => {
 
     "contactPoint": {
       "@type": "ContactPoint",
-      "telephone": "+91-XXXXXXXXXX",
+      "telephone": "+91-7302265809",
       "contactType": "Customer Support",
       "availableLanguage": ["English", "Hindi"]
-    },
-
-    "sameAs": [
-      "https://www.facebook.com/yourpage",
-      "https://www.instagram.com/yourpage",
-      "https://www.youtube.com/yourchannel"
-    ]
+    }
   };
 
 
   return (
     <>
 
-    <script
+      <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
           __html: JSON.stringify([
             aboutPageSchema,
             organizationSchema,
-            
+
           ])
         }}
       />

@@ -9,54 +9,56 @@ import Footer from "@/utils/Footer";
 import VrindavanTrustStats from "@/components/Home/VrindavanTrustStats";
 import FooterCTA from "@/utils/FooterCTA";
 import type { Metadata } from "next";
-import Script from "next/script";
 import { supabase } from "@/lib/supabase/SupabaseConfig";
 import TrustBuildingSection from "@/components/Home/TrustBuildSec";
 
 
 export const metadata: Metadata = {
-  title: "Vrindavan Tour Packages | Mathura Vrindavan Yatra & Darshan Tours",
-  description:
-    "Book the best Vrindavan tour packages with Mathura, Govardhan Parikrama and temple darshan. Trusted local guides, AC taxi service and customizable spiritual itineraries.",
-  keywords: [
-    "Vrindavan tour packages",
-    "Mathura Vrindavan yatra",
-    "Vrindavan darshan package",
-    "Govardhan parikrama tour",
-    "Mathura Vrindavan taxi tour"
-  ],
-  alternates: {
-    canonical: "https://vrindavanmathuraguide.com/packages",
+  metadataBase: new URL("https://vrindavanmathuraguide.com"),
+
+  title: {
+    default: "Vrindavan Tour Packages | Mathura Vrindavan Yatra & Darshan Tours",
+    template: "%s | Vrindavan Mathura Guide",
   },
+
+  description:
+    "Book the best Vrindavan tour packages including Mathura temple darshan, Govardhan Parikrama, AC taxi service and customizable spiritual itineraries.",
+
+  alternates: {
+    canonical: "/packages",
+  },
+
   robots: {
     index: true,
     follow: true,
   },
+
   openGraph: {
+    type: "website",
+    url: "/packages",
     title: "Vrindavan Tour Packages | Mathura Vrindavan Yatra",
     description:
       "Explore curated Vrindavan tour packages including temple darshan, Govardhan Parikrama and spiritual yatras.",
-    url: "https://vrindavanmathuraguide.com/packages",
     siteName: "Vrindavan Mathura Guide",
     images: [
       {
-        url: "https://vrindavanmathuraguide.com/images/Packages/package-hero.webp",
+        url: "/images/Packages/package-hero.webp",
         width: 1600,
         height: 900,
         alt: "Vrindavan Tour Packages",
       },
     ],
-    type: "website",
   },
+
   twitter: {
     card: "summary_large_image",
     title: "Vrindavan Tour Packages",
     description:
       "Explore Mathura Vrindavan yatra packages with trusted guides and taxi services.",
-    images: [
-      "https://vrindavanmathuraguide.com/images/Packages/package-hero.webp",
-    ],
+    images: ["/images/Packages/package-hero.webp"],
   },
+
+  category: "Travel",
 };
 
 const faqs = [
@@ -110,71 +112,85 @@ async function getAllPackages() {
 export default async function Page() {
   const packages = await getAllPackages();
 
+  const collectionPageSchema = {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    "@id": "https://vrindavanmathuraguide.com/packages#webpage",
+    "url": "https://vrindavanmathuraguide.com/packages",
+    "name": "Vrindavan Tour Packages",
+    "description":
+      "Browse curated Vrindavan tour packages including temple darshan, Govardhan Parikrama and spiritual yatras.",
+    "isPartOf": {
+      "@id": "https://vrindavanmathuraguide.com/#website"
+    }
+  };
+
+
+  const itemListSchema = {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    "@id": "https://vrindavanmathuraguide.com/packages#itemlist",
+    "name": "Vrindavan Tour Packages",
+    "itemListElement": packages.map((pkg: any, index: number) => ({
+      "@type": "ListItem",
+      "position": index + 1,
+      "url": `https://vrindavanmathuraguide.com/packages/${pkg.slug}`,
+      "name": pkg.title
+    }))
+  };
+
+
+  const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "@id": "https://vrindavanmathuraguide.com/packages#breadcrumb",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://vrindavanmathuraguide.com/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Packages",
+        "item": "https://vrindavanmathuraguide.com/packages"
+      }
+    ]
+  };
+
+
+  const faqSchema = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "@id": "https://vrindavanmathuraguide.com/packages#faq",
+    "mainEntity": faqs.map((faq) => ({
+      "@type": "Question",
+      "name": faq.question,
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": faq.answer
+      }
+    }))
+  };
+
   return (
     <div>
 
 
-      <Script
+      <script
+        id="packages-schema"
         type="application/ld+json"
         dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "ItemList",
-            "name": "Vrindavan Tour Packages",
-            "itemListElement": packages.map((pkg: any, index: number) => ({
-              "@type": "ListItem",
-              "position": index + 1,
-              "url": `https://vrindavanmathuraguide.com/packages/${pkg.slug}`,
-              "name": pkg.title,
-            })),
-          }),
+          __html: JSON.stringify([
+            collectionPageSchema,
+            itemListSchema,
+            breadcrumbSchema,
+            faqSchema
+          ])
         }}
       />
-
-
-      <Script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "BreadcrumbList",
-            "itemListElement": [
-              {
-                "@type": "ListItem",
-                "position": 1,
-                "name": "Home",
-                "item": "https://vrindavanmathuraguide.com"
-              },
-              {
-                "@type": "ListItem",
-                "position": 2,
-                "name": "Packages",
-                "item": "https://vrindavanmathuraguide.com/packages"
-              }
-            ]
-          })
-        }}
-      />
-
-      <Script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "FAQPage",
-            "mainEntity": faqs.map((faq) => ({
-              "@type": "Question",
-              "name": faq.question,
-              "acceptedAnswer": {
-                "@type": "Answer",
-                "text": faq.answer,
-              },
-            })),
-          })
-        }}
-      />
-
-
 
       <Navbar />
 

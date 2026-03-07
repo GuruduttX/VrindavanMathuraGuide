@@ -1,9 +1,92 @@
 import Footer from "@/utils/Footer";
 import Navbar from "@/utils/Navbar";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+    metadataBase: new URL("https://vrindavanmathuraguide.com"),
+
+    title: "Terms & Refund Policy | Vrindavan Mathura Guide",
+
+    description:
+        "Read the official Terms & Conditions and Refund Policy of Vrindavan Mathura Guide including cancellation rules, booking terms and refund timelines.",
+
+    alternates: {
+        canonical: "/refund-policy",
+    },
+
+    robots: {
+        index: true,
+        follow: true,
+    },
+
+    openGraph: {
+        type: "website",
+        url: "/refund-policy",
+        title: "Terms & Refund Policy | Vrindavan Mathura Guide",
+        description:
+            "Understand booking rules, cancellation charges and refund timelines for Vrindavan tours and services.",
+        siteName: "Vrindavan Mathura Guide",
+    },
+
+    twitter: {
+        card: "summary",
+        title: "Terms & Refund Policy | Vrindavan Mathura Guide",
+        description:
+            "Official booking terms and refund policy of Vrindavan Mathura Guide.",
+    },
+};
 
 export default function RefundPolicyPage() {
+
+    const termsSchema = {
+        "@context": "https://schema.org",
+        "@type": "TermsOfService",
+        "@id": "https://vrindavanmathuraguide.com/refund-policy#webpage",
+        "url": "https://vrindavanmathuraguide.com/refund-policy",
+        "name": "Terms & Refund Policy - Vrindavan Mathura Guide",
+        "description":
+            "Official Terms & Conditions and Refund Policy of Vrindavan Mathura Guide including booking, cancellation and refund rules.",
+        "inLanguage": "en-IN",
+        "isPartOf": {
+            "@id": "https://vrindavanmathuraguide.com/#website"
+        },
+        "publisher": {
+            "@id": "https://vrindavanmathuraguide.com/#organization"
+        },
+        "datePublished": "2026-01-01",
+        "dateModified": "2026-01-01"
+    };
+
+    const breadcrumbSchema = {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "@id": "https://vrindavanmathuraguide.com/refund-policy#breadcrumb",
+        "itemListElement": [
+            {
+                "@type": "ListItem",
+                "position": 1,
+                "name": "Home",
+                "item": "https://vrindavanmathuraguide.com/"
+            },
+            {
+                "@type": "ListItem",
+                "position": 2,
+                "name": "Terms & Refund Policy",
+                "item": "https://vrindavanmathuraguide.com/refund-policy"
+            }
+        ]
+    };
     return (
         <>
+
+            <script
+                id="terms-schema"
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{
+                    __html: JSON.stringify([termsSchema, breadcrumbSchema])
+                }}
+            />
+
             <Navbar />
             <section className="relative min-h-screen bg-gradient-to-b from-orange-50 via-white to-orange-100">
 
