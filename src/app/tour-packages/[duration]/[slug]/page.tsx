@@ -18,7 +18,6 @@ import PackageTestimonials from "@/components/PackageDetail/PackageTestimonial";
 import { supabase } from "@/lib/supabase/SupabaseConfig";
 import KnowBeforeYouGo from "@/components/PackageDetail/KnowBeforeYouGo";
 import TrustBuildingSection from "@/components/Home/TrustBuildSec";
-import Script from "next/script";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import DurationSection from "@/components/Admin/PackageEditor/DurationSection";
@@ -40,44 +39,50 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const baseUrl = "https://vrindavanmathuraguide.com";
   const url = `${baseUrl}/tour-packages/${duration}/${slug}`;    
 
-    return {
-      title: data?.meta?.title ?? data?.title ?? "Travel Package",
-      description: data?.meta?.description ?? data?.shortDescription ?? "",
+  const title = data?.meta?.title ?? data?.title ?? "Travel Package";
+  const description =
+    data?.meta?.description ?? data?.shortDescription ?? "";
 
-      alternates: {
-        canonical: url,
-      },
+  return {
+    metadataBase: new URL(baseUrl),
 
-      openGraph: {
-        title: data?.meta?.title ?? data?.title,
-        description: data?.meta?.description ?? data?.shortDescription,
-        url,
-        siteName: "Vrindavan Mathura Guide",
-        images: [
-          {
-            url: data?.heroImage ?? `${baseUrl}/default-og.jpg`,
-            width: 1600,
-            height: 900,
-            alt: data?.title,
-          },
-        ],
-        type: "website",
-      },
+    title,
+    description,
 
-      twitter: {
-        card: "summary_large_image",
-        title: data?.meta?.title ?? data?.title,
-        description: data?.meta?.description ?? data?.shortDescription,
-        images: [data?.heroImage ?? `${baseUrl}/default-og.jpg`],
-      },
+    alternates: {
+      canonical: url,
+    },
 
-      robots: {
-        index: true,
-        follow: true,
-      },
-    };
+    openGraph: {
+      type: "article",
+      url,
+      title,
+      description,
+      siteName: "Vrindavan Mathura Guide",
+      images: [
+        {
+          url: data?.heroImage ?? `${baseUrl}/.jpg`,
+          width: 1600,
+          height: 900,
+          alt: data?.title ?? "Tour Package",
+        },
+      ],
+    },
 
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+      images: [
+        data?.heroImage ?? `${baseUrl}/og-mathura-vrindavan-tour.jpg`
+      ],
+    },
 
+    robots: {
+      index: true,
+      follow: true,
+    },
+  };
 }
 
 // export async function generateStaticParams() {
@@ -128,9 +133,30 @@ const page = async ({ params }: { params: Promise<{ slug: string , duration : st
   
       }
 
-const baseUrl = "https://vrindavanmathuraguide.com";
-const packageUrl = `${baseUrl}/tour-packages/${PackageData?.slug}`;
 
+  if (!packages || error) {
+
+    notFound();
+
+  }
+
+  const baseUrl = "https://vrindavanmathuraguide.com";
+  const packageUrl = `${baseUrl}/tour-packages/${PackageData?.slug}`;
+
+  const touristTripSchema = {
+    "@context": "https://schema.org",
+    "@type": "TouristTrip",
+    "@id": `${packageUrl}#tour`,
+    "name": PackageData?.title ?? "Mathura Vrindavan Tour Package",
+    "description": PackageData?.shortDescription ?? "",
+    "touristType": "Religious Tour",
+    "provider": {
+      "@type": "TravelAgency",
+      "@id": "https://vrindavanmathuraguide.com/#organization",
+      "name": "Vrindavan Mathura Guide",
+      "url": baseUrl
+    }
+  };
 
 
   const packageSchema = {
@@ -159,96 +185,106 @@ const packageUrl = `${baseUrl}/tour-packages/${PackageData?.slug}`;
     }
   };
 
-const productSchema = {
-  "@context": "https://schema.org",
-  "@type": "Product",
-  "@id": `${packageUrl}#product`,
-  "name": PackageData?.schema?.title,
-  "image": PackageData?.heroImage,
-  "description": PackageData?.schema?.description,
-  "category": "Tour Package",
-  "brand": {
-    "@type": "Brand",
-    "name": "Vrindavan Mathura Guide"
-  },
- "offers": {
-  "@type": "Offer",
-  "url": packageUrl,
-  "priceCurrency": "INR",
-  "price": PackageData?.price,
-  "availability": "https://schema.org/InStock",
-  "priceValidUntil": "2026-12-31",
-  "seller": {
-    "@type": "TravelAgency",
-    "name": "Vrindavan Mathura Guide"
-  }
-}
-,
-  "aggregateRating": PackageData?.rating && {
-    "@type": "AggregateRating",
-    "ratingValue": PackageData.rating,
-    "reviewCount": PackageData.reviewCount
-  }
-};
+  const productSchema = {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    "@id": `${packageUrl}#product`,
+    "name": PackageData?.title ?? "Tour Package",
+    "image": PackageData?.heroImage?.image ?? `${baseUrl}/og-mathura-vrindavan-tour.jpg`,
+    "description": PackageData?.schema?.description ?? "",
+    "category": "Tour Package",
+    "brand": {
+      "@type": "Brand",
+      "name": "Vrindavan Mathura Guide"
+    },
 
-const faqSchema = PackageData?.faqs?.length
-  ? {
-      "@context": "https://schema.org",
-      "@type": "FAQPage",
-      "@id": `${packageUrl}#faq`,
-      "mainEntity": PackageData.faqs.map((faq: any) => ({
-        "@type": "Question",
-        "name": faq.question,
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": faq.answer
+    ...(PackageData?.price && {
+      "offers": {
+        "@type": "Offer",
+        "url": packageUrl,
+        "priceCurrency": "INR",
+        "price": String(PackageData.price),  // ALWAYS STRING
+        "availability": "https://schema.org/InStock",
+        "priceValidUntil": "2026-12-31",
+        "seller": {
+          "@type": "Organization",
+          "name": "Vrindavan Mathura Guide"
         }
-      }))
-    }
-  : null;
+      }
+    }),
 
-const breadcrumbSchema = {
-  "@context": "https://schema.org",
-  "@type": "BreadcrumbList",
-  "@id": `${packageUrl}#breadcrumb`,
-  "itemListElement": [
-    {
-      "@type": "ListItem",
-      "position": 1,
-      "name": "Home",
-      "item": baseUrl
-    },
-    {
-      "@type": "ListItem",
-      "position": 2,
-      "name": "Packages",
-      "item": `${baseUrl}/tour-packages`
-    },
-    {
-      "@type": "ListItem",
-      "position": 3,
-      "name": PackageData?.title,
-      "item": packageUrl
-    }
-  ]
-};
+    ...(PackageData?.rating &&
+      PackageData?.reviewCount && {
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": String(PackageData.rating),
+        "reviewCount": String(PackageData.reviewCount)
+      }
+    })
+  };
 
 
+  const faqSchema =
+    PackageData?.faqs?.length > 0
+      ? {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "@id": `${packageUrl}#faq`,
+        "mainEntity": PackageData.faqs.map((faq: any) => ({
+          "@type": "Question",
+          "name": faq.question,
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": faq.answer
+          }
+        }))
+      }
+      : null;
 
 
-return (
-  <>
-    <Script
-      type="application/ld+json"
-      dangerouslySetInnerHTML={{
-        __html: JSON.stringify(
-          [packageSchema, productSchema, faqSchema, breadcrumbSchema].filter(Boolean)
-        ),
-      }}
-    />
+
+  const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "@id": `${packageUrl}#breadcrumb`,
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": baseUrl + "/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Packages",
+        "item": `${baseUrl}/tour-packages`
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "name": PackageData?.title ?? "Tour Package",
+        "item": packageUrl
+      }
+    ]
+  };
+
+
+
+
+  return (
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(
+            [packageSchema, productSchema, faqSchema, breadcrumbSchema].filter(Boolean)
+          ),
+        }}
+      />
       <Navbar />
 
-     
+
 
       {/* HERO */}
       <PackageHero PackageData={PackageData} />
@@ -278,7 +314,7 @@ return (
 
               <ItineraryAccordion PackageData={PackageData} />
 
-              <InclusionExclusion PackageData={PackageData}/>
+              <InclusionExclusion PackageData={PackageData} />
 
             </main>
 
@@ -298,12 +334,12 @@ return (
       </section>
 
       {/* BELOW CONTENT */}
-      <KnowBeforeYouGo PackageData={PackageData}/>
+      <KnowBeforeYouGo PackageData={PackageData} />
       <GroupCta />
       <ProductRatings />
       <PackageTestimonials PackageData={PackageData} />
-      <TrustBuildingSection/>
-      <PackageFaqSection PackageData={PackageData}/>
+      <TrustBuildingSection />
+      <PackageFaqSection PackageData={PackageData} />
       <Policies PackageData={PackageData} />
     
       <Footer />

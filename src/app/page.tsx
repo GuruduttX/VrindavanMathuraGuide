@@ -163,7 +163,7 @@ const Home = async () => {
   };
   return (
     <>
-      <Script
+      <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
           __html: JSON.stringify([
