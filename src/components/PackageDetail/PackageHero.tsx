@@ -15,20 +15,41 @@ export default function PackageHero({ PackageData }: any) {
       {" "}
       <EnquiryPopup open={isOpen} onClose={() => setIsOpen(false)} />
       <section className="relative w-full px-6 py-12 lg:px-16">
-        {/* Orange Glow Background */}
 
         {/* BreadCrumbs */}
 
-        <nav className="text-sm text-orange-400 mb-4 px-8 sm:px-16 -mt-6 flex flex-wrap">
-          <Link href="/" className="">
-            Home
-          </Link>
-          <span className="mx-2">/</span>
-          <Link href={"/tour-packages"} className=" font-medium">
-            Packages
-          </Link>
-          <span className="mx-2">/</span>
-          <span className="font-medium">{PackageData.title}</span>
+        <nav className="text-sm text-orange-400 mb-4 px-3 sm:px-16 -mt-6">
+        
+          <ol className="flex flex-wrap items-center gap-y-1">
+
+            <li className="flex items-center shrink-0">
+              <Link href="/" className="hover:text-orange-500 transition-colors whitespace-nowrap">
+                Home
+              </Link>
+              <span className="mx-2 text-orange-300">/</span>
+            </li>
+
+            <li className="flex items-center shrink-0">
+              <Link
+                href="/tour-packages"
+                className="font-medium hover:text-orange-500 transition-colors whitespace-nowrap"
+              >
+                Packages
+              </Link>
+              <span className="mx-2 text-orange-300">/</span>
+            </li>
+
+            {/* Last crumb: truncates cleanly if very long */}
+            <li className="flex items-center min-w-0">
+              <span
+                className="font-medium text-orange-500 truncate"
+                title={PackageData.slug}   /* full text on hover as tooltip */
+              >
+                {PackageData.slug}
+              </span>
+            </li>
+
+          </ol>
         </nav>
         <div className="absolute inset-0 -z-10 bg-gradient-to-br from-orange-100 via-orange-50 to-white" />
 
@@ -72,10 +93,10 @@ export default function PackageHero({ PackageData }: any) {
         </div>
 
         {/* BOTTOM CONTENT */}
-        <div className="mx-auto max-w-7xl mt-10 flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6">
-          {/* Title Section */}
+          <div className="mx-auto max-w-7xl mt-4 sm:mt-6 md:mt-8 lg:mt-10 flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6">
+        {/* Title Section */}
           <div className="flex-1 min-w-0">
-            <h1 className="text-3xl lg:text-4xl font-extrabold text-gray-900 leading-tight break-words">
+            <h1 className="text-2xl md:text-3xl lg:text-4xl font-extrabold text-gray-900 leading-tight break-words">
               {PackageData.title}
             </h1>
 
@@ -90,22 +111,15 @@ export default function PackageHero({ PackageData }: any) {
             </div>
           </div>
 
-          {/* Price + CTA */}
-          <div
-            className="shrink-0  bg-white/70 backdrop-blur-md border border-orange-100 shadow-xl rounded-2xl 
-                    px-6 py-5 
-                    flex flex-col sm:flex-col md:flex-row 
-                    items-center md:items-center 
-                    gap-6 md:gap-8 
-                    text-center md:text-left"
-          >
+        {/* Price + CTA - Responsive */}
+        <div className="shrink-0 w-full sm:w-auto bg-white/70 backdrop-blur-md border border-orange-100 shadow-xl rounded-2xl px-6 py-5">
+          <div className="flex flex-col sm:flex-row items-center gap-4 sm:gap-6 md:gap-8">
             {/* Price Section */}
-            <div className="md:text-right">
+            <div className="text-center sm:text-left md:text-right w-full sm:w-auto">
               <p className="text-xs uppercase tracking-wide text-gray-500">
                 Starting from
               </p>
-
-              <div className="flex items-end justify-center md:justify-end gap-1">
+              <div className="flex items-end justify-center sm:justify-start md:justify-end gap-1">
                 <span className="text-3xl sm:text-4xl font-extrabold text-orange-600 flex items-center">
                   <IndianRupee size={28} className="sm:hidden" />
                   <IndianRupee size={34} className="hidden sm:block" />
@@ -113,27 +127,24 @@ export default function PackageHero({ PackageData }: any) {
                 </span>
                 <span className="text-sm text-gray-500 mb-1">/person</span>
               </div>
-
-              <span className="inline-block mt-2 text-xs bg-orange-50 text-orange-600 px-3 py-1 rounded-full font-medium">
-                Best Price Guarantee
-              </span>
+              <div className="flex justify-center sm:justify-start md:justify-end">
+                <span className="inline-block mt-2 text-xs bg-orange-50 text-orange-600 px-3 py-1 rounded-full font-medium">
+                  Best Price Guarantee
+                </span>
+              </div>
             </div>
 
             {/* CTA */}
             <button
               onClick={() => setIsOpen(true)}
-              className="w-full md:w-auto 
-            whitespace-nowrap cursor-pointer 
-            px-6 sm:px-8 py-3 sm:py-4 
-            rounded-xl bg-gradient-to-r from-orange-500 to-orange-600 
-            text-white font-semibold 
-            shadow-md hover:shadow-xl hover:scale-105 
-            transition-all duration-300"
+              className="w-full sm:w-auto whitespace-nowrap cursor-pointer px-6 sm:px-8 py-3 sm:py-4 rounded-xl bg-gradient-to-r from-orange-500 to-orange-600 text-white font-semibold shadow-md hover:shadow-xl hover:scale-105 transition-all duration-300"
             >
               Book Now →
             </button>
           </div>
         </div>
+         </div>
+
       </section>
     </>
   );

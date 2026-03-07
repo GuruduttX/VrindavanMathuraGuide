@@ -6,7 +6,7 @@ import { ChevronDown, MapPin, Clock } from "lucide-react";
 
 
 export default function ItineraryAccordion({PackageData} : any) {
-  const [active, setActive] = useState<number | null>(0);
+  const [active, setActive] = useState<number | null>(-1);
 
   return (
     <section className="w-full max-w-4xl p-5 space-y-4">

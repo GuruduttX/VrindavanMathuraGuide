@@ -28,28 +28,28 @@ const tours = [
     subtitle: "Darshan • Aarti • Stay",
     duration: "3D / 2N",
     price: "7,999",
-    image: "/images/tours/vrindavan-weekend.jpg",
+    image: "/images/Home/oneday-vrindavan.webp",
   },
   {
     title: "Same Day Agra–Mathura",
     subtitle: "Taj Mahal • Mathura",
     duration: "1 Day",
     price: "3,999",
-    image: "/images/tours/agra-mathura.jpg",
+    image: "/images/Home/oneday-vrindavan.webp",
   },
   {
     title: "Braj 84 Kos Yatra",
     subtitle: "Complete Braj Mandal",
     duration: "7 Days",
     price: "24,999",
-    image: "/images/tours/braj-84kos.jpg",
+    image: "/images/Home/oneday-vrindavan.webp",
   },
   {
     title: "Senior Citizen Special",
     subtitle: "Comfortable & Slow Pace",
     duration: "2D / 1N",
     price: "5,499",
-    image: "/images/tours/senior.jpg",
+    image: "/images/Home/oneday-vrindavan.webp",
   },
 ];
 

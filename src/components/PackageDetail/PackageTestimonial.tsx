@@ -4,8 +4,11 @@ import { useRef } from "react";
 import { Star, BadgeCheck, ChevronLeft, ChevronRight } from "lucide-react";
 
 export default function PackageTestimonials({ PackageData }: any) {
-  const sliderRef = useRef<HTMLDivElement>(null);
 
+  const sliderRef = useRef<HTMLDivElement>(null);
+  const testimonials = PackageData?.testimonials || [];
+
+  /* ---------------- SCROLL ---------------- */
   const scroll = (dir: "left" | "right") => {
     if (!sliderRef.current) return;
 
@@ -17,219 +20,213 @@ export default function PackageTestimonials({ PackageData }: any) {
     });
   };
 
+  /* ---------------- AVG RATING ---------------- */
+  const avgRating =
+    testimonials.length > 0
+      ? (
+          testimonials.reduce(
+            (sum: number, t: any) => sum + Number(t.rating || 0),
+            0
+          ) / testimonials.length
+        ).toFixed(1)
+      : "0.0";
+
+  function ratingPercentage(star: number) {
+    const total = testimonials.length;
+
+    if (total === 0) return 0;
+
+    const count = testimonials.filter(
+      (item: any) => Math.floor(Number(item.rating)) === star
+    ).length;
+
+    return Math.round((count / total) * 100);
+  }
+
+
+
+  function StarRating({ rating }: { rating: number }) {
+    return (
+      <div className="flex gap-1">
+        {Array.from({ length: 5 }).map((_, i) => {
+          let fill = Math.min(Math.max(rating - i, 0), 1);
+          if(fill < 0.3 && fill !=0 ){
+             fill = 0.4;
+          }
+          const percent = fill * 100;
+
+          return (
+            <div key={i} className="relative h-5 w-5">
+
+              <Star className="absolute text-gray-300 h-5 w-5" />
+
+              <div
+                className="absolute overflow-hidden"
+                style={{ width: `${percent}%` }}
+              >
+                <Star className="text-orange-500 fill-orange-500 h-5 w-5" />
+              </div>
+
+            </div>
+          );
+        })}
+      </div>
+    );
+  }
+
   return (
     <section className="py-14 sm:py-16 lg:py-20 bg-gradient-to-br from-orange-50 to-white">
       <div className="max-w-7xl mx-auto px-4 grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-10">
 
-        {/* LEFT – TRUST PANEL */}
-        <div className="rounded-3xl 
-                bg-gradient-to-br from-white to-orange-50
-                p-7 
-                shadow-xl 
-                border border-orange-100
-                transition duration-300 
-                hover:-translate-y-1 hover:shadow-2xl
-                cursor-pointer">
+        {/* LEFT PANEL */}
+        <div className="rounded-3xl bg-gradient-to-br from-white to-orange-50 p-7 shadow-xl border border-orange-100">
 
-  {/* Top Label */}
-  <p className="text-sm font-semibold text-orange-600 tracking-wide">
-    Guest Reviews
-  </p>
+          <p className="text-sm font-semibold text-orange-600 tracking-wide">
+            Guest Reviews
+          </p>
 
-  {/* Big Rating */}
-  <div className="flex items-center gap-4 mt-3">
-    <h3 className="text-5xl font-bold text-gray-900">4.8</h3>
+          {/* AVG RATING */}
+          <div className="flex items-center gap-4 mt-3">
 
-    <div className="flex flex-col">
-      <div className="flex gap-1">
-        {Array.from({ length: 5 }).map((_, i) => (
-          <Star
-            key={i}
-            className="h-5 w-5 text-orange-500 fill-orange-500"
-          />
-        ))}
-      </div>
-      <p className="text-xs text-gray-500 mt-1">
-        Based on 180+ trips
-      </p>
-    </div>
-  </div>
+            <h3 className="text-5xl font-bold text-gray-900">
+              {avgRating}
+            </h3>
 
-  {/* Rating Bars */}
-  <div className="mt-6 space-y-3">
-    {[84, 12, 3, 1, 0].map((v, i) => (
-      <div key={i} className="flex items-center gap-3 text-xs">
-        <span className="w-5 font-medium text-gray-700">
-          {5 - i}
-        </span>
+            <div className="flex flex-col">
 
-        <div className="h-2 flex-1 rounded-full bg-gray-200 overflow-hidden">
-          <div
-            className="h-full bg-gradient-to-r from-orange-400 to-orange-600 transition-all duration-500"
-            style={{ width: `${v}%` }}
-          />
-        </div>
+              <StarRating rating={Number(avgRating)} />
 
-                    <span className="w-8 text-right text-gray-600">
-                    {v}%
-                    </span>
-                </div>
-                ))}
+              <p className="text-xs text-gray-500 mt-1">
+                Based on {testimonials.length}+ reviews
+              </p>
+
             </div>
+          </div>
 
-            {/* Feature Badges */}
-            <div className="mt-6 flex flex-wrap gap-3">
-                {["Verified Trips", "Private Tours", "Local Drivers"].map((item, i) => (
-                <span
-                    key={i}
-                    className="rounded-full 
-                            bg-white 
-                            border border-orange-200 
-                            px-4 py-2 
-                            text-xs font-medium 
-                            text-orange-700
-                            shadow-sm
-                            hover:bg-orange-50
-                            transition">
-                    ✔ {item}
-                </span>
-                ))}
-            </div>
+          {/* RATING BARS */}
+          <div className="mt-6 space-y-3">
 
-            {/* CTA Button */}
-            <button className="mt-7 w-full 
-            
-                                bg-orange-500 
-                                hover:bg-orange-600 
-                                text-white 
-                                font-semibold 
-                                py-3 
-                                rounded-xl 
-                                shadow-md 
-                                transition 
-                                cursor-pointer">
-                View All Reviews →
-            </button>
+            {[5,4,3,2,1].map((star) => {
 
-        </div>
+              const percent = ratingPercentage(star);
 
+              return (
+                <div key={star} className="flex items-center gap-3 text-xs">
 
-        {/* RIGHT – CAROUSEL */}
-        <div className="lg:col-span-2">
-            <p className="text-sm font-semibold text-orange-600 tracking-wider">
-                CLIENT REVIEWS
-            </p>
+                  <span className="w-5 font-medium text-gray-700">
+                    {star}
+                  </span>
 
-            <h2 className="text-2xl sm:text-3xl font-bold mt-2 mb-6">
-                Real feedback from guests
-            </h2>
-
-            <div className="relative px-2 sm:px-6 md:px-10">
-
-                {/* Slider Wrapper */}
-                <div
-                ref={sliderRef}
-                className="flex gap-6 overflow-x-auto snap-x snap-mandatory 
-                            scrollbar-hide cursor-pointer px-2 sm:px-6 md:px-0"
-                >
-                {PackageData?.testimonials?.map((t: any, index: number) => (
+                  <div className="h-2 flex-1 rounded-full bg-gray-200 overflow-hidden">
                     <div
-                    key={t.id || index}
-                    className="snap-start shrink-0 
-                                w-[92%] sm:w-[75%] md:w-[60%] lg:w-[420px]
-                                rounded-3xl 
-                                bg-gradient-to-br from-white to-orange-50
-                                border border-orange-100 
-                                shadow-xl 
-                                p-7 
-                                transition duration-300 
-                                hover:-translate-y-2 hover:shadow-2xl"
-                    >
-                    {/* HEADER */}
-                    <div className="flex items-start justify-between gap-4">
+                      className="h-full bg-gradient-to-r from-orange-400 to-orange-600"
+                      style={{ width: `${percent}%` }}
+                    />
+                  </div>
 
-                        <div className="flex gap-4">
-                        <div className="h-12 w-12 sm:h-14 sm:w-14 
-                                        rounded-full 
-                                        bg-gradient-to-br from-orange-500 to-orange-600 
-                                        text-white flex items-center justify-center 
-                                        text-base sm:text-lg font-semibold shadow-md">
-                            {t.name?.charAt(0) || "G"}
+                  <span className="w-8 text-right text-gray-600">
+                    {percent}%
+                  </span>
+
+                </div>
+              );
+            })}
+
+          </div>
+
+        </div>
+
+        {/* RIGHT – TESTIMONIAL CAROUSEL */}
+        <div className="lg:col-span-2">
+
+          <h2 className="text-2xl sm:text-3xl font-bold mt-2 mb-6">
+            Real feedback from guests
+          </h2>
+
+          <div className="relative">
+
+            <div
+              ref={sliderRef}
+              className="flex gap-6 overflow-x-auto snap-x snap-mandatory scrollbar-hide"
+            >
+
+              {testimonials.map((t: any, index: number) => {
+
+                const rating = Number(t.rating || 0);
+
+                return (
+                  <div
+                    key={t.id || index}
+                    className="snap-start shrink-0 w-[92%] sm:w-[75%] md:w-[60%] lg:w-[420px]
+                    rounded-3xl bg-white border border-orange-100 shadow-xl p-7"
+                  >
+
+                    {/* HEADER */}
+                    <div className="flex items-start justify-between">
+
+                      <div className="flex gap-4">
+
+                        <div className="h-12 w-12 rounded-full bg-orange-500 text-white flex items-center justify-center font-semibold">
+                          {t.name?.charAt(0) || "G"}
                         </div>
 
                         <div>
-                            <div className="flex flex-wrap items-center gap-2">
-                            <p className="font-semibold text-gray-900 text-sm sm:text-base">
-                                {t.name || "Guest"}
-                            </p>
 
-                            <span className="flex items-center gap-1 text-[10px] sm:text-xs
-                                            bg-orange-100 text-orange-700 
-                                            px-2 py-1 rounded-full">
-                                <BadgeCheck className="h-3 w-3 sm:h-4 sm:w-4" />
-                                Verified
-                            </span>
-                            </div>
+                          <p className="font-semibold text-gray-900">
+                            {t.name || "Guest"}
+                          </p>
 
-                            <p className="text-[11px] sm:text-xs text-gray-500 mt-1">
-                            {t.location || "India"} • {t.date || "Recent Trip"}
-                            </p>
-                        </div>
+                          <p className="text-xs text-gray-500">
+                            {t.location || "India"}
+                          </p>
+
                         </div>
 
-                        <span className="hidden sm:inline-block text-xs font-medium 
-                                        bg-white border border-orange-200 
-                                        text-orange-600 px-3 py-1 rounded-full shadow-sm">
-                        {t.source || "Google"}
-                        </span>
+                      </div>
+
+                      <BadgeCheck className="text-orange-500 h-5 w-5" />
+
                     </div>
 
                     {/* RATING */}
-                    <div className="mt-5 flex items-center gap-3">
-                        <span className="text-xl sm:text-2xl font-bold text-gray-900">
-                        {t.rating || 5}.0
-                        </span>
+                    <div className="mt-4 flex items-center gap-3">
 
-                        <div className="flex gap-1">
-                        {Array.from({ length: 5 }).map((_, i) => (
-                            <Star
-                            key={i}
-                            className="h-4 w-4 sm:h-5 sm:w-5 text-orange-500 fill-orange-500"
-                            />
-                        ))}
-                        </div>
+                      <span className="text-xl font-bold">
+                        {rating.toFixed(1)}
+                      </span>
+
+                      <StarRating rating={rating} />
+
                     </div>
 
                     {/* REVIEW */}
-                    <p className="mt-4 text-sm leading-relaxed text-gray-700">
-                        “{t.description ||
-                        "Amazing experience. Very smooth darshan planning and professional service."}”
+                    <p className="mt-4 text-sm text-gray-700">
+                      “{t.description || "Amazing experience."}”
                     </p>
-                    </div>
-                ))}
-                </div>
 
-                {/* ARROWS — Visible from md and up */}
-                <button
-                onClick={() => scroll("left")}
-                className="hidden text-orange-500 md:flex absolute left-0 top-1/2 -translate-y-1/2 z-20 
-                            h-10 w-10 rounded-full bg-white shadow-lg border 
-                            items-center justify-center hover:bg-orange-50 
-                            transition cursor-pointer"
-                >
-                <ChevronLeft className="w-5 h-5 text-orange-700" />
-                </button>
+                  </div>
+                );
+              })}
 
-                <button
-                onClick={() => scroll("right")}
-                className="hidden md:flex absolute right-0 top-1/2 -translate-y-1/2 z-20 text-orange-500 
-                            h-10 w-10 rounded-full bg-white shadow-lg border 
-                            items-center justify-center hover:bg-orange-50 
-                            transition cursor-pointer"
-                >
-                <ChevronRight className="w-5 h-5 text-orange-700" />
-                </button>
             </div>
+
+            {/* ARROWS */}
+            <button
+              onClick={() => scroll("left")}
+              className="hidden md:flex absolute left-0 top-1/2 -translate-y-1/2 h-10 w-10 rounded-full bg-white shadow border items-center justify-center"
+            >
+              <ChevronLeft />
+            </button>
+
+            <button
+              onClick={() => scroll("right")}
+              className="hidden md:flex absolute right-0 top-1/2 -translate-y-1/2 h-10 w-10 rounded-full bg-white shadow border items-center justify-center"
+            >
+              <ChevronRight />
+            </button>
+
+          </div>
+
         </div>
 
       </div>

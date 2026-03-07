@@ -1,6 +1,8 @@
 import Navbar from '@/utils/Navbar'
 import React from 'react'
+
 import EnquirySection from '@/components/Home/Enquiryform'
+
 import GroupCta from '@/components/Home/GroupCta'
 import HomeFAQSection from '@/components/Home/HomeFaqs'
 import PhotoGallerySection from '@/components/Home/PhotoGallerySec'
@@ -14,7 +16,10 @@ import FooterCTA from '@/utils/FooterCTA'
 import DestinationFilter from '@/components/Home/DestinationFilter'
 import WhyChooseUs from '@/components/Home/WhyChooseUs'
 import type { Metadata } from "next";
-
+import Script from 'next/script'
+import TestimonialsSection from '@/components/Home/TestimonialsSection'
+import ServicesSection from '@/components/Home/ServicesSection'
+import AboutBrajSection from '@/components/Home/AboutBrajSection'
 
 export const metadata: Metadata = {
   title: "Mathura Vrindavan Tour Packages | Local Guide, Taxi & Temple Darshan",
@@ -171,15 +176,18 @@ const Home = async () => {
       <Navbar />
       <HeroSection />
       <DestinationFilter/>
+      <AboutBrajSection/>
       <EnquirySection />
   
       <PopularTours />
       <GroupCta />
+      <ServicesSection/>
       <WhyChooseUs />
       <TrustBuildingSection />
       <PhotoGallerySection />
       <HomeFAQSection />
       <ToursWeOperate />
+      <TestimonialsSection/>
       <VrindavanTrustStats />
       <FooterCTA />
       <Footer />

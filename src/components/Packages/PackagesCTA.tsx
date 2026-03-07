@@ -49,25 +49,32 @@ export default function PackagesCTA() {
                   We handle darshan planning, travel, and comfort.
                 </p>
 
-                <div className="mt-6 sm:mt-8 flex flex-wrap gap-3 sm:gap-4">
-                  <button
-                    onClick={() => setIsOpen(true)}
-                    className="bg-white text-orange-600 font-semibold
-                px-6 sm:px-8 py-3 rounded-xl hover:bg-orange-50
-                transition shadow-md text-sm sm:text-base cursor-pointer"
-                  >
-                    Get a Callback
-                  </button>
+              <div className="mt-6 sm:mt-8 flex flex-col sm:flex-row gap-3 sm:gap-4">
 
-                  <button
-                    onClick={() => openWhatsApp("packages-cta")}
-                    className="bg-green-500 hover:bg-green-600
-                text-white font-semibold px-6 sm:px-8 py-3
-                rounded-xl transition shadow-md text-sm sm:text-base cursor-pointer"
-                  >
-                    WhatsApp Yatra Expert
-                  </button>
-                </div>
+                <button
+                  onClick={() => setIsOpen(true)}
+                  className="w-full sm:w-auto
+                  bg-white text-orange-600 font-semibold
+                  px-6 sm:px-8 py-3 rounded-xl
+                  hover:bg-orange-50 transition shadow-md
+                  text-sm sm:text-base cursor-pointer"
+                >
+                  Get a Callback
+                </button>
+
+                <button
+                  onClick={() => openWhatsApp("packages-cta")}
+                  className="w-full sm:w-auto
+                  bg-green-500 hover:bg-green-600
+                  text-white font-semibold
+                  px-6 sm:px-8 py-3 rounded-xl
+                  transition shadow-md
+                  text-sm sm:text-base cursor-pointer"
+                >
+                  WhatsApp Yatra Expert
+                </button>
+
+              </div>
               </div>
 
               {/* IMAGE */}

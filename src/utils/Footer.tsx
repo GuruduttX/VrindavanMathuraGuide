@@ -33,8 +33,8 @@ export default function Footer() {
             </h3>
 
             <div className="flex items-center gap-5 mb-8">
-              <Image src="/images/utils/CTAIMAGE.png" alt="Partner" width={90} height={40} />
-              <Image src="/images/utils/CTAIMAGE.png" alt="Partner" width={90} height={40} />
+              <Image src="/images/utils/Experience India’s beauty and culture.webp" alt="Partner" width={90} height={40} />
+              <Image src="/images/Home/mathura-vrindavan-second.webp" alt="Partner" width={90} height={40} />
             </div>
 
             <div className="space-y-4 text-sm">

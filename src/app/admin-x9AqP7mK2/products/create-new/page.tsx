@@ -22,11 +22,13 @@ import CMSSchema from '@/components/Admin/CMS/CMSSchema';
 import DurationSection from '@/components/Admin/PackageEditor/DurationSection';
 import DestRoutes from '@/components/Admin/PackageEditor/DestRoute';
 import SelectedInclusion from '@/components/Admin/PackageEditor/SelectedInclusion';
+import PackageOverview from '@/components/Admin/PackageEditor/PackageOverview';
 type PackageForm = {
   title: string;
   category: string,
   slug: string,
   price: string,
+  overview : string,
   duration: string,
   metaTitle: string,
   metaDescription: string,
@@ -58,7 +60,8 @@ type FAQ = {
 type Testimonial = {
   id: string,
   name: string,
-  description: string
+  description: string,
+  rating : string
 }
 
 type HighLights = {
@@ -123,6 +126,7 @@ export default function CreateNewPackage() {
     slug: "",
     price: "",
     duration: "",
+    overview : "",
     day: "",
     night: "",
     destination: "",
@@ -146,7 +150,7 @@ export default function CreateNewPackage() {
 
   const [childImage , setChildImage] = useState<ChildImage[]>([]);
   const [faqs, setFaqs] = useState<FAQ[]>([{id : crypto.randomUUID() , question : "",  answer : ""}]);
-  const [testimonials, setTestimonials] = useState<Testimonial[]>([{id : crypto.randomUUID() , name : "", description : ""}]);
+  const [testimonials, setTestimonials] = useState<Testimonial[]>([{id : crypto.randomUUID() , name : "", description : "", rating : ""}]);
   const [highLights, setHighLights] = useState<HighLights[]>([{id : crypto.randomUUID() , description : ""}]);
   const [inclusions, setInclusions] = useState<Inclusions[]>([{id : crypto.randomUUID() , description : ""}]);
   const [exclusions, setExclusions] = useState<Exclusions[]>([{id : crypto.randomUUID() , description : ""}]);
@@ -213,6 +217,7 @@ export default function CreateNewPackage() {
       destination : form.destination,
       reviews : form.reviews,
       rating : form.rating,
+      overview : form.overview,
       heroimage: {
         image: form.image,
         alt: form.alt
@@ -272,6 +277,7 @@ export default function CreateNewPackage() {
       .single();
 
     if (error) {
+      console.log(error.message)
       toast.error(error.message);
       return;
     }
@@ -304,6 +310,7 @@ export default function CreateNewPackage() {
         <SelectedInclusion transfer_included={form.transfer_included} breakfast_included={form.breakfast_included} stay_included={form.stay_included} sightseeing_included={form.sightseeing_included} onChange={updateForm}/>
         <DurationSection days={form.day} nights={form.night} onChange={updateForm} breakdown={breakdown} setBreakdown={setBreakdown} />
         <DestRoutes route={route} setRoute={setRoute}/>
+        <PackageOverview overview={form.overview} onChange={updateForm} editorType='Package'/>        
         <ItinearyMaker itinerary={itinerary} setItinerary={setItinerary} editorType='Package' />
         <FaqHandler faqs={faqs} setFaqs={setFaqs} editorType="Package" />
         <TripHighlights highLights={highLights} setHighLights={setHighLights} editorType='Package' />

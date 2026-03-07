@@ -23,6 +23,7 @@ import CMSSchema from '@/components/Admin/CMS/CMSSchema';
 import DurationSection from '@/components/Admin/PackageEditor/DurationSection';
 import DestRoutes from '@/components/Admin/PackageEditor/DestRoute';
 import SelectedInclusion from '@/components/Admin/PackageEditor/SelectedInclusion';
+import PackageOverview from '@/components/Admin/PackageEditor/PackageOverview';
 
 type PackageForm = {
   title: string;
@@ -34,6 +35,7 @@ type PackageForm = {
   metaDescription: string,
   schemaTitle : string,
   schemaDescription : string,
+  overview : string,
   image: string,
   alt: string,
   refund: string,
@@ -59,7 +61,8 @@ type FAQ = {
 type Testimonial = {
   id: string,
   name: string,
-  description: string
+  description: string,
+  rating : string
 }
 
 type HighLights = {
@@ -126,6 +129,7 @@ export default function CreateNewPackage() {
      slug: "",
      price: "",
      duration: "",
+     overview : "",
      day: "",
      night: "",
      metaTitle: "",
@@ -149,7 +153,7 @@ export default function CreateNewPackage() {
   
     const[childImage , setChildImage] = useState<ChildImage[]>([]);
     const [faqs, setFaqs] = useState<FAQ[]>([{id : crypto.randomUUID() , question : "",  answer : ""}]);
-    const [testimonials, setTestimonials] = useState<Testimonial[]>([{id : crypto.randomUUID() , name : "", description : ""}]);
+    const [testimonials, setTestimonials] = useState<Testimonial[]>([{id : crypto.randomUUID() , name : "", description : "", rating : ""}]);
     const [highLights, setHighLights] = useState<HighLights[]>([{id : crypto.randomUUID() , description : ""}]);
     const [inclusions, setInclusions] = useState<Inclusions[]>([{id : crypto.randomUUID() , description : ""}]);
     const [exclusions, setExclusions] = useState<Exclusions[]>([{id : crypto.randomUUID() , description : ""}]);
@@ -169,6 +173,7 @@ export default function CreateNewPackage() {
         return;
       }
 
+
       setForm({
 
         title: data.title ?? "",
@@ -182,6 +187,7 @@ export default function CreateNewPackage() {
         schemaDescription : data?.schema?.description ?? "",
         image: data.heroimage.image ?? "",
         alt: data.heroimage.alt ?? "",
+        overview : data.overview ?? "",
         refund: data.policies[0].description ?? "",
         cancel: data.policies[1].description ?? "",
         confirmation: data.policies[2].description ?? "",
@@ -210,8 +216,9 @@ export default function CreateNewPackage() {
       setBreakdown(data.durationbreakdown ?? []);
       setRoute(data.destroutes ?? {source: "", destination : "", segments : []})
      
-
     }
+
+
 
     getBlogs();
 
@@ -270,6 +277,7 @@ export default function CreateNewPackage() {
       night : form.night,
       reviews : form.reviews,
       rating : form.rating,
+      overview : form.overview,
       heroimage: {
         image: form.image,
         alt: form.alt
@@ -323,6 +331,8 @@ export default function CreateNewPackage() {
       sightseeing_included  : form.sightseeing_included
     };
 
+
+
     const { data, error } = await supabase
       .from("Package")
       .update(payload)
@@ -359,6 +369,7 @@ export default function CreateNewPackage() {
         <SelectedInclusion transfer_included={form.transfer_included} breakfast_included={form.breakfast_included} stay_included={form.stay_included} sightseeing_included={form.sightseeing_included} onChange={updateForm}/>
         <DurationSection days={form.day} nights={form.night} onChange={updateForm} breakdown={breakdown} setBreakdown={setBreakdown} />
         <DestRoutes route={route} setRoute={setRoute}/>
+        <PackageOverview overview={form.overview} onChange={updateForm} editorType='Package'/>
         <ItinearyMaker itinerary={itinerary} setItinerary={setItinerary} editorType='Package' />
         <FaqHandler faqs={faqs} setFaqs={setFaqs} editorType="Package" />
         <TripHighlights highLights={highLights} setHighLights={setHighLights} editorType='Package' />

@@ -54,7 +54,7 @@ export default function DestinationDropdown({
         placeholder="Destination"
         value={selectedDest}
         onClick={() => setOpen((prev) => !prev)}
-        onChange={(e) => onChange("selectedDest", e.target.value)}
+        onChange={()=>true}
         className="w-full px-4 py-3 rounded-xl focus:outline-none focus:ring-2 focus:ring-orange-400 bg-orange-50"
       />
 
@@ -75,11 +75,11 @@ export default function DestinationDropdown({
               <label
                 key={idx}
                 className={`
-          flex items-center justify-between
-          gap-3 px-4 py-3
-          rounded-xl
-          cursor-pointer
-          transition-all duration-200
+                flex items-center justify-between
+                gap-3 px-4 py-3
+                rounded-xl
+                cursor-pointer
+                transition-all duration-200
           ${
             isSelected
               ? "bg-orange-100 text-orange-700 shadow-sm"

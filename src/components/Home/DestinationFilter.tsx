@@ -6,6 +6,8 @@ import Link from "next/link"
 import { CheckCircle, Clock, MapPin, Users } from "lucide-react"
 import EnquiryPopup from "@/utils/EnquiryForm"
 import { supabase } from "@/lib/supabase/SupabaseConfig"
+import { useRouter } from "next/navigation"
+import { TourCardSkeleton } from "@/utils/TourCardSkeleton"
 
 /* -------------------- DATA -------------------- */
 
@@ -46,9 +48,12 @@ const CATEGORIES = [
 /* -------------------- COMPONENT -------------------- */
 
 export default function DestinationFilter() {
+  const router = useRouter();
   const [activeCategory, setActiveCategory] = useState("Explore All")
   const [packages, setPackages] = useState<PackageType[]>([])
   const [isOpen, setIsOpen] = useState(false);
+  const [loading, setLoading] = useState(true);
+
 
   const getPackageData = async () => {
 
@@ -60,15 +65,18 @@ export default function DestinationFilter() {
     }
 
     setPackages(data ?? []);
+    setLoading(false);
   }
 
   useEffect(() => {
     getPackageData();
-  }, [])
+  }, []);
 
   const filteredPackages = activeCategory === "Explore All" ? packages : packages.filter(
     (pkg: any) => pkg.category === activeCategory
   )
+
+  
 
 
   return (
@@ -123,133 +131,148 @@ export default function DestinationFilter() {
         </div>
 
         {/* ---------- CARDS GRID ---------- */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 transition-all p-5">
-          {filteredPackages.map((pkg: any) => (
-            <div
-              key={pkg.id}
-              className="
-            group bg-white rounded-3xl overflow-hidden
-            shadow-md hover:shadow-xl transition-all
-            hover:-translate-y-1
-          "
-            >
-              {/* Image */}
-              <div className="relative h-56 overflow-hidden">
-                <Image
-                  src={pkg.heroimage.image}
-                  alt={pkg.heroimage.alt}
-                  fill
-                  className="object-cover transition-transform duration-500 group-hover:scale-105"
-                />
-
-                {/* DURATION BADGE */}
-                <span
-                  className="absolute top-4 left-4
-              bg-orange-500 text-white text-xs font-semibold
-              px-3 py-1 rounded-full shadow"
-                >
-                  {pkg.duration} 
-                </span>
-
-                {/* PRICE BADGE */}
-                <span
-                  className="absolute bottom-4 right-4
-              bg-white text-orange-600 text-sm font-bold
-              px-4 py-1.5 rounded-full shadow"
-                >
-                  ₹{pkg.price}
-                </span>
-              </div>
-
-              {/* CONTENT */}
-              <div className="p-6 space-y-4">
-
-                {/* TITLE */}
-                <h3 className="text-lg font-bold text-gray-900 leading-snug">
-                  {pkg.title}
-                </h3>
-
-                {/* LOCATION */}
-                <p className="flex items-center gap-2 text-sm text-gray-600">
-                  <MapPin className="w-4 h-4 text-orange-500" />
-                  {pkg.destination}
-                </p>
-
-                {/* INFO ROW */}
-                <div className="flex flex-wrap gap-3 text-xs text-gray-700">
-                  <span className="flex items-center gap-1">
-                    <Clock className="w-4 h-4 text-orange-500" />
-                    {pkg.duration}
-                  </span>
-                  <span className="flex items-center gap-1">
-                    <Users className="w-4 h-4 text-orange-500" />
-                    Ideal for Families & Elders
-                  </span>
-                </div>
-
-                {/* HIGHLIGHTS */}
-                <div className="grid grid-cols-2 gap-2 text-sm text-gray-700">
-                  <span className="flex items-center gap-1">
-                    <CheckCircle className="w-4 h-4 text-green-500" />
-                    AC Cab
-                  </span>
-                  <span className="flex items-center gap-1">
-                    <CheckCircle className="w-4 h-4 text-green-500" />
-                    Local Guide
-                  </span>
-                  <span className="flex items-center gap-1">
-                    <CheckCircle className="w-4 h-4 text-green-500" />
-                    Temple Darshan
-                  </span>
-                  <span className="flex items-center gap-1">
-                    <CheckCircle className="w-4 h-4 text-green-500" />
-                    Pickup & Drop
-                  </span>
-                </div>
-
-                {/* CTA */}
-                <div className="flex gap-3 pt-2">
-                  <Link
-                    href={`/tour-packages/${pkg.duration}/${pkg.slug}`}
-                    className="flex-1 text-center cursor-pointer
-                  bg-orange-500 hover:bg-orange-600
-                  text-white font-semibold py-2.5
-                  rounded-xl transition
-                "
-                  >
-                    View Details
-                  </Link>
-
-                  <button
-                    className="
-                  flex-1 cursor-pointer
-                  border border-orange-500 text-orange-600
-                  hover:bg-orange-50
-                  font-semibold py-2.5
-                  rounded-xl transition
-                "
-
-                    onClick={() => setIsOpen(true)}
-                  >
-                    Enquire Now
-                  </button>
-                </div>
-
+        {
+          loading ? (
+          <div className="max-w-7xl mx-auto px-4 sm:px-6">
+              <div className="grid md:grid-cols-3 gap-8">
+                {Array.from({ length: 3 }).map((_, i) => (
+                  <TourCardSkeleton key={i} />
+                ))}
               </div>
             </div>
-          ))}
-        </div>
+            ) :
+            
+          <div className="
+              max-h-[95vh] sm:max-h-[78vh]
+              overflow-y-auto pr-2 orange-scrollbar
+            "
+              style={{ scrollbarGutter: "stable" }}>
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-6 transition-all p-5  overflow-y-auto pr-2 orange-scrollbar">
+            {filteredPackages.map((pkg: any) => (
+              <div
+                key={pkg.id}
+                className="
+                  group bg-white rounded-3xl overflow-hidden
+                  shadow-md hover:shadow-xl transition-all
+                  hover:-translate-y-1
+            "
+              >
+                {/* Image */}
+                <div className="relative h-56 overflow-hidden cursor-pointer" onClick={()=>router.push(`/tour-packages/${pkg.duration}/${pkg.slug}`)}>
+                  <Image
+                    src={pkg.heroimage.image}
+                    alt={pkg.heroimage.alt}
+                    fill
+                    className="object-cover transition-transform duration-500 group-hover:scale-105"
+                  />
+
+                  {/* DURATION BADGE */}
+                  <span
+                    className="absolute top-4 left-4
+                bg-orange-500 text-white text-xs font-semibold
+                px-3 py-1 rounded-full shadow"
+                  >
+                    {pkg.duration} 
+                  </span>
+
+                  {/* PRICE BADGE */}
+                  <span
+                    className="absolute bottom-4 right-4
+                bg-white text-orange-600 text-sm font-bold
+                px-4 py-1.5 rounded-full shadow"
+                  >
+                    ₹{pkg.price}
+                  </span>
+                </div>
+
+                {/* CONTENT */}
+                <div className="p-6 space-y-4">
+
+                  {/* TITLE */}
+                  <h3 className="text-lg font-bold text-gray-900 leading-snug cursor-pointer" onClick={()=>router.push(`/tour-packages/${pkg.duration}/${pkg.slug}`)}>
+                    {pkg.title}
+                  </h3>
+
+                  {/* LOCATION */}
+                  <p className="flex items-center gap-2 text-sm text-gray-600">
+                    <MapPin className="w-4 h-4 text-orange-500" />
+                    {pkg.destination}
+                  </p>
+
+                  {/* INFO ROW */}
+                  <div className="flex flex-wrap gap-3 text-xs text-gray-700">
+                    <span className="flex items-center gap-1">
+                      <Clock className="w-4 h-4 text-orange-500" />
+                      {pkg.duration}
+                    </span>
+                    <span className="flex items-center gap-1">
+                      <Users className="w-4 h-4 text-orange-500" />
+                      Ideal for Families & Elders
+                    </span>
+                  </div>
+
+                  {/* HIGHLIGHTS */}
+                  <div className="grid grid-cols-2 gap-2 text-sm text-gray-700">
+                    <span className="flex items-center gap-1">
+                      <CheckCircle className="w-4 h-4 text-green-500" />
+                      AC Cab
+                    </span>
+                    <span className="flex items-center gap-1">
+                      <CheckCircle className="w-4 h-4 text-green-500" />
+                      Local Guide
+                    </span>
+                    <span className="flex items-center gap-1">
+                      <CheckCircle className="w-4 h-4 text-green-500" />
+                      Temple Darshan
+                    </span>
+                    <span className="flex items-center gap-1">
+                      <CheckCircle className="w-4 h-4 text-green-500" />
+                      Pickup & Drop
+                    </span>
+                  </div>
+
+                  {/* CTA */}
+                  <div className="flex gap-3 pt-2">
+                    <Link
+                      href={`/tour-packages/${pkg.duration}/${pkg.slug}`}
+                      className="flex-1 text-center cursor-pointer
+                    bg-orange-500 hover:bg-orange-600
+                    text-white font-semibold py-2.5
+                    rounded-xl transition
+                  "
+                    >
+                      View Details
+                    </Link>
+
+                    <button
+                      className="
+                    flex-1 cursor-pointer
+                    border border-orange-500 text-orange-600
+                    hover:bg-orange-50
+                    font-semibold py-2.5
+                    rounded-xl transition
+                  "
+
+                      onClick={() => setIsOpen(true)}
+                    >
+                      Enquire Now
+                    </button>
+                  </div>
+
+                </div>
+              </div>
+            ))}
+          </div>
+
+          </div>
+        }
+       
 
         </div>
       
 
 
-        {/* ---------- EMPTY STATE ---------- */}
-        {filteredPackages.length === 0 && (
-          <p className="text-center text-gray-500">
-            No packages available for this category.
-          </p>
-        )}
+       
       </section>
     </>
   )

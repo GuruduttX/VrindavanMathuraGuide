@@ -21,6 +21,7 @@ import TrustBuildingSection from "@/components/Home/TrustBuildSec";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import DurationSection from "@/components/Admin/PackageEditor/DurationSection";
+import PackageOverview from "@/components/PackageDetail/PackageOverview";
 
 
 
@@ -305,7 +306,9 @@ const page = async ({ params }: { params: Promise<{ slug: string , duration : st
 
               <PackageInclusionsStrip packageData={PackageData} />
 
+
               <DestinationRoute routeData={PackageData.destroutes} />
+              <PackageOverview overview={PackageData.overview}/>
 
               <PackageHighlights PackageData={PackageData} />
 
@@ -317,11 +320,12 @@ const page = async ({ params }: { params: Promise<{ slug: string , duration : st
 
             {/* RIGHT SIDEBAR */}
 
-            <aside className="hidden lg:block ">
+                <aside className="hidden lg:block ">
               <div className="sticky top-28">
                 <SideForm />
               </div>
             </aside>
+
 
 
 
