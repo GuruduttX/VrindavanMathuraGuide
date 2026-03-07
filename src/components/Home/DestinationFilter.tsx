@@ -86,12 +86,12 @@ export default function DestinationFilter() {
 
         <div className="w-full text-center space-y-4">
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-orange-500">
-            Our Tour Packages
+            Mathura Vrindavan Tour Packages
           </h2>
 
           {/* Gradient Underline */}
           <div className="flex justify-center">
-            <div className="h-1 w-70  sm:w-80 md:w-90 lg:w-100 rounded-full 
+            <div className="h-1 w-70  sm:w-80 md:w-90 lg:w-160 rounded-full 
                             bg-gradient-to-r 
                             from-transparent 
                             via-orange-500 
@@ -167,13 +167,13 @@ export default function DestinationFilter() {
                   />
 
                   {/* DURATION BADGE */}
-                  <span
+                  {/* <span
                     className="absolute top-4 left-4
                 bg-orange-500 text-white text-xs font-semibold
                 px-3 py-1 rounded-full shadow"
                   >
                     {pkg.duration} 
-                  </span>
+                  </span> */}
 
                   {/* PRICE BADGE */}
                   <span

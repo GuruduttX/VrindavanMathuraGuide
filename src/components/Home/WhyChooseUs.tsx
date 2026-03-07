@@ -4,7 +4,7 @@ import { HeartHandshake, Star, Flower2, PhoneCall } from "lucide-react";
 const features = [
   {
     icon: HeartHandshake,
-    title: "20,000+ Happy Pilgrims",
+    title: "1200+ Happy Pilgrims",
     desc: "Trusted by devotees from all across India for peaceful and well-organized Mathura–Vrindavan yatras.",
   },
   {

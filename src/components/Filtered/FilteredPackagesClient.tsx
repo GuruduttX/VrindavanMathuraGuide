@@ -83,7 +83,7 @@ export default function FilteredPackagesClient() {
 
       return (
         <>
-         <EnquiryPopup onClose={() => setIsOpen(false)} open={isOpen} />
+        <EnquiryPopup onClose={() => setIsOpen(false)} open={isOpen} />
         <Navbar/>
           <section className="bg-[#FFF7ED] py-12 sm:py-16">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

@@ -61,7 +61,7 @@ export default function DestinationDropdown({
       {open && (
         <div
           className="
-              absolute z-[9999] mt-3 w-full max-h-80 overflow-y-auto
+              absolute z-[9999] mt-1 sm:mt-3 w-full max-h-80 overflow-y-auto
               rounded-2xl border border-orange-200
               bg-white/95 backdrop-blur-md
               shadow-[0_20px_50px_rgba(0,0,0,0.15)] destination-scroll

@@ -208,7 +208,6 @@ export default async function Page() {
       <TrustBuildingSection />
       <VrindavanTrustStats />
       <PackagesFaq />
-      <FooterCTA />
       <Footer />
     </div>
   );

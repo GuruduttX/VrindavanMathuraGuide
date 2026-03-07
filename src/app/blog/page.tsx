@@ -130,7 +130,10 @@ const page = async () => {
 
       <VrindavanTrustStats />
 
+<<<<<<< HEAD
+=======
       <FooterCTA />
+>>>>>>> main
 
       <Footer />
     </>

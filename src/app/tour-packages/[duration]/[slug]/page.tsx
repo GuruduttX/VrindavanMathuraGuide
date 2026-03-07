@@ -341,7 +341,7 @@ const page = async ({ params }: { params: Promise<{ slug: string , duration : st
       <TrustBuildingSection />
       <PackageFaqSection PackageData={PackageData} />
       <Policies PackageData={PackageData} />
-      <FooterCTA />
+    
       <Footer />
     </>
   );
